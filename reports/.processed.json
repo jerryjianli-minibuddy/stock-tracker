@@ -1,1 +1,56 @@
-{}
+{
+  "memory wall.pdf": {
+    "processed_at": "2026-05-25T21:30:00Z",
+    "tickers_added": ["BESIY", "AMKR", "INTC", "MPWR", "TSM"],
+    "tickers_updated": [],
+    "report_id": "ai-physical-bottlenecks-2026-05"
+  },
+  "MRVL.pdf": {
+    "processed_at": "2026-05-25T21:30:00Z",
+    "tickers_added": ["MRVL"],
+    "tickers_updated": [],
+    "report_id": "mrvl-deep-dive-2026-05"
+  },
+  "AAOI.pdf": {
+    "processed_at": "2026-05-25T21:30:00Z",
+    "tickers_added": ["AAOI"],
+    "tickers_updated": [],
+    "report_id": "aaoi-deep-dive-2026-05"
+  },
+  "Besi.pdf": {
+    "processed_at": "2026-05-25T21:30:00Z",
+    "tickers_added": [],
+    "tickers_updated": ["BESIY"],
+    "report_id": "besi-deep-dive-2026-05"
+  },
+  "TEM.pdf": {
+    "processed_at": "2026-05-25T21:30:00Z",
+    "tickers_added": ["TEM"],
+    "tickers_updated": [],
+    "report_id": "tem-swing-trade-2026-05"
+  },
+  "MP.pdf": {
+    "processed_at": "2026-05-25T21:30:00Z",
+    "tickers_added": ["MP"],
+    "tickers_updated": [],
+    "report_id": "mp-deep-dive-2026-05"
+  },
+  "Humanoid Robotics .pdf": {
+    "processed_at": "2026-05-25T21:30:00Z",
+    "tickers_added": ["ADI", "TXN", "AMBA", "TER", "QCOM", "TDY", "TSLA", "SYM", "ROK", "OUST", "ARM", "ABB", "SERV"],
+    "tickers_updated": ["NVDA"],
+    "report_id": "physical-ai-humanoid-2026-05"
+  },
+  "Software Basket.pdf": {
+    "processed_at": "2026-05-25T21:30:00Z",
+    "tickers_added": ["RBRK", "FIG", "APP", "MNDY", "CRWD"],
+    "tickers_updated": ["PLTR"],
+    "report_id": "software-basket-2026-05"
+  },
+  "SpaceX IPOpdf.pdf": {
+    "processed_at": "2026-05-25T21:30:00Z",
+    "tickers_added": ["NOC", "HXL", "KRMN", "RKLB", "IRDM", "MDA", "LHX", "KTOS", "FLY", "VOYG", "LUNR", "RDW", "PL", "BKSY", "APH", "HEI", "UFO", "ROKT"],
+    "tickers_updated": ["MP", "TDY"],
+    "report_id": "spacex-ipo-trade-2026-05"
+  }
+}
