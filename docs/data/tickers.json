@@ -4,11 +4,16 @@
     "company": "NVIDIA",
     "sector": "AI Infra",
     "thesis": "",
-    "bottlenecks_addressed": ["humanoid-silicon", "compute-density"],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "bottlenecks_addressed": [
+      "humanoid-silicon",
+      "compute-density"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -40,10 +45,12 @@
     "sector": "AI Apps",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["software-basket-2026-05"],
+    "report_refs": [
+      "software-basket-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -63,11 +70,15 @@
     "company": "Marvell Technology",
     "sector": "AI Infra",
     "thesis": "",
-    "bottlenecks_addressed": ["interconnect-bandwidth"],
-    "report_refs": ["mrvl-deep-dive-2026-05"],
+    "bottlenecks_addressed": [
+      "interconnect-bandwidth"
+    ],
+    "report_refs": [
+      "mrvl-deep-dive-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -76,11 +87,15 @@
     "company": "Applied Optoelectronics",
     "sector": "AI Infra",
     "thesis": "",
-    "bottlenecks_addressed": ["interconnect-bandwidth"],
-    "report_refs": ["aaoi-deep-dive-2026-05"],
+    "bottlenecks_addressed": [
+      "interconnect-bandwidth"
+    ],
+    "report_refs": [
+      "aaoi-deep-dive-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -89,11 +104,17 @@
     "company": "BE Semiconductor (Besi)",
     "sector": "Semis - Packaging",
     "thesis": "",
-    "bottlenecks_addressed": ["hybrid-bonding", "advanced-packaging"],
-    "report_refs": ["ai-physical-bottlenecks-2026-05", "besi-deep-dive-2026-05"],
+    "bottlenecks_addressed": [
+      "hybrid-bonding",
+      "advanced-packaging"
+    ],
+    "report_refs": [
+      "ai-physical-bottlenecks-2026-05",
+      "besi-deep-dive-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -102,11 +123,15 @@
     "company": "Amkor Technology",
     "sector": "Semis - Packaging",
     "thesis": "",
-    "bottlenecks_addressed": ["advanced-packaging"],
-    "report_refs": ["ai-physical-bottlenecks-2026-05"],
+    "bottlenecks_addressed": [
+      "advanced-packaging"
+    ],
+    "report_refs": [
+      "ai-physical-bottlenecks-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -115,11 +140,16 @@
     "company": "TSMC",
     "sector": "Semis - Packaging",
     "thesis": "",
-    "bottlenecks_addressed": ["advanced-packaging", "compute-density"],
-    "report_refs": ["ai-physical-bottlenecks-2026-05"],
+    "bottlenecks_addressed": [
+      "advanced-packaging",
+      "compute-density"
+    ],
+    "report_refs": [
+      "ai-physical-bottlenecks-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -128,11 +158,16 @@
     "company": "Intel",
     "sector": "Semis - Process",
     "thesis": "",
-    "bottlenecks_addressed": ["backside-power-delivery", "compute-density"],
-    "report_refs": ["ai-physical-bottlenecks-2026-05"],
+    "bottlenecks_addressed": [
+      "backside-power-delivery",
+      "compute-density"
+    ],
+    "report_refs": [
+      "ai-physical-bottlenecks-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -141,11 +176,15 @@
     "company": "Analog Devices",
     "sector": "Semis - Analog/Sensors",
     "thesis": "",
-    "bottlenecks_addressed": ["humanoid-silicon"],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -154,11 +193,15 @@
     "company": "Texas Instruments",
     "sector": "Semis - Analog/Sensors",
     "thesis": "",
-    "bottlenecks_addressed": ["humanoid-silicon"],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -167,11 +210,15 @@
     "company": "Ambarella",
     "sector": "Semis - Analog/Sensors",
     "thesis": "",
-    "bottlenecks_addressed": ["humanoid-silicon"],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -180,11 +227,15 @@
     "company": "Teradyne",
     "sector": "Semis - Analog/Sensors",
     "thesis": "",
-    "bottlenecks_addressed": ["humanoid-silicon"],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -193,11 +244,15 @@
     "company": "Qualcomm",
     "sector": "Semis - Analog/Sensors",
     "thesis": "",
-    "bottlenecks_addressed": ["humanoid-silicon"],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -206,11 +261,16 @@
     "company": "Teledyne Technologies",
     "sector": "Semis - Analog/Sensors",
     "thesis": "",
-    "bottlenecks_addressed": ["humanoid-silicon"],
-    "report_refs": ["physical-ai-humanoid-2026-05", "spacex-ipo-trade-2026-05"],
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05",
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -219,11 +279,15 @@
     "company": "Monolithic Power Systems",
     "sector": "Power Conversion",
     "thesis": "",
-    "bottlenecks_addressed": ["power-density"],
-    "report_refs": ["ai-physical-bottlenecks-2026-05"],
+    "bottlenecks_addressed": [
+      "power-density"
+    ],
+    "report_refs": [
+      "ai-physical-bottlenecks-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -232,11 +296,17 @@
     "company": "MP Materials",
     "sector": "Critical Materials",
     "thesis": "",
-    "bottlenecks_addressed": ["rare-earth-magnets", "space-supply-chain"],
-    "report_refs": ["mp-deep-dive-2026-05", "spacex-ipo-trade-2026-05"],
+    "bottlenecks_addressed": [
+      "rare-earth-magnets",
+      "space-supply-chain"
+    ],
+    "report_refs": [
+      "mp-deep-dive-2026-05",
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -246,10 +316,12 @@
     "sector": "Healthcare AI",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["tem-swing-trade-2026-05"],
+    "report_refs": [
+      "tem-swing-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -258,11 +330,15 @@
     "company": "Tesla",
     "sector": "Physical AI / Robotics",
     "thesis": "",
-    "bottlenecks_addressed": ["humanoid-silicon"],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -271,11 +347,15 @@
     "company": "Symbotic",
     "sector": "Physical AI / Robotics",
     "thesis": "",
-    "bottlenecks_addressed": ["humanoid-silicon"],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -284,11 +364,15 @@
     "company": "Rockwell Automation",
     "sector": "Physical AI / Robotics",
     "thesis": "",
-    "bottlenecks_addressed": ["humanoid-silicon"],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -297,11 +381,15 @@
     "company": "Ouster",
     "sector": "Physical AI / Robotics",
     "thesis": "",
-    "bottlenecks_addressed": ["humanoid-silicon"],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -310,11 +398,16 @@
     "company": "ARM Holdings",
     "sector": "Physical AI / Robotics",
     "thesis": "",
-    "bottlenecks_addressed": ["humanoid-silicon", "compute-density"],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "bottlenecks_addressed": [
+      "humanoid-silicon",
+      "compute-density"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -324,11 +417,13 @@
     "sector": "Physical AI / Robotics",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
-    "notes": "Robotics division sold to SoftBank for $5.375B EV — closes mid-late 2026. Public ABB no longer carries robotics optionality.",
+    "rating": "Pass",
+    "notes": "Robotics division sold to SoftBank for $5.375B EV \u2014 closes mid-late 2026. Public ABB no longer carries robotics optionality.",
     "date_added": "2026-05-25"
   },
   {
@@ -337,10 +432,12 @@
     "sector": "Physical AI / Robotics",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["physical-ai-humanoid-2026-05"],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -350,10 +447,12 @@
     "sector": "AI Apps",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["software-basket-2026-05"],
+    "report_refs": [
+      "software-basket-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -363,10 +462,12 @@
     "sector": "AI Apps",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["software-basket-2026-05"],
+    "report_refs": [
+      "software-basket-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -376,10 +477,12 @@
     "sector": "AI Apps",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["software-basket-2026-05"],
+    "report_refs": [
+      "software-basket-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -389,10 +492,12 @@
     "sector": "AI Apps",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["software-basket-2026-05"],
+    "report_refs": [
+      "software-basket-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -402,10 +507,12 @@
     "sector": "AI Apps",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["software-basket-2026-05"],
+    "report_refs": [
+      "software-basket-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -414,11 +521,15 @@
     "company": "Northrop Grumman",
     "sector": "Space & Defense",
     "thesis": "",
-    "bottlenecks_addressed": ["space-supply-chain"],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "bottlenecks_addressed": [
+      "space-supply-chain"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -427,11 +538,15 @@
     "company": "Hexcel",
     "sector": "Space & Defense",
     "thesis": "",
-    "bottlenecks_addressed": ["space-supply-chain"],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "bottlenecks_addressed": [
+      "space-supply-chain"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -440,12 +555,16 @@
     "company": "Karman Holdings",
     "sector": "Space & Defense",
     "thesis": "",
-    "bottlenecks_addressed": ["launch-capacity"],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "bottlenecks_addressed": [
+      "launch-capacity"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
-    "notes": "Supplies SpaceX competitors (ULA / Blue Origin / SLS) — NOT a named SpaceX supplier per filings.",
+    "rating": "Watch",
+    "notes": "Supplies SpaceX competitors (ULA / Blue Origin / SLS) \u2014 NOT a named SpaceX supplier per filings.",
     "date_added": "2026-05-25"
   },
   {
@@ -453,11 +572,15 @@
     "company": "Rocket Lab",
     "sector": "Space & Defense",
     "thesis": "",
-    "bottlenecks_addressed": ["launch-capacity"],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "bottlenecks_addressed": [
+      "launch-capacity"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -467,10 +590,12 @@
     "sector": "Space & Defense",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -479,11 +604,15 @@
     "company": "MDA Space",
     "sector": "Space & Defense",
     "thesis": "",
-    "bottlenecks_addressed": ["space-supply-chain"],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "bottlenecks_addressed": [
+      "space-supply-chain"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Strong",
     "notes": "TSX-listed (not US).",
     "date_added": "2026-05-25"
   },
@@ -492,11 +621,15 @@
     "company": "L3Harris",
     "sector": "Space & Defense",
     "thesis": "",
-    "bottlenecks_addressed": ["space-supply-chain"],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "bottlenecks_addressed": [
+      "space-supply-chain"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -506,10 +639,12 @@
     "sector": "Space & Defense",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -518,11 +653,15 @@
     "company": "Firefly Aerospace",
     "sector": "Space & Defense",
     "thesis": "",
-    "bottlenecks_addressed": ["launch-capacity"],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "bottlenecks_addressed": [
+      "launch-capacity"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -532,10 +671,12 @@
     "sector": "Space & Defense",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -545,10 +686,12 @@
     "sector": "Space & Defense",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -558,10 +701,12 @@
     "sector": "Space & Defense",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Pass",
     "notes": "ROSA contracts are with Boeing / Maxar, NOT SpaceX. Retail mis-narrative risk.",
     "date_added": "2026-05-25"
   },
@@ -571,10 +716,12 @@
     "sector": "Space & Defense",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -584,10 +731,12 @@
     "sector": "Space & Defense",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -597,10 +746,12 @@
     "sector": "Space & Defense",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -610,10 +761,12 @@
     "sector": "Space & Defense",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
+    "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25"
   },
@@ -623,11 +776,13 @@
     "sector": "Thematic ETFs",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
-    "notes": "ETF — basket-level space exposure (0.94% ER).",
+    "rating": "Watch",
+    "notes": "ETF \u2014 basket-level space exposure (0.94% ER).",
     "date_added": "2026-05-25"
   },
   {
@@ -636,11 +791,13 @@
     "sector": "Thematic ETFs",
     "thesis": "",
     "bottlenecks_addressed": [],
-    "report_refs": ["spacex-ipo-trade-2026-05"],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
     "catalyst": "",
     "risks": "",
-    "rating": "",
-    "notes": "ETF — A&D primes (LHX/NOC) + emerging space (0.45% ER).",
+    "rating": "Watch",
+    "notes": "ETF \u2014 A&D primes (LHX/NOC) + emerging space (0.45% ER).",
     "date_added": "2026-05-25"
   }
 ]
