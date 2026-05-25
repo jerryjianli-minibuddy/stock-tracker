@@ -1,0 +1,23 @@
+[project]
+name = "stock-tracker"
+version = "0.1.0"
+description = "Watchlist tracker with daily GitHub Actions refresh + Pages dashboard"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "yfinance>=0.2.40",
+    "typer>=0.12.0",
+    "rich>=13.7.0",
+    "anthropic>=0.40.0",
+    "pydantic>=2.7.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-mock>=3.12.0",
+]
+
+# This project is intentionally an "application" (no build-system table) —
+# scripts/ holds loose entry-point files run via `uv run scripts/<name>.py`,
+# not an installable package.

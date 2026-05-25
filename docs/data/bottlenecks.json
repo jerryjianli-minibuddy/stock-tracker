@@ -1,0 +1,123 @@
+[
+  {
+    "id": "memory-bandwidth",
+    "name": "HBM Memory Bandwidth",
+    "theme": "AI Inference",
+    "physics": "Inference is memory-bandwidth-bound, not compute-bound. Each token generation requires loading the full model weights from HBM to SRAM. For a 70B parameter model in FP16, that's 140GB per token. At H100's 3.35TB/s HBM3 bandwidth, the theoretical ceiling is ~24 tokens/sec/GPU before any compute happens. This is why HBM stacking (HBM3 → HBM3e → HBM4) drives more performance gains than raw FLOPs improvements. HBM4 targets 6.4+ TB/s per stack with 16-high stacks by 2026; per SK Hynix CFO (Q3 2025), the company has 'sold out our entire 2026 HBM supply'; Micron CBO Sumit Sadana confirmed 'sold out for 2026'; Samsung memory chief Kim Jaejune warned of 'significant shortages through at least 2027' at the April 30 2026 earnings release. The binding constraint has shifted from per-stack bandwidth to wafer-supply allocation.",
+    "key_metric": "GB/s per accelerator; HBM wafer allocation per quarter",
+    "current_frontier": "HBM3e at 4.8 TB/s/stack shipping in volume; HBM4 6.4+ TB/s/stack ramping H2 2026, allocations sold out at all three vendors through 2026",
+    "winners": ["NVDA", "AVGO", "Micron", "SK Hynix"],
+    "losers_or_at_risk": ["anyone relying on GDDR for inference at scale", "accelerator designs without secured HBM4 allocation"],
+    "references": ["Chips and Cheese HBM analysis", "SemiAnalysis dive", "AI's Next Physical Bottlenecks (May 2026)", "Marvell Deep-Dive (May 2026)"]
+  },
+  {
+    "id": "power-density",
+    "name": "Rack-Level Power & Thermal Density",
+    "theme": "Data Center Power",
+    "physics": "An H100 draws 700W; a B200 draws 1200W; an NVL72 rack pulls 120kW vs. a traditional rack at 10-15kW. Air cooling tops out around 30kW/rack due to convective heat transfer limits — beyond that you need direct-to-chip liquid cooling. This creates a hard physical bifurcation: any DC retrofit must either liquid-cool or be obsolete for next-gen accelerators. The bottleneck isn't 'more power' — it's 'getting heat out of the rack fast enough'. Rubin GPUs head toward 1,800W and Rubin Ultra toward 3,600W per GPU. In September 2025 Microsoft demonstrated in-chip microfluidics — coolant flowing through channels etched into the silicon die — removing heat 3× better than cold plates and cutting peak die temperatures by 65%. Corintis (Microsoft's partner) is ramping to one million cold plates by end of 2026 with chip-integrated microfluidic prototype lines in development. This makes cold-plate vendors a transitional play, not a terminal one — the long-term frontier is moving the cooling boundary inside the silicon.",
+    "key_metric": "kW per rack supported, PUE, W/cm² heat removal at the die",
+    "current_frontier": "120kW racks with liquid cooling (NVL72); 200kW+ projected for Rubin; in-chip microfluidic prototypes 2026, volume 2027+",
+    "winners": ["VRT", "ETN", "nVent", "Corintis (private)", "Microsoft (in-chip microfluidics)"],
+    "losers_or_at_risk": ["legacy air-cooled DC operators", "cold-plate-only vendors long-term once in-chip microfluidics scales"],
+    "references": ["AI's Next Physical Bottlenecks (May 2026)"]
+  },
+  {
+    "id": "backside-power-delivery",
+    "name": "Backside Power Delivery",
+    "theme": "Semiconductor Process",
+    "physics": "Modern AI accelerators draw 1,000+ amps at sub-1V supply rails. At Rubin-class power densities (~1,800W/GPU, Rubin Ultra targeting ~3,600W), IR drop (voltage loss to resistance through the power distribution network) reached ~7% on conventional front-side power delivery — meaning ~7% of supplied power was wasted heating the interconnect before reaching transistors. Backside power delivery (BSPD) routes power through the back of the wafer via through-silicon vias directly to the transistors, separating the power-delivery network from signal routing on the front. Intel's PowerVia cut IR drop to under 1%. As of January 2026, BSPD moved from research to high-volume manufacturing in Intel's 18A node; TSMC's Super Power Rail follows on A16. NVIDIA finalized a $5B co-development deal with Intel; Microsoft adopted 18A for its Maia 2 accelerator. The transition is structural: any chip targeting >1kW must either adopt BSPD or accept compounding voltage-regulation and signal-density penalties.",
+    "key_metric": "IR drop %, watts per GPU at delivered voltage, signal routing density",
+    "current_frontier": "Intel 18A in HVM January 2026; TSMC A16 (Super Power Rail) following ~2027",
+    "winners": ["INTC", "NVDA", "Microsoft (Maia 2)", "TSM"],
+    "losers_or_at_risk": ["chip designs locked into front-side power without a BSPD migration path"],
+    "references": ["AI's Next Physical Bottlenecks (May 2026)"]
+  },
+  {
+    "id": "advanced-packaging",
+    "name": "Advanced Packaging (CoWoS / ABF / Interposers)",
+    "theme": "Semiconductor Packaging",
+    "physics": "The actual supply gate for AI accelerators is not memory — it is the packaging system (CoWoS + ABF substrates + interposers) that turns logic dies and HBM stacks into a usable AI package. The market fixates on HBM because it is visible and countable; CoWoS sits one layer deeper, oversubscribed through at least mid-2026. TSMC holds ~75% of advanced-packaging capacity across CoWoS-S/R/L variants; Amkor is the only credible second source at scale. ABF substrate availability (Ibiden, Unimicron, AT&S) is the gating constraint underneath that — ABF is a build-up material that allows the fine-pitch routing modern packages require, and capacity expansion takes 18-24 months minimum. NVIDIA's leaked GR150 roadmap shows a new 'CoWoP' approach for late 2026, driven specifically by ABF substrate constraints rather than die size or HBM stacking. The chokepoint is therefore deeper in the stack than the HBM headlines suggest.",
+    "key_metric": "CoWoS-equivalent wafer capacity per quarter; ABF substrate units; advanced-package units shipped",
+    "current_frontier": "CoWoS oversubscribed through mid-2026; CoWoP transition late 2026; TSMC SoIC-X at 6μm pitch",
+    "winners": ["TSM", "AMKR", "BESIY", "AMAT"],
+    "losers_or_at_risk": ["AI compute designs dependent on single-vendor advanced-package supply", "smaller fabless players priced out of CoWoS allocations"],
+    "references": ["AI's Next Physical Bottlenecks (May 2026)", "Marvell Deep-Dive (May 2026)", "Besi Deep-Dive (May 2026)"]
+  },
+  {
+    "id": "hybrid-bonding",
+    "name": "Hybrid Bonding (Atomic-Level Chip Stacking)",
+    "theme": "Semiconductor Packaging",
+    "physics": "Hybrid bonding welds two chips together copper-to-copper at room temperature with 100-nanometer placement accuracy — the only known way to stack the memory and logic chips that next-generation AI accelerators (NVIDIA Rubin, AMD MI400) and HBM4 16-high memory require. The process: polish surfaces to sub-0.5nm roughness via chemical mechanical polishing — for scale, a water molecule is 0.3nm, so we're polishing to a few atoms of variation; activate the oxide layer with plasma so it 'wants' to bond; place within ~100nm of target (the equivalent of landing a jumbo jet on a runway with less than the width of a virus of placement error); press at room temperature so the oxide-to-oxide layers stick; then anneal at ~200°C so copper atoms diffuse across the interface and merge. Per TSMC's 2026 SoIC-X announcement at 6μm bond pitch: ~100× higher interconnect density than 30-40μm microbumps, enormous bandwidth between stacked logic and memory, and dramatically lower power per bit transferred. Besi's Kinex platform achieves 1,600-2,000 die placements per hour in ISO Class 3 cleanrooms (fewer than 1,000 particles >0.1μm per m³). Sub-25nm placement accuracy is in development; a 50nm prototype is shipping for customer qualification.",
+    "key_metric": "Placement accuracy (nm), interconnect density (× vs microbumps), throughput (die/hour), surface roughness (nm)",
+    "current_frontier": "Besi 100nm in production; 50nm prototype shipping for qualification; sub-25nm in development; TSMC SoIC-X at 6μm pitch; HBM4 hybrid-bonding adoption pending H2 2026",
+    "winners": ["BESIY", "ASMPT", "AMAT", "TSM"],
+    "losers_or_at_risk": ["memory vendors deferring hybrid bonding (SK Hynix reportedly sticking with MR-MUF for HBM4 16-high per TrendForce Jan 2026)", "TCB-only equipment vendors"],
+    "references": ["AI's Next Physical Bottlenecks (May 2026)", "Besi Deep-Dive (May 2026)"]
+  },
+  {
+    "id": "interconnect-bandwidth",
+    "name": "Optical Interconnect Bandwidth",
+    "theme": "AI Networking",
+    "physics": "At 800Gbps and 1.6Tbps per lane, copper signals fall apart after a few feet; data must be converted to laser light via optical transceivers — thumb-drive-sized devices containing tiny lasers that switch state in well under a nanosecond with extremely consistent timing. PAM4 modulation (4-level pulse amplitude) crams 2 bits into each pulse, doubling the data rate without doubling laser switching speed. Each transceiver in an AI cluster consumes 12-30W; across hundreds of thousands of modules per AI campus, optical link power is a top-tier design constraint. EML (Electro-absorption Modulated Laser) is the standard at 800G+, and EML laser supply is itself a bottleneck — AAOI's vertical InP laser fab is its primary moat. LPO (Linear Pluggable Optics) strips out the DSP to save 5-7W per module; CPO (Co-Packaged Optics) solders the optical engine directly onto the switch ASIC — Broadcom's Bailly 51.2T CPO switch reduces optics power 65% (15W pluggable → 5.4W per 800G port, validated over 1 million flap-free hours at Meta). Per Bernstein / Lightcounting / SemiAnalysis: CPO mass adoption pushed to ~2028+ for scale-up due to manufacturing yield, fiber-coupling, serviceability, and vendor-concentration issues; LPO is transitional through 2027.",
+    "key_metric": "Bandwidth per lane (Gbps), power per Gb (W/Gbps), reach (m), EML laser availability",
+    "current_frontier": "1.6T pluggables shipping FY27; 3.2T in roadmap; CPO small-scale scale-out H2 2026; CPO scale-up H2 2028+; LPO ramping CY26",
+    "winners": ["MRVL", "AVGO", "AAOI", "Coherent", "Lumentum", "FN (Fabrinet)"],
+    "losers_or_at_risk": ["pluggable-module makers in the 2028-2030 CPO transition (AAOI, Coherent, Lumentum) if scale-up adoption materializes", "DSP-only vendors as LPO/CPO removes the discrete DSP"],
+    "references": ["Marvell Deep-Dive (May 2026)", "AAOI Deep-Dive (May 2026)", "AI's Next Physical Bottlenecks (May 2026)"]
+  },
+  {
+    "id": "compute-density",
+    "name": "Compute Density at the Reticle Limit",
+    "theme": "Semiconductor Process",
+    "physics": "Modern AI accelerators are reticle-limited — the maximum die area that can be patterned in a single EUV exposure is ~858 mm² at current ASML reticle limits. To pack more transistors into a single accelerator package, designers must either shrink the process node (TSMC N3 → N2 → A16 → A14, each step costing ~$15-30B in new fab capex) or stack multiple dies in 3D via hybrid bonding. The Blackwell B200 contains ~104 billion transistors at 4nm; Rubin will use TSMC N3 with ~150B transistors per die. At N2/A14 nodes, transistor gate widths approach 8-10 atoms across, where quantum-mechanical tunneling becomes a structural reliability problem rather than a curiosity (electrons leak across the gate even when it is 'closed'). Density gains beyond the reticle limit therefore require packaging-level 3D integration — per-die scaling alone no longer compounds. This is why hybrid bonding and advanced packaging are upstream of compute density rather than separate stories.",
+    "key_metric": "Transistors per mm², reticle utilization, gate width (nm), die-stack height (logic layers)",
+    "current_frontier": "TSMC N3 in HVM 2025; N2 ramp 2026; A16 (with Super Power Rail) targeting 2027; A14 in development",
+    "winners": ["TSM", "ASML", "NVDA", "INTC (18A re-entry)"],
+    "losers_or_at_risk": ["designs dependent on continued node shrink without a 3D-stacking strategy"],
+    "references": ["AI's Next Physical Bottlenecks (May 2026)"]
+  },
+  {
+    "id": "humanoid-silicon",
+    "name": "Edge AI Silicon for Humanoid Robots",
+    "theme": "Physical AI",
+    "physics": "Each humanoid robot requires a stack of silicon: a high-TOPS edge AI SoC for vision and planning (NVIDIA Jetson Thor delivers 2,000+ FP4 TFLOPS; Qualcomm Dragonwing IQ10 700 TOPS in an 18-core Oryon CPU; Ambarella CV7 with 2.5× the AI performance of CV5 at 8K vision resolution), sensor-fusion ICs (mmWave radar like TI's IWR6243, LiDAR time-of-flight, force/torque sensors at every joint), motor control ICs (typically 30-50 actuators per humanoid at $5-15 in BOM each), and power management distributed across the body. ADI sells signal-chain + power + connectivity at every joint and subsystem as a default supplier given its breadth — industrial is 50% of ADI's revenue. TI is the named NVIDIA Jetson Thor partner (announced March 5, 2026) for mmWave radar / motor control / sensing, with Apptronik named as a public customer. Ambarella is the only Western public pure-play edge-AI vision SoC at a swallowable market cap ($2.7-3.1B) — making it the most plausible M&A target if a chip buyer wants humanoid exposure. Silicon BOM per robot is ~$200-500 today, projected to $1,000+ as compute capability grows toward whole-body model-execution.",
+    "key_metric": "TOPS per humanoid, $ silicon BOM per humanoid, named OEM design wins per chip vendor",
+    "current_frontier": "Jetson Thor + Dragonwing IQ10 launched late 2025; Ambarella CV7 launched Jan 2026; Apptronik / Figure / 1X / Boston Dynamics / Agility / NEURA Robotics ramping production through 2026",
+    "winners": ["NVDA", "ADI", "TXN", "AMBA", "QCOM"],
+    "losers_or_at_risk": ["legacy MCU vendors without a high-TOPS edge-AI roadmap", "single-product analog peers without humanoid attach"],
+    "references": ["Physical AI / Humanoid Robotics Supply Chain (May 2026)"]
+  },
+  {
+    "id": "rare-earth-magnets",
+    "name": "Rare-Earth Magnet Supply Outside China",
+    "theme": "Critical Materials",
+    "physics": "NdFeB permanent magnets are required for high-performance motors in EVs, wind turbines, humanoid robots, defense systems (an F-35 contains ~417 kg of REE), and consumer electronics. China holds ~70% of global rare-earth extraction but >90% of downstream processing — oxide separation, metal refining, and finished magnet production. European rare-earth magnet prices have reached up to 6× Chinese domestic prices per IEA. April 2025: China imposed export controls on 7 heavy REEs (Dy, Gd, Lu, Sm, Sc, Tb, Y) in retaliation for U.S. tariffs. October 2025 MOFCOM expansion added 5 more (Ho, Er, Tm, Eu, Yb) plus equipment/technology and extraterritorial controls on foreign-made products containing Chinese material. Per CSIS April 2026: China exported just 17 tons of yttrium to the U.S. in April-December 2025 vs 333 tons in the prior 8 months — a 95% decline. NdPr export-market FOB from China sits at $183/kg vs $113/kg domestic, a 63% export premium. The binding 18-36 month constraint is (a) heavy-REE (Dy, Tb, Sm) separation outside China, and (b) finished sintered NdFeB magnet capacity outside China — these processing steps require chemistry expertise, capex, and time that haven't yet been replicated at scale outside China.",
+    "key_metric": "NdPr oxide production (MT/yr), finished magnet capacity (MT/yr), heavy-REE separation capacity outside China",
+    "current_frontier": "MP Mountain Pass heavy-REE separation circuit commissioning mid-2026; MP 10X facility (10,000 MT/yr magnets) commissions 2028; Saudi/Maaden JV 2028+; Lynas Hondo TX refinery via DoD Title III; USAR Stillwater Phase 1a commissioned March 2026",
+    "winners": ["MP", "Lynas Rare Earths (LYC.AX)", "USAR"],
+    "losers_or_at_risk": ["EV/motor/defense programs dependent on Chinese magnet supply", "downstream OEMs without long-term offtake agreements"],
+    "references": ["MP Deep-Dive (May 2026)", "SpaceX IPO Trade (May 2026)", "CSIS 'Rare Earth Export Restrictions One Year Later' (April 2026)"]
+  },
+  {
+    "id": "space-supply-chain",
+    "name": "Named SpaceX / Starshield Contract Revenue",
+    "theme": "Space & Defense Supply Chain",
+    "physics": "SpaceX dominates global commercial launch with ~80% share via Falcon 9 reusability and Starship development. SpaceX confidentially filed S-1 on April 1, 2026, targeting June 12, 2026 Nasdaq listing under ticker $SPCX at $1.75-2T valuation and ~$75B raise — a record by valuation, but valuation is targeted, not priced. Only three public names have publicly verifiable, named SpaceX / Starshield contract revenue: Northrop Grumman (sensors on the $1.8B Starshield/NRO program per Reuters May 2024 and Spaceflight Now), Hexcel (composites — Hexcel's own corporate page explicitly lists 'Airbus, Boeing, Bombardier, Mitsubishi Heavy Industries, Sikorsky, Kawasaki, SpaceX, Blue Origin, and Lockheed Martin' as customers), and MDA Space (CAD $1.1B Globalstar C-3 prime contract launched on SpaceX rockets, per MDA PRNewswire Feb 2025). Other 'space basket' names (Karman, Redwire, etc.) are sector beneficiaries trading on retail-narrative association, NOT contracted SpaceX revenue — Karman's filings explicitly name ULA / Blue Origin / SLS but NOT SpaceX; Redwire's ROSA contracts are with Boeing / Maxar per the PRNewswire May 2021 delivery release.",
+    "key_metric": "Named contract value ($), contract count, % of company revenue attributable to SpaceX",
+    "current_frontier": "SpaceX IPO June 12, 2026 (confidentially filed); Starshield/NRO $1.8B ramp; Golden Dome architecture budget cycle late 2026",
+    "winners": ["NOC", "HXL", "MDA"],
+    "losers_or_at_risk": ["ASTS (SpaceX-EchoStar $17B spectrum deal threatens D2C thesis)", "retail-narrative beneficiaries (KRMN, RDW) on post-IPO de-rating if pricing disappoints"],
+    "references": ["SpaceX IPO Trade (May 2026)"]
+  },
+  {
+    "id": "launch-capacity",
+    "name": "Earth-to-Orbit Launch Capacity",
+    "theme": "Space & Defense Supply Chain",
+    "physics": "Launch cost has fallen from ~$10,000/kg to LEO (Shuttle era) to ~$2,000/kg (Falcon 9) via first-stage reusability — boosters recovered and reflown 20+ times each. Starship targets 100-150 tons to LEO at $10-50/kg, an order of magnitude lower than any other vehicle if orbital refueling demos succeed. The remaining bottleneck is launch-vehicle production cadence, launch-site capacity (Boca Chica + LC-39A throughput), and FAA licensing (each Starship test requires environmental review). Rocket Lab Neutron Q4 2026 targets the medium-lift gap (8-13 tons LEO) where Falcon 9 is over-spec and small launch is under-spec. Defense launch capacity is gated by SDA Tranche 1/2 architecture (~$1.8B NRO/Starshield contracts) and the upcoming Golden Dome architecture budget cycle. Karman supplies payload fairings and interstages to ULA / Blue Origin / SLS — but explicitly NOT SpaceX per its FY24 release, which is important context for the IPO read-through trade.",
+    "key_metric": "$/kg to LEO, launches per year per provider, rocket production cadence, reusability flight count per booster",
+    "current_frontier": "Falcon 9 reusability ~20 flights per booster; Starship orbital refueling demo targeted; RKLB Neutron first flight Q4 2026",
+    "winners": ["RKLB", "KRMN (supplies non-SpaceX vehicles — ULA/Blue Origin/SLS)"],
+    "losers_or_at_risk": ["legacy expendable launch (ULA Vulcan transition)", "pure-D2C satcom (ASTS) under Starlink price pressure", "small-launch pure-plays without medium-lift offering"],
+    "references": ["SpaceX IPO Trade (May 2026)"]
+  }
+]

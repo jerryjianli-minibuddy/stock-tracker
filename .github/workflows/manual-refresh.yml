@@ -1,0 +1,54 @@
+name: manual-refresh
+
+# Same as daily-refresh but human-triggered only — for mid-day updates,
+# investigating a stale snapshot, or running after editing tickers.json.
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason (appended to the commit message)"
+        required: false
+        default: "mid-day update"
+
+permissions:
+  contents: write
+
+# Share the same group as daily-refresh so they queue, not race.
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Install Python 3.11
+        run: uv python install 3.11
+
+      - name: Install project dependencies
+        run: uv sync
+
+      - name: Run refresh.py
+        run: uv run python scripts/refresh.py
+
+      - name: Commit updated data (if any)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/ docs/data/; then
+            echo "no data changes — nothing to commit"
+            exit 0
+          fi
+          git add -A -- data/ docs/data/
+          git commit -m "Manual refresh $(date -u +%Y-%m-%dT%H:%MZ) — ${{ inputs.reason }}"
+          git push

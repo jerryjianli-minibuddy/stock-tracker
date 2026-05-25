@@ -1,0 +1,392 @@
+[
+  {
+    "id": "ai-physical-bottlenecks-2026-05",
+    "title": "AI's Next Physical Bottlenecks",
+    "source": "Physics-Driven Investment Thesis · May 2026",
+    "date_ingested": "2026-05-25",
+    "summary": "AI scaling has shifted from a compute problem to a series of physics problems: how to deliver 1,000+ amps into a chip at sub-1V (backside power), how to remove 3.6kW of heat from a single GPU (in-chip cooling), and how to package compute and memory together when only a handful of facilities can do it (CoWoS + ABF substrates + hybrid bonding). The companies best positioned sit one layer deeper than HBM headlines. The Asymmetric Returns Ranking weights (1) physics-forced demand, (2) market under-pricing the story, and (3) limited downside if the thesis is wrong. Explicit sit-outs: VRT (cooling consensus already priced; in-chip microfluidics disrupts cold-plate business model long-term rather than enhancing it) and VICR (technology was right but execution and competition went wrong; hyperscalers designed them out).",
+    "rankings": [
+      {
+        "rank": 1,
+        "ticker": "BESIY",
+        "reasoning": "Near-monopoly on equipment for 3D stacking with ~67% D2W hybrid-bonding share. Multi-bottleneck exposure: HBM4 advanced logic + TSMC SoIC-X ramp + future CoWoP transition. Best 3-year asymmetric play in the ranking — physics-anchored, hidden monopoly, compounds across multiple bottlenecks. Key risk: lumpy exposure to AI/HBM4 adoption pace (SK Hynix's reported MR-MUF gamble for HBM4 16-high is a direct threat to one bull driver).",
+        "bottlenecks_addressed": ["hybrid-bonding", "advanced-packaging"]
+      },
+      {
+        "rank": 2,
+        "ticker": "AMKR",
+        "reasoning": "TSMC Arizona partner; trades like commodity OSAT despite being critical advanced-packaging US infrastructure. The market doesn't yet differentiate Amkor's structural role as the only credible CoWoS second source from generic outsourced assembly economics. Risk: OSAT-margin reversion, US-fab strategic uncertainty.",
+        "bottlenecks_addressed": ["advanced-packaging"]
+      },
+      {
+        "rank": 3,
+        "ticker": "INTC",
+        "reasoning": "~1.5 year lead on PowerVia (backside power delivery in 18A high-volume manufacturing as of January 2026); NVIDIA $5B co-development deal validates the technology lead and execution optionality. Highest-variance pick in the ranking — the technology is real, but the business turnaround is not yet proven. Biggest possible move if the foundry strategy works; tail risk if it doesn't.",
+        "bottlenecks_addressed": ["backside-power-delivery", "compute-density"]
+      },
+      {
+        "rank": 4,
+        "ticker": "MPWR",
+        "reasoning": "Winning hyperscaler sockets from Vicor on next-gen GPU power conversion. The share-gain story is well-followed (higher valuation, well-watched name), so asymmetry is smaller than ranks 1-3. Risk: high valuation, well-loved.",
+        "bottlenecks_addressed": ["power-density"]
+      },
+      {
+        "rank": 5,
+        "ticker": "TSM",
+        "reasoning": "Owns the CoWoS packaging bottleneck but everyone knows it. Crowded trade with limited multiple expansion despite genuine supply-side leverage. Real franchise, fully priced into expectations.",
+        "bottlenecks_addressed": ["advanced-packaging", "compute-density"]
+      }
+    ],
+    "pdf_path": "reports/archive/memory wall.pdf"
+  },
+  {
+    "id": "mrvl-deep-dive-2026-05",
+    "title": "Marvell Technology (MRVL) — Exhaustive Deep-Dive & Theme-to-Pick Verdict",
+    "source": "Theme-to-Pick framework (Bernstein / Lightcounting / SemiAnalysis frameworks cited)",
+    "date_ingested": "2026-05-25",
+    "summary": "PASS / SWING-only verdict: MRVL clears 4 of 5 framework pillars (fails Founder-Led; Sutardja/Dai founders departed April 2016 under Starboard pressure, Matt Murphy is not a founder, insider ownership 0.27%) but Theme phase 5 (parabolic +140% in 70 days into $192.15 ATH May 14 2026, mean sell-side PT $122-137 BELOW $177 spot, insider cluster-selling under Murphy's 10b5-1 plan adopted Dec 16 2025, 36+ Buy ratings, CNBC daily coverage) triggers automatic PASS regardless of pillar count. Under the Bernstein AI-connectivity framework, MRVL is a Tier-2 beneficiary (optics/interconnect) — re-rates UP only when NVDA/AVGO/TSMC re-rate up; re-rates DOWN harder (beta 2.0-2.25) because its socket position is contestable while NVDA's is not. Multi-year base case $145 (-18%) on FY28 revenue ~$13-14B (10% below mgmt's $15B target) at 22-23× FY28 non-GAAP EPS ~$6.50. Custom-AI silicon GM estimated 40-45% vs ~59% blended drives ~3pp blended GM compression by FY28 — the quantifiable bear case is real.",
+    "rankings": [
+      {
+        "rank": 1,
+        "ticker": "MRVL",
+        "reasoning": "Tier-2 AI-connectivity beneficiary with real franchise: AWS Trainium 2 in production (Marvell exclusive on T2), Microsoft Maia in design/preproduction, 800G/1.6T PAM4 DSPs at 60-80% share, Celestial AI Photonic Fabric chiplets for CPO-era repositioning (Tier-2 → Tier-1.5). Q4 FY26 (March 5 2026): $2.219B revenue +22%, data center $1.65B (74% of mix). Q1 FY27 guide $2.4B ±5%. But Stage-7 chokepoint analysis: MRVL is a beneficiary, NOT a chokepoint — binding constraints in 18-36 months are TSMC advanced packaging, HBM (sold out 2026 at all three vendors), power/grid, and NVIDIA GPU + Broadcom switch-ASIC capacity. Disputed AWS T3/T4 socket (Benchmark Dec 8 2025: 'high conviction lost to Alchip Mariana'; JPMorgan/Marvell mgmt counter-narrative). Verdict PASS/SWING-only because Phase 5 = automatic PASS regardless of pillar count; founder-led FAIL caps maximum designation at SWING (never CORE). Next true catalyst window: Q1 FY27 earnings May 27, 2026 — every figure could change within 9 days. Entering before earnings on a Phase 5 setup is the textbook framework violation.",
+        "bottlenecks_addressed": ["interconnect-bandwidth"]
+      }
+    ],
+    "pdf_path": "reports/archive/MRVL.pdf"
+  },
+  {
+    "id": "aaoi-deep-dive-2026-05",
+    "title": "Applied Optoelectronics (AAOI): A Plain-English Deep Dive Into the AI Optical Networking Story",
+    "source": "Plain-English investment dossier",
+    "date_ingested": "2026-05-25",
+    "summary": "AAOI is a high-risk, high-reward 'picks-and-shovels' play on AI data center optical buildout. Revenue +83% to $455.7M in 2025; guides >$1.1B in 2026 anchored by 800G volume that began Q1 2026 and a >$200M first 1.6T order from a hyperscaler in March 2026. Structural moat is the in-house indium phosphide (InP) laser-chip fab that protected AAOI during 2024-2025 industry-wide laser shortages — most competitors buy chips from Lumentum/Coherent. Three bull legs: Amazon warrant for 7,945,399 shares at $23.6954 vesting against up to $4B in purchases through 2035; >$324M disclosed 800G/1.6T orders; vertically integrated US laser fab + Texas/Pearland expansion (>55% of 800G/1.6T US-made by end 2027). Three bear legs: customer concentration risk recreates the 2017 dynamic (Amazon dropped them, stock fell -70 to -90%); brutal Chinese price pressure (Innolight + Eoptolink ~60% of 800G, 20-25% lower pricing, 33% net margins); share dilution constant tax (share count doubled in 15 months; new $600M ATM equity program May 14 2026). Decision-ready: treat as small speculative position sized to survive a 40-50% drawdown. Accumulate only on weakness to $100-130; trim or hedge above $200-220 until two consecutive quarters show GAAP profits and gross margin >32%.",
+    "rankings": [
+      {
+        "rank": 1,
+        "ticker": "AAOI",
+        "reasoning": "Picks-and-shovels play on 800G→1.6T optical ramp. Bull case: vertical InP laser fab is the moat that protected AAOI during 2024-2025 industry-wide laser shortages (competitors buy from Lumentum/Coherent); Amazon warrant up to $4B through 2035 converts customer to long-term equity-aligned partner; disclosed >$324M 800G/1.6T orders ($200M+ first 1.6T from one customer, $124M cumulative 800G from another); $1.4B mid-2027 annualized run-rate from 1.6T alone; US manufacturing (>55% by end-2027) aligns with hyperscaler supply-chain resilience preference. Bear case: customer concentration recreates the 2017 dynamic that destroyed the stock; Innolight 'projected to capture 50-60% of the 1.6T module market in 2025' per Deep Fundamental Substack — head-start may already be narrower than it looks; Citron Research April 10 2026 short call ('paying beyond monopoly multiples for commodity economics' at 112x forward earnings); CPO threat 2028-2030 from Broadcom Bailly 51.2T (reduces optics power 65% — 15W pluggable vs 5.4W per 800G); GAAP losses continue (-$14.3M Q1 2026, -$38.2M FY 2025); $600M ATM means dilution will continue. Sized for risk: 1-2% starter on weakness to $100-130; max 4-5% diversified portfolio (5-year beta 3.76 — when SPY falls 1%, AAOI falls ~3.76%).",
+        "bottlenecks_addressed": ["interconnect-bandwidth"]
+      }
+    ],
+    "pdf_path": "reports/archive/AAOI.pdf"
+  },
+  {
+    "id": "besi-deep-dive-2026-05",
+    "title": "BE Semiconductor Industries (Besi): A High School-Friendly Deep Dive",
+    "source": "Plain-English investment dossier",
+    "date_ingested": "2026-05-25",
+    "summary": "Besi is the world's leading maker of hybrid-bonding machines — robots that glue future AI chips together with atom-level precision — and that single product is why the stock has roughly tripled in 12 months (+153%) to ~€260-275, giving it a market cap near €21 billion. Fundamentals improving fast: Q1 2026 revenue +28% YoY, orders +104%, Q2 guided +30-40% sequentially. But valuation is extreme: ~142x trailing and ~70x forward earnings. Analyst price targets range from €106 to €357 — one of the widest dispersions in European tech, signaling that smart people disagree violently about what this is worth. Applied Materials owns 9% (largest shareholder ahead of BlackRock) and is a deep R&D partner (joint Kinex hybrid-bonding platform). Reuters reported March 2026 that both Applied Materials and Lam Research held takeover discussions; Besi hired Morgan Stanley to evaluate. Verdict: high-quality, technology-leading 'toll booth' for AI hardware with a real moat — but at today's price you're paying full price for flawless execution through 2027-2028. Hold/Trim for new buyers; Hold for existing shareholders; Buy only on a 25-35% pullback or confirmation of HBM4 hybrid-bonding volume orders.",
+    "rankings": [
+      {
+        "rank": 1,
+        "ticker": "BESIY",
+        "reasoning": "World leader in hybrid bonding equipment: 42% share of die-attach equipment, 75% of advanced die-attach, ~67% of D2W hybrid bonding per Microsilicon Tech. Crown jewel achieves 100nm placement accuracy in production, 50nm prototype shipping for customer qualification, sub-25nm in development. Adopted first by Sony for image sensors (2016), then AMD 3D V-Cache, now ramping in TSMC SoIC and (eventually) HBM4/HBM4E memory. 18 customers, 150+ cumulative bonders shipped; six integrated production lines with 30 Besi hybrid bonders running at a leading logic customer (industry consensus: TSMC, not officially named). Applied Materials 9% equity stake + joint Kinex platform creates a flywheel: Besi sees early roadmaps from Intel, TSMC, SK Hynix, Samsung that pure back-end players (Hanmi, K&S) can't access. Bear case has weight: SK Hynix has reportedly decided to stick with MR-MUF for HBM4 16-high per TrendForce Jan 2026 (direct threat to one bull driver); 2025 net income fell -28% despite the AI narrative; 84% Asia concentration (China 45% + APAC 39% in Q4 2025); valuation 142x trailing prices in flawless execution through 2027-2028. M&A optionality from Applied/Lam takeover talks creates a soft floor (~30% strategic premium) but if walked away the stock could shed 10-20% on the news alone.",
+        "bottlenecks_addressed": ["hybrid-bonding", "advanced-packaging"]
+      }
+    ],
+    "pdf_path": "reports/archive/Besi.pdf"
+  },
+  {
+    "id": "tem-swing-trade-2026-05",
+    "title": "Tempus AI (TEM) Swing Trade Plan — Bucket 2 Framework",
+    "source": "Bucket 2 trade-planning framework — May 19 2026",
+    "date_ingested": "2026-05-25",
+    "summary": "Position-intent tag: SWING (not CORE). Catalyst has fired twice (Q1 beat-and-raise May 5; Bristol Myers Squibb strategic collaboration May 14) but the tape has rejected both — TEM broke below the $46.28 system stop, closing $43.62 May 18 before reclaiming $45.53 May 19 (+4.38% on 5.85M shares vs ~6.24M avg — a below-average bounce off a 52-week-low test, weak signal). Recommended primary entry: $46.50 limit on confirmed daily close ≥ $46.28 with volume ≥ 6M shares; hard initial stop $39.53 (-15%); position size 2.5-3.0% of book. The May 29 Investor Day is the binary catalyst that defines the trade — at IV30 of 66.5% (12th percentile of 1-year range, cheap implied vol), the ATM straddle prices ±$6.25 (~±13.7%). High volatility (ATR 6.5%, beta 2.33-3.06), 27% short interest, pending July 2025 class actions, and inaugural-investor-day binary preclude CORE treatment. Rule of 40 score 29.1-35.3% fails the ≥40 hurdle, confirming TEM is a growth-momentum story, not a compounder.",
+    "rankings": [
+      {
+        "rank": 1,
+        "ticker": "TEM",
+        "reasoning": "Precision-medicine AI play. Q1 2026 revenue $348.1M +36.1% YoY (per Business Wire May 5 2026); adj EBITDA -$2.8M (-0.8% margin); FY26 guide raised to $1.59-1.60B. Bristol Myers Squibb expanded collaboration May 14 across 5 oncology + neuroscience clinical programs using Tempus Lens. Pre-positioning signals: ARK accumulated ~620K shares May 6-15 (~$30M), TEM is ARK's third-largest holding (~5% of portfolio); short interest 27.03% of 99.01M float (5.33 days-to-cover) — squeeze fuel on positive Investor Day surprise; IV30 in 12th percentile of 1-year range (cheap implied vol); P/C OI 0.67 (modestly bullish). Insider context: CEO Lefkofsky sold 166,250 Class A shares April 28 at ~$51 under 10b5-1 plan adopted March 4 2025 (mechanical, not discretionary); NO open-market insider buys in last 30 days. SWING-only because high volatility, pending class actions, Rule-of-40 fails ≥40 hurdle. Trade structure: $46.50 primary entry on confirmed close ≥ $46.28 with ≥6M volume; hard stop $39.50; +50% trim at $69.75 (convert conversion price), +100% trim at $93.00 (capped-call cap); 180-day time stop ~Nov 16-18 2026.",
+        "bottlenecks_addressed": []
+      }
+    ],
+    "pdf_path": "reports/archive/TEM.pdf"
+  },
+  {
+    "id": "mp-deep-dive-2026-05",
+    "title": "MP Materials (MP) — Bucket 2 Swing-Trade Deep Dive",
+    "source": "Theme-to-Pick Pipeline Application — May 18-20 2026",
+    "date_ingested": "2026-05-25",
+    "summary": "VERDICT: SWING-eligible but POST-PARABOLIC; do NOT chase. Buy only on a controlled pullback into the $50-54 zone or a confirmed reclaim above $61, capped at 2.5% of Bucket 2 book in 3 tranches. MP passes 4 of 5 pillars (fails Capital Efficiency — Rule of 40 deeply negative at -70 due to capex; FCF -$328M TTM) producing a Composite ~47/100. It is a Control-layer name with a real moat (only fully-integrated US mine-to-magnet; DoD $110/kg NdPr price floor through 2035; $400M DoW Series A Convertible Preferred = 15% common as-converted; $1.0B JPM/Goldman 10X facility commitment; 10-year magnet offtake). But theme sits in Phase 4 — the +355% May→October 2025 ramp from ~$22 to $100.25 tripped the >100%/90-day Phase-5 smell test six months ago, and the stock is now ~43% below ATH in high-volatility digestion. NOT CORE: Capital Efficiency failure, Litinsky's $19.6M open-market sale May 12-13 and insiders net-selling ~$53M TTM, and ~38x P/S TTM all disqualify CORE status. The DoW price floor de-risks downside but the equity is priced for flawless execution of the 2028 10X facility ramp — leaving no margin of safety for the 3-6 month tranche-in window CORE requires.",
+    "rankings": [
+      {
+        "rank": 1,
+        "ticker": "MP",
+        "reasoning": "Only US fully-integrated mine-to-magnet rare earth producer. DoW (DoD-rebranded) Series A Convertible Preferred $400M at $30.03 conversion + warrant = 15% common as-converted, 7% PIK quarterly compounding; 10-year $110/kg NdPr price floor structured as contract-for-difference (DoW pays delta on every kg produced — sold, stockpiled, or internally consumed) with 30% DoW share of upside above $110, 50/50 EBITDA split above $170. 10-year magnet offtake of 100% of 10X output (commissioning 2028) with $140M minimum annual EBITDA guarantee. Apple $500M definitive long-term agreement for 100%-recycled NdFeB magnets at Fort Worth Independence, shipments begin 2027, $72M prepaid. Saudi/Maaden JV Nov 2025 (MP+DoW collectively 49%, capital-light). Q1 2026: 917 MT NdPr +63% YoY/+28% QoQ, 12,983 MT REO +6% YoY; $90.6M Materials revenue + $42.3M Price Protection Agreement income from the DoW floor = $132.9M consolidated; Materials segment adjusted EBITDA $36.7M (+$33M YoY); GAAP net loss -$7.97M. Balance sheet: $1.74B cash + ST investments vs ~$1.0B long-term debt. The binding 18-36 month constraint is heavy REE (Dy/Tb/Sm) separation outside China (Mountain Pass HRE circuit commissioning mid-2026) and finished magnet capacity outside China (10X 10,000 MT/yr commissions 2028). MP is both chokepoint AND beneficiary — owns the only US ore body + only domestic HRE separation circuit being built + DoW-guaranteed offtake. Verdict SWING-only because: Phase 4 (post-parabolic digestion at -43% from ATH); Litinsky $19.6M open-market sale May 12-13 + Corbett $1.5M May 8; ~38x P/S TTM; Rule-of-40 deeply negative on FCF -$328M. Entry: $50-54 flush OR $61 reclaim, 3-tranche to 2.5% of book. Tail risks: comprehensive Trump-Xi truce floods global market with Chinese NdPr (compresses non-PPA revenue to floor); congressional appropriations failure on DoW Title III ($266M FY26 request vs ~$304M/yr floor cost at current $60/kg).",
+        "bottlenecks_addressed": ["rare-earth-magnets"]
+      }
+    ],
+    "pdf_path": "reports/archive/MP.pdf"
+  },
+  {
+    "id": "physical-ai-humanoid-2026-05",
+    "title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+    "source": "Investment-Grade Tier Ranking — May 25 2026",
+    "date_ingested": "2026-05-25",
+    "summary": "The trade: own the 'toll booths,' underweight the narrative darlings. Three Tier-1 early-rerate candidates — ADI, TXN, AMBA — all trade as 'legacy industrial/analog/sensor' stocks despite material, named exposure to NVIDIA's Jetson Thor / GR00T ecosystem and humanoid robotics design pipelines that management is explicitly flagging on earnings calls — yet sell-side models still aggregate these as 'industrial recovery' stories with no breakout line for Physical AI. Already rerated / priced for perfection: TSLA, SYM, OUST, ARM (~150-155% YTD 2026 after AGI CPU launch), ROK, and to a lesser extent NVDA. The thesis works best where (a) the dollar content per humanoid is real and growing, (b) the segment is buried inside an industrial/cyclical reporting line, and (c) management is leaning in publicly but Street models have not yet broken it out. ADI, TXN, and AMBA satisfy all three. ABB has been removed from the contest — SoftBank acquired its robotics division for $5.375B EV in 2025, closing mid-to-late 2026 — itself a confirming data point that strategic acquirers see toll-booth value the public market refuses to credit. Initial allocation: ADI 40%, TXN 35%, AMBA 25%; total Tier-1 early-rerate sleeve ~5-8% of swing book.",
+    "rankings": [
+      {
+        "rank": 1,
+        "ticker": "ADI",
+        "reasoning": "Tier 1 — Highest conviction. Sensors, signal chain, power management, and connectivity at 'every joint and subsystem' — ADI sells into ALL major humanoid programs as a default supplier given its breadth. Industrial = 50% of total revenue. CEO Vincent Roche explicitly invoked humanoids on May 20 2026 Q2 FY26 call: 'As robots make up ever larger percentages of investments in factories and elsewhere, our higher value products and subsystems for content-rich robotics are aiding automation's fast recovery. Longer term, humanoids and other advanced robotics modalities are steadily increasing our opportunity pipeline value.' That is the smoking gun. Yet stock fell -7% pre-market despite beating consensus by ~$110M — definition of expectation gap. Forward P/E ~33-35x is roughly in-line with Semiconductors industry median (34.29 per GuruFocus), NOT a Physical AI premium. ZERO Physical AI revenue line item in any sell-side model. Catalysts: Physical AI bookings disclosure at next analyst day; named humanoid customer attach (Apptronik, Figure, 1X); continued >30% YoY industrial growth forcing analyst trend upgrade from cyclical to secular.",
+        "bottlenecks_addressed": ["humanoid-silicon"]
+      },
+      {
+        "rank": 1,
+        "ticker": "TXN",
+        "reasoning": "Tier 1 — Highest conviction. Headline TI-NVIDIA Jetson Thor partnership announced March 5 2026: TI partnered with NVIDIA to bring mmWave radar (IWR6243), real-time motor control, sensing, and power into the Jetson Thor humanoid reference design — Apptronik named as a public customer. TI's GM of industrial automation Giovanni Campanella now speaks regularly on humanoid panels. Trailing P/E 49x elevated but forward 29.87-34.98 is basically in-line with TXN's own 20-year average of 25.75 (FinanceCharts) — what's defining the multiple is capex anxiety on the mega-fab cycle, NOT Physical AI. Stock fell -2.18% on the day of the NVIDIA announcement — market is NOT yet rewarding humanoid headlines. Catalysts: second tier-1 humanoid OEM publicly adopting Jetson Thor + TI sensor fusion reference design; industrial recovery from trough levels in 2026; dollar-content disclosure per humanoid.",
+        "bottlenecks_addressed": ["humanoid-silicon"]
+      },
+      {
+        "rank": 1,
+        "ticker": "AMBA",
+        "reasoning": "Tier 1 — Highest variance outcome (call option on the basket). The only Western public pure-play edge-AI vision SoC at swallowable market cap (~$2.7-3.1B). CV7 8K vision SoC (4nm Samsung, 2.5× AI performance vs CV5) launched January 5 2026; Cooper Development Platform now supports 200+ model architectures; FY26 Annual Report disclosed 45 million cumulative edge AI SoCs shipped. The M&A angle is the asymmetric catalyst — Bloomberg reported June 24 2025 that AMBA hired bankers and contacted potential buyers including chip rivals and PE; that process has NOT been confirmed dead, and CEO Fermi Wang has consistently declined to comment. NXP, Renesas, Infineon, and PE roll-ups are all logical acquirers. Strategic logic: AMBA is the only Western public chip a buyer of size can swallow for a humanoid play, which provides downside support. 52x forward P/E means execution must hit; WT Microelectronics is 73.1% of Q4 revenue and 69.7% of annual — single-distributor concentration is a real risk factor.",
+        "bottlenecks_addressed": ["humanoid-silicon"]
+      },
+      {
+        "rank": 2,
+        "ticker": "TER",
+        "reasoning": "Tier 2 — Solid but more obvious. Robotics segment +32% YoY in Q1 2026 to $91M (4th consecutive growth quarter); Amazon Vulcan via Universal Robots is real but small (UBS confirmed Vulcan as 'first tangible outcome of TER's strategy to engage more directly with large OEMs'); insider selling halted in Q2 2026 — first time since 2018 per Hunterbrook/Citrini. The catch: ATE (Automatic Test Equipment) is the dominant story — AI-related ATE is ~15% of quarterly sales and growing; robotics is ~7% of total. Cobot/humanoid optionality is real but small. Rerate already partly happened in late 2025. Not as cheap as ADI/TXN.",
+        "bottlenecks_addressed": ["humanoid-silicon"]
+      },
+      {
+        "rank": 2,
+        "ticker": "QCOM",
+        "reasoning": "Tier 2. Dragonwing IQ10 series (700 TOPS, 18-core Oryon CPU) launched at CES 2026; strategic NEURA Robotics partnership announced March 9 2026; named partners include Booster Robotics and VinMotion (using prior-gen IQ9). Forward P/E ~19x looks attractive but Apple modem loss and handset exposure dominate the multiple. Robotics is buried inside IoT segment ($1.7B/quarter) — no segment breakout. Defensive play on humanoid silicon with less leveraged upside than AMBA but better margin of safety.",
+        "bottlenecks_addressed": ["humanoid-silicon"]
+      },
+      {
+        "rank": 2,
+        "ticker": "NVDA",
+        "reasoning": "Tier 2. Owns the brains layer (GR00T N1.6 model, Cosmos Reason 2, Isaac Lab-Arena, Jetson Thor, IGX Thor). Q1 FY27 (May 20 2026 8-K): $81.6B total revenue +85% YoY; Data Center alone $75.2B +92% YoY; Automotive & Robotics combined only ~$2.3B FY26 — robotics is <1% of total. CES 2026 partnerships include Agility, 1X, Boston Dynamics, Hexagon, Wandelbots, NEURA, Caterpillar, Franka. Forward P/E 21.6-25.8x cheap given growth, but upside is data center, not humanoid. Humanoid is a free option but won't move the needle for years. Own NVDA for the data-center story; humanoid by attribution, not surprise.",
+        "bottlenecks_addressed": ["humanoid-silicon", "compute-density"]
+      },
+      {
+        "rank": 2,
+        "ticker": "TDY",
+        "reasoning": "Tier 2. Teledyne FLIR / DALSA machine-vision exposure real but defense-tilted: FLIR runs UGVs (Black Hornet, SUGV) for defense; DALSA machine vision for industrial automation. Defense engine: Rogue 1 Block 2 loitering munition (Q3 2026 deliveries), LASSO program selection (May 13 2026 — up to 130 Rogue 1 systems). No 2026 humanoid robot design wins disclosed. High-quality industrial conglomerate with incidental humanoid optionality, not a focused Physical AI play.",
+        "bottlenecks_addressed": ["humanoid-silicon"]
+      },
+      {
+        "rank": 3,
+        "ticker": "TSLA",
+        "reasoning": "Tier 3 — Already extended. Optimus already a meaningful chunk of TSLA bull-case sum-of-parts; first-gen production lines being installed at Fremont with Gen 3 reveal targeted July-August 2026. Giga Texas 'Optimus factory site preparation' with permits for 5.2M sq ft by end of 2026, $5-10B construction investment, ultimate target 10M units/year. Production reality vs promise: Musk Q1 2026 call said production is 'literally impossible to predict' this year; several hundred deployed for learning, not productive work. Optimus is already capitalized as $1T+ TAM in the bull case — you are NOT catching it early. Own for Optimus only if you also believe in robotaxi + auto recovery.",
+        "bottlenecks_addressed": ["humanoid-silicon"]
+      },
+      {
+        "rank": 3,
+        "ticker": "SYM",
+        "reasoning": "Tier 3 — Already rerated post-IPO. $22.4-22.7B backlog at Q2 FY26; Q2 revenue $676M +23% YoY, GAAP profitable. SoftBank Exotec JV ($11B contract) and 87% revenue from Walmart pre-2025; new Walmart APD deal ($520M); diversification via Associated Wholesale Grocers (April 2026). Stock down 21-28% YTD 2026, ~12% in 10 days through early May. Insiders sold ~178,492 shares (~$10.3M) over 90 days to April 10. Q1 FY26 full-year guidance was cut. KeyBanc PT $70, DA Davidson $70, Needham $75 already in consensus. High-quality story but not unknown early entry. AI-enabled robotics framing already embedded at 2.6x P/S with negative GAAP EPS (P/E -1047).",
+        "bottlenecks_addressed": ["humanoid-silicon"]
+      },
+      {
+        "rank": 3,
+        "ticker": "ROK",
+        "reasoning": "Tier 3. Q2 FY26 (May 6 2026): Sales $2.239B (+12%), Adj EPS $3.30 vs $2.88 consensus; raised FY26 EPS to $12.50-$13.10. Stock surged from $400 to ~$440+. OTTO AMRs gaining adoption (Automotive, Food & Beverage, Data Center pilots) but no specific humanoid commentary at CEO level. Forward P/E ~36.5x — recently rerated, not cheap. Quality industrial automation play but the AI / data-center / warehouse-automation narrative has already done the work.",
+        "bottlenecks_addressed": ["humanoid-silicon"]
+      },
+      {
+        "rank": 3,
+        "ticker": "ABB",
+        "reasoning": "Tier 3 — Optionality is GONE from public ABB. ABB Robotics being sold to SoftBank for $5.375B EV (announced after the originally-intended IPO plan was cancelled); expected to close mid-to-late 2026. Pre-tax gain ~$2.4B; net cash ~$5.3B to ABB. Reclassified as discontinued operations starting Q4 2025. Masayoshi Son: 'SoftBank's next frontier is Physical AI. Together with ABB Robotics, we will unite world-class technology and talent under our shared vision to fuse Artificial Super Intelligence and robotics.' That's a $5.375B vote that smart money sees toll-booth value the public market does not credit. ABB shareholders get cash gain but no ongoing exposure. Skip ABB itself; use the deal as confirmation of the broader thesis.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 3,
+        "ticker": "OUST",
+        "reasoning": "Tier 3 — Already-narrative-priced. Explicitly markets itself as 'sensing and perception platform for Physical AI'; REV8 native color LiDAR launched Q1 2026. Stereolabs acquired Feb 9 2026 for $35M cash + 1.8M shares (~$70M total per MarketScreener). NVIDIA DRIVE Hyperion qualified; Gecko Robotics integration. Honest red flag: CEO Pacala in TechCrunch interview Feb 9 2026: 'There's going to be a little bit of disillusionment in physical AI as it turns out that it's much longer time to market for all these humanoids.' That's the CEO of the most 'Physical AI'-branded name telling you the timeline is longer than the market thinks. Trades ~10-13x EV/sales — closer to fair value than cheap. Hold if you own; trim into strength.",
+        "bottlenecks_addressed": ["humanoid-silicon"]
+      },
+      {
+        "rank": 3,
+        "ticker": "ARM",
+        "reasoning": "Tier 3 — Already aggressively rerated. Royalty model gets a sliver of every Jetson Thor, Dragonwing, and edge AI SoC. Stock up ~150-155% YTD 2026 (102% YTD through May 18 + CNBC's 'weekly rally of almost 50%' through May 22) — new ATH following May 20 record FY26 results. Trailing P/E ~265x. ARM's growth narrative is dominated by the AGI CPU launched March 2026 ($15B/year revenue target by 2031) and data-center inference — humanoids are rounding error vs the data-center CPU thesis already priced in. Not early.",
+        "bottlenecks_addressed": ["humanoid-silicon", "compute-density"]
+      },
+      {
+        "rank": 3,
+        "ticker": "SERV",
+        "reasoning": "Tier 3 — Speculative; not aligned with 'toll booth' philosophy. Revenue $3M Q1 2026 (+578% YoY, +238% sequential); full-year 2026 guidance reaffirmed at ~$26M; market cap ~$677M. Acquired Diligent Robotics Jan 27 2026 for $25.7M (healthcare robots); footprint expanded to 44 cities / 14 states; ~2,000 robots deployed; cash $197M after $91M ATM raise. SERV is a robot OPERATOR, not a supply-chain toll booth. Freedom Broker downgraded to Hold May 13 citing dilution and execution risk.",
+        "bottlenecks_addressed": []
+      }
+    ],
+    "pdf_path": "reports/archive/Humanoid Robotics .pdf"
+  },
+  {
+    "id": "software-basket-2026-05",
+    "title": "Theme-to-Pick Pipeline Re-Run — Shay Boloor 2027 Software Comps",
+    "source": "Theme-to-Pick framework — May 19 2026",
+    "date_ingested": "2026-05-25",
+    "summary": "Phase 4-in-correction regime: software/AI in sharp drawdown (PLTR ~-26% YTD, MSCI Software Index -21% YTD by mid-Feb 2026, 'SaaSpocalypse' narrative live), valuations still expensive, CNBC/retail coverage daily. Methodology authorizes leaders-only / #1-only SWING entries with predefined exit. Top 5 by Composite: PLTR (68.5) > RBRK (67.5) ≈ FIG (67.5) > APP (67.0) > MNDY (63.5). Of these, only PLTR sits at #1 and clears 5/5 pillars — the only name the phase gate authorizes to enter, and only as SWING with a hard stop (a CORE tag is blocked until the user supplies the Stage-7 chokepoint thesis: is PLTR the chokepoint because the binding constraint is data governance and ontology, not compute, OR a beneficiary that only re-rates if NVDA/hyperscalers/model-labs re-rate first?). No name passes the >100%/90-day Phase-5 smell test (PLTR is roughly -20% over 90 days). 'No trade' on 18 of 19 names is the honest default. CRWD is the most interesting Tier-2 name — 5/5 pillars and a fresh Q1 FY27 pipeline acceleration — but its rebound from $342.72 52-week low to $594.08 closing ATH May 15 2026 (+73.5%) means asymmetry has compressed. De-facto leader if PLTR's chokepoint thesis fails.",
+    "rankings": [
+      {
+        "rank": 1,
+        "ticker": "PLTR",
+        "reasoning": "5/5 pillars. Q1 2026 (May 4 2026 per SEC 8-K): revenue +85% YoY to $1.633B; full-year guide raised 10 points to $7.65-7.66B ('largest ever raise'); Rule of 40 of 145%; adj FCF margin 57% (true economic margin closer to 35-40% on SBC-adjusted basis). EV/NTM Sales 41x against ~50% forward 3-yr CAGR = EV/S ÷ CAGR = 0.82 (passes <2.5 PEG-equivalent gate easily, earns 20 asymmetry points for 'cheap vs own growth' at $321B market cap). Counter-signal: stock fell the day after the print — multiple compression regime. SWING-only entry, ≤2% of risk budget. Hard stop: daily close below $119.03 52-week low OR breach of 200-day SMA on a weekly close. Time stop: if Q2 (August) print does not show U.S. commercial growth ≥110% YoY (vs the 133% just printed), exit regardless of price. Required precondition: user must articulate Stage-7 chokepoint thesis — is Foundry/AIP the governance-and-ontology layer enterprises must license to deploy agentic AI on regulated data, OR a high-margin beneficiary that only re-rates if the true chokepoint name (NVDA-style compute or a frontier model lab) re-rates first? Without that thesis, PLTR sits as PASS, not SWING.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 2,
+        "ticker": "RBRK",
+        "reasoning": "5/5 pillars. Rubrik — cyber resilience leader. 81% gross margin, ~28% rev CAGR, 20% FCF margin, 66 Rule of 40. Founder-led, $13B market cap, 8.1x EV/S. Q4 FY26 reported March 2026 (outside the 30-day catalyst window) — no fresh catalyst, FLAG. Phase gate explicitly blocks entries below #1 in leader-only correction regime. Watchlist priority for the next regime shift.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 3,
+        "ticker": "FIG",
+        "reasoning": "5/5 pillars. Figma post-IPO; design collaboration leader. Q1 2026 (recent): revenue +46% YoY to $333.4M, accelerating — first post-IPO quarter showing growth re-acceleration. 80% gross margin, ~25% CAGR, 21% FCF margin, 73 Rule of 40. Founder-led (Dylan Field still CEO), $12B market cap, 7.4x EV/S. Watchlist priority but phase gate blocks entry.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 4,
+        "ticker": "APP",
+        "reasoning": "5/5 pillars. AppLovin — ad-tech AI leverage. Q1 2026 (per 8-K Ex. 99.1 May 6 2026): revenue $1,842M (+59% YoY); adjusted EBITDA $1.56B 'up 66% year over year with an 85% margin and an 86% quarter-over-quarter flow-through'; Axon platform launch announced for June 2026. 89% gross margin, ~30% CAGR, 71% FCF margin, 129 Rule of 40. Beat-and-raise. Founder-led, $160B market cap, 21x EV/S. Phase gate blocks entry below #1.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 5,
+        "ticker": "MNDY",
+        "reasoning": "5/5 pillars. Monday.com. Q1 2026 (May 11 2026): revenue +24% to $351.3M; record net adds of $500K+ ARR customers; launched AI Work Platform with Native Agents. Beat, but FY26 guide modest (18-19%). 44 Rule of 40 — passes hurdle but lowest of top 5. Founder-led, $3.5B market cap, 2x EV/S. Phase gate blocks entry.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 13,
+        "ticker": "CRWD",
+        "reasoning": "5/5 pillars and fresh Q1 FY27 pipeline acceleration. CrowdStrike. 78% gross margin, ~22% CAGR, 26% FCF margin, 49 Rule of 40. Founder-led (Kurtz), $144B market cap, 24x EV/S. Rebounded +73.5% from $342.72 52-week low to $594.08 closing ATH May 15 2026 (MacroTrends) — that rebound means asymmetry has compressed (Cheap score drops to 12 from 20). De-facto leader if PLTR's chokepoint thesis fails. Watchlist.",
+        "bottlenecks_addressed": []
+      }
+    ],
+    "pdf_path": "reports/archive/Software Basket.pdf"
+  },
+  {
+    "id": "spacex-ipo-trade-2026-05",
+    "title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+    "source": "Pillar-Scored Bucket 2 Ranking — May 15 2026",
+    "date_ingested": "2026-05-25",
+    "summary": "SpaceX confidentially filed S-1 April 1 2026, targeting June 12 2026 Nasdaq listing under ticker $SPCX at $1.75-2T valuation, ~$75B raise. The IPO is real but the 'biggest in history' framing is hype — at $2T on ~$15.5-16B 2025 revenue, that is ~95-115× sales, a richer multiple than anything currently in the S&P 500. Most space-basket repricing will be sentiment/flows, not fundamentals. The durable beneficiaries are (a) named SpaceX/Starshield subcontractors (NOC), (b) supplier oligopolies on the Starship/Starlink build (HXL, MP, MDA, KRMN — with the important caveat that Karman supplies SpaceX's competitors, not SpaceX), and (c) launch/satellite pure-plays with positive Rule-of-40 trajectory (RKLB, IRDM, LHX). The fragile names — ASTS, BKSY, RDW, LUNR, FLY, RKLB at current multiples — are sentiment proxies trading on read-through, not contracted SpaceX revenue. Play 'in-before-out into June 11': build core supplier positions now, swing the sentiment names into June 8-11 and trim 50-100% into pricing day, then re-evaluate post-lockup chatter near the 180-day mark (~December 2026). Three historical precedents (Aramco, Alibaba, Facebook) confirm sector euphoria peaks before pricing and bleeds for 60-90 days post-listing.",
+    "rankings": [
+      {
+        "rank": 1,
+        "ticker": "NOC",
+        "reasoning": "Tier 1 — Highest conviction. CORE rating, Operating layer, Phase 3. Subcontractor on the $1.8B SpaceX Starshield/NRO program per Reuters and Spaceflight Now May 2024. SDA Tranche 1/2 prime per Wikipedia. Golden Dome budget cycle late 2026. 5/5 pillars. Risk: slow grower, defense rotation exposure.",
+        "bottlenecks_addressed": ["space-supply-chain"]
+      },
+      {
+        "rank": 2,
+        "ticker": "MP",
+        "reasoning": "Tier 1. CORE rating, Control layer, Phase 4. DoD $110/kg NdPr floor through 2035; 15% Pentagon as-converted ownership; Apple $500M magnet deal; only US fully-integrated mine-to-magnet. 4/5 pillars (fails V at extended valuation). Already on user AutoTrade watchlist — flagged Tier 1 CORE but parabolic (+365% YTD 2025, +30% YTD 2026); enforce 7% portfolio cap. Risk: post-parabolic structure (-43% from ATH).",
+        "bottlenecks_addressed": ["rare-earth-magnets", "space-supply-chain"]
+      },
+      {
+        "rank": 3,
+        "ticker": "HXL",
+        "reasoning": "Tier 1. CORE rating, Operating layer, Phase 3. ONLY publicly self-disclosed SpaceX composites supplier — Hexcel's own corporate composites page explicitly lists 'Airbus, Boeing, Bombardier, Mitsubishi Heavy Industries, Sikorsky, Kawasaki, SpaceX, Blue Origin, and Lockheed Martin' as customers. Starship hull/interstage. 4/5 pillars (fails T at slow growth). Risk: aerospace cyclical.",
+        "bottlenecks_addressed": ["space-supply-chain"]
+      },
+      {
+        "rank": 4,
+        "ticker": "KRMN",
+        "reasoning": "Tier 1. CORE rating, Operating layer, Phase 4. Karman payload fairings/interstages. Q1 2026 +51% YoY; raised 2026 guide $720-735M; backlog +60% to $1B+. 4/5 pillars (fails V at ~20x sales). CRITICAL CAVEAT: SpaceX is NOT a named Karman customer per its FY24 release — filings name ULA / Blue Origin / NASA SLS. KRMN supplies SpaceX's competitors. The IPO read-through is sympathy, not contracted SpaceX revenue. Risk: rich valuation, 1.5x D/E.",
+        "bottlenecks_addressed": ["launch-capacity"]
+      },
+      {
+        "rank": 5,
+        "ticker": "RKLB",
+        "reasoning": "Tier 1. SWING rating, Operating layer, Phase 4. Only public launch + space-systems pure-play. Q1 2026 revenue $200.3M (+63.5% YoY per RKLB 8-K May 7 2026); $2.2B backlog (+108% YoY); Neutron Q4 2026 first launch targeting medium-lift gap. Golden Dome partnership with Raytheon. 4/5 pillars (fails V). Already on user AutoTrade watchlist. Risk: Neutron delay; post-IPO comp pressure as $450M ATM dilutes Q1.",
+        "bottlenecks_addressed": ["launch-capacity"]
+      },
+      {
+        "rank": 6,
+        "ticker": "IRDM",
+        "reasoning": "Tier 2 — Strong but conditional. CORE rating, Operating layer, Phase 3. Iridium — LEO satcom incumbent. ~17x FY27 P/E, 2.3% dividend yield, FCF positive. 4/5 pillars (fails T at ~7% growth). Risk: long-term Starlink competition.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 7,
+        "ticker": "MDA",
+        "reasoning": "Tier 2. CORE rating, Operating layer, Phase 3. TSX-listed. $1.1B CAD Globalstar C-3 prime contract per MDA PRNewswire February 25 2025 — launched on SpaceX rockets, making MDA a named verifiable Starshield-adjacent supplier. Canadarm-3; Telesat Lightspeed. 4/5 pillars (fails F). Risk: thinner US retail liquidity (TSX listing).",
+        "bottlenecks_addressed": ["space-supply-chain"]
+      },
+      {
+        "rank": 8,
+        "ticker": "LHX",
+        "reasoning": "Tier 2. CORE rating, Operating layer, Phase 3. L3Harris. Payload/comms primes; 70%+ recurring DoD; 8.64% of ARKX ETF. 5/5 pillars. Risk: slow growth.",
+        "bottlenecks_addressed": ["space-supply-chain"]
+      },
+      {
+        "rank": 9,
+        "ticker": "KTOS",
+        "reasoning": "Tier 2. SWING rating, Beneficiary layer, Phase 3. Kratos — hypersonic targets; Golden Dome SBI exposure; founder-led (DeMarco). 3/5 pillars (fails M, V). Risk: small-cap volatility.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 10,
+        "ticker": "FLY",
+        "reasoning": "Tier 2. SWING rating, Operating layer, Phase 4. Firefly. $1.4B backlog; 2026 guide $420-450M; Golden Dome SBI via SciTec. 3/5 pillars (fails M, V, R). Risk: net loss $298M 2025; FCF -$238M; material weakness disclosed; Cantor cut PT $65→$35.",
+        "bottlenecks_addressed": ["launch-capacity"]
+      },
+      {
+        "rank": 11,
+        "ticker": "VOYG",
+        "reasoning": "Tier 2. SWING rating, Operating layer, Phase 4. Voyager — Starlab ISS successor; $217.5M NASA grant; Palantir partner. 3/5 pillars (fails M, V, R). Risk: IPO'd June 2025 at $31; rallied to $69.75 then drifted; lockup risk.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 12,
+        "ticker": "LUNR",
+        "reasoning": "Tier 2. SWING rating, Operating layer, Phase 4. Intuitive Machines. $943M backlog; 2026 guide $900M-$1B with positive adjusted EBITDA; $4.8B NSN IDIQ. 3/5 pillars (fails M, R). Risk: lumpy revenue; dilution.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 13,
+        "ticker": "RDW",
+        "reasoning": "Tier 3 — Speculative / sentiment-driven. SWING rating, Beneficiary layer, Phase 4. Redwire ROSA arrays — but contracts are with Boeing/Maxar per primary source PRNewswire, NOT SpaceX. Edge Autonomy defense drones. 3/5 pillars (fails M, V, R). Risk: retail mis-narrative as SpaceX supplier; dilution.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 14,
+        "ticker": "PL",
+        "reasoning": "Tier 3. SWING rating, Operating layer, Phase 3. Planet Labs — Earth-observation; defense ramp; founder-led. 3/5 pillars (fails M, R). Risk: continuing losses.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 15,
+        "ticker": "BKSY",
+        "reasoning": "Tier 3. SWING rating, Operating layer, Phase 4. BlackSky — Gen-3 constellation; $351M backlog; AFRL. Q1 2026 revenue -29.5% YoY (going backward per Simply Wall St); analyst PTs cut $24→$20. 2/5 pillars (fails M, T, R, V). Risk: revenue contraction.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 16,
+        "ticker": "TDY",
+        "reasoning": "Tier 3. CORE rating, Operating layer, Phase 3. Teledyne — NASA MOSSI II $596M; broad sensors/imaging; NO direct SpaceX disclosure. 4/5 pillars (fails T). Risk: low growth, defensive.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 17,
+        "ticker": "APH",
+        "reasoning": "Tier 3. CORE rating, Operating layer, Phase 3. Amphenol — oligopoly connectors across LEO sats (incl. SpaceX per trade press, no SpaceX-named contract); AI data-center exposure. 5/5 pillars. Risk: AI cyclicality, not pure space.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 18,
+        "ticker": "HEI",
+        "reasoning": "Tier 3. CORE rating, Operating layer, Phase 3. Heico — aerospace aftermarket + electronic systems on classified space; family founder-led. 4/5 pillars (fails V at ~60x P/E). Risk: valuation.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 19,
+        "ticker": "UFO",
+        "reasoning": "Tier 3. SWING rating, Beneficiary layer, Phase 4. Procure Space ETF — cleanest basket expression. 0.94% expense ratio. Top holdings: Viasat / Garmin / RKLB / ASTS. +31% YTD / +122% TTM is the WARNING, not the bullish signal.",
+        "bottlenecks_addressed": []
+      },
+      {
+        "rank": 20,
+        "ticker": "ROKT",
+        "reasoning": "Tier 3. SWING rating, Beneficiary layer, Phase 3. SPDR Kensho Final Frontiers ETF. 54% A&D primes (LHX, NOC) + emerging space. 0.45% expense ratio. Less euphoric than UFO but indistinguishable from ITA/XAR.",
+        "bottlenecks_addressed": []
+      }
+    ],
+    "pdf_path": "reports/archive/SpaceX IPOpdf.pdf"
+  }
+]

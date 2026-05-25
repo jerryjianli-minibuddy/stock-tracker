@@ -1,0 +1,58 @@
+name: daily-refresh
+
+on:
+  schedule:
+    # Cron is in UTC. 22:00 UTC = 3:00pm PT (PDT) / 2:00pm PT (PST) —
+    # both are post-close (US market closes 4pm ET = 1pm PT). Edit if
+    # you want a different time.
+    - cron: "0 22 * * 1-5"
+  workflow_dispatch: {}
+
+# GITHUB_TOKEN needs write access to push the refreshed JSON back.
+permissions:
+  contents: write
+
+# Block this workflow from racing with manual-refresh on the same data.
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Install Python 3.11
+        run: uv python install 3.11
+
+      - name: Install project dependencies
+        run: uv sync
+
+      - name: Run refresh.py
+        # Non-zero exit here fails the job; GitHub will email repo admins.
+        run: uv run python scripts/refresh.py
+
+      - name: Commit updated data (if any)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # refresh.py writes to both /data/ (canonical) and /docs/data/
+          # (Pages mirror) — commit both if either changed.
+          if git diff --quiet -- data/ docs/data/; then
+            echo "no data changes — nothing to commit"
+            exit 0
+          fi
+          # refresh.py writes data/snapshots.json + data/history.json, and
+          # mirrors all data/*.json into docs/data/. Add only files that
+          # actually changed — `git add -A -- ...` handles new files too.
+          git add -A -- data/ docs/data/
+          git commit -m "Daily refresh $(date -u +%Y-%m-%d)"
+          git push

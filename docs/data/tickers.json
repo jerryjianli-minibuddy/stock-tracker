@@ -1,0 +1,57 @@
+[
+  {
+    "ticker": "NVDA",
+    "company": "NVIDIA",
+    "sector": "AI Infra",
+    "thesis": "",
+    "catalyst": "",
+    "risks": "",
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25"
+  },
+  {
+    "ticker": "AVGO",
+    "company": "Broadcom",
+    "sector": "AI Infra",
+    "thesis": "",
+    "catalyst": "",
+    "risks": "",
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25"
+  },
+  {
+    "ticker": "WOLF",
+    "company": "Wolfspeed",
+    "sector": "Semis - SiC",
+    "thesis": "",
+    "catalyst": "",
+    "risks": "",
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25"
+  },
+  {
+    "ticker": "PLTR",
+    "company": "Palantir",
+    "sector": "AI Apps",
+    "thesis": "",
+    "catalyst": "",
+    "risks": "",
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25"
+  },
+  {
+    "ticker": "IREN",
+    "company": "IREN Limited",
+    "sector": "Bitcoin Mining / AI HPC",
+    "thesis": "",
+    "catalyst": "",
+    "risks": "",
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25"
+  }
+]
