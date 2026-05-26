@@ -133,7 +133,7 @@
   {
     "ticker": "PLTR",
     "company": "Palantir",
-    "sector": "AI Apps",
+    "sector": "Software",
     "thesis": "",
     "bottlenecks_addressed": [],
     "report_refs": [
@@ -1241,7 +1241,7 @@
   {
     "ticker": "RBRK",
     "company": "Rubrik",
-    "sector": "AI Apps",
+    "sector": "Software",
     "thesis": "",
     "bottlenecks_addressed": [],
     "report_refs": [
@@ -1280,7 +1280,7 @@
   {
     "ticker": "FIG",
     "company": "Figma",
-    "sector": "AI Apps",
+    "sector": "Software",
     "thesis": "",
     "bottlenecks_addressed": [],
     "report_refs": [
@@ -1319,7 +1319,7 @@
   {
     "ticker": "APP",
     "company": "AppLovin",
-    "sector": "AI Apps",
+    "sector": "Software",
     "thesis": "",
     "bottlenecks_addressed": [],
     "report_refs": [
@@ -1359,7 +1359,7 @@
   {
     "ticker": "MNDY",
     "company": "Monday.com",
-    "sector": "AI Apps",
+    "sector": "Software",
     "thesis": "",
     "bottlenecks_addressed": [],
     "report_refs": [
@@ -1398,7 +1398,7 @@
   {
     "ticker": "CRWD",
     "company": "CrowdStrike",
-    "sector": "AI Apps",
+    "sector": "Software",
     "thesis": "",
     "bottlenecks_addressed": [],
     "report_refs": [

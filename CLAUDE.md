@@ -53,12 +53,23 @@ Existing entries created before these fields were added are allowed to omit them
 
 As of last edit to this file (re-read `data/tickers.json` to confirm — this list goes stale as the user adds tickers):
 
-- `AI Apps`
 - `AI Infra`
-- `Bitcoin Mining / AI HPC`
+- `Software`
+- `Semis - Packaging`
 - `Semis - SiC`
+- `Semis - Process`
+- `Semis - Analog/Sensors`
+- `Bitcoin Mining / AI HPC`
+- `Power Conversion`
+- `Critical Materials`
+- `Healthcare AI`
+- `Physical AI / Robotics`
+- `Space & Defense`
+- `Thematic ETFs`
 
 The user is curating this taxonomy deliberately — don't auto-canonicalize names (`AI Infrastructure` ≠ `AI Infra`).
+
+**Software is the canonical sector** for application software, SaaS, AI-native apps, dev tools, and platform software. **Do NOT create a separate "AI Apps" sector** — AI-native applications belong in `Software`. If a report uses the phrase "AI Apps" or "AI applications", map those names into `Software` during ingest, not into a new sector.
 
 ## When adding tickers from a research report
 
@@ -209,7 +220,7 @@ A ticker can also be *manually* overridden from the dashboard: clicking a rating
 The dashboard uses **tab-based navigation**. The tab row sits below the macro regime banner and looks like:
 
 ```
-[ All (N) ] [ AI Infra (4) ] [ Semis - SiC (1) ] [ AI Apps (6) ] ... ⎮ [ Reports (9) ] [ Bottlenecks (11) ] [ Glossary (36) ] [ Macro (RISK-ON) ]
+[ All (N) ] [ AI Infra (4) ] [ Software (6) ] [ Semis - SiC (1) ] ... ⎮ [ Reports (9) ] [ Bottlenecks (11) ] [ Glossary (36) ] [ Macro (RISK-ON) ]
 ```
 
 - The **All** tab shows every ticker in a single table; the **Sector** column is visible so each row is self-identifying.
