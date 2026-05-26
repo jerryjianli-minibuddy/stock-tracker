@@ -12,7 +12,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -67,7 +67,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 74.9% passes \u226560% software; Bottleneck winner: HBM Memory Bandwidth, Backside Power Delivery, Compute Density at the Reticle Limit",
+        "metric_value": 0.749335293757275,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +85.2% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.8522763378875221,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 132.2 (rev growth +85.2% + FCF margin 47.0%); passes \u226540 software",
+        "metric_value": 132.20208165238793,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 20.4x \u00f7 growth 85% = 0.24 \u2014 passes hard gate <2.5",
+        "metric_value": 0.23933551939924905,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "AVGO",
@@ -75,7 +117,7 @@
     "sector": "AI Infra",
     "thesis": "",
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -109,7 +151,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 68.1% passes \u226560% software; Bottleneck winner: HBM Memory Bandwidth, Optical Interconnect Bandwidth",
+        "metric_value": 0.681321526591062,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +29.5% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.2946500402252615,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 71.8 (rev growth +29.5% + FCF margin 42.3%); passes \u226540 software",
+        "metric_value": 71.80558990581703,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 29.5x \u00f7 growth 29% = 1.00 \u2014 passes hard gate <2.5",
+        "metric_value": 1.0003731877133104,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "WOLF",
@@ -117,7 +201,7 @@
     "sector": "Semis - SiC",
     "thesis": "",
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "",
     "notes": "",
     "date_added": "2026-05-25",
@@ -128,7 +212,49 @@
       "evidence": [],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin -26.6% below threshold \u226535% hardware",
+        "metric_value": -0.2663115845539281,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY -16.8% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": -0.16786703601108033,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 0,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "PLTR",
@@ -140,7 +266,7 @@
       "software-basket-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25",
@@ -169,7 +295,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 86.8% passes \u226560% software",
+        "metric_value": 0.8678180527421883,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +84.7% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.8471163256416494,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 136.2 (rev growth +84.7% + FCF margin 51.5%); passes \u226540 software",
+        "metric_value": 136.1700249229427,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 61.3x \u00f7 growth 85% = 0.72 \u2014 passes hard gate <2.5",
+        "metric_value": 0.7240682081476851,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "IREN",
@@ -177,7 +345,7 @@
     "sector": "Bitcoin Mining / AI HPC",
     "thesis": "",
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "",
     "notes": "",
     "date_added": "2026-05-25",
@@ -188,7 +356,49 @@
       "evidence": [],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 64.6% passes \u226535% hardware",
+        "metric_value": 0.6462239718222315,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY -0.0% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": -0.00019333945574943206,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -281.9 (rev growth -0.0% + FCF margin -281.9%); below threshold \u226525 hardware",
+        "metric_value": -281.91318094652655,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 1,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "MRVL",
@@ -202,7 +412,7 @@
       "mrvl-deep-dive-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25",
@@ -238,7 +448,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 51.7% below threshold \u226560% software; Bottleneck winner: Optical Interconnect Bandwidth",
+        "metric_value": 0.5173750394375084,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +22.1% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.22080994827775943,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'mrvl-deep-dive-2026-05': \"\u2026ecause Phase 5 = automatic PASS regardless of pillar count; founder-led FAIL caps maximum designation at SWING (never CORE). Next true catalyst window: Q1 FY27 earnings May 27, 2026 \u2014 eve\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 39.1 (rev growth +22.1% + FCF margin 17.0%); below threshold \u226540 software",
+        "metric_value": 39.06657045959749,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 21.2x \u00f7 growth 22% = 0.96 \u2014 passes hard gate <2.5",
+        "metric_value": 0.9605092599053078,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "AAOI",
@@ -252,7 +504,7 @@
       "aaoi-deep-dive-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -289,7 +541,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 29.1% below threshold \u226560% software; Bottleneck winner: Optical Interconnect Bandwidth",
+        "metric_value": 0.29055734928280313,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +51.4% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.5135741395367468,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -31.1 (rev growth +51.4% + FCF margin -82.5%); below threshold \u226540 software",
+        "metric_value": -31.143965227032538,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 28.4x \u00f7 growth 51% = 0.55 \u2014 passes hard gate <2.5",
+        "metric_value": 0.5531820590816028,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "BESIY",
@@ -305,7 +599,7 @@
       "besi-deep-dive-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25",
@@ -355,7 +649,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 63.5% passes \u226535% hardware; Bottleneck winner: Advanced Packaging (CoWoS / ABF / Interposers), Hybrid Bonding (Atomic-Level Chip Stacking)",
+        "metric_value": 0.6348855197183022,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +20.5% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.20510647728680098,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 47.5 (rev growth +20.5% + FCF margin 26.9%); passes \u226525 hardware",
+        "metric_value": 47.46024786044737,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 39.4x \u00f7 growth 21% = 1.92 \u2014 passes hard gate <2.5",
+        "metric_value": 1.9189057566897603,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "AMKR",
@@ -369,7 +705,7 @@
       "ai-physical-bottlenecks-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25",
@@ -403,7 +739,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 14.2% below threshold \u226535% hardware; Bottleneck winner: Advanced Packaging (CoWoS / ABF / Interposers)",
+        "metric_value": 0.1418839307390451,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +27.5% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.27476760683275636,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 29.8 (rev growth +27.5% + FCF margin 2.4%); passes \u226525 hardware",
+        "metric_value": 29.841623796920768,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 2.3x \u00f7 growth 27% = 0.08 \u2014 passes hard gate <2.5",
+        "metric_value": 0.08287003065051801,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "TSM",
@@ -418,7 +796,7 @@
       "ai-physical-bottlenecks-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -473,7 +851,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 66.2% passes \u226535% hardware; Bottleneck winner: Backside Power Delivery, Advanced Packaging (CoWoS / ABF / Interposers), Hybrid Bonding (Atomic-Level Chip Stacking)",
+        "metric_value": 0.6624575805889452,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +35.1% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.351323787607557,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 60.6 (rev growth +35.1% + FCF margin 25.5%); passes \u226525 hardware",
+        "metric_value": 60.649507198499805,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 2.0x \u00f7 growth 35% = 0.06 \u2014 passes hard gate <2.5",
+        "metric_value": 0.05715525309783515,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "INTC",
@@ -488,7 +908,7 @@
       "ai-physical-bottlenecks-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25",
@@ -523,7 +943,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 39.4% passes \u226535% hardware; Bottleneck winner: Backside Power Delivery",
+        "metric_value": 0.39382779700964865,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +7.2% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.07184021473119129,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 1.4 (rev growth +7.2% + FCF margin -5.8%); below threshold \u226525 hardware",
+        "metric_value": 1.382633933545259,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 11.7x \u00f7 growth 7% = 1.63 \u2014 passes hard gate <2.5",
+        "metric_value": 1.6263871208791205,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "ADI",
@@ -537,7 +999,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25",
@@ -572,7 +1034,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 67.3% passes \u226535% hardware; Bottleneck winner: Edge AI Silicon for Humanoid Robots",
+        "metric_value": 0.6733328457705539,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +37.2% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.37248926921579295,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 73.1 (rev growth +37.2% + FCF margin 35.8%); passes \u226525 hardware",
+        "metric_value": 73.08158407802307,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 15.6x \u00f7 growth 37% = 0.42 \u2014 passes hard gate <2.5",
+        "metric_value": 0.4186697789397364,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "TXN",
@@ -586,7 +1090,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25",
@@ -621,7 +1125,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 58.0% passes \u226535% hardware; Bottleneck winner: Edge AI Silicon for Humanoid Robots",
+        "metric_value": 0.5801036269430052,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +18.6% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.18579503563529123,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 38.8 (rev growth +18.6% + FCF margin 20.2%); passes \u226525 hardware",
+        "metric_value": 38.7606505065429,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 15.7x \u00f7 growth 19% = 0.85 \u2014 passes hard gate <2.5",
+        "metric_value": 0.8476006878306878,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "AMBA",
@@ -635,7 +1181,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25",
@@ -671,7 +1217,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 58.4% passes \u226535% hardware; Bottleneck winner: Edge AI Silicon for Humanoid Robots",
+        "metric_value": 0.5840661465097604,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +20.1% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.20058322918526453,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 34.9 (rev growth +20.1% + FCF margin 14.8%); passes \u226525 hardware",
+        "metric_value": 34.904675870242244,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 9.0x \u00f7 growth 20% = 0.45 \u2014 passes hard gate <2.5",
+        "metric_value": 0.4510347169475433,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "TER",
@@ -685,7 +1273,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -712,7 +1300,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 60.9% passes \u226535% hardware",
+        "metric_value": 0.6089299443116303,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +87.0% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.8703972698634932,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 101.6 (rev growth +87.0% + FCF margin 14.6%); passes \u226525 hardware",
+        "metric_value": 101.64771949917966,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 14.8x \u00f7 growth 87% = 0.17 \u2014 passes hard gate <2.5",
+        "metric_value": 0.16973858388040494,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "QCOM",
@@ -726,7 +1356,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -761,7 +1391,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 53.8% passes \u226535% hardware; Bottleneck winner: Edge AI Silicon for Humanoid Robots",
+        "metric_value": 0.5376922351165204,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY -3.5% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": -0.03461153110483651,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 24.6 (rev growth -3.5% + FCF margin 28.1%); below threshold \u226525 hardware",
+        "metric_value": 24.64206941920783,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 1,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "TDY",
@@ -776,7 +1448,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -811,7 +1483,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 43.2% passes \u226535% hardware",
+        "metric_value": 0.4318953913210692,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +7.6% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.0760052417408097,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 24.5 (rev growth +7.6% + FCF margin 16.9%); below threshold \u226525 hardware",
+        "metric_value": 24.525801707543287,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 4.9x \u00f7 growth 8% = 0.65 \u2014 passes hard gate <2.5",
+        "metric_value": 0.6487710435571687,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "MPWR",
@@ -825,7 +1539,7 @@
       "ai-physical-bottlenecks-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -852,7 +1566,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 55.3% passes \u226535% hardware",
+        "metric_value": 0.553436087467436,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +26.1% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.26135982206997366,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 47.3 (rev growth +26.1% + FCF margin 21.2%); passes \u226525 hardware",
+        "metric_value": 47.32640828881967,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 26.0x \u00f7 growth 26% = 0.99 \u2014 passes hard gate <2.5",
+        "metric_value": 0.9931901466113748,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "MP",
@@ -868,7 +1624,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -913,7 +1669,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin -17.4% below threshold \u226535% hardware; Bottleneck winner: Rare-Earth Magnet Supply Outside China",
+        "metric_value": -0.17355955388366115,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +49.1% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.490692320342049,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -41.2 (rev growth +49.1% + FCF margin -90.3%); below threshold \u226525 hardware",
+        "metric_value": -41.2006195589327,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 32.2x \u00f7 growth 49% = 0.66 \u2014 passes hard gate <2.5",
+        "metric_value": 0.6566232782599952,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "TEM",
@@ -925,7 +1723,7 @@
       "tem-swing-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -954,7 +1752,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 63.8% passes \u226560% software",
+        "metric_value": 0.6378362384952142,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +36.1% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.36122657261170654,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 20.0 (rev growth +36.1% + FCF margin -16.1%); below threshold \u226540 software",
+        "metric_value": 20.017382104569965,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 6.6x \u00f7 growth 36% = 0.18 \u2014 passes hard gate <2.5",
+        "metric_value": 0.18207409140605552,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "TSLA",
@@ -968,7 +1808,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25",
@@ -994,7 +1834,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 21.1% below threshold \u226535% hardware",
+        "metric_value": 0.21083664626792334,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +15.8% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.1578484613395397,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 22.9 (rev growth +15.8% + FCF margin 7.2%); below threshold \u226525 hardware",
+        "metric_value": 22.936533243936594,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 16.1x \u00f7 growth 16% = 1.02 \u2014 passes hard gate <2.5",
+        "metric_value": 1.0173681684141547,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 1,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "SYM",
@@ -1008,7 +1890,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1036,7 +1918,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 22.2% below threshold \u226535% hardware",
+        "metric_value": 0.22166508987701042,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +23.1% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.23074459975511732,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 52.8 (rev growth +23.1% + FCF margin 29.7%); passes \u226525 hardware",
+        "metric_value": 52.81908542196379,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 2.1x \u00f7 growth 23% = 0.09 \u2014 passes hard gate <2.5",
+        "metric_value": 0.0900996167280354,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "ROK",
@@ -1050,7 +1974,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1076,7 +2000,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 50.2% passes \u226535% hardware",
+        "metric_value": 0.5024564537740063,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +11.9% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.11894052973513243,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 27.1 (rev growth +11.9% + FCF margin 15.2%); passes \u226525 hardware",
+        "metric_value": 27.10304916441804,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 6.1x \u00f7 growth 12% = 0.52 \u2014 passes hard gate <2.5",
+        "metric_value": 0.5158039915966386,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "OUST",
@@ -1090,7 +2056,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1117,7 +2083,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 42.9% passes \u226535% hardware",
+        "metric_value": 0.42895961134670013,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +48.9% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.48866143662662415,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 11.5 (rev growth +48.9% + FCF margin -37.4%); below threshold \u226525 hardware",
+        "metric_value": 11.494969814576514,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 11.9x \u00f7 growth 49% = 0.24 \u2014 passes hard gate <2.5",
+        "metric_value": 0.24315403486767842,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "ARM",
@@ -1132,7 +2140,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1158,7 +2166,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Data missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 0,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "ABB",
@@ -1170,7 +2220,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Pass",
     "notes": "Robotics division sold to SoftBank for $5.375B EV \u2014 closes mid-late 2026. Public ABB no longer carries robotics optionality.",
     "date_added": "2026-05-25",
@@ -1196,7 +2246,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Data missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 0,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "SERV",
@@ -1208,7 +2300,7 @@
       "physical-ai-humanoid-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1236,7 +2328,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin -301.6% below threshold \u226535% hardware",
+        "metric_value": -3.01642091152815,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +578.2% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 5.781818181818182,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -2268.1 (rev growth +578.2% + FCF margin -2846.3%); below threshold \u226525 hardware",
+        "metric_value": -2268.1125513992956,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 94.3x \u00f7 growth 578% = 0.16 \u2014 passes hard gate <2.5",
+        "metric_value": 0.16316147798742137,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "RBRK",
@@ -1248,7 +2382,7 @@
       "software-basket-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1275,7 +2409,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 81.5% passes \u226560% software",
+        "metric_value": 0.8154594846485421,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +46.3% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.46332429290972493,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'software-basket-2026-05': \"\u2026gross margin, ~28% rev CAGR, 20% FCF margin, 66 Rule of 40. Founder-led, $13B market cap, 8.1x EV/S. Q4 FY26 reported March 2026 (outside the 30-day catalyst window) \u2014 no fresh catalyst,\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 64.4 (rev growth +46.3% + FCF margin 18.1%); passes \u226540 software",
+        "metric_value": 64.4027544346476,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 9.8x \u00f7 growth 46% = 0.21 \u2014 passes hard gate <2.5",
+        "metric_value": 0.21255090982071181,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 5,
+    "pillars_total": 5,
+    "pillar_eligibility": "CORE-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "FIG",
@@ -1287,7 +2463,7 @@
       "software-basket-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1314,7 +2490,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 79.4% passes \u226560% software",
+        "metric_value": 0.7940672806720269,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +46.1% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.4611764293445633,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'software-basket-2026-05': \"\u202680% gross margin, ~25% CAGR, 21% FCF margin, 73 Rule of 40. Founder-led (Dylan Field still CEO), $12B market cap, 7.4x EV/S. Watchlist priority but phase gate blocks entry.\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 66.1 (rev growth +46.1% + FCF margin 19.9%); passes \u226540 software",
+        "metric_value": 66.0539397087049,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 9.0x \u00f7 growth 46% = 0.19 \u2014 passes hard gate <2.5",
+        "metric_value": 0.19454593576586846,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 5,
+    "pillars_total": 5,
+    "pillar_eligibility": "CORE-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "APP",
@@ -1326,7 +2544,7 @@
       "software-basket-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1354,7 +2572,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 88.9% passes \u226560% software",
+        "metric_value": 0.8894775377771651,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +59.0% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.5897241870827128,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'software-basket-2026-05': \"\u2026~30% CAGR, 71% FCF margin, 129 Rule of 40. Beat-and-raise. Founder-led, $160B market cap, 21x EV/S. Phase gate blocks entry below #1.\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 130.4 (rev growth +59.0% + FCF margin 71.4%); passes \u226540 software",
+        "metric_value": 130.39227125178823,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 26.4x \u00f7 growth 59% = 0.45 \u2014 passes hard gate <2.5",
+        "metric_value": 0.44814170045722235,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 5,
+    "pillars_total": 5,
+    "pillar_eligibility": "CORE-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "MNDY",
@@ -1366,7 +2626,7 @@
       "software-basket-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1393,7 +2653,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 89.1% passes \u226560% software",
+        "metric_value": 0.8914665565883307,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +24.5% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.2445172719220549,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'software-basket-2026-05': \"\u202618-19%). 44 Rule of 40 \u2014 passes hurdle but lowest of top 5. Founder-led, $3.5B market cap, 2x EV/S. Phase gate blocks entry.\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 47.8 (rev growth +24.5% + FCF margin 23.4%); passes \u226540 software",
+        "metric_value": 47.82999042821356,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 2.1x \u00f7 growth 24% = 0.09 \u2014 passes hard gate <2.5",
+        "metric_value": 0.08678323552850829,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 5,
+    "pillars_total": 5,
+    "pillar_eligibility": "CORE-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "CRWD",
@@ -1405,7 +2707,7 @@
       "software-basket-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1432,7 +2734,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 76.1% passes \u226560% software",
+        "metric_value": 0.7612195729196591,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +23.3% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.2331867160177528,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'software-basket-2026-05': \"\u202678% gross margin, ~22% CAGR, 26% FCF margin, 49 Rule of 40. Founder-led (Kurtz), $144B market cap, 24x EV/S. Rebounded +73.5% from $342.72 52-week low to $594.08 closing ATH May 15 2026 (\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 49.1 (rev growth +23.3% + FCF margin 25.8%); passes \u226540 software",
+        "metric_value": 49.11852163837328,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 34.1x \u00f7 growth 23% = 1.46 \u2014 passes hard gate <2.5",
+        "metric_value": 1.460632088382212,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 5,
+    "pillars_total": 5,
+    "pillar_eligibility": "CORE-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "NOC",
@@ -1446,7 +2790,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1481,7 +2825,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 19.8% below threshold \u226535% hardware; Bottleneck winner: Named SpaceX / Starshield Contract Revenue",
+        "metric_value": 0.19836048982896468,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +4.4% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.043620616814533164,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 12.2 (rev growth +4.4% + FCF margin 7.8%); below threshold \u226525 hardware",
+        "metric_value": 12.162944137425889,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 2.2x \u00f7 growth 4% = 0.51 \u2014 passes hard gate <2.5",
+        "metric_value": 0.5107676513317192,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "HXL",
@@ -1495,7 +2881,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1530,7 +2916,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 26.9% below threshold \u226535% hardware; Bottleneck winner: Named SpaceX / Starshield Contract Revenue",
+        "metric_value": 0.26859421734795613,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +9.9% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.09857612267250822,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 20.5 (rev growth +9.9% + FCF margin 10.6%); below threshold \u226525 hardware",
+        "metric_value": 20.461563520739627,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 3.8x \u00f7 growth 10% = 0.39 \u2014 passes hard gate <2.5",
+        "metric_value": 0.38954666666666665,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "KRMN",
@@ -1544,7 +2972,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "Supplies SpaceX competitors (ULA / Blue Origin / SLS) \u2014 NOT a named SpaceX supplier per filings.",
     "date_added": "2026-05-25",
@@ -1571,7 +2999,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 42.2% passes \u226535% hardware",
+        "metric_value": 0.4223596322994511,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +51.0% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.5102273181255244,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 45.1 (rev growth +51.0% + FCF margin -5.9%); passes \u226525 hardware",
+        "metric_value": 45.09165035771576,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 17.8x \u00f7 growth 51% = 0.35 \u2014 passes hard gate <2.5",
+        "metric_value": 0.3483349355987942,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "RKLB",
@@ -1585,7 +3055,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1621,7 +3091,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 38.2% passes \u226535% hardware; Bottleneck winner: Earth-to-Orbit Launch Capacity",
+        "metric_value": 0.38180066683969893,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +63.5% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.634573179188865,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 16.9 (rev growth +63.5% + FCF margin -46.5%); below threshold \u226525 hardware",
+        "metric_value": 16.913579487371017,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 113.8x \u00f7 growth 63% = 1.79 \u2014 passes hard gate <2.5",
+        "metric_value": 1.79311076691652,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "IRDM",
@@ -1633,7 +3145,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1660,7 +3172,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 71.4% passes \u226535% hardware",
+        "metric_value": 0.7140013786366106,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +1.9% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.01944824505067992,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 36.8 (rev growth +1.9% + FCF margin 34.8%); passes \u226525 hardware",
+        "metric_value": 36.75925383917164,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S 7.8x \u00f7 growth 2% = 4.02 \u2014 fails hard gate <2.5",
+        "metric_value": 4.016300689160086,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "MDA",
@@ -1674,7 +3228,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Strong",
     "notes": "TSX-listed (not US).",
     "date_added": "2026-05-25",
@@ -1708,7 +3262,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 24.8% below threshold \u226535% hardware; Bottleneck winner: Named SpaceX / Starshield Contract Revenue",
+        "metric_value": 0.2482223658694247,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +32.2% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.32222222222222224,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 27.4 (rev growth +32.2% + FCF margin -4.8%); passes \u226525 hardware",
+        "metric_value": 27.41947769534647,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "LHX",
@@ -1722,7 +3318,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Strong",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1749,7 +3345,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 24.4% below threshold \u226535% hardware",
+        "metric_value": 0.2440807799442897,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +11.9% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.11925175370226032,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 32.1 (rev growth +11.9% + FCF margin 20.1%); passes \u226525 hardware",
+        "metric_value": 32.063631160341316,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 5.9x \u00f7 growth 12% = 0.50 \u2014 passes hard gate <2.5",
+        "metric_value": 0.49600947712418303,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "KTOS",
@@ -1761,7 +3399,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1788,7 +3426,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 24.2% below threshold \u226535% hardware",
+        "metric_value": 0.24150943396226415,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +22.6% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.2260409781890284,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'spacex-ipo-trade-2026-05': \"\u2026e 3. Kratos \u2014 hypersonic targets; Golden Dome SBI exposure; founder-led (DeMarco). 3/5 pillars (fails M, V). Risk: small-cap volatility.\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 13.2 (rev growth +22.6% + FCF margin -9.4%); below threshold \u226525 hardware",
+        "metric_value": 13.213198783518086,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 6.5x \u00f7 growth 23% = 0.29 \u2014 passes hard gate <2.5",
+        "metric_value": 0.2893280701754386,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "FLY",
@@ -1802,7 +3482,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1831,7 +3511,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 21.6% below threshold \u226535% hardware",
+        "metric_value": 0.215890404184028,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +44.8% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.4480171873601289,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -94.5 (rev growth +44.8% + FCF margin -139.3%); below threshold \u226525 hardware",
+        "metric_value": -94.45097464697776,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 40.2x \u00f7 growth 45% = 0.90 \u2014 passes hard gate <2.5",
+        "metric_value": 0.8973986073369564,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "VOYG",
@@ -1843,7 +3565,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1870,7 +3592,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin -4.4% below threshold \u226535% hardware",
+        "metric_value": -0.0438631334052091,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +2.1% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.02141594459095256,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -150.5 (rev growth +2.1% + FCF margin -152.6%); below threshold \u226525 hardware",
+        "metric_value": -150.48047340761292,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S 16.5x \u00f7 growth 2% = 7.69 \u2014 fails hard gate <2.5",
+        "metric_value": 7.694734140730717,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 0,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "LUNR",
@@ -1882,7 +3646,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1909,7 +3673,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 14.7% below threshold \u226535% hardware",
+        "metric_value": 0.14707291836845832,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +193.7% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 1.9369522103512251,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 153.6 (rev growth +193.7% + FCF margin -40.1%); passes \u226525 hardware",
+        "metric_value": 153.62042792797746,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 22.2x \u00f7 growth 194% = 0.11 \u2014 passes hard gate <2.5",
+        "metric_value": 0.11472663022476179,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "RDW",
@@ -1921,7 +3727,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Pass",
     "notes": "ROSA contracts are with Boeing / Maxar, NOT SpaceX. Retail mis-narrative risk.",
     "date_added": "2026-05-25",
@@ -1947,7 +3753,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 26.6% below threshold \u226535% hardware",
+        "metric_value": 0.26613867920636886,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +57.9% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.5794771561202052,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 13.7 (rev growth +57.9% + FCF margin -44.3%); below threshold \u226525 hardware",
+        "metric_value": 13.690146832014506,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 9.5x \u00f7 growth 58% = 0.16 \u2014 passes hard gate <2.5",
+        "metric_value": 0.16399265958343873,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "PL",
@@ -1959,7 +3807,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -1986,7 +3834,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 54.2% passes \u226535% hardware",
+        "metric_value": 0.5416829835755914,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +41.1% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.41050134840952657,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'spacex-ipo-trade-2026-05': \"\u2026er, Phase 3. Planet Labs \u2014 Earth-observation; defense ramp; founder-led. 3/5 pillars (fails M, R). Risk: continuing losses.\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 57.8 (rev growth +41.1% + FCF margin 16.7%); passes \u226525 hardware",
+        "metric_value": 57.757800416546424,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 49.3x \u00f7 growth 41% = 1.20 \u2014 passes hard gate <2.5",
+        "metric_value": 1.201214081051132,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 5,
+    "pillars_total": 5,
+    "pillar_eligibility": "CORE-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "BKSY",
@@ -1998,7 +3888,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Pass",
     "notes": "",
     "date_added": "2026-05-25",
@@ -2025,7 +3915,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 64.7% passes \u226535% hardware",
+        "metric_value": 0.6470588235294118,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY -29.7% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": -0.29684538315732467,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -104.9 (rev growth -29.7% + FCF margin -75.2%); below threshold \u226525 hardware",
+        "metric_value": -104.85963065764454,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 1,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "APH",
@@ -2037,7 +3969,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -2064,7 +3996,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 36.7% passes \u226535% hardware",
+        "metric_value": 0.3674754924476057,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +58.4% passes \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.5838910829349407,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 76.3 (rev growth +58.4% + FCF margin 17.9%); passes \u226525 hardware",
+        "metric_value": 76.269496913371,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 6.8x \u00f7 growth 58% = 0.12 \u2014 passes hard gate <2.5",
+        "metric_value": 0.11685398526218363,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "HEI",
@@ -2076,7 +4050,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "",
     "date_added": "2026-05-25",
@@ -2103,7 +4077,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 38.6% passes \u226535% hardware",
+        "metric_value": 0.3860265980644537,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +14.4% below threshold \u226520% (proxy for 3yr forward CAGR \u2014 replace with consensus CAGR when ingested)",
+        "metric_value": 0.14400779637786806,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'spacex-ipo-trade-2026-05': \"\u2026ftermarket + electronic systems on classified space; family founder-led. 4/5 pillars (fails V at ~60x P/E). Risk: valuation.\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 32.5 (rev growth +14.4% + FCF margin 18.1%); passes \u226525 hardware",
+        "metric_value": 32.54687677939375,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 9.7x \u00f7 growth 14% = 0.67 \u2014 passes hard gate <2.5",
+        "metric_value": 0.6712831001617687,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "UFO",
@@ -2115,7 +4131,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "ETF \u2014 basket-level space exposure (0.94% ER).",
     "date_added": "2026-05-25",
@@ -2142,7 +4158,49 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Data missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 0,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   },
   {
     "ticker": "ROKT",
@@ -2154,7 +4212,7 @@
       "spacex-ipo-trade-2026-05"
     ],
     "catalyst": "",
-    "risks": "",
+    "risks": [],
     "rating": "Watch",
     "notes": "ETF \u2014 A&D primes (LHX/NOC) + emerging space (0.45% ER).",
     "date_added": "2026-05-25",
@@ -2179,6 +4237,48 @@
       ],
       "rated_date": "2026-05-25",
       "rated_by": "auto"
-    }
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Data missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 0,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null
   }
 ]

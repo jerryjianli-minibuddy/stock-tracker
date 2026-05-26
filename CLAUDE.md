@@ -215,6 +215,98 @@ When the user types **"resynthesize ratings"** or **"recompute reasoning"**, run
 
 A ticker can also be *manually* overridden from the dashboard: clicking a rating opens the modal, which has a **Copy override snippet** button. The snippet sets `rated_by: "manual"` and is meant to be pasted directly into `data/tickers.json`. After paste, the user commits and pushes — and from that point on, ingest workflows must leave that block alone.
 
+## 5-Pillar framework (Theme-to-Pick scoring)
+
+Every ticker in `data/tickers.json` carries a structured pillar block alongside the rating. The pillars are the **Theme_to_Pick_Pipeline.md** rubric encoded as data — 5 binary gates that determine whether a ticker is even eligible for serious consideration. The dashboard surfaces the pillar score as a clickable "Pillars" column showing ●●●◐● 4/5 dots; clicking opens the **Pillar Breakdown Modal** with per-pillar evidence + the binding-constraint section.
+
+### Schema (per-ticker fields)
+
+```json
+{
+  "ticker": "PLTR",
+  "one_line_thesis": "AIP is the operating layer for enterprise AI…",
+  "five_pillars": {
+    "moat":                 {"pass": true,  "evidence": "...", "metric_value": 0.87, "metric_label": "Gross Margin", "metric_threshold": "≥60% software"},
+    "tam":                  {"pass": true,  "evidence": "...", "metric_value": 0.85, "metric_label": "3yr Revenue CAGR (proxy: YoY)", "metric_threshold": "≥20%"},
+    "founder_led":          {"pass": null,  "evidence": "No founder-led mention in ingested reports — verify manually", "metric_value": null, "metric_label": "Founder-led signal", "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"},
+    "capital_efficiency":   {"pass": true,  "evidence": "...", "metric_value": 136.2, "metric_label": "Rule of 40", "metric_threshold": "≥40 software"},
+    "valuation_discipline": {"pass": true,  "evidence": "...", "metric_value": 0.72, "metric_label": "EV/S NTM ÷ 3yr CAGR (PEG-equivalent)", "metric_threshold": "<2.5 hard gate"}
+  },
+  "pillars_passed": 4,
+  "pillars_total":  5,
+  "pillar_eligibility": "SWING-eligible",
+  "risks": ["Parabolic 90-day move (+85%) — Phase 5 risk", "..."],
+  "binding_constraint_thesis": null
+}
+```
+
+`pass` is tri-state: `true` (clears the gate), `false` (fails it), `null` (genuinely unknown — counts as not-passing for the 5/5 count but flagged differently in the UI). `pillar_eligibility` is derived from `pillars_passed`: `5/5 → "CORE-eligible"`, `4/5 → "SWING-eligible"`, `<4/5 → "PASS"`.
+
+### Auto-population thresholds (in `scripts/synthesize_pillars.py`)
+
+| Pillar | Pass rule |
+|---|---|
+| `moat` | gross margin ≥ 60% (software-bucket sectors) **OR** ≥ 35% (hardware-bucket) **OR** ticker named winner of any bottleneck in `bottlenecks.json` |
+| `tam` | `rev_growth_yoy` ≥ 20% (currently used as proxy for forward 3yr CAGR — replace when forward consensus is ingested) |
+| `founder_led` | the literal word "founder" appears in any ingested report's ranking-reasoning for this ticker. Otherwise `pass: null` (unknown). **Never `pass: false` automatically.** |
+| `capital_efficiency` | Rule of 40 (`rev_growth_yoy_% + fcf_margin_%`) ≥ 40 (software) or ≥ 25 (hardware-cyclical). FCF margin derived as `fcf_ttm / (market_cap / ps_ratio)`. |
+| `valuation_discipline` | `ev_to_sales / (rev_growth_yoy * 100)` < 2.5 (hard gate). Fails if growth ≤ 0. |
+
+**Sector buckets** for the software-vs-hardware threshold split:
+- **Software bucket**: `AI Infra`, `Software`, `Healthcare AI`, `Thematic ETFs`
+- **Hardware bucket**: `Semis - *`, `Power Conversion`, `Physical AI / Robotics`, `Space & Defense`, `Critical Materials`, `Bitcoin Mining / AI HPC`
+
+If you add a new sector, classify it in `synthesize_pillars.py` (constants `SOFTWARE_SECTORS` / `HARDWARE_SECTORS`).
+
+### binding_constraint_thesis — NEVER auto-fill
+
+This is the **Section 7** field from Theme_to_Pick_Pipeline: one sentence answering *what's the binding constraint on this theme being delivered at scale in 18-36 months, and is this ticker the chokepoint or merely a beneficiary?*
+
+**Rules:**
+
+1. `scripts/synthesize_pillars.py` initializes this field to `null` and never modifies it on subsequent runs.
+2. The ingestion workflow (`/ingest`) **must not auto-fill it** either — even when the source report's reasoning sounds like a binding-constraint thesis, transcribe it into the report's `reasoning` field, not into the ticker's `binding_constraint_thesis`.
+3. **Only the user supplies this field**, either by direct JSON edit or by clicking the **+ Add binding constraint thesis…** button in the Pillar Breakdown Modal (which copies a paste-ready JSON snippet to clipboard).
+4. The dashboard shows a CORE-eligible ticker as just "CORE-eligible" until the thesis is supplied; once supplied, the eligibility label upgrades to "CORE".
+5. The `Eligibility: Has binding thesis` filter in the watchlist shows only tickers where the user has done this work — i.e., names the user would actually consider CORE.
+
+### Glossary cross-reference
+
+Every pillar has a glossary entry under category `5-Pillar Framework` in `data/glossary.json`:
+
+- `five-pillars` — overview of the rubric and CORE/SWING/PASS gates
+- `pillar-moat` / `pillar-tam` / `pillar-founder-led` / `pillar-capital-efficiency` / `pillar-valuation-discipline` — per-pillar definitions with thresholds
+- `binding-constraint-thesis` — Section 7 explainer
+- `pillar-eligibility` — CORE vs SWING vs PASS labels
+
+The Pillar Breakdown Modal renders the pillar names as glossary-clickable (each opens its definition popover). When adding a new pillar or changing thresholds, **update both `scripts/synthesize_pillars.py` AND the glossary entry** — they're the public contract.
+
+### Ingestion integration
+
+When `/ingest` processes a new report, the same workflow expands per ticker:
+
+1. Extract `one_line_thesis` from the report's framing of the ticker (one sentence; if not obvious, leave empty).
+2. Auto-compute the 5 pillars per the rules above (`synthesize_pillars.py` is the reference implementation).
+3. Append risks from the report's stated risks section into `risks: []` (deduped against existing entries).
+4. **Leave `binding_constraint_thesis` as `null`.** Never auto-fill it. Print a clear flag in the ingestion summary:
+
+   ```
+   PLTR: pillars ●●◐●● 4/5 (SWING-eligible)
+          binding constraint thesis: [REQUIRED for CORE — supply manually]
+   ```
+
+5. Show the user a per-ticker pillar diff in the ingest preview (before any writes), so the user can spot-check threshold logic and override `founder_led` from `null` to `true` for known founder-CEOs.
+
+### Re-running pillar synthesis
+
+```bash
+uv run scripts/synthesize_pillars.py            # bulk-apply to all 50 tickers
+uv run scripts/synthesize_pillars.py --preview  # dry run, shows top 3 by score
+uv run scripts/synthesize_pillars.py --preview PLTR NVDA WOLF   # specific tickers
+```
+
+The script writes both `data/tickers.json` and `docs/data/tickers.json` (Pages mirror). It preserves any manually-edited `binding_constraint_thesis` field; it does NOT preserve manual pillar overrides — re-running will recompute pillars from the current snapshot. If you've manually flipped a `founder_led` pillar from `null` to `true`, you'll need to flip it again after each re-synthesis (or — better — get the report ranking to mention "founder").
+
 ## Dashboard layout (canonical: tab-based)
 
 The dashboard uses **tab-based navigation**. The tab row sits below the macro regime banner and looks like:

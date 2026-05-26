@@ -34,6 +34,14 @@
           <option value="hide_pass">Hide Pass</option>
         </select>
       </label>
+      <label class="ctl">Eligibility
+        <select id="eligibility-filter" aria-label="Pillar eligibility filter">
+          <option value="all">All</option>
+          <option value="core">CORE-eligible only (5/5)</option>
+          <option value="swing_plus">SWING-eligible+ (4/5 or 5/5)</option>
+          <option value="has_binding">Has binding thesis</option>
+        </select>
+      </label>
     </div>
     <main id="watchlist-main">
       <div id="watchlist-table-wrap"></div>
@@ -79,6 +87,26 @@
       <div id="empty-glossary" hidden>No terms match.</div>
     </main>
   </section>
+
+  <!-- Pillar Breakdown modal (5-Pillar framework, per Theme_to_Pick_Pipeline.md) -->
+  <div id="pillar-modal" class="modal" hidden aria-hidden="true" role="dialog" aria-labelledby="pillar-modal-title">
+    <div class="modal-backdrop" data-close-pillar></div>
+    <div class="modal-card" role="document">
+      <header class="modal-header">
+        <div class="modal-title-row">
+          <h2 id="pillar-modal-title"></h2>
+          <span id="pillar-modal-dots"></span>
+          <span id="pillar-modal-elig" class="muted small"></span>
+        </div>
+        <button class="modal-close" aria-label="Close" data-close-pillar>✕</button>
+      </header>
+      <div id="pillar-modal-body"></div>
+      <footer class="modal-footer">
+        <button id="pillar-modal-add-binding" class="modal-btn">+ Add binding constraint thesis…</button>
+        <button class="modal-btn ghost" data-close-pillar>Close</button>
+      </footer>
+    </div>
+  </div>
 
   <!-- Glossary popover modal -->
   <div id="glossary-modal" class="modal" hidden aria-hidden="true" role="dialog" aria-labelledby="glossary-modal-title">

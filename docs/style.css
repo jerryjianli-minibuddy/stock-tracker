@@ -394,6 +394,62 @@ tr.data-row.flash-target td { animation: flash 1.2s ease-out 1; }
 .small { font-size: 0.75rem; }
 code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-elev); padding: 0.1rem 0.35rem; border-radius: 4px; }
 
+/* ----- 5-Pillar framework — table cell + modal ----- */
+/* Compact 5-dot strip shown in the Pillars column. The whole cell is
+   clickable to open the breakdown modal. */
+.pillars-cell { cursor: pointer; user-select: none; white-space: nowrap; }
+.pillars-cell:hover { background: var(--bg-row-hover); }
+.pillars-strip { display: inline-flex; align-items: center; gap: 0.15rem; font-family: var(--font-mono); font-size: 0.85rem; }
+.pdot { font-size: 0.85rem; line-height: 1; }
+.pdot-pass    { color: var(--green); }
+.pdot-fail    { color: var(--text-muted); opacity: 0.65; }
+.pdot-unknown { color: var(--yellow); opacity: 0.85; }
+.pdot-binding { color: var(--accent); margin-left: 0.25rem; font-size: 0.85rem; }
+.pillars-count { margin-left: 0.4rem; font-size: 0.78rem; color: var(--text-muted); }
+/* Score-bucket tints for the count number */
+.pillars-strip.pillars-5 .pillars-count { color: var(--green); font-weight: 600; }
+.pillars-strip.pillars-4 .pillars-count { color: var(--green); }
+.pillars-strip.pillars-3 .pillars-count { color: var(--yellow); }
+.pillars-strip.pillars-low .pillars-count { color: var(--red); }
+
+#pillar-modal-dots { display: inline-flex; align-items: center; }
+#pillar-modal-elig { margin-left: 0.5rem; }
+#pillar-modal-body { padding: 1.1rem; overflow-y: auto; flex: 1; font-size: 0.875rem; line-height: 1.55; }
+.pillar-section { margin-bottom: 1.1rem; }
+.pillar-section:last-child { margin-bottom: 0; }
+.pillar-section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; margin-bottom: 0.4rem; }
+.pillar-section-label.glossary-clickable { display: inline-flex; align-items: center; gap: 0.15rem; cursor: help; }
+.pillar-thesis { font-size: 0.95rem; font-weight: 500; }
+.pillar-grid { display: grid; grid-template-columns: 1fr; gap: 0.55rem; }
+.pillar-card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+  padding: 0.65rem 0.85rem;
+  border-left-width: 3px;
+}
+.pillar-card.pillar-pass    { border-left-color: var(--green); }
+.pillar-card.pillar-fail    { border-left-color: var(--red); }
+.pillar-card.pillar-unknown { border-left-color: var(--yellow); }
+.pillar-card-header { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.3rem; }
+.pillar-dot { font-size: 0.9rem; }
+.pillar-pass .pillar-dot    { color: var(--green); }
+.pillar-fail .pillar-dot    { color: var(--text-muted); }
+.pillar-unknown .pillar-dot { color: var(--yellow); }
+.pillar-name { font-weight: 600; flex: 1; cursor: help; }
+.pillar-verdict {
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.06em; padding: 0.05rem 0.5rem;
+  border-radius: 4px;
+}
+.pillar-pass    .pillar-verdict { background: var(--green-bg); color: var(--green); }
+.pillar-fail    .pillar-verdict { background: var(--red-bg);   color: var(--red); }
+.pillar-unknown .pillar-verdict { background: var(--yellow-bg); color: var(--yellow); }
+.pillar-metric { font-family: var(--font-mono); font-size: 0.82rem; margin-bottom: 0.2rem; }
+.pillar-evidence { color: var(--text); font-size: 0.85rem; line-height: 1.45; }
+.pillar-risks { margin: 0; padding-left: 1.1rem; }
+.pillar-risks li { margin: 0.2rem 0; }
+.binding-thesis-text { padding: 0.55rem 0.8rem; border-left: 3px solid var(--accent); background: var(--accent-bg); border-radius: 0 4px 4px 0; }
+.binding-thesis-missing { padding: 0.55rem 0.8rem; border-left: 3px solid var(--yellow); background: var(--yellow-bg); border-radius: 0 4px 4px 0; }
+
 /* ----- glossary system ----- */
 /* Inline term/header marker — the ⓘ icon is the always-visible affordance;
    a dotted underline appears on hover for a footnote-style hint. Subtler than
@@ -596,7 +652,7 @@ code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-el
     grid-template-columns: 2.2rem auto 1fr auto auto auto auto;
     grid-template-areas:
       "rank tk   co   co   co   co   rating"
-      "rank pr   pr   rev  dma  ms   .";
+      "rank pr   pr   rev  ms   pl   pl";
     column-gap: 0.55rem; row-gap: 0.35rem;
     align-items: center;
     padding: 0.7rem 0.9rem;
@@ -625,6 +681,7 @@ code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-el
   table.watchlist > tbody > tr.data-row > td.rev-col   { display: block; grid-area: rev; font-family: var(--font-mono); font-size: 0.8rem; }
   table.watchlist > tbody > tr.data-row > td.dma-col   { display: block; grid-area: dma; font-size: 0.75rem; text-align: center; }
   table.watchlist > tbody > tr.data-row > td.mansfield-cell { display: block; grid-area: ms; font-family: var(--font-mono); font-size: 0.8rem; text-align: right; }
+  table.watchlist > tbody > tr.data-row > td.pillars-cell { display: block; grid-area: pl; text-align: right; }
 
   table.watchlist > tbody > tr.detail-row { display: block; }
   table.watchlist > tbody > tr.detail-row > td {

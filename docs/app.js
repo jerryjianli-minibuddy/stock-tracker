@@ -8,6 +8,7 @@ const STORAGE_KEYS = {
   activeTab:        "stock-tracker.activeTab",
   tabSorts:         "stock-tracker.tabSorts",      // per-tab column sort: { tabKey: {col, dir} }
   ratingFilter:     "stock-tracker.ratingFilter",
+  eligibilityFilter:"stock-tracker.eligibilityFilter",
 };
 
 // Columns that are click-to-sort. The key matches a row property; the type
@@ -27,6 +28,7 @@ const SORTABLE_COLS = {
   rs_proxy:        "num",
   above_200dma:    "bool",
   rating:          "rating",
+  pillars_passed:  "num",
 };
 
 const state = {
@@ -48,6 +50,7 @@ const state = {
   // watchlist controls
   tabSorts: {},                // { [tabKey]: {col, dir} } — column sort per tab; missing = default rank
   ratingFilter: "all",         // all | strong | strong_watch | hide_pass
+  eligibilityFilter: "all",    // all | core | swing_plus | has_binding
   expanded: new Set(),         // ticker symbols whose detail rows are expanded
   // navigation
   scrollTarget: null,          // {kind: "ticker"|"bottleneck"|"report", id: string}
@@ -68,14 +71,21 @@ async function init() {
   });
   // Restore persisted watchlist control state (must run before renderWatchlist)
   state.ratingFilter = localStorage.getItem(STORAGE_KEYS.ratingFilter) || "all";
+  state.eligibilityFilter = localStorage.getItem(STORAGE_KEYS.eligibilityFilter) || "all";
   try {
     const raw = JSON.parse(localStorage.getItem(STORAGE_KEYS.tabSorts) || "{}");
     if (raw && typeof raw === "object") state.tabSorts = raw;
   } catch { /* ignore */ }
   document.getElementById("rating-filter").value = state.ratingFilter;
+  document.getElementById("eligibility-filter").value = state.eligibilityFilter;
   document.getElementById("rating-filter").addEventListener("change", (e) => {
     state.ratingFilter = e.target.value;
     localStorage.setItem(STORAGE_KEYS.ratingFilter, state.ratingFilter);
+    renderWatchlist();
+  });
+  document.getElementById("eligibility-filter").addEventListener("change", (e) => {
+    state.eligibilityFilter = e.target.value;
+    localStorage.setItem(STORAGE_KEYS.eligibilityFilter, state.eligibilityFilter);
     renderWatchlist();
   });
   document.getElementById("glossary-search").addEventListener("input", (e) => {
@@ -126,6 +136,7 @@ async function init() {
   renderMacroView();
   renderGlossary();
   wireGlossaryModalOnce();
+  wirePillarModalOnce();
   activateTab(restoreActiveTab());
 }
 
@@ -314,6 +325,17 @@ function passesRatingFilter(rating) {
   }
 }
 
+function passesEligibilityFilter(row) {
+  const passed = row.pillars_passed ?? 0;
+  switch (state.eligibilityFilter) {
+    case "core":         return passed >= 5;
+    case "swing_plus":   return passed >= 4;
+    case "has_binding":  return !!row.binding_constraint_thesis;
+    case "all":
+    default:             return true;
+  }
+}
+
 // Current sort for the active tab. Returns null when the tab is in default
 // (composite rank) mode — renderWatchlist then sorts by computeCompositeScore.
 function currentSort() {
@@ -385,10 +407,11 @@ function renderWatchlist() {
   const q = state.search;
   const showSector = state.sector === "All";
 
-  // Filter: active tab restricts to one sector, rating filter applies, search hides.
+  // Filter: active tab restricts to one sector, rating + eligibility filters apply, search hides.
   let rows = state.rows;
   if (!showSector) rows = rows.filter((r) => r.sector === state.sector);
   rows = rows.filter((r) => passesRatingFilter(r.rating));
+  rows = rows.filter((r) => passesEligibilityFilter(r));
   if (q) {
     rows = rows.filter(
       (r) => r.ticker.toLowerCase().includes(q) || (r.company || "").toLowerCase().includes(q)
@@ -466,6 +489,7 @@ function renderWatchlist() {
           ${mansfieldTh}
           <th>vs SPY 52w</th>
           <th>Ratio Trend</th>
+          ${th("pillars_passed", "Pillars",       "")}
           ${th("rating",         "Rating",        "")}
         </tr>
       </thead>
@@ -490,10 +514,17 @@ function renderWatchlist() {
       if (e.target.closest(".pill.clickable")) return;
       if (e.target.closest(".rating-clickable")) return;
       if (e.target.closest("[data-glossary]")) return;
+      if (e.target.closest("[data-pillars-ticker]")) return;
       const t = tr.dataset.ticker;
       if (state.expanded.has(t)) state.expanded.delete(t);
       else state.expanded.add(t);
       renderWatchlist();
+    });
+  });
+  wrap.querySelectorAll("[data-pillars-ticker]").forEach((cell) => {
+    cell.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openPillarModal(cell.dataset.pillarsTicker);
     });
   });
   wirePillClicks(wrap);
@@ -511,7 +542,7 @@ function renderTickerRow(r, rankInfo, sectorSize, showSector) {
   const sectorCell = showSector
     ? `<td class="sector-col">${escapeText(r.sector || "")}</td>`
     : "";
-  const colspan = showSector ? 20 : 19;
+  const colspan = showSector ? 21 : 20;
   return `
     <tr class="data-row ${exp ? "expanded" : ""}" data-ticker="${escapeAttr(r.ticker)}">
       <td class="rank-cell ${rankClass}" title="${escapeAttr(tooltip)}">${rank}</td>
@@ -533,6 +564,7 @@ function renderTickerRow(r, rankInfo, sectorSize, showSector) {
       <td class="num mansfield-cell ${mansfieldClass(r.mansfield_rs)}">${fmtMansfield(r.mansfield_rs)}</td>
       <td class="${above200Class(r.ratio_above_sma)}">${ratioAboveSmaText(r.ratio_above_sma)}</td>
       <td class="ratio-trend-cell">${miniSparkline(r.ratio_history_90d || [])}</td>
+      <td class="pillars-cell" data-pillars-ticker="${escapeAttr(r.ticker)}" title="Open pillar breakdown">${pillarDots(r)}</td>
       <td class="rating-col">${ratingPill(r.rating, r.ticker)}</td>
     </tr>
     ${exp ? `<tr class="detail-row"><td colspan="${colspan}">${renderTickerDetail(r)}</td></tr>` : ""}
@@ -1650,6 +1682,211 @@ function mansfieldClass(v) {
   if (v >= -20) return "mansfield-n2";
   return "mansfield-n3";
 }
+// ============ 5-Pillar framework UI ============
+//
+// Pillars data model (per ticker, populated by scripts/synthesize_pillars.py):
+//   five_pillars: {moat, tam, founder_led, capital_efficiency, valuation_discipline}
+//     where each pillar = {pass: true|false|null, evidence, metric_value,
+//                          metric_label, metric_threshold}
+//   pillars_passed: int (count of pass=true)
+//   pillars_total:  5
+//   pillar_eligibility: "CORE-eligible" | "SWING-eligible" | "PASS"
+//   binding_constraint_thesis: null | string (manually supplied — never auto-filled)
+
+const PILLAR_ORDER = ["moat", "tam", "founder_led", "capital_efficiency", "valuation_discipline"];
+const PILLAR_LABEL = {
+  moat: "Moat",
+  tam: "TAM",
+  founder_led: "Founder-led",
+  capital_efficiency: "Capital Efficiency",
+  valuation_discipline: "Valuation Discipline",
+};
+// Glossary id mapping for pillar headers (clickable from inside the modal)
+const PILLAR_GLOSSARY = {
+  moat: "pillar-moat",
+  tam: "pillar-tam",
+  founder_led: "pillar-founder-led",
+  capital_efficiency: "pillar-capital-efficiency",
+  valuation_discipline: "pillar-valuation-discipline",
+};
+
+function pillarDotsClass(passed) {
+  if (passed >= 5) return "pillars-5";
+  if (passed === 4) return "pillars-4";
+  if (passed === 3) return "pillars-3";
+  return "pillars-low";
+}
+
+function pillarDots(r) {
+  const pillars = r.five_pillars;
+  if (!pillars) return `<span class="muted">—</span>`;
+  const passed = r.pillars_passed ?? 0;
+  const cls = pillarDotsClass(passed);
+  const dots = PILLAR_ORDER.map((id) => {
+    const p = pillars[id];
+    if (!p) return `<span class="pdot pdot-fail">○</span>`;
+    if (p.pass === true)  return `<span class="pdot pdot-pass">●</span>`;
+    if (p.pass === false) return `<span class="pdot pdot-fail">○</span>`;
+    return `<span class="pdot pdot-unknown">◐</span>`; // null = unknown
+  }).join("");
+  const bindingMark = r.binding_constraint_thesis ? `<span class="pdot-binding" title="Binding constraint thesis supplied">★</span>` : "";
+  return `<span class="pillars-strip ${cls}">${dots} <span class="pillars-count">${passed}/5</span>${bindingMark}</span>`;
+}
+
+let _pillarModalWired = false;
+function wirePillarModalOnce() {
+  if (_pillarModalWired) return;
+  _pillarModalWired = true;
+  document.querySelectorAll("#pillar-modal [data-close-pillar]").forEach((el) =>
+    el.addEventListener("click", closePillarModal)
+  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closePillarModal();
+  });
+}
+
+function openPillarModal(ticker) {
+  wirePillarModalOnce();
+  const t = state.tickerByT.get(String(ticker).toUpperCase());
+  if (!t) return;
+  const modal = document.getElementById("pillar-modal");
+  modal.dataset.currentTicker = t.ticker;
+
+  document.getElementById("pillar-modal-title").textContent = `${t.ticker} — ${t.company || ""}`;
+  document.getElementById("pillar-modal-dots").innerHTML = pillarDots(t);
+  const elig = t.pillar_eligibility || "—";
+  const hasBinding = !!t.binding_constraint_thesis;
+  const eligLabel = elig === "CORE-eligible" && hasBinding ? "CORE (binding thesis supplied)" : elig;
+  document.getElementById("pillar-modal-elig").textContent = `Eligibility: ${eligLabel}`;
+
+  const body = document.getElementById("pillar-modal-body");
+  if (!t.five_pillars) {
+    body.innerHTML = `<div class="muted">No pillar data for ${escapeText(t.ticker)} yet. Run <code>scripts/synthesize_pillars.py</code>.</div>`;
+  } else {
+    body.innerHTML = renderPillarModalBody(t);
+  }
+
+  // Show or hide the "+ add binding thesis" button per current state
+  const addBtn = document.getElementById("pillar-modal-add-binding");
+  addBtn.textContent = hasBinding
+    ? "Copy override binding-thesis snippet"
+    : "+ Add binding constraint thesis…";
+  addBtn.classList.remove("copied");
+  addBtn.onclick = () => copyBindingThesisSnippet(t, addBtn);
+
+  modal.hidden = false;
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closePillarModal() {
+  const modal = document.getElementById("pillar-modal");
+  if (!modal) return;
+  modal.hidden = true;
+  modal.setAttribute("aria-hidden", "true");
+  delete modal.dataset.currentTicker;
+}
+
+function renderPillarModalBody(t) {
+  const thesis = t.one_line_thesis || t.thesis || "";
+  const pillars = t.five_pillars;
+  const cards = PILLAR_ORDER.map((id) => {
+    const p = pillars[id];
+    if (!p) return "";
+    const pass = p.pass;
+    const pillarCls = pass === true ? "pillar-pass" : pass === false ? "pillar-fail" : "pillar-unknown";
+    const verdict = pass === true ? "PASS" : pass === false ? "FAIL" : "UNKNOWN";
+    const dot = pass === true ? "●" : pass === false ? "○" : "◐";
+    const metric = p.metric_value != null
+      ? `<div class="pillar-metric"><strong>${escapeText(p.metric_label || "")}:</strong> ${escapeText(formatPillarMetric(id, p.metric_value))} <span class="muted small">(threshold ${escapeText(p.metric_threshold || "")})</span></div>`
+      : `<div class="pillar-metric muted small">${escapeText(p.metric_label || "")} — no value (threshold ${escapeText(p.metric_threshold || "")})</div>`;
+    const gid = PILLAR_GLOSSARY[id];
+    return `
+      <article class="pillar-card ${pillarCls}">
+        <header class="pillar-card-header">
+          <span class="pillar-dot">${dot}</span>
+          <span class="pillar-name glossary-clickable" data-glossary="${escapeAttr(gid)}">${escapeText(PILLAR_LABEL[id])}<span class="glossary-info" aria-hidden="true">ⓘ</span></span>
+          <span class="pillar-verdict">${verdict}</span>
+        </header>
+        ${metric}
+        <div class="pillar-evidence">${escapeText(p.evidence || "")}</div>
+      </article>
+    `;
+  }).join("");
+
+  const risks = Array.isArray(t.risks) ? t.risks.filter((s) => s && s.trim()) : [];
+  const risksHtml = risks.length
+    ? `<ul class="pillar-risks">${risks.map((r) => `<li>${escapeText(r)}</li>`).join("")}</ul>`
+    : `<div class="muted small">No risks recorded — add some to <code>tickers.json[ticker].risks</code>.</div>`;
+
+  const bindingHtml = t.binding_constraint_thesis
+    ? `<div class="binding-thesis-text">${escapeText(t.binding_constraint_thesis)}</div>`
+    : `<div class="binding-thesis-missing">⚠ Required for CORE tagging — not yet supplied. Click the button below to copy a paste-ready snippet, edit it, then commit to <code>tickers.json</code>.</div>`;
+
+  return `
+    ${thesis ? `<div class="pillar-section pillar-thesis">
+      <div class="pillar-section-label">One-line thesis</div>
+      <div>${escapeText(thesis)}</div>
+    </div>` : ""}
+    <div class="pillar-section">
+      <div class="pillar-section-label glossary-clickable" data-glossary="five-pillars">5 Pillars<span class="glossary-info" aria-hidden="true">ⓘ</span></div>
+      <div class="pillar-grid">${cards}</div>
+    </div>
+    <div class="pillar-section">
+      <div class="pillar-section-label">Risks</div>
+      ${risksHtml}
+    </div>
+    <div class="pillar-section">
+      <div class="pillar-section-label glossary-clickable" data-glossary="binding-constraint-thesis">Binding Constraint Thesis (Section 7)<span class="glossary-info" aria-hidden="true">ⓘ</span></div>
+      ${bindingHtml}
+    </div>
+  `;
+}
+
+// Format a pillar metric value for display per its type.
+function formatPillarMetric(pillarId, value) {
+  if (value == null) return "—";
+  switch (pillarId) {
+    case "moat":
+    case "tam":
+      return `${(value * 100).toFixed(1)}%`;
+    case "capital_efficiency":
+      return value.toFixed(1);
+    case "valuation_discipline":
+      return value.toFixed(2);
+    default:
+      return String(value);
+  }
+}
+
+function copyBindingThesisSnippet(t, btn) {
+  // Paste-ready JSON fragment for tickers.json — sets the binding-constraint
+  // thesis. The placeholder TEXT prompts the user to actually write a
+  // sentence; the JSON shape itself is correct so paste-and-edit works.
+  const snippet = {
+    ticker: t.ticker,
+    binding_constraint_thesis: t.binding_constraint_thesis ||
+      `<edit me — one sentence answering: what's the binding constraint on this theme being delivered at scale in 18-36 months, and is ${t.ticker} the chokepoint or merely a beneficiary?>`,
+  };
+  const text = JSON.stringify(snippet, null, 2);
+  const onOk = () => {
+    btn.classList.add("copied");
+    btn.textContent = "Copied — edit then paste into tickers.json";
+  };
+  const onFail = () => {
+    btn.textContent = "Copy failed (use right-click)";
+  };
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(text).then(onOk, onFail);
+  } else {
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); document.body.removeChild(ta);
+      onOk();
+    } catch { onFail(); }
+  }
+}
+
 function ratingPill(r, ticker) {
   const hasReasoning = ticker && state.tickerByT.get(ticker)?.rating_reasoning;
   const dataAttr = hasReasoning
