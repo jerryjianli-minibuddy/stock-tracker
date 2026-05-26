@@ -6,20 +6,27 @@
 const DATA_PATH = "./data";
 const STORAGE_KEYS = {
   activeTab:        "stock-tracker.activeTab",
-  sortMode:         "stock-tracker.sortMode",
+  tabSorts:         "stock-tracker.tabSorts",      // per-tab column sort: { tabKey: {col, dir} }
   ratingFilter:     "stock-tracker.ratingFilter",
 };
 
-// Sort modes available in the watchlist control row. Each maps to a row key
-// from which a numeric/string compare is derived; "rank" is the synthetic
-// composite score computed in computeCompositeScore.
-const SORT_MODES = {
-  rank:            { key: null,             dir: "desc" },  // composite
-  mansfield_rs:    { key: "mansfield_rs",   dir: "desc" },
-  rev_growth_yoy:  { key: "rev_growth_yoy", dir: "desc" },
-  rating:          { key: "rating",         dir: "asc"  },  // Strong < Watch < Pass < ""
-  price:           { key: "price",          dir: "desc" },
-  market_cap:      { key: "market_cap",     dir: "desc" },
+// Columns that are click-to-sort. The key matches a row property; the type
+// drives the comparator (numeric vs string vs special).
+const SORTABLE_COLS = {
+  price:           "num",
+  market_cap:      "num",
+  pe_forward:      "num",
+  ps_ratio:        "num",
+  ev_to_sales:     "num",
+  ev_to_ebitda:    "num",
+  rev_growth_yoy:  "num",
+  eps_growth_yoy:  "num",
+  gross_margin:    "num",
+  pct_from_high:   "num",
+  mansfield_rs:    "num",
+  rs_proxy:        "num",
+  above_200dma:    "bool",
+  rating:          "rating",
 };
 
 const state = {
@@ -39,7 +46,7 @@ const state = {
   sector: "All",               // "All" or a sector name (drives the per-sector tab filter)
   search: "",
   // watchlist controls
-  sortMode: "rank",
+  tabSorts: {},                // { [tabKey]: {col, dir} } — column sort per tab; missing = default rank
   ratingFilter: "all",         // all | strong | strong_watch | hide_pass
   expanded: new Set(),         // ticker symbols whose detail rows are expanded
   // navigation
@@ -60,15 +67,12 @@ async function init() {
     renderWatchlist();
   });
   // Restore persisted watchlist control state (must run before renderWatchlist)
-  state.sortMode = localStorage.getItem(STORAGE_KEYS.sortMode) || "rank";
   state.ratingFilter = localStorage.getItem(STORAGE_KEYS.ratingFilter) || "all";
-  document.getElementById("sort-mode").value = state.sortMode;
+  try {
+    const raw = JSON.parse(localStorage.getItem(STORAGE_KEYS.tabSorts) || "{}");
+    if (raw && typeof raw === "object") state.tabSorts = raw;
+  } catch { /* ignore */ }
   document.getElementById("rating-filter").value = state.ratingFilter;
-  document.getElementById("sort-mode").addEventListener("change", (e) => {
-    state.sortMode = e.target.value;
-    localStorage.setItem(STORAGE_KEYS.sortMode, state.sortMode);
-    renderWatchlist();
-  });
   document.getElementById("rating-filter").addEventListener("change", (e) => {
     state.ratingFilter = e.target.value;
     localStorage.setItem(STORAGE_KEYS.ratingFilter, state.ratingFilter);
@@ -310,30 +314,70 @@ function passesRatingFilter(rating) {
   }
 }
 
+// Current sort for the active tab. Returns null when the tab is in default
+// (composite rank) mode — renderWatchlist then sorts by computeCompositeScore.
+function currentSort() {
+  const key = activeTabKey();
+  const s = state.tabSorts[key];
+  if (!s || !s.col || !SORTABLE_COLS[s.col]) return null;
+  if (s.dir !== "asc" && s.dir !== "desc") return null;
+  return s;
+}
+
+function setCurrentSort(col, dir) {
+  const key = activeTabKey();
+  if (!col || !dir) {
+    delete state.tabSorts[key];
+  } else {
+    state.tabSorts[key] = { col, dir };
+  }
+  localStorage.setItem(STORAGE_KEYS.tabSorts, JSON.stringify(state.tabSorts));
+}
+
+// 3-state cycle invoked by a column-header click: desc → asc → default(=null).
+function cycleSort(col) {
+  const cur = currentSort();
+  if (!cur || cur.col !== col) {
+    setCurrentSort(col, "desc");
+  } else if (cur.dir === "desc") {
+    setCurrentSort(col, "asc");
+  } else {
+    setCurrentSort(null, null);
+  }
+}
+
 function sortRows(rows) {
-  const mode = SORT_MODES[state.sortMode] || SORT_MODES.rank;
-  const dir = mode.dir === "asc" ? 1 : -1;
+  const cur = currentSort();
   const out = [...rows];
-  if (state.sortMode === "rank") {
+  if (!cur) {
+    // Default: composite-rank descending.
     out.sort((a, b) => computeCompositeScore(b) - computeCompositeScore(a));
     return out;
   }
-  if (state.sortMode === "rating") {
-    out.sort((a, b) => (ratingSortValue(a.rating) - ratingSortValue(b.rating)) * dir
-                    || a.ticker.localeCompare(b.ticker));
-    return out;
-  }
-  const key = mode.key;
+  const { col, dir } = cur;
+  const mult = dir === "asc" ? 1 : -1;
+  const type = SORTABLE_COLS[col];
   out.sort((a, b) => {
-    const va = a[key], vb = b[key];
+    let va, vb;
+    if (type === "rating") {
+      va = ratingSortValue(a.rating);
+      vb = ratingSortValue(b.rating);
+    } else if (type === "bool") {
+      va = a[col] == null ? null : (a[col] ? 1 : 0);
+      vb = b[col] == null ? null : (b[col] ? 1 : 0);
+    } else {
+      va = a[col]; vb = b[col];
+    }
+    // Nulls always at the bottom regardless of direction.
     if (va == null && vb == null) return 0;
     if (va == null) return 1;
     if (vb == null) return -1;
-    if (typeof va === "number" && typeof vb === "number") return (va - vb) * dir;
-    return String(va).localeCompare(String(vb)) * dir;
+    if (typeof va === "number" && typeof vb === "number") return (va - vb) * mult;
+    return String(va).localeCompare(String(vb)) * mult;
   });
   return out;
 }
+
 
 function renderWatchlist() {
   const wrap = document.getElementById("watchlist-table-wrap");
@@ -376,37 +420,53 @@ function renderWatchlist() {
   }
   empty.hidden = true;
 
-  const activeSort = state.sortMode;
-  const sortAttr = (key) => activeSort === key ? ' class="sort-active"' : "";
-  const sectorCol = showSector
-    ? `<th class="sector-col glossary-clickable" data-glossary="composite-score">Sector</th>`
+  // Active column sort drives the ▲/▼ arrow on the matching header. The
+  // arrow indicators live in CSS via .sort-asc / .sort-desc::after.
+  const cur = currentSort();
+  const sortCls = (col) => cur && cur.col === col
+    ? (cur.dir === "asc" ? "sort-asc" : "sort-desc")
     : "";
-  const sectorColCount = showSector ? 1 : 0;
+  // Build a th with data-sort + an active-direction class for the arrow.
+  const th = (col, label, extraCls = "") => {
+    const cls = [extraCls, sortCls(col)].filter(Boolean).join(" ");
+    return `<th class="${cls}" data-sort="${col}">${label}</th>`;
+  };
+  // Mansfield is the only header with both sorting AND a glossary definition
+  // (per CLAUDE.md: plain stock metrics are self-explanatory). The ⓘ button
+  // is a separate click target inside the header — clicking the label sorts,
+  // clicking the icon opens the glossary popover.
+  const mansfieldTh = `
+    <th class="num ${sortCls("mansfield_rs")}" data-sort="mansfield_rs">
+      <span class="th-label">Mansfield</span><button type="button" class="header-info" data-glossary="mansfield-rs" aria-label="Mansfield RS definition" title="Definition">ⓘ</button>
+    </th>`;
+  const sectorCol = showSector
+    ? `<th class="sector-col">Sector</th>`
+    : "";
 
   wrap.innerHTML = `
     <table class="watchlist${showSector ? " with-sector" : ""}" id="watchlist">
       <thead>
         <tr>
-          <th class="rank-col glossary-clickable" data-glossary="composite-score" title="Composite rank within sector — click for definition">#${glossaryIcon()}</th>
+          <th class="rank-col" title="Composite rank within sector">#</th>
           <th>Ticker</th>
           <th>Company</th>
           ${sectorCol}
-          <th class="num"${sortAttr("price")}>Price</th>
-          <th class="num glossary-clickable"${sortAttr("market_cap")} data-glossary="market-cap">Mkt Cap${glossaryIcon()}</th>
-          <th class="num glossary-clickable" data-glossary="pe-forward">Fwd P/E${glossaryIcon()}</th>
-          <th class="num glossary-clickable"${sortAttr("rev_growth_yoy")} data-glossary="rev-growth-yoy">Rev YoY${glossaryIcon()}</th>
-          <th class="num glossary-clickable" data-glossary="eps-growth-yoy">EPS YoY${glossaryIcon()}</th>
-          <th class="num glossary-clickable" data-glossary="gross-margin">Gross${glossaryIcon()}</th>
-          <th class="num glossary-clickable" data-glossary="pct-from-52w-high">% From High${glossaryIcon()}</th>
-          <th class="glossary-clickable" data-glossary="above-200dma">Above 200DMA${glossaryIcon()}</th>
-          <th class="num glossary-clickable" data-glossary="rs-proxy">RS${glossaryIcon()}</th>
-          <th class="num glossary-clickable" data-glossary="ps-ratio">P/S${glossaryIcon()}</th>
-          <th class="num glossary-clickable" data-glossary="ev-sales">EV/S${glossaryIcon()}</th>
-          <th class="num glossary-clickable" data-glossary="ev-ebitda">EV/EBITDA${glossaryIcon()}</th>
-          <th class="num glossary-clickable"${sortAttr("mansfield_rs")} data-glossary="mansfield-rs">Mansfield${glossaryIcon()}</th>
-          <th class="glossary-clickable" data-glossary="ratio-vs-spy">vs SPY 52w${glossaryIcon()}</th>
-          <th class="glossary-clickable" data-glossary="ratio-history-90d">Ratio Trend${glossaryIcon()}</th>
-          <th class="glossary-clickable"${sortAttr("rating")} data-glossary="rating-system">Rating${glossaryIcon()}</th>
+          ${th("price",          "Price",         "num")}
+          ${th("market_cap",     "Mkt Cap",       "num")}
+          ${th("pe_forward",     "Fwd P/E",       "num")}
+          ${th("rev_growth_yoy", "Rev YoY",       "num")}
+          ${th("eps_growth_yoy", "EPS YoY",       "num")}
+          ${th("gross_margin",   "Gross",         "num")}
+          ${th("pct_from_high",  "% From High",   "num")}
+          ${th("above_200dma",   "Above 200DMA",  "")}
+          ${th("rs_proxy",       "RS",            "num")}
+          ${th("ps_ratio",       "P/S",           "num")}
+          ${th("ev_to_sales",    "EV/S",          "num")}
+          ${th("ev_to_ebitda",   "EV/EBITDA",     "num")}
+          ${mansfieldTh}
+          <th>vs SPY 52w</th>
+          <th>Ratio Trend</th>
+          ${th("rating",         "Rating",        "")}
         </tr>
       </thead>
       <tbody>
@@ -415,11 +475,21 @@ function renderWatchlist() {
     </table>
   `;
 
+  // Column-header click → 3-state sort cycle. The Mansfield ⓘ child sits
+  // inside the th — defer to the global glossary delegator for that click.
+  wrap.querySelectorAll("th[data-sort]").forEach((thEl) => {
+    thEl.addEventListener("click", (e) => {
+      if (e.target.closest("[data-glossary]")) return; // ⓘ → glossary
+      cycleSort(thEl.dataset.sort);
+      renderWatchlist();
+    });
+  });
+
   wrap.querySelectorAll(".data-row").forEach((tr) => {
     tr.addEventListener("click", (e) => {
       if (e.target.closest(".pill.clickable")) return;
       if (e.target.closest(".rating-clickable")) return;
-      if (e.target.closest("[data-glossary-cell], [data-glossary]")) return;
+      if (e.target.closest("[data-glossary]")) return;
       const t = tr.dataset.ticker;
       if (state.expanded.has(t)) state.expanded.delete(t);
       else state.expanded.add(t);
@@ -438,32 +508,29 @@ function renderTickerRow(r, rankInfo, sectorSize, showSector) {
   const tooltip = score != null
     ? `Composite ${score.toFixed(2)} = rating ${ratingWeightOf(r.rating).toFixed(1)} + mansfield ${mansfieldComponent(r.mansfield_rs).toFixed(2)} + rev ${revGrowthComponent(r.rev_growth_yoy).toFixed(2)} + 200DMA ${above200Component(r.above_200dma).toFixed(1)} + nearHigh ${nearHighComponent(r.pct_from_high).toFixed(1)}`
     : "";
-  const ctx = (id, value) => value == null
-    ? ""
-    : ` data-glossary-cell="${id}" data-glossary-value="${value}" data-glossary-ticker="${escapeAttr(r.ticker)}"`;
   const sectorCell = showSector
     ? `<td class="sector-col">${escapeText(r.sector || "")}</td>`
     : "";
   const colspan = showSector ? 20 : 19;
   return `
     <tr class="data-row ${exp ? "expanded" : ""}" data-ticker="${escapeAttr(r.ticker)}">
-      <td class="rank-cell ${rankClass} cell-glossary"${ctx("composite-score", score != null ? score.toFixed(2) : null)} title="${escapeAttr(tooltip)}">${rank}</td>
+      <td class="rank-cell ${rankClass}" title="${escapeAttr(tooltip)}">${rank}</td>
       <td class="ticker">${escapeText(r.ticker)}<span class="caret">${exp ? "▾" : "▸"}</span></td>
       <td class="company-col">${escapeText(r.company || "")}</td>
       ${sectorCell}
       <td class="num price-col">${fmtPrice(r.price)}</td>
       <td class="num">${fmtCap(r.market_cap)}</td>
       <td class="num">${fmtPE(r.pe_forward)}</td>
-      <td class="num rev-col cell-glossary ${revGrowthClass(r.rev_growth_yoy)}"${ctx("rev-growth-yoy", r.rev_growth_yoy)}>${fmtPct(r.rev_growth_yoy, true)}</td>
-      <td class="num cell-glossary"${ctx("eps-growth-yoy", r.eps_growth_yoy)}>${fmtPct(r.eps_growth_yoy, true)}</td>
+      <td class="num rev-col ${revGrowthClass(r.rev_growth_yoy)}">${fmtPct(r.rev_growth_yoy, true)}</td>
+      <td class="num">${fmtPct(r.eps_growth_yoy, true)}</td>
       <td class="num">${fmtPct(r.gross_margin)}</td>
-      <td class="num cell-glossary ${pctFromHighClass(r.pct_from_high)}"${ctx("pct-from-52w-high", r.pct_from_high)}>${fmtPct(r.pct_from_high)}</td>
-      <td class="dma-col cell-glossary ${above200Class(r.above_200dma)}"${ctx("above-200dma", r.above_200dma == null ? null : (r.above_200dma ? "true" : "false"))}>${above200Text(r.above_200dma)}</td>
+      <td class="num ${pctFromHighClass(r.pct_from_high)}">${fmtPct(r.pct_from_high)}</td>
+      <td class="dma-col ${above200Class(r.above_200dma)}">${above200Text(r.above_200dma)}</td>
       <td class="num">${fmtPct(r.rs_proxy, true)}</td>
-      <td class="num cell-glossary"${ctx("ps-ratio", r.ps_ratio)}>${fmtX(r.ps_ratio)}</td>
-      <td class="num cell-glossary"${ctx("ev-sales", r.ev_to_sales)}>${fmtX(r.ev_to_sales)}</td>
-      <td class="num cell-glossary"${ctx("ev-ebitda", r.ev_to_ebitda)}>${fmtEvEbitda(r.ev_to_ebitda)}</td>
-      <td class="num mansfield-cell cell-glossary ${mansfieldClass(r.mansfield_rs)}"${ctx("mansfield-rs", r.mansfield_rs)}>${fmtMansfield(r.mansfield_rs)}</td>
+      <td class="num">${fmtX(r.ps_ratio)}</td>
+      <td class="num">${fmtX(r.ev_to_sales)}</td>
+      <td class="num">${fmtEvEbitda(r.ev_to_ebitda)}</td>
+      <td class="num mansfield-cell ${mansfieldClass(r.mansfield_rs)}">${fmtMansfield(r.mansfield_rs)}</td>
       <td class="${above200Class(r.ratio_above_sma)}">${ratioAboveSmaText(r.ratio_above_sma)}</td>
       <td class="ratio-trend-cell">${miniSparkline(r.ratio_history_90d || [])}</td>
       <td class="rating-col">${ratingPill(r.rating, r.ticker)}</td>

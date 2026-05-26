@@ -191,8 +191,29 @@ table.watchlist th {
 table.watchlist th.num, table.watchlist td.num {
   text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums;
 }
-table.watchlist th.sort-active { color: var(--accent); }
-table.watchlist th.sort-active::after { content: " ↓"; opacity: 0.75; }
+/* Sortable column headers — click cycles desc → asc → default(rank).
+   Headers without data-sort (Ticker, Company, Sector, #, vs SPY 52w, Ratio Trend)
+   are not interactive. */
+table.watchlist th[data-sort] { cursor: pointer; user-select: none; }
+table.watchlist th[data-sort]:hover { color: var(--text); }
+table.watchlist th.sort-asc,
+table.watchlist th.sort-desc { color: var(--accent); }
+table.watchlist th.sort-asc::after  { content: " ▲"; font-size: 0.7em; }
+table.watchlist th.sort-desc::after { content: " ▼"; font-size: 0.7em; }
+
+/* Small ⓘ next to a column label — opens glossary; standalone click target
+   so the parent <th>'s sort handler doesn't fire. Mansfield is the only
+   header that uses it in the watchlist table. */
+.header-info {
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-left: 0.3rem;
+  background: transparent; border: none; padding: 0;
+  color: var(--text-muted); font-size: 0.78em;
+  cursor: help; opacity: 0.55;
+  transition: opacity 0.1s, color 0.1s;
+}
+.header-info:hover { opacity: 1; color: var(--accent); }
+.header-info:focus { outline: 1px solid var(--accent); outline-offset: 1px; }
 table.watchlist td.ticker { font-weight: 600; font-family: var(--font-mono); }
 
 /* Sector column is hidden by default; shown only when state.sector === 'All'
@@ -393,10 +414,6 @@ code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-el
   transition: opacity 0.1s, color 0.1s;
 }
 .glossary-clickable:hover .glossary-info { opacity: 1; color: var(--accent); }
-
-/* Numeric cells with context — subtle hover affordance, no underline */
-.cell-glossary { cursor: help; }
-.cell-glossary:hover { background: var(--bg-row-hover); }
 
 /* Modal body layout */
 #glossary-modal-body {

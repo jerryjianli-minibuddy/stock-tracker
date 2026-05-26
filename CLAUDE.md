@@ -248,12 +248,24 @@ If you tweak the formula:
 
 ### Sort + filter
 
-Above the table:
+**Column-header sort** is the canonical way to reorder rows. Clicking a sortable header cycles through three states:
 
-- **Sort**: `rank` (composite, default) | `mansfield_rs` | `rev_growth_yoy` | `rating` | `price` | `market_cap`. Affects the order of rows in the current tab.
-- **Rating filter**: `all` | `strong` | `strong_watch` | `hide_pass`. The composite `#` rank is recomputed across the rating-filtered universe (so when "Strong only" is on, the visible #1 is the top Strong name in its sector, not a hidden Pass).
+1. First click → **descending** (▼ arrow appears)
+2. Second click → **ascending** (▲ arrow appears)
+3. Third click → **default** (back to composite rank within sector, no arrow)
 
-Search filters by ticker symbol or company name within the active tab; it does not affect the rank label (search hides, it doesn't reshape the ranking).
+Sort state is persisted **per tab** in `localStorage` under `stock-tracker.tabSorts` as `{ [tabKey]: {col, dir} }`. Switching tabs restores that tab's sort; the AI Infra tab can be sorted by Mansfield desc while the All tab stays on rank-default.
+
+Sortable columns (the `SORTABLE_COLS` table in `docs/app.js`):
+- **Numeric** (sort by value): `price`, `market_cap`, `pe_forward`, `ps_ratio`, `ev_to_sales`, `ev_to_ebitda`, `rev_growth_yoy`, `eps_growth_yoy`, `gross_margin`, `pct_from_high`, `mansfield_rs`, `rs_proxy`
+- **Boolean** (yes/no): `above_200dma`
+- **Categorical** (Strong < Watch < unrated < Pass): `rating`
+
+Non-sortable: `#`, `Ticker`, `Company`, `Sector`, `vs SPY 52w`, `Ratio Trend`. Nulls always sort to the bottom regardless of direction.
+
+**Rating filter** dropdown above the table: `all` | `strong` | `strong_watch` | `hide_pass`. The composite `#` rank is recomputed across the rating-filtered universe (so when "Strong only" is on, the visible #1 is the top Strong name in its sector, not a hidden Pass).
+
+**Search** filters by ticker symbol or company name within the active tab; it does not affect the rank label (search hides, it doesn't reshape the ranking).
 
 ### Mobile (≤768px)
 
@@ -300,15 +312,26 @@ Categories are rendered in the order they first appear in the file — keep new 
 3. **Be substantive.** Include real numbers, real thresholds (e.g., "software 70-90%, semis 50-70%"), and a "why this matters" reasoning sentence. Avoid bland textbook definitions. The interpretation scale is the most important field — that's the part that turns the dashboard into a teaching tool.
 4. **Refinements are welcome.** When the user learns something new and wants to refine a definition ("for biotech, gross margin <60% can still be fine because of pre-launch dynamics"), just edit the JSON. The dashboard picks it up on next load.
 
-### Context-aware popover
+### Where the glossary is wired up (and where it isn't)
 
-Numeric cells in the watchlist (Mansfield, % From High, Rev YoY, P/S, EV/S, EV/EBITDA, EPS YoY, Above 200DMA) and macro banner chips (VIX, F&G, Net Liq, DXY, HY OAS, SPY vs 200DMA) carry `data-glossary-cell="<id>"` + `data-glossary-value="<value>"`. Clicking them opens the modal with a context lead line ("AMKR's Mansfield RS is +8.6 → Outperforming (lime zone)") and highlights the matching row in the interpretation scale.
+Plain stock metrics are self-explanatory; the watchlist table is for *sorting and scanning*, not for definitions. Headers like Price / Mkt Cap / Fwd P/E / Rev YoY have no ⓘ icon and no popover — clicking them just sorts. The glossary is reserved for things that genuinely benefit from threshold context or framework explanation:
 
-The matching logic lives in `scaleMatchIndex(id, value)` in `docs/app.js`. **If you add a new term with a numeric scale and want context-aware highlighting, add the corresponding case to that function** — the scale itself is just labels; the thresholds for "which row matches value X" are hardcoded JS because the `range` strings in JSON are intentionally human-readable, not parseable.
+| Surface | Glossary clickable? | Notes |
+|---|---|---|
+| Watchlist column headers (Price, Mkt Cap, P/E, P/S, EV/S, EV/EBITDA, Rev YoY, EPS YoY, Gross, % From High, RS, Above 200DMA, Rating) | **No** — sort only | These are standard metrics. Adding a ⓘ to each would clutter a 19-column header row. |
+| Watchlist **Mansfield** column header | **Yes**, via a separate ⓘ icon next to the label | Mansfield is non-obvious enough to warrant an inline definition. Clicking the label sorts; clicking the ⓘ opens glossary. |
+| Watchlist data cells | **No** — context-aware cell popovers are gone | The per-cell "AMKR's Mansfield is +8.6 → Outperforming" feature was removed when the table was reverted to sort-first. The threshold info is one ⓘ click away via the Mansfield column header. |
+| Macro banner indicators (VIX, F&G, Net Liq, DXY, HY OAS, SPY vs 200DMA, Regime) | **Yes** | Threshold context is the whole point of the banner; chips carry both `data-glossary` and `data-glossary-cell` so the popover shows the matching zone. |
+| Macro tab indicator cards | **Yes** | Same indicators, more detail; titles carry `data-glossary`. |
+| Macro tab sector-rotation table headers (Mansfield, 30d slope, Tag, Above 52w SMA) | **Yes** via the ⓘ pattern | The th sorts on body click; ⓘ opens glossary. |
+| Bottlenecks tab | Reserved for future use | Physics labels and tag-pills could become glossary-linked; not wired today. |
+| Glossary tab | n/a — that's the reference itself | |
+
+Rule of thumb: **plain stock metrics → sort only; framework concepts and macro indicators → glossary clickable.** When adding a new term, decide which side of that line it falls on.
 
 ### Rating chip is special
 
-Clicking a rating chip in the watchlist (Strong / Watch / Pass) opens the **per-ticker reasoning modal** (`rating_reasoning` content), not the glossary. Clicking the **Rating column header** opens the glossary `rating-system` entry. These are intentionally different surfaces: reasoning is "why is THIS ticker rated this way", glossary is "what does the rating SYSTEM mean".
+Clicking a rating chip in the watchlist (Strong / Watch / Pass) opens the **per-ticker reasoning modal** (`rating_reasoning` content), not the glossary. The Rating column header is sortable but does *not* open the glossary (the rating system is documented in this file and in the `rating-system` glossary entry, but reaching it from a sort-first header would conflict with the sort cycle). To read the rating-system definition, use the Glossary tab.
 
 ## After editing tickers.json
 
