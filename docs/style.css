@@ -148,11 +148,10 @@ header {
 .view { display: none; }
 .view.active { display: block; }
 
-/* ----- watchlist controls (sticky bar above sector sections) ----- */
+/* ----- watchlist controls ----- */
 .controls { padding: 0.5rem 1rem; border-bottom: 1px solid var(--border); }
 .watchlist-controls {
   display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;
-  position: sticky; top: 91px; z-index: 9; background: var(--bg);
 }
 #search {
   flex: 1 1 18rem; min-width: 12rem; max-width: 24rem;
@@ -176,75 +175,30 @@ header {
   cursor: pointer;
 }
 .ctl select:focus { outline: none; border-color: var(--accent); }
-.ghost-btn {
-  background: transparent; border: 1px solid var(--border); color: var(--text-muted);
-  border-radius: 6px; padding: 0.3rem 0.7rem; font-size: 0.75rem;
-  font-family: var(--font-sans); cursor: pointer;
-}
-.ghost-btn:hover { background: var(--bg-elev); color: var(--text); border-color: var(--text-muted); }
 
-/* ----- top movers strip ----- */
-#top-movers { padding: 0.65rem 1rem 0.25rem; display: flex; flex-direction: column; gap: 0.3rem; }
-#top-movers:empty { display: none; }
-.movers-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-.movers-label {
-  color: var(--text-muted); font-size: 0.7rem; font-weight: 700;
-  letter-spacing: 0.08em; min-width: 4.5rem;
-}
-.mover-chip {
-  display: inline-flex; align-items: baseline; gap: 0.35rem;
-  padding: 0.25rem 0.65rem; border-radius: 6px;
-  border: 1px solid var(--border);
-  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
-  font-size: 0.78rem; cursor: pointer; user-select: none;
-}
-.mover-chip:hover { border-color: var(--text-muted); }
-.mover-chip strong { font-family: var(--font-sans); font-size: 0.8rem; }
-.mover-chip.chip-up   { background: var(--green-bg); color: var(--green); }
-.mover-chip.chip-down { background: var(--red-bg);   color: var(--red); }
-
-/* ----- sector sections ----- */
-#watchlist-sections { padding: 0.5rem 0 1.5rem; }
-.sector-section { margin: 0.75rem 0 1.5rem; }
-.sector-header {
-  display: flex; align-items: baseline; gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  cursor: pointer; user-select: none;
-  position: sticky; top: 138px; z-index: 8;
-}
-.sector-header:hover { background: var(--bg-elev); }
-.sector-chev { color: var(--text-muted); font-size: 0.7rem; width: 0.8rem; }
-.sector-name { font-weight: 600; font-size: 0.95rem; }
-.sector-count { color: var(--text-muted); font-size: 0.8rem; }
-.sector-section.collapsed .sector-header { border-bottom-color: transparent; }
-.sector-empty { padding: 0.75rem 1.25rem; }
-
-/* Per-sector table (replaces the single #watchlist table) */
-.sector-table {
-  width: 100%; border-collapse: collapse; min-width: 980px;
-  table-layout: auto;
-}
-.sector-table th, .sector-table td {
+/* ----- watchlist view: single table per active tab ----- */
+#view-watchlist main { overflow-x: auto; padding-bottom: 1.5rem; }
+table.watchlist { width: 100%; border-collapse: collapse; min-width: 980px; }
+table.watchlist th, table.watchlist td {
   padding: 0.5rem 0.75rem; text-align: left;
   border-bottom: 1px solid var(--border);
   font-size: 0.8125rem; white-space: nowrap;
 }
-.sector-table th {
+table.watchlist th {
   font-weight: 500; color: var(--text-muted);
   user-select: none; background: var(--bg);
 }
-.sector-table th.num, .sector-table td.num {
+table.watchlist th.num, table.watchlist td.num {
   text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums;
 }
-.sector-table th.sort-active {
-  color: var(--accent);
-}
-.sector-table th.sort-active::after { content: " ↓"; opacity: 0.75; }
-.sector-table td.ticker { font-weight: 600; font-family: var(--font-mono); }
-/* Watchlist main scrolls horizontally as a whole if viewport is narrow */
-#view-watchlist main { overflow-x: auto; }
+table.watchlist th.sort-active { color: var(--accent); }
+table.watchlist th.sort-active::after { content: " ↓"; opacity: 0.75; }
+table.watchlist td.ticker { font-weight: 600; font-family: var(--font-mono); }
+
+/* Sector column is hidden by default; shown only when state.sector === 'All'
+   (renderWatchlist emits .with-sector on the table). */
+#watchlist .sector-col { display: none; }
+#watchlist.with-sector .sector-col { display: table-cell; }
 
 /* Rank cell — medal treatment for #1/#2-3 */
 .rank-col { width: 2.5rem; }
@@ -609,21 +563,18 @@ code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-el
 .modal-btn.ghost { color: var(--text-muted); }
 .modal-btn.copied { background: var(--green-soft, #1f3d2a); border-color: var(--green, #4caf50); color: var(--text); }
 
-/* Tablet/medium screens — relax the heavy sticky stack a bit */
-@media (max-width: 1024px) {
-  .watchlist-controls { top: auto; position: static; }
-  .sector-header { top: auto; position: static; }
-}
-
 /* Mobile (<768px) — collapse each ticker row into a 2-row card layout.
    Hide thead, repurpose <tr> as a CSS Grid card. Most columns are hidden;
    the visible ones (rank, ticker, company, rating, price, rev growth,
-   above-200DMA, Mansfield) are placed via grid-template-areas. */
+   above-200DMA, Mansfield) are placed via grid-template-areas. Sector tabs
+   make the Sector column redundant on mobile, so it's force-hidden even on
+   the All tab. */
 @media (max-width: 768px) {
-  .sector-table { min-width: 0; }
-  .sector-table > thead { display: none; }
-  .sector-table, .sector-table > tbody { display: block; }
-  .sector-table > tbody > tr.data-row {
+  table.watchlist { min-width: 0; }
+  table.watchlist > thead { display: none; }
+  table.watchlist, table.watchlist > tbody { display: block; }
+  #watchlist.with-sector .sector-col { display: none; }
+  table.watchlist > tbody > tr.data-row {
     display: grid;
     grid-template-columns: 2.2rem auto 1fr auto auto auto auto;
     grid-template-areas:
@@ -636,38 +587,30 @@ code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-el
     background: var(--bg-elev);
     border: 1px solid var(--border); border-radius: 8px;
   }
-  .sector-table > tbody > tr.data-row.expanded {
-    background: var(--bg-row-hover);
-  }
-  .sector-table > tbody > tr.data-row > td {
+  table.watchlist > tbody > tr.data-row.expanded { background: var(--bg-row-hover); }
+  table.watchlist > tbody > tr.data-row > td {
     display: none; padding: 0; border: 0; white-space: normal;
   }
-  .sector-table > tbody > tr.data-row > td.rank-cell {
+  table.watchlist > tbody > tr.data-row > td.rank-cell {
     display: flex; grid-area: rank;
     width: 2rem; height: 100%;
     align-items: center; justify-content: center;
     font-size: 1.05rem;
   }
-  .sector-table > tbody > tr.data-row > td.ticker {
-    display: block; grid-area: tk;
-    font-size: 0.95rem;
-  }
-  .sector-table > tbody > tr.data-row > td:nth-child(3) {
+  table.watchlist > tbody > tr.data-row > td.ticker { display: block; grid-area: tk; font-size: 0.95rem; }
+  table.watchlist > tbody > tr.data-row > td.company-col {
     display: block; grid-area: co;
     color: var(--text-muted); font-size: 0.8rem;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
-  .sector-table > tbody > tr.data-row > td:nth-child(19) {
-    display: block; grid-area: rating; justify-self: end;
-  }
-  .sector-table > tbody > tr.data-row > td:nth-child(4)  { display: block; grid-area: pr;  font-family: var(--font-mono); font-size: 0.8rem; }
-  .sector-table > tbody > tr.data-row > td:nth-child(7)  { display: block; grid-area: rev; font-family: var(--font-mono); font-size: 0.8rem; }
-  .sector-table > tbody > tr.data-row > td:nth-child(11) { display: block; grid-area: dma; font-size: 0.75rem; text-align: center; }
-  .sector-table > tbody > tr.data-row > td:nth-child(16) { display: block; grid-area: ms;  font-family: var(--font-mono); font-size: 0.8rem; text-align: right; }
+  table.watchlist > tbody > tr.data-row > td.rating-col { display: block; grid-area: rating; justify-self: end; }
+  table.watchlist > tbody > tr.data-row > td.price-col { display: block; grid-area: pr;  font-family: var(--font-mono); font-size: 0.8rem; }
+  table.watchlist > tbody > tr.data-row > td.rev-col   { display: block; grid-area: rev; font-family: var(--font-mono); font-size: 0.8rem; }
+  table.watchlist > tbody > tr.data-row > td.dma-col   { display: block; grid-area: dma; font-size: 0.75rem; text-align: center; }
+  table.watchlist > tbody > tr.data-row > td.mansfield-cell { display: block; grid-area: ms; font-family: var(--font-mono); font-size: 0.8rem; text-align: right; }
 
-  /* Detail row spans full width below the card */
-  .sector-table > tbody > tr.detail-row { display: block; }
-  .sector-table > tbody > tr.detail-row > td {
+  table.watchlist > tbody > tr.detail-row { display: block; }
+  table.watchlist > tbody > tr.detail-row > td {
     display: block; padding: 0.85rem 1rem;
     margin: -0.5rem 0.9rem 0.5rem;
     background: var(--bg-elev); border: 1px solid var(--border); border-radius: 0 0 8px 8px;

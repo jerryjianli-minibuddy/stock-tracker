@@ -204,21 +204,30 @@ When the user types **"resynthesize ratings"** or **"recompute reasoning"**, run
 
 A ticker can also be *manually* overridden from the dashboard: clicking a rating opens the modal, which has a **Copy override snippet** button. The snippet sets `rated_by: "manual"` and is meant to be pasted directly into `data/tickers.json`. After paste, the user commits and pushes — and from that point on, ingest workflows must leave that block alone.
 
-## Dashboard layout (Watchlist view)
+## Dashboard layout (canonical: tab-based)
 
-The dashboard has four top-level tabs: **Watchlist · Macro · Reports · Bottlenecks**. The Watchlist is the default and shows **all sectors stacked vertically on a single page** — there are no per-sector tabs. Don't reintroduce them.
+The dashboard uses **tab-based navigation**. The tab row sits below the macro regime banner and looks like:
 
-Per-sector structure:
+```
+[ All (N) ] [ AI Infra (4) ] [ Semis - SiC (1) ] [ AI Apps (6) ] ... ⎮ [ Reports (9) ] [ Bottlenecks (11) ] [ Glossary (36) ] [ Macro (RISK-ON) ]
+```
 
-- One collapsible `<section class="sector-section">` per sector, in the order sectors first appear in `data/tickers.json` (don't re-sort the sector list).
-- A sticky `<header class="sector-header">` shows the sector name + ticker count and toggles collapse on click.
-- Inside each section a `<table class="sector-table">` renders the tickers. The first column is `#` (composite rank within sector).
+- The **All** tab shows every ticker in a single table; the **Sector** column is visible so each row is self-identifying.
+- Each **sector tab** filters to that sector and **hides the Sector column** (it's redundant when every row is from one sector).
+- **Reports / Bottlenecks / Glossary / Macro** tabs are the non-watchlist views, separated from the sector list by a small divider.
+- Sector tabs appear in the order sectors first show up in `data/tickers.json` — don't auto-sort them.
 
-Collapsed sectors are persisted to `localStorage` under `stock-tracker.collapsedSectors` (JSON array of sector names). Sort mode, rating filter, and sector-visibility selections are persisted under `stock-tracker.sortMode`, `stock-tracker.ratingFilter`, and `stock-tracker.sectorVisibility`.
+There is **no single-page stacked-sectors view**, **no collapsible sector sections**, **no sticky section headers**, and **no cross-sector Top Movers strip**. These were experiments that have been intentionally reverted. Don't reintroduce them.
+
+### State + persistence
+
+Active tab is persisted to `localStorage` under `stock-tracker.activeTab`, with one of these values: `all`, `sector:<name>`, `reports`, `bottlenecks`, `glossary`, `macro`. On load, an unknown or legacy value falls back to `all`.
+
+Sort and rating filter selections persist under `stock-tracker.sortMode` and `stock-tracker.ratingFilter`. (The older `collapsedSectors` and `sectorVisibility` keys are dead — `init()` no longer reads them.)
 
 ### Composite rank score
 
-The default sort within each sector is by a composite score combining quality, momentum, and rating. The formula is in `computeCompositeScore()` in `docs/app.js` and **must stay in sync with this doc**:
+Every table has a `#` column showing the ticker's **rank within its own sector** by composite score (sorted descending). The formula is in `computeCompositeScore()` in `docs/app.js` and **must stay in sync with this doc**:
 
 ```
 composite =
@@ -229,27 +238,26 @@ composite =
   + (pct_from_high <= 0.15 ? +0.3 : 0)
 ```
 
-Rank #1 in a sector is the best-positioned name *right now*. The score itself is surfaced as a hover tooltip on the `#` cell so the math is auditable. Rank cell color: #1 gold, #2-3 silver, others muted gray; a single-ticker sector shows "1" without medal styling.
+Rank is sector-local even on the **All** tab — meaning you'll see multiple "#1"s on screen, one per sector. That's intentional: the rank tells you "best-in-sector", and the sector is right next to the rank in the All view. The hover tooltip on the `#` cell shows the per-component breakdown. Rank cell color: #1 gold, #2-3 silver, others muted gray; single-ticker sectors show "1" with no medal styling.
 
 If you tweak the formula:
 
 1. Update both `computeCompositeScore` and the tooltip-component helpers (`ratingWeightOf`, `mansfieldComponent`, `revGrowthComponent`, `above200Component`, `nearHighComponent`) in `docs/app.js`.
 2. Update the formula above in this file.
-3. Mention the change in the commit message — the rank order is user-visible and surprising changes feel like a bug.
+3. Mention the change in the commit message — the rank order is user-visible.
 
-### Sort, filter, top movers
+### Sort + filter
 
-Above the sector sections, the control row offers:
+Above the table:
 
-- **Sort within sector**: `rank` (composite, default) | `mansfield_rs` | `rev_growth_yoy` | `rating` | `price` | `market_cap`. Sort changes only affect the order within each sector — sectors themselves never reorder.
-- **Rating filter**: `all` | `strong` | `strong_watch` | `hide_pass`. The composite `#` rank is recomputed across the post-filter slice (so when "Strong only" is on, the visible #1 is the top Strong name, not a hidden Pass).
-- **Sector visibility**: `all` | `hide_empty` (hides sections whose post-filter row count is 0).
+- **Sort**: `rank` (composite, default) | `mansfield_rs` | `rev_growth_yoy` | `rating` | `price` | `market_cap`. Affects the order of rows in the current tab.
+- **Rating filter**: `all` | `strong` | `strong_watch` | `hide_pass`. The composite `#` rank is recomputed across the rating-filtered universe (so when "Strong only" is on, the visible #1 is the top Strong name in its sector, not a hidden Pass).
 
-The **TOP RS / WEAKEST** strip at the top of the watchlist surfaces the 3 highest and 3 lowest Mansfield RS tickers across all sectors. Clicking a chip uncollapses that ticker's sector, scrolls to its row, and flashes it. Top movers always reflect the full universe, regardless of filter/search state.
+Search filters by ticker symbol or company name within the active tab; it does not affect the rank label (search hides, it doesn't reshape the ranking).
 
 ### Mobile (≤768px)
 
-Tables collapse to a card layout via CSS grid (`grid-template-areas`). The visible cells become: rank, ticker, company, rating (top row); price, rev growth, above-200DMA, Mansfield (second row). Everything else is hidden in column mode but still present in the detail panel that expands on tap. Section headers and the controls bar become non-sticky on mobile to free up vertical space.
+Tabs scroll horizontally. Each ticker row collapses to a CSS-grid card showing: rank | ticker + company | rating (row 1); price | rev growth | above-200DMA | Mansfield (row 2). The Sector column is force-hidden on mobile even on the All tab (the sector name would be redundant given the company name is visible). Expand the card by tapping it to see the full detail panel.
 
 ## Glossary
 
