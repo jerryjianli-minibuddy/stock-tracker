@@ -198,67 +198,6 @@
     "binding_constraint_thesis": null
   },
   {
-    "ticker": "WOLF",
-    "company": "Wolfspeed",
-    "sector": "Semis - SiC",
-    "thesis": "",
-    "catalyst": "",
-    "risks": [],
-    "rating": "",
-    "notes": "",
-    "date_added": "2026-05-25",
-    "rating_reasoning": {
-      "summary": "In watchlist for SiC EV power-electronics exposure but no ingested research currently anchors a rating. Mansfield RS +166 reflects the post-blowup recovery from $8 lows; not a thesis-based signal.",
-      "primary_drivers": [],
-      "key_risks": [],
-      "evidence": [],
-      "rated_date": "2026-05-25",
-      "rated_by": "auto"
-    },
-    "one_line_thesis": "",
-    "five_pillars": {
-      "moat": {
-        "pass": false,
-        "evidence": "Gross margin -26.6% below threshold \u226535% hardware",
-        "metric_value": -0.2663115845539281,
-        "metric_label": "Gross Margin",
-        "metric_threshold": "\u226535% hardware"
-      },
-      "tam": {
-        "pass": false,
-        "evidence": "Revenue growth YoY -16.8% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
-        "metric_value": -0.16786703601108033,
-        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
-        "metric_threshold": "\u226520%"
-      },
-      "founder_led": {
-        "pass": null,
-        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
-        "metric_value": null,
-        "metric_label": "Founder-led signal",
-        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
-      },
-      "capital_efficiency": {
-        "pass": false,
-        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
-        "metric_value": null,
-        "metric_label": "Rule of 40",
-        "metric_threshold": "\u226525 hardware"
-      },
-      "valuation_discipline": {
-        "pass": false,
-        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
-        "metric_value": null,
-        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
-        "metric_threshold": "<2.5 hard gate"
-      }
-    },
-    "pillars_passed": 0,
-    "pillars_total": 5,
-    "pillar_eligibility": "PASS",
-    "binding_constraint_thesis": null
-  },
-  {
     "ticker": "PLTR",
     "company": "Palantir",
     "sector": "Software",

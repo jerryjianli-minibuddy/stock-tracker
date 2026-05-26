@@ -61,37 +61,6 @@
       "ratio_slope_30d": 0.35
     }
   ],
-  "WOLF": [
-    {
-      "date": "2026-05-25",
-      "price": 69.88999938964844,
-      "market_cap": 3378418176.0,
-      "pe_forward": -13.964036,
-      "pe_trailing": null,
-      "ps_ratio": 4.7416396,
-      "ev_to_sales": 5.676,
-      "ev_to_ebitda": -14.803,
-      "peg_ratio": null,
-      "rev_growth_yoy": -0.16786703601108033,
-      "eps_growth_yoy": -0.2798611539479938,
-      "gross_margin": -0.2663115845539281,
-      "op_margin": -0.7197070572569907,
-      "fcf_ttm": null,
-      "debt_to_equity": 179.162,
-      "dma_50": 31.75639991760254,
-      "dma_150": 23.896799958546957,
-      "dma_200": null,
-      "high_52w": 80.81999969482422,
-      "low_52w": 8.050000190734863,
-      "volume_avg_30d": 8320126.666666667,
-      "rs_proxy": 2.727187535815276,
-      "ratio_vs_spy": 0.093732,
-      "ratio_sma_52w": 0.035165,
-      "mansfield_rs": 166.55,
-      "ratio_above_sma": true,
-      "ratio_slope_30d": 166.29
-    }
-  ],
   "PLTR": [
     {
       "date": "2026-05-25",

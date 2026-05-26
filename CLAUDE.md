@@ -56,7 +56,6 @@ As of last edit to this file (re-read `data/tickers.json` to confirm — this li
 - `AI Infra`
 - `Software`
 - `Semis - Packaging`
-- `Semis - SiC`
 - `Semis - Process`
 - `Semis - Analog/Sensors`
 - `Bitcoin Mining / AI HPC`
