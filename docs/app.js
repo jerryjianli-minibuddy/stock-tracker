@@ -4,17 +4,25 @@
 // to the watchlist row; clicking a bottleneck pill anywhere jumps to its card.
 
 const DATA_PATH = "./data";
-const STORAGE_KEY = "stock-tracker.activeTab";
-const NUMERIC_KEYS = new Set([
-  "price", "market_cap", "pe_forward", "pe_trailing",
-  "ps_ratio", "ev_to_sales", "ev_to_ebitda", "peg_ratio",
-  "rev_growth_yoy", "eps_growth_yoy", "gross_margin", "op_margin",
-  "fcf_ttm", "debt_to_equity",
-  "dma_50", "dma_150", "dma_200",
-  "high_52w", "low_52w", "volume_avg_30d",
-  "rs_proxy", "pct_from_high",
-  "mansfield_rs", "ratio_slope_30d", "ratio_vs_spy", "ratio_sma_52w",
-]);
+const STORAGE_KEYS = {
+  activeTab:        "stock-tracker.activeTab",
+  collapsedSectors: "stock-tracker.collapsedSectors",
+  sortMode:         "stock-tracker.sortMode",
+  ratingFilter:     "stock-tracker.ratingFilter",
+  sectorVisibility: "stock-tracker.sectorVisibility",
+};
+
+// Sort modes available in the watchlist control row. Each maps to a row key
+// from which a numeric/string compare is derived; "rank" is the synthetic
+// composite score computed in computeCompositeScore.
+const SORT_MODES = {
+  rank:            { key: null,             dir: "desc" },  // composite
+  mansfield_rs:    { key: "mansfield_rs",   dir: "desc" },
+  rev_growth_yoy:  { key: "rev_growth_yoy", dir: "desc" },
+  rating:          { key: "rating",         dir: "asc"  },  // Strong < Watch < Pass < ""
+  price:           { key: "price",          dir: "desc" },
+  market_cap:      { key: "market_cap",     dir: "desc" },
+};
 
 const state = {
   // raw
@@ -26,12 +34,18 @@ const state = {
   bottleneckById: new Map(),
   reportById: new Map(),
   tickerByT: new Map(),
-  // ui state
+  // ui state — top-level view
   view: "watchlist",
-  sector: "All", search: "",
-  sortKey: "ticker", sortDir: "asc",
-  expanded: new Set(),
-  scrollTarget: null,    // {kind: "ticker"|"bottleneck", id: string}
+  search: "",
+  // watchlist controls
+  sortMode: "rank",
+  ratingFilter: "all",         // all | strong | strong_watch | hide_pass
+  sectorVisibility: "all",     // all | hide_empty
+  collapsedSectors: new Set(), // sector names that are collapsed
+  expanded: new Set(),         // ticker symbols whose detail rows are expanded
+  // navigation
+  scrollTarget: null,          // {kind: "ticker"|"bottleneck"|"report", id: string}
+  // rotation table (Macro tab)
   rotationSortKey: "mansfield_rs", rotationSortDir: "desc",
 };
 
@@ -44,6 +58,42 @@ async function init() {
   document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
   document.getElementById("search").addEventListener("input", (e) => {
     state.search = e.target.value.trim().toLowerCase();
+    renderWatchlist();
+  });
+  // Restore persisted watchlist control state (must run before renderWatchlist)
+  state.sortMode = localStorage.getItem(STORAGE_KEYS.sortMode) || "rank";
+  state.ratingFilter = localStorage.getItem(STORAGE_KEYS.ratingFilter) || "all";
+  state.sectorVisibility = localStorage.getItem(STORAGE_KEYS.sectorVisibility) || "all";
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEYS.collapsedSectors) || "[]");
+    if (Array.isArray(saved)) state.collapsedSectors = new Set(saved);
+  } catch { /* ignore */ }
+  document.getElementById("sort-mode").value = state.sortMode;
+  document.getElementById("rating-filter").value = state.ratingFilter;
+  document.getElementById("sector-visibility").value = state.sectorVisibility;
+  document.getElementById("sort-mode").addEventListener("change", (e) => {
+    state.sortMode = e.target.value;
+    localStorage.setItem(STORAGE_KEYS.sortMode, state.sortMode);
+    renderWatchlist();
+  });
+  document.getElementById("rating-filter").addEventListener("change", (e) => {
+    state.ratingFilter = e.target.value;
+    localStorage.setItem(STORAGE_KEYS.ratingFilter, state.ratingFilter);
+    renderWatchlist();
+  });
+  document.getElementById("sector-visibility").addEventListener("change", (e) => {
+    state.sectorVisibility = e.target.value;
+    localStorage.setItem(STORAGE_KEYS.sectorVisibility, state.sectorVisibility);
+    renderWatchlist();
+  });
+  document.getElementById("expand-all").addEventListener("click", () => {
+    state.collapsedSectors.clear();
+    persistCollapsedSectors();
+    renderWatchlist();
+  });
+  document.getElementById("collapse-all").addEventListener("click", () => {
+    state.collapsedSectors = new Set(getSectorsInOrder(state.tickers));
+    persistCollapsedSectors();
     renderWatchlist();
   });
 
@@ -82,11 +132,14 @@ async function init() {
 
   renderMacroBanner();
   renderTabs();
-  wireSortHeaders();
   renderReports();
   renderBottlenecks();
   renderMacroView();
   activateTab(restoreActiveTab());
+}
+
+function persistCollapsedSectors() {
+  localStorage.setItem(STORAGE_KEYS.collapsedSectors, JSON.stringify([...state.collapsedSectors]));
 }
 
 // ============ helpers reused across views ============
@@ -106,12 +159,9 @@ function buildRow(ticker, snap) {
 
 // ============ tab system + cross-nav ============
 //
-// Tab identifiers are flat strings used in DOM data-tab attributes and as the
-// localStorage value:
-//   'all'                   → state.view='watchlist', state.sector='All'
-//   'sector:<name>'         → state.view='watchlist', state.sector=<name>
-//   'reports'               → state.view='reports'
-//   'bottlenecks'           → state.view='bottlenecks'
+// Tab identifiers (also the localStorage value): 'watchlist' | 'macro' |
+// 'reports' | 'bottlenecks'. Watchlist is a single unified page; sectors
+// stack vertically inside it (no per-sector tabs).
 
 function getSectorsInOrder(tickers) {
   const seen = new Set();
@@ -125,37 +175,22 @@ function getSectorsInOrder(tickers) {
 
 function renderTabs() {
   const nav = document.getElementById("tabs");
-  const sectors = getSectorsInOrder(state.tickers);
-
-  const sectorButtons = sectors.map((s) => {
-    const count = state.tickers.filter((t) => t.sector === s).length;
-    return `<button class="tab" data-tab="sector:${escapeAttr(s)}">${escapeText(s)} <span class="count">(${count})</span></button>`;
-  }).join("");
-
   const macroTab = state.macro
     ? `<button class="tab" data-tab="macro">Macro <span class="count">(${state.macro.regime || "?"})</span></button>`
     : `<button class="tab" data-tab="macro">Macro</button>`;
-
   nav.innerHTML = [
-    `<button class="tab" data-tab="all">All <span class="count">(${state.tickers.length})</span></button>`,
+    `<button class="tab" data-tab="watchlist">Watchlist <span class="count">(${state.tickers.length})</span></button>`,
     macroTab,
-    sectorButtons,
-    `<span class="tab-divider" aria-hidden="true"></span>`,
     `<button class="tab" data-tab="reports">Reports <span class="count">(${state.reports.length})</span></button>`,
     `<button class="tab" data-tab="bottlenecks">Bottlenecks <span class="count">(${state.bottlenecks.length})</span></button>`,
   ].join("");
-
   nav.querySelectorAll(".tab").forEach((b) =>
     b.addEventListener("click", () => activateTab(b.dataset.tab))
   );
 }
 
 function activeTabKey() {
-  if (state.view === "reports") return "reports";
-  if (state.view === "bottlenecks") return "bottlenecks";
-  if (state.view === "macro") return "macro";
-  if (state.sector === "All") return "all";
-  return `sector:${state.sector}`;
+  return state.view; // "watchlist" | "macro" | "reports" | "bottlenecks"
 }
 
 function highlightActiveTab() {
@@ -166,27 +201,16 @@ function highlightActiveTab() {
 }
 
 function activateTab(tabId) {
-  // Translate tab id → state
-  if (tabId === "reports") {
-    state.view = "reports";
-  } else if (tabId === "bottlenecks") {
-    state.view = "bottlenecks";
-  } else if (tabId === "macro") {
-    state.view = "macro";
-  } else if (tabId === "all") {
-    state.view = "watchlist";
-    state.sector = "All";
-  } else if (typeof tabId === "string" && tabId.startsWith("sector:")) {
-    state.view = "watchlist";
-    state.sector = tabId.slice(7);
-  } else {
-    return; // unknown tab id — ignore
+  // Legacy keys ('all', 'sector:<name>') from older localStorage values get
+  // remapped to the unified watchlist.
+  if (tabId === "all" || (typeof tabId === "string" && tabId.startsWith("sector:"))) {
+    tabId = "watchlist";
   }
+  if (!["watchlist", "macro", "reports", "bottlenecks"].includes(tabId)) return;
 
-  // Persist
-  localStorage.setItem(STORAGE_KEY, activeTabKey());
+  state.view = tabId;
+  localStorage.setItem(STORAGE_KEYS.activeTab, state.view);
 
-  // Show/hide view sections
   document.querySelectorAll(".view").forEach((sec) => {
     const active = sec.id === `view-${state.view}`;
     sec.classList.toggle("active", active);
@@ -203,23 +227,23 @@ function activateTab(tabId) {
 }
 
 function restoreActiveTab() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (!saved) return "all";
-  if (saved === "all" || saved === "reports" || saved === "bottlenecks" || saved === "macro") return saved;
-  if (saved.startsWith("sector:")) {
-    const s = saved.slice(7);
-    if (getSectorsInOrder(state.tickers).includes(s)) return saved;
-  }
-  return "all"; // fallback when persisted sector no longer exists
+  const saved = localStorage.getItem(STORAGE_KEYS.activeTab);
+  if (!saved) return "watchlist";
+  if (["watchlist", "macro", "reports", "bottlenecks"].includes(saved)) return saved;
+  // Legacy: 'all' or 'sector:X' from the old layout → unified watchlist
+  return "watchlist";
 }
 
 function jumpToTicker(t) {
   state.expanded.add(t);
+  // Make sure the ticker's sector is uncollapsed so the row is visible.
+  const tk = state.tickerByT.get(String(t).toUpperCase());
+  if (tk?.sector) state.collapsedSectors.delete(tk.sector);
   state.scrollTarget = { kind: "ticker", id: t };
   state.search = "";
   const searchEl = document.getElementById("search");
   if (searchEl) searchEl.value = "";
-  activateTab("all");
+  activateTab("watchlist");
 }
 
 function jumpToBottleneck(id) {
@@ -246,89 +270,133 @@ function applyScrollTarget() {
 
 // ============ watchlist view ============
 
-function wireSortHeaders() {
-  document.querySelectorAll("#watchlist thead th").forEach((th) => {
-    th.addEventListener("click", () => {
-      const key = th.dataset.sort;
-      if (!key) return;
-      if (state.sortKey === key) {
-        state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
-      } else {
-        state.sortKey = key;
-        state.sortDir = NUMERIC_KEYS.has(key) ? "desc" : "asc";
-      }
-      renderWatchlist();
-    });
-  });
+// Composite ranking score — used as the default sort within each sector and
+// surfaced in the rank cell's tooltip. See CLAUDE.md "Composite rank score".
+function computeCompositeScore(r) {
+  const ratingWeight = { Strong: 3, Watch: 1, Pass: -2 }[r.rating] ?? 0;
+  const mrsClamped = r.mansfield_rs == null
+    ? 0
+    : Math.max(-5, Math.min(5, r.mansfield_rs / 10));
+  const revGrowth = (r.rev_growth_yoy != null ? r.rev_growth_yoy : 0) * 2;
+  const above200 = r.above_200dma === null ? 0 : (r.above_200dma ? 0.5 : -0.5);
+  const nearHigh = (r.pct_from_high != null && r.pct_from_high <= 0.15) ? 0.3 : 0;
+  return ratingWeight + mrsClamped + revGrowth + above200 + nearHigh;
 }
 
-function renderWatchlist() {
-  let rows = state.rows;
-  if (state.sector !== "All") rows = rows.filter((r) => r.sector === state.sector);
-  if (state.search) {
-    const q = state.search;
-    rows = rows.filter(
-      (r) => r.ticker.toLowerCase().includes(q) || (r.company || "").toLowerCase().includes(q)
-    );
+// Rating ranks for the "rating" sort mode — lower is better.
+const RATING_SORT_RANK = { Strong: 0, Watch: 1, Pass: 3 };
+function ratingSortValue(r) {
+  return RATING_SORT_RANK[r] ?? 2; // unrated falls between Watch and Pass
+}
+
+function passesRatingFilter(rating) {
+  switch (state.ratingFilter) {
+    case "strong":         return rating === "Strong";
+    case "strong_watch":   return rating === "Strong" || rating === "Watch";
+    case "hide_pass":      return rating !== "Pass";
+    case "all":
+    default:               return true;
   }
-  const key = state.sortKey;
-  const dir = state.sortDir === "asc" ? 1 : -1;
-  rows = [...rows].sort((a, b) => {
-    let va = a[key], vb = b[key];
-    if (key === "above_200dma") { va = va === null ? null : (va ? 1 : 0); vb = vb === null ? null : (vb ? 1 : 0); }
+}
+
+function sortRows(rows) {
+  const mode = SORT_MODES[state.sortMode] || SORT_MODES.rank;
+  const dir = mode.dir === "asc" ? 1 : -1;
+  const out = [...rows];
+  if (state.sortMode === "rank") {
+    out.sort((a, b) => computeCompositeScore(b) - computeCompositeScore(a));
+    return out;
+  }
+  if (state.sortMode === "rating") {
+    out.sort((a, b) => (ratingSortValue(a.rating) - ratingSortValue(b.rating)) * dir
+                    || a.ticker.localeCompare(b.ticker));
+    return out;
+  }
+  const key = mode.key;
+  out.sort((a, b) => {
+    const va = a[key], vb = b[key];
     if (va == null && vb == null) return 0;
     if (va == null) return 1;
     if (vb == null) return -1;
     if (typeof va === "number" && typeof vb === "number") return (va - vb) * dir;
     return String(va).localeCompare(String(vb)) * dir;
   });
+  return out;
+}
 
-  document.querySelectorAll("#watchlist thead th").forEach((th) => {
-    th.classList.remove("sort-asc", "sort-desc");
-    if (th.dataset.sort === state.sortKey) {
-      th.classList.add(state.sortDir === "asc" ? "sort-asc" : "sort-desc");
-    }
-  });
-
-  // Show the Sector column only when viewing All
-  document.getElementById("watchlist").classList.toggle("with-sector", state.sector === "All");
-
-  const tbody = document.querySelector("#watchlist tbody");
+function renderWatchlist() {
+  const container = document.getElementById("watchlist-sections");
   const empty = document.getElementById("empty-watchlist");
-  if (rows.length === 0) { tbody.innerHTML = ""; empty.hidden = false; return; }
-  empty.hidden = true;
+  const sectors = getSectorsInOrder(state.tickers);
+  const q = state.search;
 
-  tbody.innerHTML = rows.map((r) => {
-    const exp = state.expanded.has(r.ticker);
+  // Top movers always reflect the unfiltered universe — they're a cross-sector
+  // rotation overview, not a filtered subset.
+  renderTopMovers();
+
+  let visibleCount = 0;
+  const sectionsHtml = sectors.map((sector) => {
+    const sectorRows = state.rows.filter((r) => r.sector === sector);
+    let filtered = sectorRows.filter((r) => passesRatingFilter(r.rating));
+    if (q) {
+      filtered = filtered.filter(
+        (r) => r.ticker.toLowerCase().includes(q) || (r.company || "").toLowerCase().includes(q)
+      );
+    }
+    if (filtered.length === 0 && (state.sectorVisibility === "hide_empty" || q)) {
+      return "";
+    }
+    visibleCount += filtered.length;
+
+    const collapsed = state.collapsedSectors.has(sector);
+    const sorted = sortRows(filtered);
+    // Composite rank is always computed from the FULL sector (post rating-filter)
+    // so collapsing or filtering doesn't shuffle the "#1" badge. Search-filter
+    // never affects rank — search hides, it doesn't reshape the ranking.
+    const rankBase = sortRows(sectorRows.filter((r) => passesRatingFilter(r.rating)));
+    const rankByTicker = new Map();
+    if (state.sortMode === "rank") {
+      rankBase.forEach((r, i) => rankByTicker.set(r.ticker, { rank: i + 1, score: computeCompositeScore(r) }));
+    } else {
+      // Even when sort mode != rank, show the composite rank in the # column.
+      const composite = [...rankBase].sort((a, b) => computeCompositeScore(b) - computeCompositeScore(a));
+      composite.forEach((r, i) => rankByTicker.set(r.ticker, { rank: i + 1, score: computeCompositeScore(r) }));
+    }
+    const sectorSize = rankBase.length;
+
+    const headerCount = sectorSize === filtered.length
+      ? `${sectorSize}`
+      : `${filtered.length} of ${sectorSize}`;
+
+    const bodyHtml = collapsed ? "" : renderSectorTable(sorted, rankByTicker, sectorSize);
+
     return `
-      <tr class="data-row ${exp ? "expanded" : ""}" data-ticker="${escapeAttr(r.ticker)}">
-        <td class="ticker">${escapeText(r.ticker)}<span class="caret">${exp ? "▾" : "▸"}</span></td>
-        <td>${escapeText(r.company || "")}</td>
-        <td class="sector-col">${escapeText(r.sector || "")}</td>
-        <td class="num">${fmtPrice(r.price)}</td>
-        <td class="num">${fmtCap(r.market_cap)}</td>
-        <td class="num">${fmtPE(r.pe_forward)}</td>
-        <td class="num ${revGrowthClass(r.rev_growth_yoy)}">${fmtPct(r.rev_growth_yoy, true)}</td>
-        <td class="num">${fmtPct(r.eps_growth_yoy, true)}</td>
-        <td class="num">${fmtPct(r.gross_margin)}</td>
-        <td class="num ${pctFromHighClass(r.pct_from_high)}">${fmtPct(r.pct_from_high)}</td>
-        <td class="${above200Class(r.above_200dma)}">${above200Text(r.above_200dma)}</td>
-        <td class="num">${fmtPct(r.rs_proxy, true)}</td>
-        <td class="num">${fmtX(r.ps_ratio)}</td>
-        <td class="num">${fmtX(r.ev_to_sales)}</td>
-        <td class="num">${fmtEvEbitda(r.ev_to_ebitda)}</td>
-        <td class="num mansfield-cell ${mansfieldClass(r.mansfield_rs)}">${fmtMansfield(r.mansfield_rs)}</td>
-        <td class="${above200Class(r.ratio_above_sma)}">${ratioAboveSmaText(r.ratio_above_sma)}</td>
-        <td class="ratio-trend-cell">${miniSparkline(r.ratio_history_90d || [])}</td>
-        <td>${ratingPill(r.rating, r.ticker)}</td>
-      </tr>
-      ${exp ? `<tr class="detail-row"><td colspan="19">${renderTickerDetail(r)}</td></tr>` : ""}
+      <section class="sector-section ${collapsed ? "collapsed" : ""}" data-sector="${escapeAttr(sector)}">
+        <header class="sector-header" data-toggle-sector="${escapeAttr(sector)}">
+          <span class="sector-chev">${collapsed ? "▸" : "▾"}</span>
+          <span class="sector-name">${escapeText(sector)}</span>
+          <span class="sector-count">(${headerCount})</span>
+        </header>
+        ${bodyHtml}
+      </section>
     `;
   }).join("");
 
-  tbody.querySelectorAll(".data-row").forEach((tr) => {
+  container.innerHTML = sectionsHtml;
+  empty.hidden = visibleCount !== 0;
+
+  container.querySelectorAll(".sector-header").forEach((h) => {
+    h.addEventListener("click", () => {
+      const s = h.dataset.toggleSector;
+      if (state.collapsedSectors.has(s)) state.collapsedSectors.delete(s);
+      else state.collapsedSectors.add(s);
+      persistCollapsedSectors();
+      renderWatchlist();
+    });
+  });
+
+  container.querySelectorAll(".data-row").forEach((tr) => {
     tr.addEventListener("click", (e) => {
-      // ignore clicks on pills / rating cells inside the row (only the row itself toggles)
       if (e.target.closest(".pill.clickable")) return;
       if (e.target.closest(".rating-clickable")) return;
       const t = tr.dataset.ticker;
@@ -337,8 +405,125 @@ function renderWatchlist() {
       renderWatchlist();
     });
   });
-  wirePillClicks(tbody);
-  wireRatingClicks(tbody);
+  wirePillClicks(container);
+  wireRatingClicks(container);
+}
+
+function renderSectorTable(sortedRows, rankByTicker, sectorSize) {
+  if (sortedRows.length === 0) {
+    return `<div class="sector-empty muted small">No tickers match current filters.</div>`;
+  }
+  const activeSort = state.sortMode;
+  const sortAttr = (key) => activeSort === key ? ' class="sort-active"' : "";
+  return `
+    <table class="watchlist sector-table">
+      <thead>
+        <tr>
+          <th class="rank-col" title="Composite rank within sector">#</th>
+          <th>Ticker</th>
+          <th>Company</th>
+          <th class="num"${sortAttr("price")}>Price</th>
+          <th class="num"${sortAttr("market_cap")}>Mkt Cap</th>
+          <th class="num">Fwd P/E</th>
+          <th class="num"${sortAttr("rev_growth_yoy")}>Rev YoY</th>
+          <th class="num">EPS YoY</th>
+          <th class="num">Gross</th>
+          <th class="num">% From High</th>
+          <th>Above 200DMA</th>
+          <th class="num">RS</th>
+          <th class="num">P/S</th>
+          <th class="num">EV/S</th>
+          <th class="num">EV/EBITDA</th>
+          <th class="num"${sortAttr("mansfield_rs")}>Mansfield</th>
+          <th>vs SPY 52w</th>
+          <th>Ratio Trend</th>
+          <th${sortAttr("rating")}>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${sortedRows.map((r) => renderTickerRow(r, rankByTicker.get(r.ticker), sectorSize)).join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderTickerRow(r, rankInfo, sectorSize) {
+  const exp = state.expanded.has(r.ticker);
+  const rank = rankInfo?.rank ?? "—";
+  const score = rankInfo?.score;
+  const rankClass = rankCellClass(rank, sectorSize);
+  const tooltip = score != null
+    ? `Composite ${score.toFixed(2)} = rating ${ratingWeightOf(r.rating).toFixed(1)} + mansfield ${mansfieldComponent(r.mansfield_rs).toFixed(2)} + rev ${revGrowthComponent(r.rev_growth_yoy).toFixed(2)} + 200DMA ${above200Component(r.above_200dma).toFixed(1)} + nearHigh ${nearHighComponent(r.pct_from_high).toFixed(1)}`
+    : "";
+  return `
+    <tr class="data-row ${exp ? "expanded" : ""}" data-ticker="${escapeAttr(r.ticker)}">
+      <td class="rank-cell ${rankClass}" title="${escapeAttr(tooltip)}">${rank}</td>
+      <td class="ticker">${escapeText(r.ticker)}<span class="caret">${exp ? "▾" : "▸"}</span></td>
+      <td>${escapeText(r.company || "")}</td>
+      <td class="num">${fmtPrice(r.price)}</td>
+      <td class="num">${fmtCap(r.market_cap)}</td>
+      <td class="num">${fmtPE(r.pe_forward)}</td>
+      <td class="num ${revGrowthClass(r.rev_growth_yoy)}">${fmtPct(r.rev_growth_yoy, true)}</td>
+      <td class="num">${fmtPct(r.eps_growth_yoy, true)}</td>
+      <td class="num">${fmtPct(r.gross_margin)}</td>
+      <td class="num ${pctFromHighClass(r.pct_from_high)}">${fmtPct(r.pct_from_high)}</td>
+      <td class="${above200Class(r.above_200dma)}">${above200Text(r.above_200dma)}</td>
+      <td class="num">${fmtPct(r.rs_proxy, true)}</td>
+      <td class="num">${fmtX(r.ps_ratio)}</td>
+      <td class="num">${fmtX(r.ev_to_sales)}</td>
+      <td class="num">${fmtEvEbitda(r.ev_to_ebitda)}</td>
+      <td class="num mansfield-cell ${mansfieldClass(r.mansfield_rs)}">${fmtMansfield(r.mansfield_rs)}</td>
+      <td class="${above200Class(r.ratio_above_sma)}">${ratioAboveSmaText(r.ratio_above_sma)}</td>
+      <td class="ratio-trend-cell">${miniSparkline(r.ratio_history_90d || [])}</td>
+      <td>${ratingPill(r.rating, r.ticker)}</td>
+    </tr>
+    ${exp ? `<tr class="detail-row"><td colspan="19">${renderTickerDetail(r)}</td></tr>` : ""}
+  `;
+}
+
+function rankCellClass(rank, sectorSize) {
+  if (sectorSize <= 1) return "rank-solo";
+  if (rank === 1) return "rank-gold";
+  if (rank === 2 || rank === 3) return "rank-silver";
+  return "rank-normal";
+}
+
+// Score-component helpers used for the rank tooltip.
+function ratingWeightOf(r)         { return { Strong: 3, Watch: 1, Pass: -2 }[r] ?? 0; }
+function mansfieldComponent(v)     { return v == null ? 0 : Math.max(-5, Math.min(5, v / 10)); }
+function revGrowthComponent(v)     { return (v != null ? v : 0) * 2; }
+function above200Component(v)      { return v === null ? 0 : (v ? 0.5 : -0.5); }
+function nearHighComponent(v)      { return (v != null && v <= 0.15) ? 0.3 : 0; }
+
+// ============ top movers ============
+
+function renderTopMovers() {
+  const el = document.getElementById("top-movers");
+  const ranked = state.rows
+    .filter((r) => r.mansfield_rs != null)
+    .sort((a, b) => b.mansfield_rs - a.mansfield_rs);
+  if (ranked.length < 2) { el.innerHTML = ""; return; }
+  const top = ranked.slice(0, 3);
+  const bottom = ranked.slice(-3).reverse(); // worst first
+  const chip = (r) => {
+    const v = r.mansfield_rs;
+    const s = v >= 0 ? "+" : "";
+    const cls = v >= 0 ? "chip-up" : "chip-down";
+    return `<span class="mover-chip ${cls}" data-mover-ticker="${escapeAttr(r.ticker)}" title="${escapeAttr(r.sector || "")}">
+      <strong>${escapeText(r.ticker)}</strong> ${s}${v.toFixed(1)}
+    </span>`;
+  };
+  el.innerHTML = `
+    <div class="movers-row">
+      <span class="movers-label">TOP RS</span>${top.map(chip).join("")}
+    </div>
+    <div class="movers-row">
+      <span class="movers-label">WEAKEST</span>${bottom.map(chip).join("")}
+    </div>
+  `;
+  el.querySelectorAll("[data-mover-ticker]").forEach((c) =>
+    c.addEventListener("click", () => jumpToTicker(c.dataset.moverTicker))
+  );
 }
 
 function renderTickerDetail(r) {

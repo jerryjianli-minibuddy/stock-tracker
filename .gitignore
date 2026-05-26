@@ -12,3 +12,6 @@ build/
 # Research PDFs and Finder clippings (kept local; not published to GitHub)
 reports/**/*.pdf
 reports/**/*.textClipping
+
+# Dev tooling (per-machine launch config for Claude Preview MCP, etc.)
+.claude/

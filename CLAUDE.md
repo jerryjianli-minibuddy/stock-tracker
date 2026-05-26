@@ -204,6 +204,53 @@ When the user types **"resynthesize ratings"** or **"recompute reasoning"**, run
 
 A ticker can also be *manually* overridden from the dashboard: clicking a rating opens the modal, which has a **Copy override snippet** button. The snippet sets `rated_by: "manual"` and is meant to be pasted directly into `data/tickers.json`. After paste, the user commits and pushes — and from that point on, ingest workflows must leave that block alone.
 
+## Dashboard layout (Watchlist view)
+
+The dashboard has four top-level tabs: **Watchlist · Macro · Reports · Bottlenecks**. The Watchlist is the default and shows **all sectors stacked vertically on a single page** — there are no per-sector tabs. Don't reintroduce them.
+
+Per-sector structure:
+
+- One collapsible `<section class="sector-section">` per sector, in the order sectors first appear in `data/tickers.json` (don't re-sort the sector list).
+- A sticky `<header class="sector-header">` shows the sector name + ticker count and toggles collapse on click.
+- Inside each section a `<table class="sector-table">` renders the tickers. The first column is `#` (composite rank within sector).
+
+Collapsed sectors are persisted to `localStorage` under `stock-tracker.collapsedSectors` (JSON array of sector names). Sort mode, rating filter, and sector-visibility selections are persisted under `stock-tracker.sortMode`, `stock-tracker.ratingFilter`, and `stock-tracker.sectorVisibility`.
+
+### Composite rank score
+
+The default sort within each sector is by a composite score combining quality, momentum, and rating. The formula is in `computeCompositeScore()` in `docs/app.js` and **must stay in sync with this doc**:
+
+```
+composite =
+    rating_weight           // Strong=3, Watch=1, Pass=-2, ""=0
+  + clamp(mansfield_rs / 10, -5, +5)
+  + (rev_growth_yoy ?? 0) * 2
+  + (above_200dma ? +0.5 : -0.5)   // 0 if null
+  + (pct_from_high <= 0.15 ? +0.3 : 0)
+```
+
+Rank #1 in a sector is the best-positioned name *right now*. The score itself is surfaced as a hover tooltip on the `#` cell so the math is auditable. Rank cell color: #1 gold, #2-3 silver, others muted gray; a single-ticker sector shows "1" without medal styling.
+
+If you tweak the formula:
+
+1. Update both `computeCompositeScore` and the tooltip-component helpers (`ratingWeightOf`, `mansfieldComponent`, `revGrowthComponent`, `above200Component`, `nearHighComponent`) in `docs/app.js`.
+2. Update the formula above in this file.
+3. Mention the change in the commit message — the rank order is user-visible and surprising changes feel like a bug.
+
+### Sort, filter, top movers
+
+Above the sector sections, the control row offers:
+
+- **Sort within sector**: `rank` (composite, default) | `mansfield_rs` | `rev_growth_yoy` | `rating` | `price` | `market_cap`. Sort changes only affect the order within each sector — sectors themselves never reorder.
+- **Rating filter**: `all` | `strong` | `strong_watch` | `hide_pass`. The composite `#` rank is recomputed across the post-filter slice (so when "Strong only" is on, the visible #1 is the top Strong name, not a hidden Pass).
+- **Sector visibility**: `all` | `hide_empty` (hides sections whose post-filter row count is 0).
+
+The **TOP RS / WEAKEST** strip at the top of the watchlist surfaces the 3 highest and 3 lowest Mansfield RS tickers across all sectors. Clicking a chip uncollapses that ticker's sector, scrolls to its row, and flashes it. Top movers always reflect the full universe, regardless of filter/search state.
+
+### Mobile (≤768px)
+
+Tables collapse to a card layout via CSS grid (`grid-template-areas`). The visible cells become: rank, ticker, company, rating (top row); price, rev growth, above-200DMA, Mansfield (second row). Everything else is hidden in column mode but still present in the detail panel that expands on tap. Section headers and the controls bar become non-sticky on mobile to free up vertical space.
+
 ## After editing tickers.json
 
 Remind the user to commit and push so the next Actions run picks up the new tickers:

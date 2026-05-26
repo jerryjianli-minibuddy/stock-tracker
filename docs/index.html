@@ -24,36 +24,38 @@
 
   <!-- Watchlist view -->
   <section id="view-watchlist" class="view active">
-    <div class="controls">
+    <div class="controls watchlist-controls">
       <input id="search" type="search" placeholder="Search ticker or company…" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <label class="ctl">Sort
+        <select id="sort-mode" aria-label="Sort within sector">
+          <option value="rank">Rank (composite)</option>
+          <option value="mansfield_rs">Mansfield RS</option>
+          <option value="rev_growth_yoy">Rev growth YoY</option>
+          <option value="rating">Rating</option>
+          <option value="price">Price</option>
+          <option value="market_cap">Mkt cap</option>
+        </select>
+      </label>
+      <label class="ctl">Filter
+        <select id="rating-filter" aria-label="Rating filter">
+          <option value="all">All ratings</option>
+          <option value="strong">Strong only</option>
+          <option value="strong_watch">Strong + Watch</option>
+          <option value="hide_pass">Hide Pass</option>
+        </select>
+      </label>
+      <label class="ctl">Show
+        <select id="sector-visibility" aria-label="Sector visibility">
+          <option value="all">All sectors</option>
+          <option value="hide_empty">Hide empty sectors</option>
+        </select>
+      </label>
+      <button id="expand-all" type="button" class="ghost-btn" title="Expand all sectors">Expand all</button>
+      <button id="collapse-all" type="button" class="ghost-btn" title="Collapse all sectors">Collapse all</button>
     </div>
-    <main>
-      <table id="watchlist" aria-label="Watchlist">
-        <thead>
-          <tr>
-            <th data-sort="ticker">Ticker</th>
-            <th data-sort="company">Company</th>
-            <th data-sort="sector" class="sector-col">Sector</th>
-            <th data-sort="price" class="num">Price</th>
-            <th data-sort="market_cap" class="num">Mkt Cap</th>
-            <th data-sort="pe_forward" class="num">Fwd P/E</th>
-            <th data-sort="rev_growth_yoy" class="num">Rev YoY</th>
-            <th data-sort="eps_growth_yoy" class="num">EPS YoY</th>
-            <th data-sort="gross_margin" class="num">Gross</th>
-            <th data-sort="pct_from_high" class="num">% From High</th>
-            <th data-sort="above_200dma">Above 200DMA</th>
-            <th data-sort="rs_proxy" class="num">RS</th>
-            <th data-sort="ps_ratio" class="num">P/S</th>
-            <th data-sort="ev_to_sales" class="num">EV/S</th>
-            <th data-sort="ev_to_ebitda" class="num">EV/EBITDA</th>
-            <th data-sort="mansfield_rs" class="num">Mansfield</th>
-            <th data-sort="ratio_above_sma">vs SPY 52w</th>
-            <th>Ratio Trend</th>
-            <th data-sort="rating">Rating</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+    <main id="watchlist-main">
+      <div id="top-movers"></div>
+      <div id="watchlist-sections"></div>
       <div id="empty-watchlist" hidden>No tickers match.</div>
     </main>
   </section>
