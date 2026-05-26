@@ -532,6 +532,37 @@ code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-el
 .glossary-rlabel { font-weight: 600; }
 .glossary-meaning { grid-column: 2 / -1; }
 
+/* ----- F&G / Put-Call live data section (injected into glossary modal) ----- */
+.fng-live { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; }
+.fng-headline { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.5rem; }
+.fng-headline-score { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 1.5rem; font-weight: 700; }
+.fng-headline-label { font-weight: 600; color: var(--text-muted); }
+.fng-prev { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1.2rem; margin: 0.5rem 0 0.75rem; font-size: 0.8rem; }
+.fng-prev-row { display: flex; justify-content: space-between; color: var(--text-muted); }
+.fng-prev-val { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--text); }
+.fng-comp-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; margin-top: 0.5rem; margin-bottom: 0.35rem; }
+.fng-comp-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.fng-comp-table td { padding: 0.3rem 0.4rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.fng-comp-name { color: var(--text); width: 40%; }
+.fng-comp-score { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; width: 3rem; }
+.fng-comp-rating { color: var(--text-muted); font-size: 0.75rem; width: 30%; text-transform: capitalize; }
+.fng-comp-bar { width: 25%; min-width: 5rem; }
+.fng-bar-bg { background: var(--bg-elev); border-radius: 3px; height: 6px; overflow: hidden; }
+.fng-bar-fill { height: 100%; border-radius: 3px; transition: width 0.2s; }
+.fng-color-red    { color: var(--red);    background: var(--red); }
+.fng-color-orange { color: var(--yellow); background: var(--yellow); opacity: 0.85; }
+.fng-color-gray   { color: var(--text-muted); background: var(--text-muted); }
+.fng-color-lime   { color: var(--green);  background: var(--green); opacity: 0.7; }
+.fng-color-yellow { color: var(--yellow); background: var(--yellow); }
+/* For headline text override the background-fill mapping above */
+.fng-headline-score.fng-color-red    { background: transparent; color: var(--red); }
+.fng-headline-score.fng-color-orange { background: transparent; color: var(--yellow); }
+.fng-headline-score.fng-color-gray   { background: transparent; color: var(--text-muted); }
+.fng-headline-score.fng-color-lime   { background: transparent; color: var(--green); }
+.fng-headline-score.fng-color-yellow { background: transparent; color: var(--yellow); }
+.fng-divergence { padding: 0.55rem 0.8rem; border-left: 3px solid var(--yellow); background: var(--yellow-bg); border-radius: 0 4px 4px 0; margin-bottom: 0.6rem; font-size: 0.82rem; }
+.fng-foot { margin-top: 0.5rem; }
+
 /* ----- glossary view (full reference tab) ----- */
 .glossary-main { padding: 1.25rem; max-width: 80rem; margin: 0 auto; }
 .glossary-controls { margin-bottom: 1rem; }

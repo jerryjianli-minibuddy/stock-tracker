@@ -1123,6 +1123,17 @@ function renderGlossaryBody(term, context) {
 
   const sections = [];
   if (term.short_definition) sections.push(`<div class="glossary-section glossary-short">${escapeText(term.short_definition)}</div>`);
+  // Term-specific live data injection — F&G shows the 7-component breakdown +
+  // prev_close/1w/1m/1y; put-call-cnn shows the current zone (the standard
+  // scale highlight already handles the rest).
+  if (term.id === "fear-greed-index") {
+    const fg = state.macro?.indicators?.fear_greed;
+    if (fg) sections.push(renderFearGreedLiveSection(fg));
+  }
+  if (term.id === "put-call-cnn") {
+    const pc = state.macro?.indicators?.put_call;
+    if (pc) sections.push(renderPutCallLiveSection(pc));
+  }
   if (term.formula)         sections.push(`<div class="glossary-section"><div class="glossary-label">Formula</div><div class="glossary-formula">${escapeText(term.formula)}</div></div>`);
   if (term.what_it_measures) sections.push(`<div class="glossary-section"><div class="glossary-label">What it measures</div><div>${escapeText(term.what_it_measures)}</div></div>`);
   if (Array.isArray(term.interpretation_scale) && term.interpretation_scale.length) {
@@ -1145,6 +1156,97 @@ function renderGlossaryBody(term, context) {
   if (term.common_pitfalls) sections.push(`<div class="glossary-section"><div class="glossary-label">Common pitfalls</div><div>${escapeText(term.common_pitfalls)}</div></div>`);
 
   return contextHtml + sections.join("");
+}
+
+// Friendly labels for the F&G sub-components (matches CNN's UI).
+const FNG_COMPONENT_LABELS = {
+  market_momentum:    "Market Momentum",
+  price_strength:     "Stock Price Strength",
+  price_breadth:      "Stock Price Breadth",
+  put_call_options:   "Put/Call Options",
+  volatility_vix:     "Market Volatility (VIX)",
+  safe_haven_demand:  "Safe Haven Demand",
+  junk_bond_demand:   "Junk Bond Demand",
+};
+const FNG_COMPONENT_ORDER = [
+  "market_momentum", "price_strength", "price_breadth", "put_call_options",
+  "volatility_vix", "safe_haven_demand", "junk_bond_demand",
+];
+
+function fngColor(score) {
+  if (score == null) return "gray";
+  if (score < 25) return "red";
+  if (score < 45) return "orange";
+  if (score < 55) return "gray";
+  if (score < 75) return "lime";
+  return "yellow";
+}
+
+function renderFearGreedLiveSection(fg) {
+  const ratingLower = (rt) => rt ? rt.split(/\s+/).map(w => w[0].toUpperCase() + w.slice(1)).join(" ") : "—";
+  const prevRow = (label, v) => v == null ? "" :
+    `<div class="fng-prev-row"><span>${label}</span><span class="fng-prev-val">${v.toFixed(1)}</span></div>`;
+  const componentsRows = FNG_COMPONENT_ORDER.map((k) => {
+    const c = fg.components?.[k] || {};
+    const score = c.score;
+    const color = fngColor(score);
+    return `
+      <tr class="fng-comp-row fng-comp-${color}">
+        <td class="fng-comp-name">${escapeText(FNG_COMPONENT_LABELS[k] || k)}</td>
+        <td class="fng-comp-score num">${score == null ? "—" : score.toFixed(1)}</td>
+        <td class="fng-comp-rating">${escapeText(ratingLower(c.rating || ""))}</td>
+        <td class="fng-comp-bar"><div class="fng-bar-bg"><div class="fng-bar-fill fng-color-${color}" style="width:${Math.max(0, Math.min(100, score || 0))}%"></div></div></td>
+      </tr>
+    `;
+  }).join("");
+  // Divergence detection: callout when the 7 components span a wide range,
+  // since the headline composite is just an average and can hide sub-signal
+  // disagreement. >50 point spread is a meaningful divergence in practice
+  // (today: 25.4 breadth ↔ 97.8 momentum — same composite as a uniformly-
+  // greedy market but a fundamentally different setup).
+  const scores = FNG_COMPONENT_ORDER.map(k => fg.components?.[k]?.score).filter(v => v != null);
+  const min = scores.length ? Math.min(...scores) : null;
+  const max = scores.length ? Math.max(...scores) : null;
+  const divergence = (min != null && (max - min) > 50)
+    ? `<div class="fng-divergence">⚠ <strong>Divergence Watch:</strong> components span ${min.toFixed(0)} … ${max.toFixed(0)} (range ${(max - min).toFixed(0)}). Headline ${fg.value?.toFixed(0)} hides meaningful sub-signal disagreement — internals (breadth, junk bonds, price strength) are far weaker than the surface signals (momentum, options, safe-haven).</div>`
+    : "";
+  return `
+    <div class="glossary-section fng-live">
+      <div class="glossary-label">Current reading · ${escapeText(fg.source || "")}</div>
+      <div class="fng-headline">
+        <span class="fng-headline-score fng-color-${fngColor(fg.value)}">${fg.value == null ? "—" : fg.value.toFixed(1)}</span>
+        <span class="fng-headline-label">${escapeText(fg.regime || "?")}</span>
+      </div>
+      ${divergence}
+      <div class="fng-prev">
+        ${prevRow("Previous close", fg.prev_close)}
+        ${prevRow("1 week ago",   fg.prev_week)}
+        ${prevRow("1 month ago",  fg.prev_month)}
+        ${prevRow("1 year ago",   fg.prev_year)}
+      </div>
+      <div class="fng-comp-label">Components</div>
+      <table class="fng-comp-table"><tbody>${componentsRows}</tbody></table>
+      <div class="muted small fng-foot">Data ${escapeText(fg.data_timestamp || "—")} · Fetched ${escapeText(fg.last_updated || "—")}</div>
+    </div>
+  `;
+}
+
+function renderPutCallLiveSection(pc) {
+  if (pc.cnn_score == null) {
+    return `<div class="glossary-section"><div class="muted">Put/Call score unavailable. ${escapeText(pc.error || "")}</div></div>`;
+  }
+  const color = fngColor(pc.cnn_score);
+  return `
+    <div class="glossary-section fng-live">
+      <div class="glossary-label">Current reading · ${escapeText(pc.source || "")}</div>
+      <div class="fng-headline">
+        <span class="fng-headline-score fng-color-${color}">${pc.cnn_score.toFixed(1)}</span>
+        <span class="fng-headline-label">${escapeText(pc.zone || "?")}</span>
+      </div>
+      <div class="muted small">${escapeText(pc.interpretation || "")}</div>
+      <div class="muted small fng-foot">Data ${escapeText(pc.data_timestamp || "—")} · Fetched ${escapeText(pc.last_updated || "—")}</div>
+    </div>
+  `;
 }
 
 // Numeric-threshold matchers for context-aware highlighting. Each function
@@ -1208,6 +1310,7 @@ function scaleMatchIndex(id, rawValue) {
       if (v < 40)  return 4;
       return 5;
     case "fear-greed-index":
+    case "put-call-cnn":
       if (v < 25)  return 0;
       if (v < 45)  return 1;
       if (v < 55)  return 2;
@@ -1261,6 +1364,7 @@ function formatContextValue(id, rawValue) {
     case "vix":
       return v.toFixed(1);
     case "fear-greed-index":
+    case "put-call-cnn":
       return v.toFixed(0);
     case "above-200dma":
     case "spy-200dma":
@@ -1352,11 +1456,22 @@ function renderMacroBanner() {
   if (ind.vix?.current != null)
     chips.push(chip(classify("VIX"), "vix", "VIX", ind.vix.current.toFixed(1), ind.vix.current));
   if (ind.fear_greed?.value != null) {
-    const src = ind.fear_greed.source?.includes("CRYPTO") ? " ⚠️" : "";
     chips.push(chip(classify("F&G"), "fear-greed-index",
-      `F&amp;G${src}`,
+      "F&amp;G",
       `${ind.fear_greed.value.toFixed(0)} (${escapeText(ind.fear_greed.regime || "?")})`,
       ind.fear_greed.value));
+  } else if (ind.fear_greed) {
+    // Visible-broken state: source unavailable / endpoint error
+    chips.push(`<span class="indicator-chip glossary-clickable bear" data-glossary="fear-greed-index" title="${escapeAttr(ind.fear_greed.error || 'unavailable')}"><span class="lbl">F&amp;G</span><span class="val">— unavailable</span></span>`);
+  }
+  if (ind.put_call?.cnn_score != null) {
+    const pcZone = ind.put_call.zone || "?";
+    chips.push(chip(classify("Put/Call"), "put-call-cnn",
+      "P/C",
+      `${ind.put_call.cnn_score.toFixed(0)} (${escapeText(pcZone)})`,
+      ind.put_call.cnn_score));
+  } else if (ind.put_call) {
+    chips.push(`<span class="indicator-chip glossary-clickable bear" data-glossary="put-call-cnn" title="${escapeAttr(ind.put_call.error || 'unavailable')}"><span class="lbl">P/C</span><span class="val">— unavailable</span></span>`);
   }
   if (ind.net_liquidity?.delta_4w != null) {
     const sign = ind.net_liquidity.delta_4w >= 0 ? "+" : "";
@@ -1447,9 +1562,16 @@ function renderIndicatorCards(ind) {
   if (ind.fear_greed) {
     const v = ind.fear_greed.value;
     const sig = v == null ? "neut" : (v > 50 ? "bull" : v < 30 ? "bear" : "neut");
-    const cnnFallback = ind.fear_greed.source?.includes("CRYPTO") ? " ⚠️ fallback" : "";
+    const broken = v == null ? " ⚠️ unavailable" : "";
     const deltaTxt = ind.fear_greed.prev_week != null ? `vs ${ind.fear_greed.prev_week.toFixed(0)} prev week` : "";
-    cards.push(card(`Fear & Greed${cnnFallback}`, "fear-greed-index", fmtN(v, 0), ind.fear_greed.regime, sig, deltaTxt, ind.fear_greed.description));
+    cards.push(card(`Fear & Greed${broken}`, "fear-greed-index", fmtN(v, 0), ind.fear_greed.regime, sig, deltaTxt, ind.fear_greed.description));
+  }
+  if (ind.put_call) {
+    const v = ind.put_call.cnn_score;
+    const sig = v == null ? "neut" : (v > 75 ? "bear" : v < 25 ? "bear" : v > 55 ? "bull" : v < 45 ? "bull" : "neut");
+    const broken = v == null ? " ⚠️ unavailable" : "";
+    cards.push(card(`Put/Call${broken}`, "put-call-cnn", fmtN(v, 0), ind.put_call.zone, sig,
+      "", ind.put_call.description));
   }
   if (ind.net_liquidity) {
     const d = ind.net_liquidity.direction;

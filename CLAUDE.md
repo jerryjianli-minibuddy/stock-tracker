@@ -305,7 +305,41 @@ uv run scripts/synthesize_pillars.py --preview  # dry run, shows top 3 by score
 uv run scripts/synthesize_pillars.py --preview PLTR NVDA WOLF   # specific tickers
 ```
 
-The script writes both `data/tickers.json` and `docs/data/tickers.json` (Pages mirror). It preserves any manually-edited `binding_constraint_thesis` field; it does NOT preserve manual pillar overrides — re-running will recompute pillars from the current snapshot. If you've manually flipped a `founder_led` pillar from `null` to `true`, you'll need to flip it again after each re-synthesis (or — better — get the report ranking to mention "founder").
+The script writes both `data/tickers.json` and `docs/data/tickers.json` (Pages mirror). It preserves:
+
+- **`binding_constraint_thesis`** — never overwritten (see "binding_constraint_thesis — NEVER auto-fill" above).
+- **Manual founder-led flips** — if a pillar's evidence starts with `"Manual flip — …"`, the script keeps `pass: true` and the evidence verbatim. Use this when a founder-CEO isn't named in the ingested reports' ranking text (Jensen Huang at NVDA, Alex Karp at PLTR, etc. — the keyword scan misses them but a one-shot hand-edit captures them durably).
+
+Manual override pattern (for `founder_led`):
+
+```json
+"founder_led": {
+  "pass": true,
+  "evidence": "Manual flip — Jensen Huang co-founder & CEO since founding (1993)",
+  "metric_value": null,
+  "metric_label": "Founder-led signal",
+  "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+}
+```
+
+### Forward 3yr revenue CAGR (TAM + valuation discipline pillars)
+
+Two pillars depend on growth rate: `tam` (gate ≥ 20%) and `valuation_discipline` (`EV/S ÷ growth < 2.5`). The synthesis script uses two growth sources, preferring the explicit one when present:
+
+1. **`forward_3yr_cagr_pct`** (optional top-level ticker field) — hand-supplied or report-extracted forward 3yr consensus, in percent. Preferred when present; the pillar evidence will say "(source: <note>)".
+2. **`rev_growth_yoy`** from `snapshots.json` — TTM proxy. Used when forward CAGR is absent; the pillar evidence will say "(TTM proxy — set forward_3yr_cagr_pct on the ticker for an explicit consensus number)".
+
+Field shape:
+
+```json
+{
+  "ticker": "PLTR",
+  "forward_3yr_cagr_pct": 30,
+  "forward_3yr_cagr_source": "Conservative mid-cycle consensus; report cited 50% near-term guide"
+}
+```
+
+When ingesting a report that quotes a forward CAGR explicitly (e.g., "~25% 3yr CAGR" in a Software Basket ranking), capture it into `forward_3yr_cagr_pct` so the val_disc pillar reflects the same number the analyst used.
 
 ## Dashboard layout (canonical: tab-based)
 
@@ -431,6 +465,53 @@ Plain stock metrics are self-explanatory; the watchlist table is for *sorting an
 | Glossary tab | n/a — that's the reference itself | |
 
 Rule of thumb: **plain stock metrics → sort only; framework concepts and macro indicators → glossary clickable.** When adding a new term, decide which side of that line it falls on.
+
+### Macro indicators — CNN F&G + Put/Call
+
+`scripts/fetch_macro.py` pulls Fear & Greed and Put/Call together from CNN's data endpoint:
+
+```
+GET https://production.dataviz.cnn.io/index/fearandgreed/graphdata/<YYYY-MM-DD>
+```
+
+The endpoint sits behind a Cloudflare-style bot check that rejects bare Python UAs (HTTP 418). The fetcher uses `_http_get_cnn()` which sends a full set of browser-like headers (User-Agent, Accept, Accept-Language, Accept-Encoding, Referer https://www.cnn.com/, Origin) and decompresses gzip/deflate transparently. Don't simplify those headers — CNN's gate is sensitive to header order and completeness.
+
+**Failure mode is explicit:** if the endpoint fails (404, schema change, blocked), the fetcher returns visibly-broken structures (`value: null`, `regime: "unknown"`, `error: "<msg>"`) instead of silently falling back to a wrong value. The old `alternative.me` crypto-F&G fallback has been removed — a wrong number is worse than a missing one. The dashboard renders `— unavailable` in that state.
+
+**Data shape (in `data/macro.json` → `indicators.fear_greed`):**
+
+```json
+{
+  "value": 58.6,
+  "regime": "Greed",
+  "rating_raw": "greed",
+  "prev_close": 58.2,
+  "prev_week": 63.2,
+  "prev_month": 68.5,
+  "prev_year": 66.8,
+  "components": {
+    "market_momentum":   {"score": 97.8, "rating": "extreme greed"},
+    "price_strength":    {"score": 40.0, "rating": "fear"},
+    "price_breadth":     {"score": 25.4, "rating": "fear"},
+    "put_call_options":  {"score": 80.0, "rating": "extreme greed"},
+    "volatility_vix":    {"score": 50.0, "rating": "neutral"},
+    "safe_haven_demand": {"score": 83.6, "rating": "extreme greed"},
+    "junk_bond_demand":  {"score": 33.2, "rating": "fear"}
+  },
+  "history_30d": [{"date": "2026-05-25", "score": 58.6, "rating": "Greed"}, ...],
+  "data_timestamp": "2026-05-22T23:59:54+00:00",
+  "last_updated":   "2026-05-26T05:11:55Z",
+  "source":         "CNN production.dataviz.cnn.io"
+}
+```
+
+**Put/Call lives at `indicators.put_call`** — same shape minus the components map, with a `zone` field instead of `regime` and an `interpretation` sentence. It IS CNN's put/call sub-component surfaced as a top-level indicator so the banner can have its own chip.
+
+**History accumulates file-side.** CNN's endpoint only ships today's value (each component's `data[]` array has one element). `fetch_macro.py` reads the previous `macro.json`, appends today's score to `history_30d`, dedups by date, keeps the last 30. The history grows from 1 point on day 1 to a rolling 30-day window after a month of daily refreshes.
+
+**Component naming.** Endpoint uses `market_momentum_sp500`, `stock_price_strength`, etc. The friendly UI names (`market_momentum`, `price_strength`, …) are the canonical labels used in `macro.json`, the glossary, and the dashboard. The `CNN_COMPONENTS` dict in `fetch_macro.py` is the source of truth for the mapping.
+
+**Divergence detection.** The F&G popover surfaces a "Divergence Watch" callout when component scores span a range > 50 — the headline composite is an average, and a 50-point spread (e.g., breadth at 25 and momentum at 98) usually means the market regime is internally inconsistent and the headline is a less reliable timing signal.
 
 ### Rating chip is special
 

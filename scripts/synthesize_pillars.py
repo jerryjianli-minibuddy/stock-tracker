@@ -126,13 +126,30 @@ def compute_moat(t: dict, snap: dict, bottlenecks: list[dict]) -> dict:
 
 
 def compute_tam(t: dict, snap: dict) -> dict:
+    """Prefer explicit forward CAGR if hand-supplied on the ticker; else fall
+    back to rev_growth_yoy as a TTM proxy."""
+    fwd_pct = t.get("forward_3yr_cagr_pct")
+    if fwd_pct is not None:
+        passed = float(fwd_pct) >= TAM_CAGR_PCT
+        source = t.get("forward_3yr_cagr_source") or "hand-supplied"
+        evidence = (
+            f"Forward 3yr revenue CAGR {fwd_pct:.0f}% {'passes' if passed else 'below threshold'} "
+            f"≥{TAM_CAGR_PCT:.0f}% (source: {source})"
+        )
+        return {
+            "pass": passed,
+            "evidence": evidence,
+            "metric_value": fwd_pct / 100.0,  # store as decimal for consistency with proxy
+            "metric_label": "3yr Revenue CAGR (forward)",
+            "metric_threshold": f"≥{TAM_CAGR_PCT:.0f}%",
+        }
     rev_g = snap.get("rev_growth_yoy") if snap else None
     passed = rev_g is not None and rev_g * 100 >= TAM_CAGR_PCT
     if rev_g is not None:
         verdict = "passes" if passed else "below threshold"
         evidence = (
             f"Revenue growth YoY {fmt_signed_pct(rev_g)} {verdict} ≥{TAM_CAGR_PCT:.0f}% "
-            "(proxy for 3yr forward CAGR — replace with consensus CAGR when ingested)"
+            "(TTM proxy — set forward_3yr_cagr_pct on the ticker for an explicit consensus number)"
         )
     else:
         evidence = "Revenue growth missing — verify manually"
@@ -148,8 +165,23 @@ def compute_tam(t: dict, snap: dict) -> dict:
 def compute_founder_led(t: dict, reports: list[dict]) -> dict:
     """Qualitative pillar — scan ingested report reasoning for the word
     'founder'. If the reports don't mention it, return pass=None (unknown).
-    Per CLAUDE.md, unknown is NOT a fail — it's a flag to verify manually."""
+    Per CLAUDE.md, unknown is NOT a fail — it's a flag to verify manually.
+
+    Manual override preservation: if the existing pillar's evidence starts
+    with 'Manual flip', the user has explicitly hand-set this — preserve
+    pass=True and the evidence verbatim across re-runs."""
     sym = t["ticker"].upper()
+    # Preserve manual flips across re-synthesis
+    existing = ((t.get("five_pillars") or {}).get("founder_led") or {})
+    existing_ev = existing.get("evidence") or ""
+    if existing.get("pass") is True and existing_ev.startswith("Manual flip"):
+        return {
+            "pass": True,
+            "evidence": existing_ev,
+            "metric_value": None,
+            "metric_label": "Founder-led signal",
+            "metric_threshold": "Founder CEO OR insider >5% OR explicit signal",
+        }
     refs = t.get("report_refs") or []
     matched: list[tuple[str, str]] = []
     for rid in refs:
@@ -214,9 +246,17 @@ def compute_capital_efficiency(t: dict, snap: dict) -> dict:
 
 
 def compute_valuation_discipline(t: dict, snap: dict) -> dict:
+    """Prefer explicit forward CAGR when present, else TTM growth as proxy."""
     ev_s = snap.get("ev_to_sales") if snap else None
-    rev_g = snap.get("rev_growth_yoy") if snap else None
-    if ev_s is None or rev_g is None or rev_g <= 0:
+    fwd_pct = t.get("forward_3yr_cagr_pct")
+    if fwd_pct is not None:
+        growth_pct = float(fwd_pct)
+        growth_source = "forward"
+    else:
+        rev_g = snap.get("rev_growth_yoy") if snap else None
+        growth_pct = (rev_g * 100) if rev_g is not None else None
+        growth_source = "TTM proxy"
+    if ev_s is None or growth_pct is None or growth_pct <= 0:
         return {
             "pass": False,
             "evidence": "EV/S or positive growth missing — cannot compute PEG-equivalent; verify manually",
@@ -224,12 +264,12 @@ def compute_valuation_discipline(t: dict, snap: dict) -> dict:
             "metric_label": "EV/S NTM ÷ 3yr CAGR (PEG-equivalent)",
             "metric_threshold": f"<{VAL_DISC_GATE} hard gate",
         }
-    score = ev_s / (rev_g * 100)
+    score = ev_s / growth_pct
     passed = score < VAL_DISC_GATE
     return {
         "pass": passed,
         "evidence": (
-            f"EV/S {ev_s:.1f}x ÷ growth {rev_g * 100:.0f}% = {score:.2f} — "
+            f"EV/S {ev_s:.1f}x ÷ {growth_source} growth {growth_pct:.0f}% = {score:.2f} — "
             f"{'passes' if passed else 'fails'} hard gate <{VAL_DISC_GATE}"
         ),
         "metric_value": score,

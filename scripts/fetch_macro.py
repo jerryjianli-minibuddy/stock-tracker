@@ -22,7 +22,7 @@ import logging
 import math
 import sys
 import urllib.request
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Optional
 
@@ -53,6 +53,11 @@ SECTOR_ETFS: list[tuple[str, str]] = [
 ]
 
 USER_AGENT = "Mozilla/5.0 (stock-tracker macro fetcher)"
+# CNN's production.dataviz endpoint sits behind Cloudflare-style fingerprinting
+# and rejects bare Python UAs (HTTP 418). Use a full browser-like header set
+# specifically for the CNN domain.
+BROWSER_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36")
 log = logging.getLogger("macro")
 
 
@@ -62,6 +67,29 @@ def _http_get(url: str, timeout: int = 20) -> bytes:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return resp.read()
+
+
+def _http_get_cnn(url: str, timeout: int = 20) -> bytes:
+    """CNN-flavored GET — passes their bot check and transparently decompresses."""
+    import gzip
+    import zlib
+    req = urllib.request.Request(url, headers={
+        "User-Agent": BROWSER_UA,
+        "Accept": "*/*",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate",
+        "Referer": "https://www.cnn.com/",
+        "Origin": "https://www.cnn.com",
+        "sec-ch-ua-platform": '"macOS"',
+    })
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        body = resp.read()
+        enc = resp.headers.get("Content-Encoding", "")
+    if enc == "gzip":
+        body = gzip.decompress(body)
+    elif enc == "deflate":
+        body = zlib.decompress(body)
+    return body
 
 
 def _safe(func: Callable[[], Any], label: str = "") -> Any:
@@ -151,60 +179,198 @@ def _dxy_regime(v: float) -> str:
     return "Crisis"
 
 
-def fetch_fear_greed() -> dict:
-    cnn = _safe(_fetch_cnn_fng, label="CNN F&G")
-    if cnn is not None:
-        return cnn
-    log.warning("CNN F&G unavailable, falling back to alternative.me crypto reading")
-    alt = _safe(_fetch_alternative_fng, label="alternative.me F&G")
-    if alt is not None:
-        return alt
-    return {"value": None, "regime": None, "prev_week": None, "source": "unavailable",
-            "description": "CNN Fear & Greed Index (0=Extreme Fear, 100=Extreme Greed). Currently unavailable."}
+# Map CNN's verbose component keys to the friendly names we surface in the UI
+# (macro.json, dashboard popovers, glossary).
+CNN_COMPONENTS = {
+    "market_momentum":    "market_momentum_sp500",
+    "price_strength":     "stock_price_strength",
+    "price_breadth":      "stock_price_breadth",
+    "put_call_options":   "put_call_options",
+    "volatility_vix":     "market_volatility_vix",
+    "safe_haven_demand":  "safe_haven_demand",
+    "junk_bond_demand":   "junk_bond_demand",
+}
 
 
-def _fetch_cnn_fng() -> dict:
-    url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
-    raw = _http_get(url)
+def fetch_fear_greed_and_put_call(prev_macro: dict | None = None) -> tuple[dict, dict]:
+    """Returns (fear_greed_dict, put_call_dict).
+
+    Pulls the full composite + sub-components from CNN's production endpoint.
+    The endpoint does not expose multi-day history (each component's `data`
+    array holds only today's value), so we accumulate a rolling 30-day history
+    inside macro.json ourselves — read the prior run's history, append today's
+    point if new, trim to 30. `prev_macro` is the previously-written macro.json
+    contents (or None on a fresh repo).
+
+    Failure mode (per CLAUDE.md): on any error — HTTP block, schema change,
+    parse failure — return visibly-broken structures with value=None and
+    rating='unknown' so the dashboard surfaces the problem instead of silently
+    falling back to stale or wrong data.
+    """
+    try:
+        return _fetch_cnn_fng_full(prev_macro)
+    except Exception as e:  # noqa: BLE001
+        log.error("CNN F&G endpoint failed: %s — surfacing as unknown on dashboard", e)
+        return _broken_fear_greed(str(e)), _broken_put_call(str(e))
+
+
+def _fetch_cnn_fng_full(prev_macro: dict | None) -> tuple[dict, dict]:
+    # Path-suffix the date so CNN doesn't 404 on us (their JS does the same).
+    today = date.today().isoformat()
+    url = f"https://production.dataviz.cnn.io/index/fearandgreed/graphdata/{today}"
+    raw = _http_get_cnn(url)
     data = json.loads(raw)
-    fng = data.get("fear_and_greed", {})
-    score = fng.get("score")
-    if score is None:
-        raise ValueError("missing score in CNN response")
+
+    fng = data.get("fear_and_greed") or {}
+    if fng.get("score") is None:
+        raise ValueError("missing fear_and_greed.score in CNN response")
+    score = float(fng["score"])
+
+    components: dict[str, dict] = {}
+    for friendly, raw_key in CNN_COMPONENTS.items():
+        c = data.get(raw_key) or {}
+        cs = c.get("score")
+        components[friendly] = {
+            "score": round(float(cs), 1) if cs is not None else None,
+            "rating": (c.get("rating") or "").lower() or None,
+        }
+
+    # Persist rolling history. macro.json gets rewritten each run, so we read
+    # whatever was there before, append today's point, dedup by date, keep
+    # last 30 entries.
+    fg_history = _accumulate_daily_history(
+        prev_macro, "fear_greed", "history_30d",
+        date_iso=today, score=round(score, 1), rating=_fng_rating_label(score),
+    )
+    pc_score = components.get("put_call_options", {}).get("score")
+    pc_history = _accumulate_daily_history(
+        prev_macro, "put_call", "history_30d",
+        date_iso=today, score=pc_score, rating=_fng_rating_label(pc_score) if pc_score is not None else None,
+    )
+
+    fear_greed = {
+        "value":              round(score, 1),
+        "regime":             _fng_rating_label(score),       # canonical UI label (Greed, Fear, etc.)
+        "rating_raw":         (fng.get("rating") or "").lower(),  # CNN's raw label
+        "prev_close":         _round1(fng.get("previous_close")),
+        "prev_week":          _round1(fng.get("previous_1_week")),
+        "prev_month":         _round1(fng.get("previous_1_month")),
+        "prev_year":          _round1(fng.get("previous_1_year")),
+        "components":         components,
+        "history_30d":        fg_history,
+        "data_timestamp":     fng.get("timestamp"),  # CNN's last-update marker
+        "last_updated":       _utc_now_iso(),
+        "source":             "CNN production.dataviz.cnn.io",
+        "description":        ("CNN Fear & Greed Index — composite of 7 sub-indicators "
+                               "(market momentum, price strength, breadth, put/call options, "
+                               "VIX, safe-haven demand, junk bond demand). 0=Extreme Fear, 100=Extreme Greed."),
+    }
+
+    pc_component = components.get("put_call_options", {})
+    put_call = {
+        "cnn_score":          pc_component.get("score"),
+        "cnn_rating":         pc_component.get("rating"),  # CNN's lowercase rating ("extreme greed", etc.)
+        "zone":               _fng_rating_label(pc_component.get("score")) if pc_component.get("score") is not None else None,
+        "interpretation":     _put_call_interpretation(pc_component.get("score")),
+        "history_30d":        pc_history,
+        "data_timestamp":     (data.get("put_call_options") or {}).get("timestamp"),
+        "last_updated":       _utc_now_iso(),
+        "source":             "CNN F&G sub-component (production.dataviz.cnn.io)",
+        "note":               ("Higher score = more greedy/bullish positioning. CNN's normalized 0-100 "
+                               "version of the put/call ratio — INVERTED vs the raw CBOE ratio (where "
+                               "high = fear). For raw equity-only vs index breakdown, separate CBOE "
+                               "feed integration would be needed (not implemented)."),
+        "description":        ("Put/Call options positioning, CNN-normalized. <25 Extreme Fear / heavy "
+                               "put-buying (contrarian buy zone); >75 Extreme Greed / heavy call-buying "
+                               "(contrarian sell zone)."),
+    }
+    return fear_greed, put_call
+
+
+def _broken_fear_greed(error_msg: str) -> dict:
     return {
-        "value": round(float(score), 1),
-        "regime": _fng_regime(float(score)),
-        "prev_close": round(float(fng["previous_close"]), 1) if fng.get("previous_close") is not None else None,
-        "prev_week": round(float(fng["previous_1_week"]), 1) if fng.get("previous_1_week") is not None else None,
-        "source": "CNN (equities)",
-        "description": "CNN Fear & Greed Index for US equities (0-100). <25 Extreme Fear, >75 Extreme Greed.",
+        "value":          None,
+        "regime":         "unknown",
+        "rating_raw":     None,
+        "prev_close":     None,
+        "prev_week":      None,
+        "prev_month":     None,
+        "prev_year":      None,
+        "components":     {},
+        "history_30d":    [],
+        "data_timestamp": None,
+        "last_updated":   _utc_now_iso(),
+        "source":         "unavailable",
+        "error":          error_msg,
+        "description":    f"CNN F&G endpoint failed. Error: {error_msg}",
     }
 
 
-def _fetch_alternative_fng() -> dict:
-    url = "https://api.alternative.me/fng/?limit=8"
-    raw = _http_get(url)
-    data = json.loads(raw)
-    rows = data.get("data", [])
-    if not rows:
-        raise ValueError("no rows in alternative.me response")
-    current = float(rows[0]["value"])
-    prev = float(rows[7]["value"]) if len(rows) >= 8 else None
+def _broken_put_call(error_msg: str) -> dict:
     return {
-        "value": round(current, 1),
-        "regime": _fng_regime(current),
-        "prev_week": prev,
-        "source": "alternative.me (CRYPTO — fallback, not equities)",
-        "description": "Crypto Fear & Greed Index (fallback when CNN equity index unavailable). Different market — interpret with caution.",
+        "cnn_score":      None,
+        "cnn_rating":     None,
+        "zone":           "unknown",
+        "interpretation": None,
+        "history_30d":    [],
+        "data_timestamp": None,
+        "last_updated":   _utc_now_iso(),
+        "source":         "unavailable",
+        "error":          error_msg,
+        "description":    f"CNN F&G endpoint failed (put/call sub-component unavailable). Error: {error_msg}",
+        "note":           None,
     }
 
 
-def _fng_regime(v: float) -> str:
+def _round1(v) -> float | None:
+    return round(float(v), 1) if v is not None else None
+
+
+def _accumulate_daily_history(prev_macro: dict | None, indicator_key: str,
+                              history_field: str, date_iso: str,
+                              score: float | None, rating: str | None) -> list[dict]:
+    """Append today's score to a rolling 30-day history, deduped by date."""
+    prior: list[dict] = []
+    if prev_macro:
+        ind = (prev_macro.get("indicators") or {}).get(indicator_key) or {}
+        prior = list(ind.get(history_field) or [])
+    # Drop any prior entry for today's date (re-run on the same day overwrites)
+    prior = [p for p in prior if p.get("date") != date_iso]
+    if score is not None:
+        prior.append({"date": date_iso, "score": score, "rating": rating})
+    # Keep most-recent 30 points (sorted by date ascending)
+    prior.sort(key=lambda p: p.get("date") or "")
+    return prior[-30:]
+
+
+def _fng_rating_label(v) -> str | None:
+    """Canonical UI label for an F&G or put/call score on CNN's 0-100 scale."""
+    if v is None:
+        return None
+    v = float(v)
     if v < 25:  return "Extreme Fear"
     if v < 45:  return "Fear"
     if v < 55:  return "Neutral"
     if v < 75:  return "Greed"
     return "Extreme Greed"
+
+
+def _put_call_interpretation(score) -> str | None:
+    """One-sentence reading of the CNN put/call zone."""
+    if score is None:
+        return None
+    s = float(score)
+    if s < 25:  return "Extreme Fear — heavy put buying / panic hedging. Contrarian BUY zone."
+    if s < 45:  return "Fear — elevated put activity / defensive positioning."
+    if s < 55:  return "Neutral — balanced put/call positioning."
+    if s < 75:  return "Greed — call buying outpacing puts / bullish positioning."
+    return "Extreme Greed — heavy call buying / complacent. Contrarian SELL zone."
+
+
+# Backwards-compat shim — older callers still expect fetch_fear_greed().
+def fetch_fear_greed() -> dict:
+    fg, _pc = fetch_fear_greed_and_put_call(prev_macro=None)
+    return fg
 
 
 def fetch_net_liquidity() -> dict:
@@ -469,9 +635,22 @@ def main() -> int:
     if spy_hist is None or spy_hist.empty:
         log.warning("SPY history fetch failed — sector rotation will be empty")
 
+    # Read the previous macro.json (if any) to preserve rolling 30-day history
+    # for F&G + put/call — CNN's endpoint only ships today's value, so we
+    # accumulate the history file-side.
+    prev_macro: dict | None = None
+    if MACRO_PATH.exists():
+        try:
+            prev_macro = json.loads(MACRO_PATH.read_text(encoding="utf-8"))
+        except Exception as e:  # noqa: BLE001
+            log.warning("could not parse prior macro.json (%s) — starting fresh history", e)
+
+    fear_greed, put_call = fetch_fear_greed_and_put_call(prev_macro)
+
     indicators = {
         "vix":           fetch_vix(),
-        "fear_greed":    fetch_fear_greed(),
+        "fear_greed":    fear_greed,
+        "put_call":      put_call,
         "net_liquidity": fetch_net_liquidity(),
         "dxy":           fetch_dxy(),
         "credit_spread": fetch_credit_spread(),

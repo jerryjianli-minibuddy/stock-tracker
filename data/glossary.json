@@ -806,46 +806,6 @@
       "common_pitfalls": "VIX measures implied vol, not realized. Implied can stay elevated long after a panic if the market doesn't reverse. Don't trade VIX itself \u2014 use it to inform position sizing."
     },
     {
-      "id": "fear-greed-index",
-      "category": "Macro",
-      "term": "Fear & Greed Index",
-      "short_definition": "Composite sentiment index on a 0-100 scale. 0 = extreme fear, 100 = extreme greed. Best read as a contrarian signal at extremes.",
-      "formula": "CNN's composite of seven indicators (price momentum, breadth, options put/call, junk bond demand, etc.). Crypto variant from alternative.me uses a different basket.",
-      "what_it_measures": "Markets are driven by sentiment in the short run. F&G compresses multiple sentiment signals into one number. The middle of the range (40-60) tells you nothing; the extremes (\u226420 or \u226580) are where contrarian setups appear.",
-      "interpretation_scale": [
-        {
-          "range": "0-25",
-          "label": "Extreme Fear",
-          "color": "red",
-          "meaning": "Capitulation zone \u2014 historically the best long entries. Buy when others are puking."
-        },
-        {
-          "range": "25-45",
-          "label": "Fear",
-          "color": "orange"
-        },
-        {
-          "range": "45-55",
-          "label": "Neutral",
-          "color": "gray",
-          "meaning": "No edge from sentiment; trade on fundamentals."
-        },
-        {
-          "range": "55-75",
-          "label": "Greed",
-          "color": "lime"
-        },
-        {
-          "range": "75-100",
-          "label": "Extreme Greed",
-          "color": "yellow",
-          "meaning": "Sell into strength; chop and corrections more likely than continued melt-up."
-        }
-      ],
-      "how_to_use": "Use to time risk-on/risk-off lean, not specific entries. Pair with macro regime: extreme fear in a still-bullish macro = high-quality buy setup; extreme greed in a deteriorating macro = trim aggressively.",
-      "common_pitfalls": "When CNN's source is blocked, the dashboard falls back to alternative.me's crypto F&G (marked with \u26a0\ufe0f) which moves differently from equity sentiment. Greed can persist for months in trending bull markets \u2014 don't sell every '80' reading."
-    },
-    {
       "id": "net-liquidity",
       "category": "Macro",
       "term": "Net Liquidity",
@@ -1466,6 +1426,91 @@
         }
       ],
       "how_to_use": "When scanning for ideas, filter to SWING-eligible+. When building a long-term book, filter to CORE-eligible + has binding thesis. The two filters together are the 'real-positions-only' view."
+    },
+    {
+      "id": "fear-greed-index",
+      "category": "Macro",
+      "term": "Fear & Greed Index",
+      "short_definition": "CNN's composite sentiment index (0-100) blending 7 sub-indicators. Best read as a contrarian signal at the extremes \u2014 buy fear, sell greed.",
+      "formula": "Equal-weighted composite of 7 sub-indicators: Market Momentum (S&P 500 vs 125-DMA), Stock Price Strength (52-week highs/lows on NYSE), Stock Price Breadth (McClellan Volume Summation), Put/Call Options (CBOE 5-day ratio), Market Volatility (VIX vs 50-DMA), Safe Haven Demand (stock vs Treasury 20-day returns), Junk Bond Demand (HY spread vs IG).",
+      "what_it_measures": "Sentiment compressed into one number. The middle of the range tells you nothing \u2014 it's the extremes that matter. At Extreme Fear (<25), forced sellers dominate and historically you're looking at multi-year lows (March 2020, October 2022, December 2018). At Extreme Greed (>75), late-cycle euphoria sets in \u2014 that's where to trim. The 7 sub-components let you see WHICH signals are driving the headline; when they disagree (e.g., momentum extreme-greed but breadth fear), the headline hides a meaningful divergence.",
+      "interpretation_scale": [
+        {
+          "range": "0-24",
+          "label": "Extreme Fear",
+          "color": "red",
+          "meaning": "Capitulation zone. Historically the best long entries. Buy when others are puking."
+        },
+        {
+          "range": "25-44",
+          "label": "Fear",
+          "color": "orange"
+        },
+        {
+          "range": "45-54",
+          "label": "Neutral",
+          "color": "gray",
+          "meaning": "No edge from sentiment; trade on fundamentals."
+        },
+        {
+          "range": "55-74",
+          "label": "Greed",
+          "color": "lime"
+        },
+        {
+          "range": "75-100",
+          "label": "Extreme Greed",
+          "color": "yellow",
+          "meaning": "Sell into strength; chop and corrections more likely than continued melt-up."
+        }
+      ],
+      "how_to_use": "Use to time risk-on/risk-off lean, not specific entries. Pair with macro regime: extreme fear in a still-bullish macro = high-quality buy setup; extreme greed in a deteriorating macro = trim aggressively. **Check the 7 components inside the popover** \u2014 when they disagree, the headline is a less reliable signal than usual.",
+      "origin": "CNN Money's index, originally built in 2012 by CNN's editorial team blending the 7 indicators above. Now hosted at production.dataviz.cnn.io.",
+      "ken_quote": "Ken Teng's framing: 'The edge is at extremes WITH risk management.' F&G identifies the extremes; you supply the risk management.",
+      "common_pitfalls": "F&G can stay in Greed or Fear for weeks \u2014 not a precise timing tool. Pair with VIX, credit spreads, and Mansfield RS for confirmation. The endpoint reflects the most-recent market close, not real-time \u2014 the score doesn't move during a single trading day."
+    },
+    {
+      "id": "put-call-cnn",
+      "category": "Macro",
+      "term": "Put/Call Options (CNN-normalized)",
+      "short_definition": "CNN's 0-100 normalized version of the CBOE 5-day put/call ratio. Higher = more bullish positioning (greed); lower = more put-buying (fear).",
+      "formula": "CNN takes the CBOE 5-day options put/call ratio and normalizes it to a 0-100 scale where higher = more greedy. Specifically, the raw ratio is mapped against its 5-year historical distribution.",
+      "what_it_measures": "How options traders are positioned, relative to the historical baseline. High score = more calls than puts (bullish positioning, complacent); low score = more puts than calls (defensive positioning, fearful). At the extremes this is the highest-conviction sentiment signal \u2014 heavy retail put buying near market bottoms, heavy call buying near tops.",
+      "interpretation_scale": [
+        {
+          "range": "0-24",
+          "label": "Extreme Fear",
+          "color": "red",
+          "meaning": "Heavy put buying / panic hedging. Historically a contrarian BUY zone."
+        },
+        {
+          "range": "25-44",
+          "label": "Fear",
+          "color": "orange",
+          "meaning": "Elevated put activity / defensive positioning."
+        },
+        {
+          "range": "45-54",
+          "label": "Neutral",
+          "color": "gray",
+          "meaning": "Balanced put/call positioning."
+        },
+        {
+          "range": "55-74",
+          "label": "Greed",
+          "color": "lime",
+          "meaning": "Call buying outpacing puts / bullish positioning."
+        },
+        {
+          "range": "75-100",
+          "label": "Extreme Greed",
+          "color": "yellow",
+          "meaning": "Heavy call buying / complacent. Contrarian SELL zone."
+        }
+      ],
+      "how_to_use": "Use contrarian at extremes. P/C score >80 alongside market all-time highs is a setup to trim \u2014 the marginal call buyer is exhausted. P/C score <20 alongside a 15%+ drawdown is a setup to add \u2014 forced put buyers have unloaded their hedges.",
+      "origin": "CBOE Put/Call ratio (raw) \u2014 normalized to 0-100 by CNN as one of the 7 components of the Fear & Greed Index.",
+      "common_pitfalls": "**INVERTED vs the raw CBOE ratio.** The raw P/C ratio is HIGH when fear is high (more puts than calls); CNN's normalized score is LOW when fear is high. The dashboard uses CNN's 'higher = more greed' convention everywhere \u2014 don't read it like a raw P/C ratio. For raw equity-only vs index breakdown, would need separate CBOE feed integration (future enhancement)."
     }
   ]
 }
