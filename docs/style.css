@@ -419,6 +419,123 @@ tr.data-row.flash-target td { animation: flash 1.2s ease-out 1; }
 .small { font-size: 0.75rem; }
 code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-elev); padding: 0.1rem 0.35rem; border-radius: 4px; }
 
+/* ----- glossary system ----- */
+/* Inline term/header marker — the ⓘ icon is the always-visible affordance;
+   a dotted underline appears on hover for a footnote-style hint. Subtler than
+   underlining every one of the 19 column headers permanently. */
+.glossary-clickable { cursor: help; }
+.glossary-clickable:hover {
+  color: var(--text);
+  text-decoration: underline dotted var(--accent);
+  text-underline-offset: 3px;
+}
+.glossary-info {
+  display: inline-block;
+  margin-left: 0.2rem;
+  color: var(--text-muted);
+  font-size: 0.75em;
+  opacity: 0.55;
+  vertical-align: baseline;
+  transition: opacity 0.1s, color 0.1s;
+}
+.glossary-clickable:hover .glossary-info { opacity: 1; color: var(--accent); }
+
+/* Numeric cells with context — subtle hover affordance, no underline */
+.cell-glossary { cursor: help; }
+.cell-glossary:hover { background: var(--bg-row-hover); }
+
+/* Modal body layout */
+#glossary-modal-body {
+  padding: 1.1rem; overflow-y: auto; flex: 1;
+  font-size: 0.875rem; line-height: 1.55;
+}
+.glossary-context {
+  padding: 0.55rem 0.8rem;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-bg);
+  margin-bottom: 1rem; border-radius: 0 4px 4px 0;
+}
+.glossary-context.glossary-color-green   { border-left-color: var(--green);  background: var(--green-bg); }
+.glossary-context.glossary-color-lime    { border-left-color: var(--green);  background: rgba(52, 211, 153, 0.06); }
+.glossary-context.glossary-color-yellow  { border-left-color: var(--yellow); background: var(--yellow-bg); }
+.glossary-context.glossary-color-orange  { border-left-color: var(--yellow); background: var(--yellow-bg); }
+.glossary-context.glossary-color-red     { border-left-color: var(--red);    background: var(--red-bg); }
+.glossary-context.glossary-color-gray    { border-left-color: var(--text-muted); background: var(--gray-bg); }
+.glossary-section { margin-bottom: 0.9rem; }
+.glossary-section:last-child { margin-bottom: 0; }
+.glossary-section.glossary-short { font-size: 0.95rem; font-weight: 500; }
+.glossary-section.glossary-quote {
+  font-style: italic; color: var(--text-muted);
+  border-left: 2px solid var(--border); padding-left: 0.8rem;
+}
+.glossary-label {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--text-muted); font-weight: 600; margin-bottom: 0.3rem;
+}
+.glossary-formula {
+  font-family: var(--font-mono); font-size: 0.82rem;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 4px; padding: 0.35rem 0.6rem;
+}
+.glossary-scale {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 0.35rem;
+}
+.glossary-scale-row {
+  display: grid;
+  grid-template-columns: 1rem 9rem 1fr;
+  column-gap: 0.5rem; align-items: baseline;
+  padding: 0.35rem 0.5rem; border-radius: 4px;
+}
+.glossary-scale-row.match {
+  background: var(--accent-bg);
+  outline: 1px solid var(--accent);
+}
+.glossary-dot {
+  width: 0.6rem; height: 0.6rem; border-radius: 50%;
+  display: inline-block; align-self: center;
+}
+.glossary-color-green   { background: var(--green); }
+.glossary-color-lime    { background: var(--green); opacity: 0.7; }
+.glossary-color-yellow  { background: var(--yellow); }
+.glossary-color-orange  { background: var(--yellow); opacity: 0.85; }
+.glossary-color-red     { background: var(--red); }
+.glossary-color-gray    { background: var(--text-muted); }
+.glossary-range { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); }
+.glossary-rlabel { font-weight: 600; }
+.glossary-meaning { grid-column: 2 / -1; }
+
+/* ----- glossary view (full reference tab) ----- */
+.glossary-main { padding: 1.25rem; max-width: 80rem; margin: 0 auto; }
+.glossary-controls { margin-bottom: 1rem; }
+#glossary-search {
+  width: 100%; max-width: 28rem; padding: 0.45rem 0.75rem;
+  background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: 6px; color: var(--text);
+  font-family: var(--font-sans); font-size: 0.875rem;
+}
+#glossary-search:focus { outline: none; border-color: var(--accent); }
+.glossary-category { margin: 1.5rem 0; }
+.glossary-cat-name {
+  font-size: 1rem; margin: 0 0 0.6rem;
+  padding-bottom: 0.35rem; border-bottom: 1px solid var(--border);
+}
+.glossary-cat-grid {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+}
+.glossary-card {
+  background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: 8px; padding: 1rem 1.1rem;
+  display: flex; flex-direction: column;
+}
+.glossary-card-header { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.45rem; }
+.glossary-card-header h3 { margin: 0; font-size: 0.95rem; font-weight: 600; }
+.glossary-card .glossary-section { font-size: 0.82rem; line-height: 1.5; }
+.glossary-card .glossary-scale-row { padding: 0.2rem 0.35rem; }
+.glossary-card .glossary-scale-row.match { background: var(--accent-bg); outline: none; }
+.glossary-card.flash-target { animation: card-flash 1.5s ease-out 1; }
+
 /* ----- rating reasoning modal ----- */
 .rating-clickable { cursor: pointer; }
 .rating-clickable:hover { filter: brightness(1.1); text-decoration: underline; }
@@ -571,4 +688,8 @@ code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-el
   .modal-card { width: 96vw; max-height: 92vh; }
   /* mover chips wrap tighter on small screens */
   .movers-label { min-width: 3.5rem; font-size: 0.65rem; }
+  /* glossary cards stack 1 column on phones */
+  .glossary-cat-grid { grid-template-columns: 1fr; }
+  /* On phones the popover should fill more of the viewport for readability */
+  #glossary-modal .modal-card { width: 96vw; max-height: 92vh; }
 }

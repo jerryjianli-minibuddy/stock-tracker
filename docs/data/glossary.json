@@ -1,0 +1,577 @@
+{
+  "terms": [
+    {
+      "id": "pe-forward",
+      "category": "Valuation",
+      "term": "Forward P/E",
+      "short_definition": "Stock price divided by analyst-consensus earnings per share for the next 12 months. The market's stated price for a dollar of expected future profit.",
+      "formula": "price / EPS_next_12_months (Wall Street consensus)",
+      "what_it_measures": "Forward P/E translates expectations into one number. A 25x multiple says 'investors are paying 25 years of next year's earnings for a share today.' Two companies with the same trailing P/E can have very different forward P/Es if their growth trajectories diverge — that's the whole point of using forward over trailing for growth stocks.",
+      "interpretation_scale": [
+        {"range": "Software 20-40x", "label": "Normal range", "color": "gray", "meaning": "Typical for profitable SaaS. Above 40x needs strong growth or moat justification."},
+        {"range": "Semis 15-30x", "label": "Normal range", "color": "gray", "meaning": "Cyclical businesses; multiples expand in bull cycles, compress in busts."},
+        {"range": "Mature industrials 10-18x", "label": "Normal range", "color": "gray", "meaning": "Slow growth, predictable cash flows."},
+        {"range": ">40x for non-software", "label": "Premium", "color": "orange", "meaning": "Priced for perfection. One earnings miss = re-rating."},
+        {"range": "<10x", "label": "Cheap or broken", "color": "green", "meaning": "Either a real bargain or the market sees something earnings don't show."}
+      ],
+      "how_to_use": "Compare to the company's own 5-year average and to sector peers. Falling P/E with rising earnings is a re-rating opportunity; rising P/E with flat earnings is multiple expansion you should fade.",
+      "common_pitfalls": "Forward EPS is consensus, which can be wrong by wide margins for early-stage or volatile names. AI-cycle semis had estimates that were stale by the time they printed. Always check whether estimates are being revised up or down."
+    },
+    {
+      "id": "pe-trailing",
+      "category": "Valuation",
+      "term": "Trailing P/E",
+      "short_definition": "Price divided by the last 12 months of actual GAAP earnings. The least-speculative valuation multiple, but it looks backwards.",
+      "formula": "price / EPS_TTM (trailing 12 months)",
+      "what_it_measures": "Trailing P/E is honest — no estimates, no story. It tells you what you're paying for earnings that already happened. The catch is that for growth companies whose earnings have been suppressed by reinvestment, trailing P/E will look absurdly high (NVDA at >100x trailing in 2024 wasn't a bubble flag — forward was ~30x).",
+      "interpretation_scale": [
+        {"range": "<15x", "label": "Cheap by trailing", "color": "green"},
+        {"range": "15-25x", "label": "Normal trailing", "color": "gray"},
+        {"range": "25-40x", "label": "Premium trailing", "color": "yellow"},
+        {"range": ">40x", "label": "Either growth or distortion", "color": "orange", "meaning": "Check forward P/E — if it's much lower, this is a growth name. If forward is similar, this is just expensive."}
+      ],
+      "how_to_use": "Use as a sanity check on forward P/E. Big gap between trailing and forward = market is pricing in big earnings growth; you're betting on that growth showing up.",
+      "common_pitfalls": "TTM can be distorted by one-time charges (restructuring, asset writedowns) that suppress GAAP earnings and inflate the multiple. Look at adjusted/operating earnings for cyclicals."
+    },
+    {
+      "id": "ps-ratio",
+      "category": "Valuation",
+      "term": "Price / Sales (P/S)",
+      "short_definition": "Market cap divided by trailing revenue. The valuation multiple that still works when a company isn't profitable yet.",
+      "formula": "market_cap / revenue_TTM",
+      "what_it_measures": "P/S is the right tool when earnings don't exist or are deliberately suppressed by reinvestment. It strips out the income-statement engineering and asks 'what are you paying for a dollar of sales?' Software, biotech, and pre-profitability growth companies trade primarily on P/S until they scale into profitability.",
+      "interpretation_scale": [
+        {"range": "<2x", "label": "Cheap", "color": "green", "meaning": "Either a value name or a low-margin business — confirm with gross margin."},
+        {"range": "2-6x", "label": "Normal", "color": "gray", "meaning": "Typical for mid-margin businesses; software floors at ~5x in bear markets."},
+        {"range": "6-15x", "label": "Expensive", "color": "yellow", "meaning": "Reserved for high-growth, high-margin businesses. Software incumbents."},
+        {"range": "15-25x", "label": "Premium growth", "color": "orange", "meaning": "Hypergrowth + high gross margin (PLTR, CRWD historically). Sustainable only if growth holds."},
+        {"range": ">25x", "label": "Priced for perfection", "color": "red", "meaning": "Any slowdown causes a 50%+ derate. Approach with discipline; trim into strength."}
+      ],
+      "how_to_use": "Always pair P/S with gross margin. A 20x P/S on 85% gross margin software is reasonable; a 20x P/S on 30% gross margin hardware is delusional. Multiply P/S × gross margin for a rough 'P/gross profit' number — that's a better cross-business comparison.",
+      "common_pitfalls": "P/S ignores debt and cash. Use EV/Sales for capital-structure-aware comparison. Companies with one giant customer (e.g., chip suppliers to a hyperscaler) can have P/S that look reasonable until that customer cuts orders."
+    },
+    {
+      "id": "ev-sales",
+      "category": "Valuation",
+      "term": "EV / Sales",
+      "short_definition": "Enterprise value (market cap + debt - cash) divided by revenue. Like P/S but adjusted for capital structure.",
+      "formula": "EV / revenue_TTM, where EV = market_cap + total_debt - cash_and_equivalents",
+      "what_it_measures": "EV/Sales answers what an acquirer would pay per dollar of revenue. By adding debt and subtracting cash, it makes capital-light and capital-heavy businesses directly comparable. A net-debt company looks more expensive on EV/Sales than P/S; a net-cash company looks cheaper.",
+      "interpretation_scale": [
+        {"range": "<2x", "label": "Cheap", "color": "green"},
+        {"range": "2-6x", "label": "Normal", "color": "gray"},
+        {"range": "6-15x", "label": "Expensive", "color": "yellow"},
+        {"range": ">15x", "label": "Priced for perfection", "color": "red"}
+      ],
+      "how_to_use": "Use instead of P/S whenever you're comparing companies with materially different balance sheets — e.g., a leveraged industrial vs. a net-cash software company.",
+      "common_pitfalls": "Cash can include operational float that the company can't actually return to shareholders. Read the balance sheet."
+    },
+    {
+      "id": "ev-ebitda",
+      "category": "Valuation",
+      "term": "EV / EBITDA",
+      "short_definition": "Enterprise value divided by earnings before interest, taxes, depreciation, and amortization. The 'acquirer's multiple' — what a strategic would pay for the cash-generating engine.",
+      "formula": "EV / EBITDA_TTM",
+      "what_it_measures": "EBITDA strips out capital structure (interest), tax regime, and accounting non-cash charges (D&A) to expose operating cash generation. EV/EBITDA is the standard private-equity valuation lens and the cleanest cross-border comparable.",
+      "interpretation_scale": [
+        {"range": "<10x", "label": "Cheap", "color": "green", "meaning": "Mature business, low growth, or temporary depression."},
+        {"range": "10-15x", "label": "Normal", "color": "gray", "meaning": "Typical for healthy industrials and mid-growth tech."},
+        {"range": "15-25x", "label": "Premium", "color": "yellow", "meaning": "High-margin growth or scarce franchise."},
+        {"range": ">25x", "label": "Expensive growth or distressed earnings", "color": "orange", "meaning": "Either you believe the growth justifies it, or EBITDA is artificially low (cyclical trough, restructuring)."},
+        {"range": "n/m (EBITDA ≤ 0)", "label": "Not meaningful", "color": "gray", "meaning": "Company isn't generating positive operating cash. Use P/S or EV/Sales instead."}
+      ],
+      "how_to_use": "For LBO-style sanity check: at what multiple would a strategic acquirer find this attractive? <12x for industrials, <18x for software is roughly the M&A market. Anything above that needs an organic-growth thesis to justify.",
+      "common_pitfalls": "EBITDA flatters capital-intensive businesses by ignoring D&A — the actual cost of reinvesting to maintain the asset base. Compare EBITDA to FCF; if they diverge a lot, the EBITDA story is incomplete."
+    },
+    {
+      "id": "peg-ratio",
+      "category": "Valuation",
+      "term": "PEG Ratio",
+      "short_definition": "Forward P/E divided by expected annual earnings growth rate. Peter Lynch's shortcut for whether a growth multiple is justified.",
+      "formula": "forward_PE / EPS_growth_rate_%",
+      "what_it_measures": "PEG normalizes for growth. A 30x P/E company growing 30% has PEG = 1.0 — fairly valued. A 30x P/E company growing 10% has PEG = 3.0 — overpaying for the growth on offer.",
+      "interpretation_scale": [
+        {"range": "<1.0", "label": "Cheap relative to growth", "color": "green", "meaning": "Lynch's classic buy zone. Verify the growth rate is sustainable."},
+        {"range": "1.0-2.0", "label": "Fair", "color": "gray"},
+        {"range": "2.0-3.0", "label": "Expensive", "color": "yellow"},
+        {"range": ">3.0", "label": "Disconnected from fundamentals", "color": "red", "meaning": "Either growth is about to inflect higher or you're paying a hype premium."}
+      ],
+      "how_to_use": "PEG works best for stable-growth mid-caps. Use as a screen, not a precise valuation tool.",
+      "common_pitfalls": "Breaks down at the extremes. Hypergrowth (>50%) names look cheap on PEG even at 70x P/E — but that growth can vanish overnight. Negative growth makes PEG meaningless. For loss-makers, fall back to P/S × growth."
+    },
+    {
+      "id": "market-cap",
+      "category": "Valuation",
+      "term": "Market Capitalization",
+      "short_definition": "Share price times shares outstanding. The market's stated value of the equity.",
+      "formula": "price × shares_outstanding (diluted preferred)",
+      "what_it_measures": "Market cap is the simplest sizing metric — micro <$300M, small $300M-$2B, mid $2B-$10B, large $10B-$200B, mega >$200B. It correlates with liquidity, analyst coverage, and institutional ownership.",
+      "interpretation_scale": [
+        {"range": "<$300M", "label": "Micro cap", "color": "orange", "meaning": "Often illiquid; can move 10%+ on retail flows. Position-size accordingly."},
+        {"range": "$300M-$2B", "label": "Small cap", "color": "yellow", "meaning": "Where the asymmetric multibaggers live but also the highest mortality rate."},
+        {"range": "$2B-$10B", "label": "Mid cap", "color": "gray", "meaning": "Sweet spot for many growth strategies — large enough to be institutional, small enough to compound."},
+        {"range": "$10B-$200B", "label": "Large cap", "color": "gray"},
+        {"range": ">$200B", "label": "Mega cap", "color": "gray", "meaning": "Index-flow dominated; absolute moves can be huge in dollar terms even on small percentage changes."}
+      ],
+      "how_to_use": "Pair with liquidity (volume × price) and float to size positions appropriately. A 50bps position in a $500M illiquid name is harder to exit than a 2% position in a $50B name.",
+      "common_pitfalls": "Market cap doesn't tell you the float — heavily controlled companies (insider/PE/family) can have a much smaller tradeable share count. Check float-adjusted market cap for true liquidity."
+    },
+    {
+      "id": "rev-growth-yoy",
+      "category": "Growth & Profitability",
+      "term": "Revenue Growth YoY",
+      "short_definition": "Year-over-year change in revenue. The cleanest top-line measure of demand for the product.",
+      "formula": "(revenue_TTM_now / revenue_TTM_prior_year) - 1",
+      "what_it_measures": "Revenue is the most-resistant line item to accounting choices — you either sold the product or you didn't. Growth in revenue is the leading indicator of everything that comes after (margin, earnings, cash flow). For mature companies revenue growth = market growth + share gains; for early-stage companies it's the dominant signal.",
+      "interpretation_scale": [
+        {"range": "<0%", "label": "Contracting", "color": "red", "meaning": "Real problems — losing customers, cyclical downturn, or product becoming obsolete. Demands explanation."},
+        {"range": "0-10%", "label": "Mature", "color": "gray", "meaning": "Inflation-plus growth. Acceptable for slow-and-steady names paying out cash."},
+        {"range": "10-25%", "label": "Solid growth", "color": "lime", "meaning": "Healthy growth phase. Sustainable for years if execution holds."},
+        {"range": "25-50%", "label": "Hypergrowth", "color": "green", "meaning": "Real momentum. Multiples justified IF growth is durable. Most names slow well before 50% is sustained."},
+        {"range": ">50%", "label": "Explosive", "color": "green", "meaning": "Stage-1 of a new market or AI-style hypercycle. Will not last forever — model the deceleration."}
+      ],
+      "how_to_use": "Look at the trend, not the point. Decelerating from 40% to 25% over four quarters is a different story than 25% steady. The first derivative (whether growth is accelerating or decelerating) is more important than the absolute number for high-growth names.",
+      "common_pitfalls": "Acquisition-driven growth flatters the number — back out M&A for organic growth. Currency tailwinds/headwinds can swing reported growth 3-5pp; check constant-currency. Comparison base matters: a soft prior-year comp inflates the YoY print."
+    },
+    {
+      "id": "eps-growth-yoy",
+      "category": "Growth & Profitability",
+      "term": "EPS Growth YoY",
+      "short_definition": "Year-over-year change in earnings per share. Revenue growth × operating leverage × buybacks, condensed to one number.",
+      "formula": "(EPS_TTM_now / EPS_TTM_prior_year) - 1",
+      "what_it_measures": "EPS growth combines top-line growth, margin expansion, capital structure (share count, interest expense), and tax rate into the bottom-line shareholder return per share. It's what the P/E multiple is applied to.",
+      "interpretation_scale": [
+        {"range": "<0%", "label": "Declining", "color": "red", "meaning": "Either revenue is falling, margins are compressing, or share count is rising faster than profits."},
+        {"range": "0-10%", "label": "Mature compounder", "color": "gray"},
+        {"range": "10-25%", "label": "Healthy growth", "color": "lime"},
+        {"range": "25-50%", "label": "High growth", "color": "green"},
+        {"range": ">50%", "label": "Inflection or one-time", "color": "yellow", "meaning": "Check sustainability — operating leverage moments produce huge EPS growth quarters that don't repeat."}
+      ],
+      "how_to_use": "Compare EPS growth to revenue growth. EPS growing faster than revenue = margin expansion or buybacks (good if margins are sustainable). EPS growing slower than revenue = margin compression or dilution.",
+      "common_pitfalls": "Stock-based compensation is a real cost that GAAP captures only partially. Companies often guide on non-GAAP EPS that excludes SBC, making EPS growth look better than economic reality. Look at FCF/share alongside EPS."
+    },
+    {
+      "id": "gross-margin",
+      "category": "Growth & Profitability",
+      "term": "Gross Margin",
+      "short_definition": "Revenue minus cost of goods sold, divided by revenue. The structural profitability of the product itself.",
+      "formula": "(revenue - COGS) / revenue",
+      "what_it_measures": "Gross margin is the closest thing to a business-model fingerprint on the income statement. It tells you how much of each dollar of revenue survives the direct cost of delivering the product, before SG&A, R&D, and below-the-line items. It's the ceiling on operating leverage.",
+      "interpretation_scale": [
+        {"range": "Software 70-90%", "label": "Software baseline", "color": "green", "meaning": "Marginal cost of an additional license is ~zero. Anything below 70% for software suggests heavy services/hosting drag."},
+        {"range": "Semis 50-70%", "label": "Semis baseline", "color": "gray", "meaning": "Wafer + packaging + test + R&D amortization. Leading-edge fabless can exceed 65%; commodity memory falls below 30%."},
+        {"range": "Hardware 20-40%", "label": "Hardware baseline", "color": "gray", "meaning": "BOM-heavy products. Apple's 40%+ hardware margin is exceptional."},
+        {"range": "Commodity <20%", "label": "Commodity", "color": "yellow", "meaning": "Pure pass-through pricing. Differentiation has to come from scale or distribution."}
+      ],
+      "how_to_use": "Trend matters more than absolute level. Software at 75% trending down to 70% over four quarters is a more serious signal than software stuck at 65%. Margin compression usually precedes EPS misses by 1-2 quarters.",
+      "common_pitfalls": "Many companies report 'non-GAAP gross margin' that excludes SBC and amortization of acquired intangibles — both real costs. Cross-company comparisons require the same framework. Mix shifts (SaaS revenue growing faster than services revenue) drive 'margin expansion' that's just composition, not improvement."
+    },
+    {
+      "id": "op-margin",
+      "category": "Growth & Profitability",
+      "term": "Operating Margin",
+      "short_definition": "Operating income divided by revenue. Margin after the full cost of running the business — R&D, sales & marketing, G&A — but before financing and taxes.",
+      "formula": "operating_income / revenue",
+      "what_it_measures": "Operating margin captures the scalability of the entire business, not just the product. As revenue grows, fixed costs like R&D and corporate G&A should grow more slowly, expanding margins — that's operating leverage. Operating margin trending up is one of the most powerful equity tailwinds.",
+      "interpretation_scale": [
+        {"range": "<0%", "label": "Loss-making", "color": "red", "meaning": "Acceptable only if there's a clear path to scale and runway to get there."},
+        {"range": "0-10%", "label": "Thin", "color": "yellow", "meaning": "Vulnerable to cost shocks. Mature low-margin businesses or pre-scale growth names."},
+        {"range": "10-20%", "label": "Healthy", "color": "lime"},
+        {"range": "20-30%", "label": "Strong", "color": "green", "meaning": "Tech/franchise zone. Most large-cap software/semis land here."},
+        {"range": ">30%", "label": "Exceptional", "color": "green", "meaning": "Network effects, monopoly economics, or unique IP. NVDA peaked above 60%."}
+      ],
+      "how_to_use": "Decompose: gross margin × (1 - opex/revenue) ≈ op margin. If op margin is rising while gross margin is flat, the company is scaling opex slower than revenue — good. If gross margin is falling and op margin is stable, the company is cutting opex to defend earnings — usually a late-cycle sign.",
+      "common_pitfalls": "Non-GAAP op margin often excludes SBC and restructuring. SBC in particular is real cash compensation paid in stock, and at high-growth companies it can be 20%+ of revenue."
+    },
+    {
+      "id": "rule-of-40",
+      "category": "Growth & Profitability",
+      "term": "Rule of 40",
+      "short_definition": "Revenue growth % + free cash flow margin % ≥ 40. The SaaS health benchmark.",
+      "formula": "revenue_growth_yoy_% + fcf_margin_% ≥ 40",
+      "what_it_measures": "Software companies have to make a tradeoff between growing fast (low or negative margins as they invest) and being profitable (slower growth). The Rule of 40 says the SUM of those two should be at least 40 — you can be 50% growth at -10% margin, or 25% growth at 15% margin, but if neither is enough to clear 40, the business is sub-scale or mismanaged.",
+      "interpretation_scale": [
+        {"range": ">60", "label": "Best-in-class", "color": "green", "meaning": "CRWD, NOW, MELI territory historically. Sustainable only with real moats."},
+        {"range": "40-60", "label": "Healthy", "color": "lime", "meaning": "The bar most public SaaS clears."},
+        {"range": "20-40", "label": "Sub-scale", "color": "yellow", "meaning": "Needs either growth re-acceleration or margin expansion to justify the multiple."},
+        {"range": "<20", "label": "Broken", "color": "red", "meaning": "Either growth has stalled with bad margins or margins are deep negative without enough growth to justify."}
+      ],
+      "how_to_use": "Track quarter-by-quarter. A SaaS company falling from 55 to 35 over a year is a re-rating risk even if absolute numbers still look fine. Use as a screen, not a precise valuation tool.",
+      "common_pitfalls": "Only applies cleanly to subscription / recurring-revenue businesses. Doesn't work for transactional or services companies. Use FCF margin, not operating margin or earnings — SBC distorts the latter."
+    },
+    {
+      "id": "fcf-margin",
+      "category": "Growth & Profitability",
+      "term": "Free Cash Flow Margin",
+      "short_definition": "Operating cash flow minus capex, divided by revenue. The cash the business actually generates per dollar of sales.",
+      "formula": "(operating_cash_flow - capex) / revenue",
+      "what_it_measures": "FCF margin is the most honest profitability number — it can't be gamed by stock-based comp the way operating margin can. It's what would be available to return to shareholders, reduce debt, or reinvest in the business.",
+      "interpretation_scale": [
+        {"range": "<0%", "label": "Cash-burning", "color": "red", "meaning": "Track runway and how the burn is being funded."},
+        {"range": "0-10%", "label": "Thin", "color": "yellow"},
+        {"range": "10-20%", "label": "Healthy", "color": "lime"},
+        {"range": "20-30%", "label": "Strong", "color": "green"},
+        {"range": ">30%", "label": "Exceptional", "color": "green", "meaning": "Asset-light franchise economics. Best-in-class SaaS and IP licensors."}
+      ],
+      "how_to_use": "Compare to operating margin. FCF > operating earnings usually means D&A > capex (under-investing) or working-capital tailwinds. FCF < operating earnings is the opposite. Persistent divergence is a yellow flag.",
+      "common_pitfalls": "Working-capital changes can swing FCF quarter to quarter; smooth with TTM. Some companies include / exclude stock-based comp inconsistently. Always reconcile to the cash flow statement."
+    },
+    {
+      "id": "mansfield-rs",
+      "category": "Relative Strength & Trend",
+      "term": "Mansfield Relative Strength",
+      "short_definition": "Measures whether a stock is outperforming SPY relative to its own 52-week trend. Positive = leadership; negative = laggard.",
+      "formula": "((ratio_current / ratio_52w_SMA) - 1) × 100, where ratio = stock_price / spy_price",
+      "what_it_measures": "Mansfield RS removes the 'all stocks go up in bull markets' problem by anchoring each stock's relative performance to its own one-year average versus the index. A reading of +10 means the stock is 10% above its 52-week typical relationship to SPY — capital is flowing in. The zero line is the long-term baseline of 'tracking the index'; crossings of zero are regime changes in leadership.",
+      "interpretation_scale": [
+        {"range": "+10 or more", "label": "Strong leadership", "color": "green", "meaning": "Stock dramatically outperforming SPY; capital flowing in. Often becomes extended above +30."},
+        {"range": "+3 to +10", "label": "Outperforming", "color": "lime", "meaning": "Real leadership without yet being euphoric. The healthy zone."},
+        {"range": "-3 to +3", "label": "Neutral", "color": "gray", "meaning": "Tracking SPY — no edge in owning over the index."},
+        {"range": "-3 to -10", "label": "Underperforming", "color": "orange"},
+        {"range": "-10 or worse", "label": "Lagging badly", "color": "red", "meaning": "Wrong horse — capital is flowing out. Hard to make money owning these in any regime."}
+      ],
+      "how_to_use": "Buy leaders, avoid laggards. Zero-line crossings from below are Weinstein's Stage 2 breakout signal. Pair with absolute price action: a stock above its 200-day moving average AND with positive Mansfield RS is the highest-probability long setup.",
+      "origin": "Stan Weinstein, 'Secrets for Profiting in Bull and Bear Markets' (1988)",
+      "ken_quote": "Ken Teng / Chicken Genius framing: 'Absolute price means nothing. Relative strength is everything — you want to own what institutions are buying, not what's just going up because everything is.'",
+      "common_pitfalls": "If the 52w SMA is itself trending hard, the indicator can give late signals — by the time Mansfield turns positive, the easy money is gone. Combine with the 30-day slope of the ratio: positive Mansfield + positive 30d slope = strongest setup. Readings above +30 are often unsustainable extensions; trim into strength."
+    },
+    {
+      "id": "ratio-vs-spy",
+      "category": "Relative Strength & Trend",
+      "term": "Ratio vs SPY",
+      "short_definition": "Stock price divided by SPY price. The raw building block of all relative-strength analysis.",
+      "formula": "stock_price / spy_price",
+      "what_it_measures": "The ratio itself is dimensionless and trends independently of broad market direction. Rising ratio = stock outperforming SPY regardless of whether both are up or both are down. Falling ratio = stock underperforming.",
+      "interpretation_scale": [
+        {"range": "Trending up over months", "label": "Leadership emerging", "color": "green"},
+        {"range": "Sideways", "label": "Tracking the index", "color": "gray"},
+        {"range": "Trending down", "label": "Laggard", "color": "red"}
+      ],
+      "how_to_use": "Look at the ratio chart, not the price chart, when the market regime is unclear. A stock making new ratio highs in a flat tape is showing real leadership.",
+      "common_pitfalls": "Ratio levels are arbitrary — what matters is the trend and the deviation from the trend (which is what Mansfield RS measures)."
+    },
+    {
+      "id": "ratio-slope-30d",
+      "category": "Relative Strength & Trend",
+      "term": "30-day Ratio Slope",
+      "short_definition": "Percentage change in the stock/SPY ratio over the last 30 trading days. Short-term acceleration or deceleration of relative strength.",
+      "formula": "(ratio_today / ratio_30d_ago) - 1",
+      "what_it_measures": "Mansfield RS is a 52-week measure — it's slow. The 30-day ratio slope catches inflections weeks before Mansfield does. Positive and rising slope = relative strength is accelerating; positive but flattening slope = leadership is plateauing.",
+      "interpretation_scale": [
+        {"range": "+3% or more", "label": "Accelerating outperformance", "color": "green"},
+        {"range": "+1% to +3%", "label": "Mildly accelerating", "color": "lime"},
+        {"range": "-1% to +1%", "label": "Flat", "color": "gray"},
+        {"range": "-1% to -3%", "label": "Mildly decelerating", "color": "orange"},
+        {"range": "-3% or worse", "label": "Decelerating fast", "color": "red", "meaning": "Often precedes a Mansfield zero-line cross."}
+      ],
+      "how_to_use": "Combine with Mansfield RS. Positive Mansfield + positive 30d slope = strongest leadership. Positive Mansfield + negative 30d slope = leadership topping; consider trimming.",
+      "common_pitfalls": "30-day windows are noisy — a single earnings reaction can swing the slope materially. Don't act on slope alone; use it as a confirming signal."
+    },
+    {
+      "id": "ratio-history-90d",
+      "category": "Relative Strength & Trend",
+      "term": "Ratio History (90d)",
+      "short_definition": "The last 90 trading days of the stock/SPY ratio, plotted as a mini-sparkline in the table.",
+      "short_definition_extra": "It's the chart version of the same data that Mansfield and 30d slope summarize numerically.",
+      "what_it_measures": "Lets you see at a glance whether the stock has been trending up against SPY (green-tinted line going up), trending down (red, going down), or oscillating. Sometimes a single number hides a story the chart shows — e.g., a stock that crashed and recovered has a flat 30d slope but a V-shaped 90d history.",
+      "interpretation_scale": [
+        {"range": "Up-sloping", "label": "Outperforming over 90d", "color": "green"},
+        {"range": "Flat", "label": "In line with SPY", "color": "gray"},
+        {"range": "Down-sloping", "label": "Underperforming over 90d", "color": "red"}
+      ],
+      "how_to_use": "Quick visual scan across the watchlist to find shape divergences — e.g., a sector with mostly down-sloping lines but one stock going up.",
+      "common_pitfalls": "90 trading days ≈ 4.5 months, so this misses longer-cycle leadership changes. For those, look at Mansfield RS (52-week)."
+    },
+    {
+      "id": "above-200dma",
+      "category": "Relative Strength & Trend",
+      "term": "Above 200-day Moving Average",
+      "short_definition": "Whether the current price is above the 200-day moving average. The single most important trend filter in equities.",
+      "formula": "price > SMA_200_days",
+      "what_it_measures": "The 200-DMA is the line institutional algorithms watch. Above it = uptrend regime, below it = downtrend regime. Mark Minervini's Trend Template requires price above 200-DMA as one of its eight criteria; CAN SLIM and most momentum systems do the same. The line itself often acts as support in uptrends and resistance in downtrends.",
+      "interpretation_scale": [
+        {"range": "Yes", "label": "In uptrend", "color": "green", "meaning": "Long bias is appropriate. Most outperformance comes from stocks above 200-DMA."},
+        {"range": "No", "label": "In downtrend", "color": "red", "meaning": "Avoid as a long. Even cheap valuations don't matter until trend repairs."}
+      ],
+      "how_to_use": "Use as a hard filter — most retail and many institutional strategies refuse to buy anything below the 200-DMA. When a stock crosses above it after a long downtrend (the 'golden cross' if 50-DMA also crosses), it's often the start of a Stage 2 advance.",
+      "origin": "Long history in technical analysis; popularized by William O'Neil (CAN SLIM) and Mark Minervini.",
+      "common_pitfalls": "Choppy markets generate whipsaws around the 200-DMA. Look for sustained breakouts on volume, not single-day crosses. The 200-DMA can be too slow for fast cycles — supplement with the 50-DMA."
+    },
+    {
+      "id": "pct-from-52w-high",
+      "category": "Relative Strength & Trend",
+      "term": "% From 52-Week High",
+      "short_definition": "How far below the trailing 52-week high the stock is trading. A measure of trend health vs. damage.",
+      "formula": "(52w_high - price) / 52w_high",
+      "what_it_measures": "Stocks making new highs are the strongest names; stocks far below their highs have done something to break momentum. The CAN SLIM / Minervini framework prefers stocks within 15-25% of their 52-week high — close enough that buyers are still confident, but with enough pullback that you're not buying the absolute top.",
+      "interpretation_scale": [
+        {"range": "<15%", "label": "Near breakout zone", "color": "green", "meaning": "Healthy uptrend; institutional buyers active. Minervini's preferred entry zone."},
+        {"range": "15-25%", "label": "Pullback healthy", "color": "lime", "meaning": "Normal correction in an ongoing uptrend."},
+        {"range": "25-40%", "label": "Trend damaged", "color": "yellow", "meaning": "Needs a base before the next leg. Avoid until structure repairs."},
+        {"range": ">40%", "label": "Bear market territory", "color": "red", "meaning": "Either the thesis is broken or the market hasn't priced the recovery yet — high-risk/high-reward."}
+      ],
+      "how_to_use": "Filter your watchlist to <15% from high to focus on leaders. Stocks bouncing between 15% and 40% are usually 'no man's land' — too damaged to trade as breakouts, not damaged enough to be deep-value setups.",
+      "common_pitfalls": "Recent IPOs may have artificially close 52-week highs because the data doesn't extend back far enough. Mega-caps spend most of their time within 10% of highs and the metric loses discriminating power; use it for mid- and small-caps."
+    },
+    {
+      "id": "pct-from-52w-low",
+      "category": "Relative Strength & Trend",
+      "term": "% Above 52-Week Low",
+      "short_definition": "How far above the trailing 52-week low the stock is trading. A measure of how much repair has happened.",
+      "formula": "(price - 52w_low) / 52w_low",
+      "what_it_measures": "Stocks barely off their 52-week low are still in the wreckage of a downtrend; stocks well above their 52-week low have demonstrated repair. Minervini requires >30% above 52-week low as one of the Trend Template criteria — there has to be some recovery in the chart before he'll buy.",
+      "interpretation_scale": [
+        {"range": "<10%", "label": "Just off lows", "color": "red", "meaning": "Too early — let the base form."},
+        {"range": "10-30%", "label": "Repairing", "color": "yellow", "meaning": "Watch for the structure to set up — early-stage."},
+        {"range": ">30%", "label": "Reclaimed trend", "color": "green", "meaning": "Minervini Trend Template minimum. Combined with above-200DMA = real recovery."}
+      ],
+      "how_to_use": "Combine with % from high. Stocks that are >30% off lows AND <25% from highs are in the strongest part of the uptrend cycle.",
+      "common_pitfalls": "Volatile small caps can be >30% off lows mechanically without a real trend change — look at the chart shape, not just the number."
+    },
+    {
+      "id": "rs-proxy",
+      "category": "Relative Strength & Trend",
+      "term": "RS Proxy (6mo)",
+      "short_definition": "6-month price return of the stock minus 6-month return of SPY. A simple absolute relative-strength measure.",
+      "formula": "stock_6mo_return - spy_6mo_return",
+      "what_it_measures": "Mansfield RS is normalized to a 52-week trend; the RS proxy is a raw 6-month outperformance measure. Quicker to react to leadership changes, but noisier.",
+      "interpretation_scale": [
+        {"range": ">+20%", "label": "Strong outperformer", "color": "green"},
+        {"range": "+5% to +20%", "label": "Outperforming", "color": "lime"},
+        {"range": "-5% to +5%", "label": "In line", "color": "gray"},
+        {"range": "<-5%", "label": "Underperforming", "color": "red"}
+      ],
+      "how_to_use": "Use as a fast confirmation of Mansfield RS direction. They should generally agree; when they disagree, Mansfield is the more reliable indicator for trend status.",
+      "common_pitfalls": "A 6-month window can be dominated by a single event (earnings beat/miss, M&A). For trend status use Mansfield; for recent narrative use RS proxy."
+    },
+    {
+      "id": "vix",
+      "category": "Macro",
+      "term": "VIX",
+      "short_definition": "30-day implied volatility of the S&P 500, as derived from S&P 500 option prices. The 'fear gauge'.",
+      "formula": "30-day annualized implied vol from SPX options; computed by CBOE.",
+      "what_it_measures": "VIX is the market's pricing of how volatile the next 30 days will be. Low VIX = options are cheap = traders aren't worried. High VIX = options are expensive = hedging demand is high, fear is in the market. It's anti-correlated with SPY: VIX spikes when SPY drops.",
+      "interpretation_scale": [
+        {"range": "<15", "label": "Complacent", "color": "yellow", "meaning": "Low fear; often a sign of late-cycle exuberance. Risk of mean-reversion higher."},
+        {"range": "15-20", "label": "Normal", "color": "gray", "meaning": "Healthy range for a rising market."},
+        {"range": "20-25", "label": "Elevated", "color": "yellow", "meaning": "Investors are paying up for hedges; something is unsettled."},
+        {"range": "25-30", "label": "Stressed", "color": "orange", "meaning": "Material market stress; corrections are usually in progress."},
+        {"range": "30-40", "label": "Panic", "color": "red", "meaning": "Bear market reactions; capitulation phase begins."},
+        {"range": ">40", "label": "Capitulation", "color": "red", "meaning": "Historical bottoms (2008, 2020) hit here. Contrarian buy zone for those with risk budget."}
+      ],
+      "how_to_use": "Use as a regime filter and contrarian indicator. VIX <15 = trim risk; VIX >30 = capitulation buy setups appearing.",
+      "common_pitfalls": "VIX measures implied vol, not realized. Implied can stay elevated long after a panic if the market doesn't reverse. Don't trade VIX itself — use it to inform position sizing."
+    },
+    {
+      "id": "fear-greed-index",
+      "category": "Macro",
+      "term": "Fear & Greed Index",
+      "short_definition": "Composite sentiment index on a 0-100 scale. 0 = extreme fear, 100 = extreme greed. Best read as a contrarian signal at extremes.",
+      "formula": "CNN's composite of seven indicators (price momentum, breadth, options put/call, junk bond demand, etc.). Crypto variant from alternative.me uses a different basket.",
+      "what_it_measures": "Markets are driven by sentiment in the short run. F&G compresses multiple sentiment signals into one number. The middle of the range (40-60) tells you nothing; the extremes (≤20 or ≥80) are where contrarian setups appear.",
+      "interpretation_scale": [
+        {"range": "0-25", "label": "Extreme Fear", "color": "red", "meaning": "Capitulation zone — historically the best long entries. Buy when others are puking."},
+        {"range": "25-45", "label": "Fear", "color": "orange"},
+        {"range": "45-55", "label": "Neutral", "color": "gray", "meaning": "No edge from sentiment; trade on fundamentals."},
+        {"range": "55-75", "label": "Greed", "color": "lime"},
+        {"range": "75-100", "label": "Extreme Greed", "color": "yellow", "meaning": "Sell into strength; chop and corrections more likely than continued melt-up."}
+      ],
+      "how_to_use": "Use to time risk-on/risk-off lean, not specific entries. Pair with macro regime: extreme fear in a still-bullish macro = high-quality buy setup; extreme greed in a deteriorating macro = trim aggressively.",
+      "common_pitfalls": "When CNN's source is blocked, the dashboard falls back to alternative.me's crypto F&G (marked with ⚠️) which moves differently from equity sentiment. Greed can persist for months in trending bull markets — don't sell every '80' reading."
+    },
+    {
+      "id": "net-liquidity",
+      "category": "Macro",
+      "term": "Net Liquidity",
+      "short_definition": "Fed balance sheet minus Treasury General Account minus Reverse Repo. The amount of liquidity actually circulating in markets.",
+      "formula": "WALCL (Fed assets) − WTREGEN (Treasury cash) − RRPONTSYD (reverse repo balance)",
+      "what_it_measures": "The Fed's balance sheet (WALCL) is the headline number, but not all of it reaches markets. Money parked at the Treasury (TGA) or in the Fed's reverse-repo facility (RRP) is sterilized — it's on the Fed's balance sheet but not flowing through bank reserves into risk assets. Net liquidity strips those out to show what's actually circulating. Risk assets — especially small caps and crypto — track net liquidity with a 13-week lag.",
+      "interpretation_scale": [
+        {"range": "Rising 4w delta", "label": "Liquidity expanding", "color": "green", "meaning": "Tailwind for risk assets. Watch the 13-week lag."},
+        {"range": "Flat 4w delta", "label": "Neutral", "color": "gray"},
+        {"range": "Falling 4w delta", "label": "Liquidity contracting", "color": "red", "meaning": "Headwind. Defensive lean appropriate."}
+      ],
+      "how_to_use": "Track the 4-week change, not the absolute level. Inflections (positive after a long contraction or negative after a long expansion) are the most actionable signal. The 13-week lag means liquidity changes today show up in risk-asset prices over the following quarter.",
+      "origin": "Popularized by macro analysts in 2020-2022 as the QT/QE cycle made liquidity flows the dominant driver of risk-asset returns.",
+      "ken_quote": "Ken Teng calls this 'the only macro chart that matters' — when net liquidity is expanding, you want max risk-on positioning; when it's contracting, you want defense.",
+      "common_pitfalls": "TGA and RRP can move sharply on short-term Treasury operations without changing the underlying liquidity picture. Smooth with 4-week deltas. Net liquidity has lost some signal value as RRP balances have come down — the dynamic only worked while RRP was a $2T+ sterilization."
+    },
+    {
+      "id": "dxy",
+      "category": "Macro",
+      "term": "Dollar Index (DXY)",
+      "short_definition": "USD strength versus a basket of major foreign currencies. Strong dollar = global liquidity tightening; weak dollar = liquidity easing.",
+      "formula": "Weighted index of USD vs EUR (57.6%), JPY (13.6%), GBP (11.9%), CAD (9.1%), SEK (4.2%), CHF (3.6%)",
+      "what_it_measures": "The dollar is the global reserve currency. When DXY rises, dollar-denominated debt elsewhere becomes more expensive to service, EM currencies break, commodities get cheaper in USD, and risk assets globally tighten. The 'dollar smile' / 'dollar wrecking ball' / 'milkshake theory' all describe this dynamic — DXY going up tightens everything that's not the US.",
+      "interpretation_scale": [
+        {"range": "<95", "label": "Weak — risk-on fuel", "color": "green", "meaning": "Global liquidity easy; EM, commodities, risk assets benefit."},
+        {"range": "95-100", "label": "Neutral", "color": "gray"},
+        {"range": "100-105", "label": "Mildly tight", "color": "yellow", "meaning": "Some EM stress beginning; commodity-driven economies hurt."},
+        {"range": "105-110", "label": "Tight — things break", "color": "orange", "meaning": "Historically associated with EM crises, credit events. Risk-off lean appropriate."},
+        {"range": ">110", "label": "Historical crisis levels", "color": "red", "meaning": "1985, 2002, 2022 — extreme dollar moves typically resolve with policy intervention or crisis."}
+      ],
+      "how_to_use": "Watch DXY trend more than level. A rising DXY into a Fed pivot is the strongest signal that the pivot is real; a falling DXY into a hawkish surprise is the market saying the Fed has lost credibility. For US equities specifically, DXY is a secondary concern — but for global allocators and EM exposure it's primary.",
+      "origin": "Brent Johnson's 'Dollar Milkshake' theory: as the world's reserve currency, the dollar 'sucks up' global liquidity during dollar shortages, creating self-reinforcing strength.",
+      "common_pitfalls": "DXY's heavy EUR weighting (>57%) means it's really a USD/EUR index in disguise. For true dollar strength, check trade-weighted dollar or DXY vs broader baskets."
+    },
+    {
+      "id": "credit-spread",
+      "category": "Macro",
+      "term": "High Yield Credit Spread (HY OAS)",
+      "short_definition": "Yield on US high-yield (junk) corporate bonds, in excess of the comparable Treasury. The market's pricing of corporate default risk.",
+      "formula": "BAMLH0A0HYM2 from FRED — option-adjusted spread of the BofA US High Yield index over Treasuries, in basis points.",
+      "what_it_measures": "Junk bonds default. The spread is the compensation investors demand for taking that risk. When credit conditions are easy, spreads compress (investors are reaching for yield). When stress builds, spreads widen — investors are demanding more compensation, and corporate borrowing gets expensive. Credit spreads usually lead equities by weeks to months at major turns.",
+      "interpretation_scale": [
+        {"range": "<300bps", "label": "Complacent", "color": "yellow", "meaning": "Investors reaching for yield. Often late-cycle."},
+        {"range": "300-500bps", "label": "Normal", "color": "gray", "meaning": "Healthy compensation for default risk in a stable economy."},
+        {"range": "500-700bps", "label": "Stressed", "color": "orange", "meaning": "Material deterioration; defaults likely picking up."},
+        {"range": ">700bps", "label": "Risk-off confirmed", "color": "red", "meaning": "Bear-market conditions; corporate borrowing largely shut. >1000bps = capitulation."}
+      ],
+      "how_to_use": "Track 30-day delta and inflections. Spreads widening from low levels (e.g., 350 → 450) is more meaningful than spreads moving within a stressed regime. If spreads are widening while equities are still making highs, the credit market is warning you.",
+      "common_pitfalls": "Spreads are influenced by Treasury yields too — be careful interpreting absolute levels in different rate regimes. Compare to recent history. CLO and private-credit issuance can mask underlying stress that doesn't yet show up in HY OAS."
+    },
+    {
+      "id": "spy-200dma",
+      "category": "Macro",
+      "term": "SPY vs 200-day MA",
+      "short_definition": "Whether the S&P 500 (SPY) is trading above or below its 200-day moving average. The single most-watched bull/bear regime line.",
+      "formula": "SPY_price vs SPY_200_day_SMA",
+      "what_it_measures": "Trend regime for the index itself. Above 200-DMA = bull market regime; below = bear market regime. The line acts as support in bull regimes and resistance in bear regimes. Many algorithmic and pension allocators key on this exact threshold.",
+      "interpretation_scale": [
+        {"range": "Above, +5% or more", "label": "Strong uptrend", "color": "green"},
+        {"range": "Above, 0-5%", "label": "In uptrend, near support", "color": "lime"},
+        {"range": "Below, 0 to -5%", "label": "Lost the line", "color": "orange", "meaning": "First test of the regime — bull may try to reclaim."},
+        {"range": "Below, <-5%", "label": "Bear regime", "color": "red", "meaning": "Sustained break; institutional algorithms de-risking."}
+      ],
+      "how_to_use": "Use as the dominant regime filter. In a clear bull regime, lean long single names; in a clear bear regime, focus on defense, cash, or short setups. Sustained crosses of the 200-DMA usually mark multi-month-to-multi-year regime changes.",
+      "common_pitfalls": "Choppy markets can whipsaw across the 200-DMA repeatedly without a regime change. Look for sustained crosses (multiple weeks) on volume. The October 2022 low printed below the 200-DMA — single days don't matter, durability does."
+    },
+    {
+      "id": "composite-score",
+      "category": "Portfolio & Framework Concepts",
+      "term": "Composite Rank Score",
+      "short_definition": "Dashboard-internal composite that ranks tickers within a sector. Combines rating, Mansfield RS, revenue growth, trend, and proximity to highs.",
+      "formula": "rating_weight + clamp(mansfield_rs / 10, ±5) + rev_growth × 2 + above_200dma(±0.5) + near_high(+0.3 if pct_from_high ≤ 15%)",
+      "what_it_measures": "Most metrics individually are noisy or sector-dependent. The composite blends a hand-curated rating (Strong/Watch/Pass) with two leadership signals (Mansfield RS, trend), one fundamentals signal (revenue growth), and one momentum filter (proximity to highs). The result is a single number that approximates 'which name in this sector is best-positioned right now.'",
+      "interpretation_scale": [
+        {"range": ">+5", "label": "Top of the sector", "color": "green", "meaning": "Strong rating + leadership + trend + growth all aligned."},
+        {"range": "+2 to +5", "label": "Healthy", "color": "lime"},
+        {"range": "-2 to +2", "label": "Mixed", "color": "gray"},
+        {"range": "<-2", "label": "Bottom of the sector", "color": "red"}
+      ],
+      "how_to_use": "Look at the #1-3 names per sector for highest-conviction longs. The tooltip on the rank cell shows the per-component breakdown — useful for understanding why a particular name is rated where it is.",
+      "common_pitfalls": "The composite is an opinionated mix; it weights leadership and trend heavily. If you're a deep-value contrarian, the composite will rank against you intentionally. Edit the formula in scripts/refresh.py-paired logic if your style differs."
+    },
+    {
+      "id": "rating-system",
+      "category": "Portfolio & Framework Concepts",
+      "term": "Rating System (Strong / Watch / Pass)",
+      "short_definition": "Three-tier hand-curated rating per ticker. Strong = high-conviction long; Watch = on the bench; Pass = explicitly avoid.",
+      "what_it_measures": "Captures the user's qualitative conviction in each name, distinct from the metrics. The rating is the OUTPUT of the research process — fundamentals, valuation, trend, and report findings combined into one label. Every rated ticker has a structured rating_reasoning entry explaining the call.",
+      "interpretation_scale": [
+        {"range": "Strong", "label": "High conviction", "color": "green", "meaning": "Would size up. Real edge from research, not just liking the chart."},
+        {"range": "Watch", "label": "On the bench", "color": "yellow", "meaning": "Promising but waiting for a catalyst, better entry, or more evidence."},
+        {"range": "Pass", "label": "Explicitly avoid", "color": "red", "meaning": "Not just unrated — actively bearish on, or a value trap."},
+        {"range": "— (empty)", "label": "Unrated", "color": "gray", "meaning": "Not yet researched in depth. The reasoning field may still explain WHY it's unrated."}
+      ],
+      "how_to_use": "Click any rating chip in the watchlist to open the per-ticker reasoning modal (summary, primary drivers, key risks, evidence from reports and bottlenecks). The rating is a starting point; the reasoning is where the work is.",
+      "common_pitfalls": "Ratings get stale as the market and fundamentals evolve. The dashboard tracks rated_date — anything older than 3-6 months should be re-examined. Manual overrides (rated_by='manual') survive re-ingestion."
+    },
+    {
+      "id": "rating-strong",
+      "category": "Portfolio & Framework Concepts",
+      "term": "Rating: Strong",
+      "short_definition": "Highest conviction tier. A 'Strong' ticker has been explicitly recommended in a research report AND survives the metrics/trend/macro filter.",
+      "what_it_measures": "Strong is reserved for names where (a) at least one ingested report ranks them top-3 in their theme, (b) the fundamental story is intact, (c) the trend is up or repairing, and (d) valuation isn't dislocating from the growth profile. It is meant to be a small fraction of the watchlist — typically 15-25%.",
+      "interpretation_scale": [
+        {"range": "Assigned", "label": "Buy candidate", "color": "green", "meaning": "Size into on pullbacks or breakouts. Composite rank #1-2 in sector reinforces."}
+      ],
+      "how_to_use": "Strong does NOT mean buy right now at any price — combine with trend filters (Mansfield RS, above 200DMA, % from 52w high). A Strong rating + good metrics + favorable regime = high-conviction entry zone.",
+      "common_pitfalls": "Strong ratings can become wrong without you noticing — re-check the original report's thesis quarterly. If the catalyst has played out or the bottleneck has been solved, downgrade to Watch."
+    },
+    {
+      "id": "rating-watch",
+      "category": "Portfolio & Framework Concepts",
+      "term": "Rating: Watch",
+      "short_definition": "On the bench — there's a story but it's not yet actionable. Either waiting for a catalyst, better entry, or more conviction.",
+      "what_it_measures": "Watch is the largest tier. Tickers sit here when (a) the thematic exposure is right but the company is #4-10 in its theme (not top-3), (b) the fundamentals are healthy but valuation is stretched, (c) the trend is broken but the story is intact and a base is forming, or (d) bottleneck exposure exists but no direct report has covered the name yet.",
+      "interpretation_scale": [
+        {"range": "Assigned", "label": "Monitor", "color": "yellow", "meaning": "Not a buy today. Set conditions for upgrade or move to Pass."}
+      ],
+      "how_to_use": "Use the reasoning modal to understand WHY a Watch is a Watch — then track the missing piece. If the missing piece arrives (catalyst hits, valuation compresses, trend repairs), promote to Strong.",
+      "common_pitfalls": "The danger of Watch is letting it expand to include everything. Be disciplined — if a name has been Watch for 6+ months with no progress, demote to Pass."
+    },
+    {
+      "id": "rating-pass",
+      "category": "Portfolio & Framework Concepts",
+      "term": "Rating: Pass",
+      "short_definition": "Explicit avoid. Either the report's verdict was negative, the metrics are broken, or the company is a structural loser in its bottleneck.",
+      "what_it_measures": "Pass is not 'unrated' — it's actively bearish or skeptical. The reasoning modal will explain whether this is a balance-sheet problem, a structural-loser-of-bottleneck problem, a valuation-disconnect problem, or a trend-failure problem.",
+      "interpretation_scale": [
+        {"range": "Assigned", "label": "Avoid", "color": "red", "meaning": "Don't buy. Possibly short if the trend confirms."}
+      ],
+      "how_to_use": "Pass-rated names are useful as a short list or a 'what to avoid in this theme' filter. The 'Hide Pass' filter in the watchlist controls hides them when scanning for ideas.",
+      "common_pitfalls": "Pass ratings can be wrong if the company executes a turnaround. Re-examine annually."
+    },
+    {
+      "id": "bottleneck",
+      "category": "Portfolio & Framework Concepts",
+      "term": "Bottleneck",
+      "short_definition": "The physics, science, or structural constraint driving a thematic investment. Identifies WHY a theme works and WHO benefits.",
+      "what_it_measures": "Every durable investment theme has a physical or economic bottleneck at its core. Identifying the bottleneck tells you which companies are structural winners (they relieve the bottleneck) and which are structural losers (they're consumers of the bottleneck's output). The HBM memory-bandwidth bottleneck is the canonical example: inference is bandwidth-bound, not compute-bound, so HBM suppliers (Micron, SK Hynix, Samsung) and packaging specialists (TSM CoWoS, Amkor) capture disproportionate value.",
+      "interpretation_scale": [
+        {"range": "Winner", "label": "Relieves the bottleneck", "color": "green", "meaning": "Beneficiary of the constraint — pricing power, share gains."},
+        {"range": "At risk", "label": "Consumes the bottleneck", "color": "red", "meaning": "Margin compressed by the constraint — needs alternative, vertical integration, or substitution to escape."}
+      ],
+      "how_to_use": "When evaluating a new name, ask: which bottleneck does it sit on, and is it a winner or a consumer? The Bottlenecks tab in the dashboard lists all current bottlenecks with their physics, key metric, and the named winners/losers. Cross-reference against each ticker's bottlenecks_addressed list.",
+      "origin": "Framework drawn from Ken Teng / Chicken Genius and structural investing — 'find the physics constraint and own who relieves it'.",
+      "common_pitfalls": "Bottlenecks evolve. HBM bandwidth was THE constraint in 2024; by 2026 it may shift to optical interconnect or power delivery. Re-audit the bottleneck taxonomy as the technology moves."
+    },
+    {
+      "id": "regime",
+      "category": "Portfolio & Framework Concepts",
+      "term": "Macro Regime (RISK-ON / RISK-OFF / MIXED)",
+      "short_definition": "Three-state classification of the macro backdrop, synthesized from VIX + F&G + net liquidity + DXY + credit spreads + SPY 200-DMA.",
+      "what_it_measures": "Synthesizes six independent macro indicators into a single regime label. RISK-ON when 5+ indicators flash bullish; RISK-OFF when 4+ flash bearish; MIXED otherwise. Drives position-sizing lean — same ticker setup deserves bigger risk in RISK-ON than in RISK-OFF.",
+      "interpretation_scale": [
+        {"range": "RISK-ON", "label": "Risk-positive", "color": "green", "meaning": "VIX low, F&G healthy, liquidity expanding, dollar contained, credit spreads tight, SPY above 200DMA. Lean long; chase leaders; tolerate higher beta."},
+        {"range": "MIXED", "label": "Indeterminate", "color": "yellow", "meaning": "Cross-currents. Trade with smaller size; focus on individual setups rather than betas."},
+        {"range": "RISK-OFF", "label": "Risk-negative", "color": "red", "meaning": "Multiple indicators flashing red. Defensive lean; focus on cash, low-beta, or shorts. Avoid initiating new high-beta longs."}
+      ],
+      "how_to_use": "Adjust position size and beta tilt by regime — not which names to own, but how aggressively. A Strong-rated leader in RISK-OFF still works; you just size smaller and use tighter risk.",
+      "common_pitfalls": "Regime can flip on a single data print. Don't whipsaw — use 1-2 week confirmations. The synthesis is a heuristic, not a system; it can be wrong, especially at regime transitions."
+    },
+    {
+      "id": "sector-rotation",
+      "category": "Portfolio & Framework Concepts",
+      "term": "Sector Rotation (Leading / Improving / Weakening / Lagging)",
+      "short_definition": "Tags for the 11 SPDR sector ETFs based on Mansfield RS level and 30-day slope. Identifies which sectors institutional flow is favoring.",
+      "what_it_measures": "Combines two axes: current relative strength (above/below zero) and recent momentum (slope positive/negative). The four-quadrant tag tells you whether each sector is leading and accelerating, recovering, topping, or in a sustained downtrend.",
+      "interpretation_scale": [
+        {"range": "Leading", "label": "Mansfield >0, slope >0", "color": "green", "meaning": "Outperforming AND accelerating. Highest-conviction sector longs."},
+        {"range": "Improving", "label": "Mansfield <0, slope >0", "color": "lime", "meaning": "Repairing — could be early-stage rotation in. Watch for confirmation."},
+        {"range": "Weakening", "label": "Mansfield >0, slope <0", "color": "yellow", "meaning": "Still outperforming but momentum fading. Trim into strength."},
+        {"range": "Lagging", "label": "Mansfield <0, slope <0", "color": "red", "meaning": "Underperforming AND deteriorating. Avoid as long, possibly short."}
+      ],
+      "how_to_use": "Focus stock-picking effort in Leading and Improving sectors. Top-down filter — pick the sector first, then the best name within it.",
+      "origin": "Standard Mansfield-style rotation analysis; popularized in the IBD CAN SLIM framework and refined for the four-quadrant view by Stockcharts.com's John Murphy.",
+      "common_pitfalls": "Sector ETFs hide intra-sector dispersion. XLK's strength might be driven entirely by 3 mega-caps while the median name in the sector is weak. Use as a starting filter, not a final answer."
+    },
+    {
+      "id": "stack-layer",
+      "category": "Portfolio & Framework Concepts",
+      "term": "Stack Layer (Control / Operating / Expansion / Beneficiary)",
+      "short_definition": "Four-layer taxonomy describing where a company sits in the technology stack. From StockSavvyShay's framework.",
+      "what_it_measures": "Different layers of the stack capture value differently across the technology cycle. Control = the chokepoint that gates everything else (NVDA in AI compute). Operating = the platforms running on top (CRM, OS, hyperscalers). Expansion = the picks-and-shovels capacity build-out (memory, networking, power). Beneficiary = end-applications that use the new capability (AI-driven SaaS, robotics).",
+      "interpretation_scale": [
+        {"range": "Control", "label": "Chokepoint", "color": "green", "meaning": "Capture the most economic rent. Highest multiples sustained the longest."},
+        {"range": "Operating", "label": "Platforms", "color": "lime", "meaning": "Steady compounders once entrenched."},
+        {"range": "Expansion", "label": "Capacity build", "color": "yellow", "meaning": "Cyclical — front-loaded in capex cycles, then digestion."},
+        {"range": "Beneficiary", "label": "End applications", "color": "gray", "meaning": "Late-cycle value capture as the technology matures."}
+      ],
+      "how_to_use": "Map your watchlist by stack layer. Healthy thematic portfolios have exposure across layers, but the largest weights should be in Control and Expansion during the build-out phase of a cycle.",
+      "origin": "StockSavvyShay's investment framework — applies to any technology cycle (cloud, mobile, AI).",
+      "common_pitfalls": "Layers blur — NVDA is Control in AI compute but Expansion in optical networking. Be specific about which sub-theme you're classifying."
+    }
+  ]
+}

@@ -251,6 +251,57 @@ The **TOP RS / WEAKEST** strip at the top of the watchlist surfaces the 3 highes
 
 Tables collapse to a card layout via CSS grid (`grid-template-areas`). The visible cells become: rank, ticker, company, rating (top row); price, rev growth, above-200DMA, Mansfield (second row). Everything else is hidden in column mode but still present in the detail panel that expands on tap. Section headers and the controls bar become non-sticky on mobile to free up vertical space.
 
+## Glossary
+
+`data/glossary.json` is the single source of truth for every definition surfaced in the dashboard — column headers, macro indicators, regime labels, ratings, framework concepts. The dashboard reads it on load (mirrored to `docs/data/glossary.json` by `refresh.py` via the standard `*.json` glob) and turns every term into a clickable popover.
+
+### Schema
+
+```json
+{
+  "terms": [
+    {
+      "id":   "mansfield-rs",       // kebab-case unique key — referenced by data-glossary attrs in app.js
+      "category": "Relative Strength & Trend",
+      "term": "Mansfield Relative Strength",
+      "short_definition": "1-2 sentence punchline",
+      "formula":          "((current_ratio / 52w_SMA) - 1) × 100",
+      "what_it_measures": "1-2 paragraph explanation",
+      "interpretation_scale": [
+        {"range": "+10 or more", "label": "Strong leadership", "color": "green",  "meaning": "..."},
+        {"range": "+3 to +10",   "label": "Outperforming",     "color": "lime"},
+        {"range": "-3 to +3",    "label": "Neutral",           "color": "gray",   "meaning": "..."},
+        {"range": "-3 to -10",   "label": "Underperforming",   "color": "orange"},
+        {"range": "-10 or worse","label": "Lagging badly",     "color": "red",    "meaning": "..."}
+      ],
+      "how_to_use":       "When to act, what to combine with.",
+      "origin":           "Stan Weinstein (1988)",        // optional
+      "ken_quote":        "Optional Ken Teng framing",    // optional
+      "common_pitfalls":  "Where the metric breaks down"  // optional
+    }
+  ]
+}
+```
+
+Categories are rendered in the order they first appear in the file — keep new entries within an existing category if possible. Valid colors are `green | lime | yellow | orange | red | gray` (these map to the dot+highlight CSS in `style.css`).
+
+### Editing rules
+
+1. **Single source of truth.** All definitions live in `data/glossary.json`. Edit the JSON directly or ask Claude Code to update it — never duplicate definitions in markdown or hardcode them in `app.js`.
+2. **Every new dashboard metric ships with a glossary entry.** If `refresh.py` or `fetch_macro.py` adds a column, indicator, or chip, add a corresponding glossary entry in the same change. If you add a `data-glossary="foo-bar"` attribute to a DOM element, `foo-bar` must resolve in `glossary.json` (the JS prints a fallback message if it doesn't, but that's a defect, not a feature).
+3. **Be substantive.** Include real numbers, real thresholds (e.g., "software 70-90%, semis 50-70%"), and a "why this matters" reasoning sentence. Avoid bland textbook definitions. The interpretation scale is the most important field — that's the part that turns the dashboard into a teaching tool.
+4. **Refinements are welcome.** When the user learns something new and wants to refine a definition ("for biotech, gross margin <60% can still be fine because of pre-launch dynamics"), just edit the JSON. The dashboard picks it up on next load.
+
+### Context-aware popover
+
+Numeric cells in the watchlist (Mansfield, % From High, Rev YoY, P/S, EV/S, EV/EBITDA, EPS YoY, Above 200DMA) and macro banner chips (VIX, F&G, Net Liq, DXY, HY OAS, SPY vs 200DMA) carry `data-glossary-cell="<id>"` + `data-glossary-value="<value>"`. Clicking them opens the modal with a context lead line ("AMKR's Mansfield RS is +8.6 → Outperforming (lime zone)") and highlights the matching row in the interpretation scale.
+
+The matching logic lives in `scaleMatchIndex(id, value)` in `docs/app.js`. **If you add a new term with a numeric scale and want context-aware highlighting, add the corresponding case to that function** — the scale itself is just labels; the thresholds for "which row matches value X" are hardcoded JS because the `range` strings in JSON are intentionally human-readable, not parseable.
+
+### Rating chip is special
+
+Clicking a rating chip in the watchlist (Strong / Watch / Pass) opens the **per-ticker reasoning modal** (`rating_reasoning` content), not the glossary. Clicking the **Rating column header** opens the glossary `rating-system` entry. These are intentionally different surfaces: reasoning is "why is THIS ticker rated this way", glossary is "what does the rating SYSTEM mean".
+
 ## After editing tickers.json
 
 Remind the user to commit and push so the next Actions run picks up the new tickers:

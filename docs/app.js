@@ -28,6 +28,8 @@ const state = {
   // raw
   tickers: [], snapshots: {}, history: {}, reports: [], bottlenecks: [],
   macro: null, sectorRotation: [],
+  glossary: [],
+  glossaryById: new Map(),
   // joined rows (watchlist)
   rows: [],
   // lookups
@@ -96,9 +98,13 @@ async function init() {
     persistCollapsedSectors();
     renderWatchlist();
   });
+  document.getElementById("glossary-search").addEventListener("input", (e) => {
+    state.glossarySearch = e.target.value.trim().toLowerCase();
+    renderGlossary();
+  });
 
   try {
-    const [tickers, snapshots, history, reports, bottlenecks, macro, rotation] = await Promise.all([
+    const [tickers, snapshots, history, reports, bottlenecks, macro, rotation, glossary] = await Promise.all([
       fetchJSON(`${DATA_PATH}/tickers.json`, []),
       fetchJSON(`${DATA_PATH}/snapshots.json`, { last_updated: null, data: {} }),
       fetchJSON(`${DATA_PATH}/history.json`, {}),
@@ -106,6 +112,7 @@ async function init() {
       fetchJSON(`${DATA_PATH}/bottlenecks.json`, []),
       fetchJSON(`${DATA_PATH}/macro.json`, null),
       fetchJSON(`${DATA_PATH}/sector_rotation.json`, { sectors: [] }),
+      fetchJSON(`${DATA_PATH}/glossary.json`, { terms: [] }),
     ]);
     state.tickers = Array.isArray(tickers) ? tickers : [];
     state.snapshots = snapshots.data || {};
@@ -114,6 +121,8 @@ async function init() {
     state.bottlenecks = Array.isArray(bottlenecks) ? bottlenecks : [];
     state.macro = macro;
     state.sectorRotation = (rotation && Array.isArray(rotation.sectors)) ? rotation.sectors : [];
+    state.glossary = (glossary && Array.isArray(glossary.terms)) ? glossary.terms : [];
+    state.glossaryById = new Map(state.glossary.map((t) => [t.id, t]));
     document.getElementById("last-updated").textContent = snapshots.last_updated
       ? `Updated ${formatTimestamp(snapshots.last_updated)}`
       : "No data yet";
@@ -135,6 +144,8 @@ async function init() {
   renderReports();
   renderBottlenecks();
   renderMacroView();
+  renderGlossary();
+  wireGlossaryModalOnce();
   activateTab(restoreActiveTab());
 }
 
@@ -183,6 +194,7 @@ function renderTabs() {
     macroTab,
     `<button class="tab" data-tab="reports">Reports <span class="count">(${state.reports.length})</span></button>`,
     `<button class="tab" data-tab="bottlenecks">Bottlenecks <span class="count">(${state.bottlenecks.length})</span></button>`,
+    `<button class="tab" data-tab="glossary">Glossary <span class="count">(${state.glossary.length})</span></button>`,
   ].join("");
   nav.querySelectorAll(".tab").forEach((b) =>
     b.addEventListener("click", () => activateTab(b.dataset.tab))
@@ -206,7 +218,7 @@ function activateTab(tabId) {
   if (tabId === "all" || (typeof tabId === "string" && tabId.startsWith("sector:"))) {
     tabId = "watchlist";
   }
-  if (!["watchlist", "macro", "reports", "bottlenecks"].includes(tabId)) return;
+  if (!["watchlist", "macro", "reports", "bottlenecks", "glossary"].includes(tabId)) return;
 
   state.view = tabId;
   localStorage.setItem(STORAGE_KEYS.activeTab, state.view);
@@ -229,7 +241,7 @@ function activateTab(tabId) {
 function restoreActiveTab() {
   const saved = localStorage.getItem(STORAGE_KEYS.activeTab);
   if (!saved) return "watchlist";
-  if (["watchlist", "macro", "reports", "bottlenecks"].includes(saved)) return saved;
+  if (["watchlist", "macro", "reports", "bottlenecks", "glossary"].includes(saved)) return saved;
   // Legacy: 'all' or 'sector:X' from the old layout → unified watchlist
   return "watchlist";
 }
@@ -258,6 +270,8 @@ function applyScrollTarget() {
     ? `tr.data-row[data-ticker="${cssEscape(id)}"]`
     : kind === "report"
     ? `[data-report-id="${cssEscape(id)}"]`
+    : kind === "glossary"
+    ? `[data-glossary-id="${cssEscape(id)}"]`
     : `[data-bottleneck-id="${cssEscape(id)}"]`;
   const el = document.querySelector(sel);
   if (el) {
@@ -399,6 +413,8 @@ function renderWatchlist() {
     tr.addEventListener("click", (e) => {
       if (e.target.closest(".pill.clickable")) return;
       if (e.target.closest(".rating-clickable")) return;
+      // Glossary cells open the glossary popover instead of toggling the row.
+      if (e.target.closest("[data-glossary-cell], [data-glossary]")) return;
       const t = tr.dataset.ticker;
       if (state.expanded.has(t)) state.expanded.delete(t);
       else state.expanded.add(t);
@@ -419,25 +435,25 @@ function renderSectorTable(sortedRows, rankByTicker, sectorSize) {
     <table class="watchlist sector-table">
       <thead>
         <tr>
-          <th class="rank-col" title="Composite rank within sector">#</th>
+          <th class="rank-col glossary-clickable" data-glossary="composite-score" title="Composite rank — click for definition">#${glossaryIcon()}</th>
           <th>Ticker</th>
           <th>Company</th>
           <th class="num"${sortAttr("price")}>Price</th>
-          <th class="num"${sortAttr("market_cap")}>Mkt Cap</th>
-          <th class="num">Fwd P/E</th>
-          <th class="num"${sortAttr("rev_growth_yoy")}>Rev YoY</th>
-          <th class="num">EPS YoY</th>
-          <th class="num">Gross</th>
-          <th class="num">% From High</th>
-          <th>Above 200DMA</th>
-          <th class="num">RS</th>
-          <th class="num">P/S</th>
-          <th class="num">EV/S</th>
-          <th class="num">EV/EBITDA</th>
-          <th class="num"${sortAttr("mansfield_rs")}>Mansfield</th>
-          <th>vs SPY 52w</th>
-          <th>Ratio Trend</th>
-          <th${sortAttr("rating")}>Rating</th>
+          <th class="num glossary-clickable"${sortAttr("market_cap")} data-glossary="market-cap">Mkt Cap${glossaryIcon()}</th>
+          <th class="num glossary-clickable" data-glossary="pe-forward">Fwd P/E${glossaryIcon()}</th>
+          <th class="num glossary-clickable"${sortAttr("rev_growth_yoy")} data-glossary="rev-growth-yoy">Rev YoY${glossaryIcon()}</th>
+          <th class="num glossary-clickable" data-glossary="eps-growth-yoy">EPS YoY${glossaryIcon()}</th>
+          <th class="num glossary-clickable" data-glossary="gross-margin">Gross${glossaryIcon()}</th>
+          <th class="num glossary-clickable" data-glossary="pct-from-52w-high">% From High${glossaryIcon()}</th>
+          <th class="glossary-clickable" data-glossary="above-200dma">Above 200DMA${glossaryIcon()}</th>
+          <th class="num glossary-clickable" data-glossary="rs-proxy">RS${glossaryIcon()}</th>
+          <th class="num glossary-clickable" data-glossary="ps-ratio">P/S${glossaryIcon()}</th>
+          <th class="num glossary-clickable" data-glossary="ev-sales">EV/S${glossaryIcon()}</th>
+          <th class="num glossary-clickable" data-glossary="ev-ebitda">EV/EBITDA${glossaryIcon()}</th>
+          <th class="num glossary-clickable"${sortAttr("mansfield_rs")} data-glossary="mansfield-rs">Mansfield${glossaryIcon()}</th>
+          <th class="glossary-clickable" data-glossary="ratio-vs-spy">vs SPY 52w${glossaryIcon()}</th>
+          <th class="glossary-clickable" data-glossary="ratio-history-90d">Ratio Trend${glossaryIcon()}</th>
+          <th class="glossary-clickable"${sortAttr("rating")} data-glossary="rating-system">Rating${glossaryIcon()}</th>
         </tr>
       </thead>
       <tbody>
@@ -455,30 +471,42 @@ function renderTickerRow(r, rankInfo, sectorSize) {
   const tooltip = score != null
     ? `Composite ${score.toFixed(2)} = rating ${ratingWeightOf(r.rating).toFixed(1)} + mansfield ${mansfieldComponent(r.mansfield_rs).toFixed(2)} + rev ${revGrowthComponent(r.rev_growth_yoy).toFixed(2)} + 200DMA ${above200Component(r.above_200dma).toFixed(1)} + nearHigh ${nearHighComponent(r.pct_from_high).toFixed(1)}`
     : "";
+  // Context-aware cell attrs — clicking these opens the glossary popover
+  // with a lead line scoped to this ticker's value. Stops row-toggle via
+  // the centralized data-glossary-cell handler in wireGlossaryModalOnce.
+  const ctx = (id, value) => value == null
+    ? ""
+    : ` data-glossary-cell="${id}" data-glossary-value="${value}" data-glossary-ticker="${escapeAttr(r.ticker)}"`;
   return `
     <tr class="data-row ${exp ? "expanded" : ""}" data-ticker="${escapeAttr(r.ticker)}">
-      <td class="rank-cell ${rankClass}" title="${escapeAttr(tooltip)}">${rank}</td>
+      <td class="rank-cell ${rankClass} cell-glossary"${ctx("composite-score", score != null ? score.toFixed(2) : null)} title="${escapeAttr(tooltip)}">${rank}</td>
       <td class="ticker">${escapeText(r.ticker)}<span class="caret">${exp ? "▾" : "▸"}</span></td>
       <td>${escapeText(r.company || "")}</td>
       <td class="num">${fmtPrice(r.price)}</td>
       <td class="num">${fmtCap(r.market_cap)}</td>
       <td class="num">${fmtPE(r.pe_forward)}</td>
-      <td class="num ${revGrowthClass(r.rev_growth_yoy)}">${fmtPct(r.rev_growth_yoy, true)}</td>
-      <td class="num">${fmtPct(r.eps_growth_yoy, true)}</td>
+      <td class="num cell-glossary ${revGrowthClass(r.rev_growth_yoy)}"${ctx("rev-growth-yoy", r.rev_growth_yoy)}>${fmtPct(r.rev_growth_yoy, true)}</td>
+      <td class="num cell-glossary"${ctx("eps-growth-yoy", r.eps_growth_yoy)}>${fmtPct(r.eps_growth_yoy, true)}</td>
       <td class="num">${fmtPct(r.gross_margin)}</td>
-      <td class="num ${pctFromHighClass(r.pct_from_high)}">${fmtPct(r.pct_from_high)}</td>
-      <td class="${above200Class(r.above_200dma)}">${above200Text(r.above_200dma)}</td>
+      <td class="num cell-glossary ${pctFromHighClass(r.pct_from_high)}"${ctx("pct-from-52w-high", r.pct_from_high)}>${fmtPct(r.pct_from_high)}</td>
+      <td class="cell-glossary ${above200Class(r.above_200dma)}"${ctx("above-200dma", r.above_200dma == null ? null : (r.above_200dma ? "true" : "false"))}>${above200Text(r.above_200dma)}</td>
       <td class="num">${fmtPct(r.rs_proxy, true)}</td>
-      <td class="num">${fmtX(r.ps_ratio)}</td>
-      <td class="num">${fmtX(r.ev_to_sales)}</td>
-      <td class="num">${fmtEvEbitda(r.ev_to_ebitda)}</td>
-      <td class="num mansfield-cell ${mansfieldClass(r.mansfield_rs)}">${fmtMansfield(r.mansfield_rs)}</td>
+      <td class="num cell-glossary"${ctx("ps-ratio", r.ps_ratio)}>${fmtX(r.ps_ratio)}</td>
+      <td class="num cell-glossary"${ctx("ev-sales", r.ev_to_sales)}>${fmtX(r.ev_to_sales)}</td>
+      <td class="num cell-glossary"${ctx("ev-ebitda", r.ev_to_ebitda)}>${fmtEvEbitda(r.ev_to_ebitda)}</td>
+      <td class="num mansfield-cell cell-glossary ${mansfieldClass(r.mansfield_rs)}"${ctx("mansfield-rs", r.mansfield_rs)}>${fmtMansfield(r.mansfield_rs)}</td>
       <td class="${above200Class(r.ratio_above_sma)}">${ratioAboveSmaText(r.ratio_above_sma)}</td>
       <td class="ratio-trend-cell">${miniSparkline(r.ratio_history_90d || [])}</td>
       <td>${ratingPill(r.rating, r.ticker)}</td>
     </tr>
     ${exp ? `<tr class="detail-row"><td colspan="19">${renderTickerDetail(r)}</td></tr>` : ""}
   `;
+}
+
+// Small info icon HTML appended to glossary-clickable elements. Single source
+// of truth so styling and accessibility attributes stay consistent.
+function glossaryIcon() {
+  return ` <span class="glossary-info" aria-hidden="true">ⓘ</span>`;
 }
 
 function rankCellClass(rank, sectorSize) {
@@ -956,6 +984,308 @@ function copyOverrideSnippet(t, btn) {
   }
 }
 
+// ============ glossary system ============
+//
+// Two surfaces:
+// - Modal popover (#glossary-modal): opened by clicking any term/header/cell
+//   with a data-glossary or data-glossary-cell attribute. Optionally shows a
+//   context-aware lead line ("AMKR's Mansfield RS is +8.6 → Outperforming")
+//   plus highlights the matching row in the interpretation scale.
+// - Full Glossary tab: scrollable reference of every term, grouped by
+//   category, with a search filter.
+
+let _glossaryModalWired = false;
+function wireGlossaryModalOnce() {
+  if (_glossaryModalWired) return;
+  _glossaryModalWired = true;
+  document.querySelectorAll("#glossary-modal [data-close-glossary]").forEach((el) =>
+    el.addEventListener("click", closeGlossaryModal)
+  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeGlossaryModal();
+  });
+  document.getElementById("glossary-modal-fullview").addEventListener("click", (e) => {
+    e.preventDefault();
+    const id = document.getElementById("glossary-modal").dataset.currentTerm || "";
+    closeGlossaryModal();
+    state.scrollTarget = id ? { kind: "glossary", id } : null;
+    activateTab("glossary");
+  });
+  // Delegate clicks anywhere in the document to open the modal whenever a
+  // glossary-tagged element is clicked. This keeps individual render sites
+  // free from having to re-wire after every re-render.
+  //
+  // Conflict rule: when the same header drives BOTH sorting and glossary
+  // (rotation-table th has data-rsort + data-glossary), the ⓘ icon opens
+  // glossary; the rest of the header sorts. Watchlist sector-table headers
+  // don't sort on click (sort is via dropdown), so the whole header opens
+  // the glossary.
+  document.addEventListener("click", (e) => {
+    const cellEl = e.target.closest("[data-glossary-cell]");
+    if (cellEl) {
+      const id = cellEl.dataset.glossaryCell;
+      const value = cellEl.dataset.glossaryValue;
+      const ticker = cellEl.dataset.glossaryTicker;
+      openGlossaryModal(id, { value, ticker });
+      return;
+    }
+    const termEl = e.target.closest("[data-glossary]");
+    if (!termEl) return;
+    const isSortHeader = termEl.matches("[data-rsort]");
+    const clickedIcon  = e.target.closest(".glossary-info");
+    if (isSortHeader && !clickedIcon) return; // let the sort handler win
+    openGlossaryModal(termEl.dataset.glossary, null);
+  });
+}
+
+function openGlossaryModal(id, context) {
+  const term = state.glossaryById.get(id);
+  const modal = document.getElementById("glossary-modal");
+  modal.dataset.currentTerm = id || "";
+  if (!term) {
+    document.getElementById("glossary-modal-title").textContent = `(${id || "unknown"})`;
+    document.getElementById("glossary-modal-category").textContent = "";
+    document.getElementById("glossary-modal-body").innerHTML =
+      `<div class="muted">No glossary entry for <code>${escapeText(id || "")}</code>. Add one to <code>data/glossary.json</code>.</div>`;
+  } else {
+    document.getElementById("glossary-modal-title").textContent = term.term;
+    document.getElementById("glossary-modal-category").textContent = term.category || "";
+    document.getElementById("glossary-modal-body").innerHTML = renderGlossaryBody(term, context);
+  }
+  modal.hidden = false;
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closeGlossaryModal() {
+  const modal = document.getElementById("glossary-modal");
+  if (!modal) return;
+  modal.hidden = true;
+  modal.setAttribute("aria-hidden", "true");
+  delete modal.dataset.currentTerm;
+}
+
+function renderGlossaryBody(term, context) {
+  const matchIdx = context && context.value != null
+    ? scaleMatchIndex(term.id, context.value)
+    : -1;
+  // Context-aware lead line: "<TICKER>'s <metric> is <value> → <label>"
+  let contextHtml = "";
+  if (context && context.value != null && matchIdx >= 0 && term.interpretation_scale?.[matchIdx]) {
+    const row = term.interpretation_scale[matchIdx];
+    const ticker = context.ticker ? `<strong>${escapeText(context.ticker)}'s</strong> ` : "";
+    contextHtml = `<div class="glossary-context glossary-color-${escapeAttr(row.color || "gray")}">
+      ${ticker}${escapeText(term.term)} is <strong>${escapeText(formatContextValue(term.id, context.value))}</strong>
+       → ${escapeText(row.label)} <span class="muted small">(${escapeText(row.color || "")} zone)</span>
+    </div>`;
+  } else if (context && context.value != null) {
+    contextHtml = `<div class="glossary-context">
+      ${context.ticker ? `<strong>${escapeText(context.ticker)}'s</strong> ` : ""}
+      ${escapeText(term.term)} is <strong>${escapeText(formatContextValue(term.id, context.value))}</strong>
+    </div>`;
+  }
+
+  const sections = [];
+  if (term.short_definition) sections.push(`<div class="glossary-section glossary-short">${escapeText(term.short_definition)}</div>`);
+  if (term.formula)         sections.push(`<div class="glossary-section"><div class="glossary-label">Formula</div><div class="glossary-formula">${escapeText(term.formula)}</div></div>`);
+  if (term.what_it_measures) sections.push(`<div class="glossary-section"><div class="glossary-label">What it measures</div><div>${escapeText(term.what_it_measures)}</div></div>`);
+  if (Array.isArray(term.interpretation_scale) && term.interpretation_scale.length) {
+    sections.push(`<div class="glossary-section">
+      <div class="glossary-label">How to read</div>
+      <ul class="glossary-scale">
+        ${term.interpretation_scale.map((row, i) => `
+          <li class="glossary-scale-row ${i === matchIdx ? "match" : ""}">
+            <span class="glossary-dot glossary-color-${escapeAttr(row.color || "gray")}" aria-hidden="true"></span>
+            <span class="glossary-range">${escapeText(row.range || "")}</span>
+            <span class="glossary-rlabel">${escapeText(row.label || "")}</span>
+            ${row.meaning ? `<div class="glossary-meaning muted small">${escapeText(row.meaning)}</div>` : ""}
+          </li>`).join("")}
+      </ul>
+    </div>`);
+  }
+  if (term.how_to_use)      sections.push(`<div class="glossary-section"><div class="glossary-label">How to use</div><div>${escapeText(term.how_to_use)}</div></div>`);
+  if (term.origin)          sections.push(`<div class="glossary-section"><div class="glossary-label">Origin</div><div class="muted small">${escapeText(term.origin)}</div></div>`);
+  if (term.ken_quote)       sections.push(`<div class="glossary-section glossary-quote">${escapeText(term.ken_quote)}</div>`);
+  if (term.common_pitfalls) sections.push(`<div class="glossary-section"><div class="glossary-label">Common pitfalls</div><div>${escapeText(term.common_pitfalls)}</div></div>`);
+
+  return contextHtml + sections.join("");
+}
+
+// Numeric-threshold matchers for context-aware highlighting. Each function
+// takes the raw cell value (string, since it came from a data-attribute) and
+// returns the matching index in the term's interpretation_scale array.
+function scaleMatchIndex(id, rawValue) {
+  if (rawValue == null || rawValue === "") return -1;
+  // booleans encoded as "yes"/"no" / "true"/"false"
+  if (id === "above-200dma" || id === "spy-200dma") {
+    if (rawValue === "true" || rawValue === "yes")  return 0;
+    if (rawValue === "false" || rawValue === "no") return 1;
+  }
+  const v = parseFloat(rawValue);
+  if (Number.isNaN(v)) return -1;
+  switch (id) {
+    case "mansfield-rs":
+      if (v >= 10) return 0;
+      if (v >= 3)  return 1;
+      if (v >= -3) return 2;
+      if (v >= -10) return 3;
+      return 4;
+    case "rev-growth-yoy":  // expects percentage (e.g. 0.30 = 30%)
+      if (v < 0)     return 0;
+      if (v < 0.10)  return 1;
+      if (v < 0.25)  return 2;
+      if (v < 0.50)  return 3;
+      return 4;
+    case "eps-growth-yoy":
+      if (v < 0)     return 0;
+      if (v < 0.10)  return 1;
+      if (v < 0.25)  return 2;
+      if (v < 0.50)  return 3;
+      return 4;
+    case "pct-from-52w-high":
+      if (v < 0.15)  return 0;
+      if (v < 0.25)  return 1;
+      if (v < 0.40)  return 2;
+      return 3;
+    case "ps-ratio":
+      if (v < 2)   return 0;
+      if (v < 6)   return 1;
+      if (v < 15)  return 2;
+      if (v < 25)  return 3;
+      return 4;
+    case "ev-sales":
+      if (v < 2)   return 0;
+      if (v < 6)   return 1;
+      if (v < 15)  return 2;
+      return 3;
+    case "ev-ebitda":
+      if (v <= 0)  return 4;  // n/m
+      if (v < 10)  return 0;
+      if (v < 15)  return 1;
+      if (v < 25)  return 2;
+      return 3;
+    case "vix":
+      if (v < 15)  return 0;
+      if (v < 20)  return 1;
+      if (v < 25)  return 2;
+      if (v < 30)  return 3;
+      if (v < 40)  return 4;
+      return 5;
+    case "fear-greed-index":
+      if (v < 25)  return 0;
+      if (v < 45)  return 1;
+      if (v < 55)  return 2;
+      if (v < 75)  return 3;
+      return 4;
+    case "dxy":
+      if (v < 95)   return 0;
+      if (v < 100)  return 1;
+      if (v < 105)  return 2;
+      if (v < 110)  return 3;
+      return 4;
+    case "credit-spread":
+      if (v < 300)  return 0;
+      if (v < 500)  return 1;
+      if (v < 700)  return 2;
+      return 3;
+    case "composite-score":
+      if (v > 5)   return 0;
+      if (v > 2)   return 1;
+      if (v > -2)  return 2;
+      return 3;
+    default:
+      return -1;
+  }
+}
+
+// Format a context value for display in the lead line — matches the column's
+// in-row format (percentages, multiples, basis points, etc.).
+function formatContextValue(id, rawValue) {
+  const v = parseFloat(rawValue);
+  if (Number.isNaN(v)) return rawValue;
+  switch (id) {
+    case "rev-growth-yoy":
+    case "eps-growth-yoy":
+    case "pct-from-52w-high":
+    case "gross-margin":
+    case "op-margin":
+    case "fcf-margin":
+      return `${(v * 100).toFixed(1)}%`;
+    case "ps-ratio":
+    case "ev-sales":
+    case "ev-ebitda":
+    case "pe-forward":
+    case "pe-trailing":
+      return `${v.toFixed(1)}x`;
+    case "mansfield-rs":
+      return `${v >= 0 ? "+" : ""}${v.toFixed(1)}`;
+    case "credit-spread":
+      return `${Math.round(v)} bps`;
+    case "dxy":
+    case "vix":
+      return v.toFixed(1);
+    case "fear-greed-index":
+      return v.toFixed(0);
+    case "above-200dma":
+    case "spy-200dma":
+      return rawValue === "true" || rawValue === "yes" ? "Yes" : "No";
+    case "composite-score":
+      return v.toFixed(2);
+    default:
+      return rawValue;
+  }
+}
+
+// ============ glossary view (full reference tab) ============
+
+function renderGlossary() {
+  const container = document.getElementById("glossary-sections");
+  const empty = document.getElementById("empty-glossary");
+  if (state.glossary.length === 0) {
+    container.innerHTML = "";
+    empty.hidden = false;
+    empty.textContent = "No glossary terms loaded (data/glossary.json missing or empty).";
+    return;
+  }
+  const q = state.glossarySearch || "";
+  const matches = (t) => {
+    if (!q) return true;
+    const hay = `${t.term} ${t.short_definition || ""} ${t.what_it_measures || ""} ${t.id}`.toLowerCase();
+    return hay.includes(q);
+  };
+  // Preserve insertion order of categories as they first appear in the data,
+  // not alphabetical — gives the user authored control over category order.
+  const order = [];
+  const seen = new Set();
+  for (const t of state.glossary) {
+    if (!seen.has(t.category)) { seen.add(t.category); order.push(t.category); }
+  }
+  let totalMatching = 0;
+  const html = order.map((cat) => {
+    const terms = state.glossary.filter((t) => t.category === cat && matches(t));
+    if (terms.length === 0) return "";
+    totalMatching += terms.length;
+    return `
+      <section class="glossary-category" data-category="${escapeAttr(cat)}">
+        <h2 class="glossary-cat-name">${escapeText(cat)} <span class="muted small">(${terms.length})</span></h2>
+        <div class="glossary-cat-grid">
+          ${terms.map((t) => `
+            <article class="glossary-card" data-glossary-id="${escapeAttr(t.id)}">
+              <header class="glossary-card-header">
+                <h3>${escapeText(t.term)}</h3>
+                <code class="muted small">${escapeText(t.id)}</code>
+              </header>
+              ${renderGlossaryBody(t, null)}
+            </article>
+          `).join("")}
+        </div>
+      </section>
+    `;
+  }).join("");
+  container.innerHTML = html;
+  empty.hidden = totalMatching > 0;
+  if (totalMatching === 0) empty.textContent = `No terms match "${q}".`;
+}
+
 // ============ macro banner + macro view ============
 
 function renderMacroBanner() {
@@ -973,33 +1303,54 @@ function renderMacroBanner() {
     return "neut";
   };
 
+  // Each chip carries data-glossary (term) and data-glossary-cell+value (for
+  // context-aware popover that highlights the current zone in the scale).
+  const chip = (cls, glossaryId, lblHtml, valHtml, contextValue) => {
+    const ctx = contextValue != null
+      ? ` data-glossary-cell="${glossaryId}" data-glossary-value="${contextValue}"`
+      : "";
+    return `<span class="indicator-chip glossary-clickable ${cls}" data-glossary="${glossaryId}"${ctx}><span class="lbl">${lblHtml}</span><span class="val">${valHtml}</span></span>`;
+  };
   const chips = [];
   if (ind.vix?.current != null)
-    chips.push(`<span class="indicator-chip ${classify("VIX")}"><span class="lbl">VIX</span><span class="val">${ind.vix.current.toFixed(1)}</span></span>`);
+    chips.push(chip(classify("VIX"), "vix", "VIX", ind.vix.current.toFixed(1), ind.vix.current));
   if (ind.fear_greed?.value != null) {
     const src = ind.fear_greed.source?.includes("CRYPTO") ? " ⚠️" : "";
-    chips.push(`<span class="indicator-chip ${classify("F&G")}"><span class="lbl">F&amp;G${src}</span><span class="val">${ind.fear_greed.value.toFixed(0)} (${escapeText(ind.fear_greed.regime || "?")})</span></span>`);
+    chips.push(chip(classify("F&G"), "fear-greed-index",
+      `F&amp;G${src}`,
+      `${ind.fear_greed.value.toFixed(0)} (${escapeText(ind.fear_greed.regime || "?")})`,
+      ind.fear_greed.value));
   }
   if (ind.net_liquidity?.delta_4w != null) {
     const sign = ind.net_liquidity.delta_4w >= 0 ? "+" : "";
-    chips.push(`<span class="indicator-chip ${classify("Net Liq")}"><span class="lbl">Net Liq Δ4w</span><span class="val">${sign}$${Math.round(ind.net_liquidity.delta_4w)}B</span></span>`);
+    chips.push(chip(classify("Net Liq"), "net-liquidity",
+      "Net Liq Δ4w",
+      `${sign}$${Math.round(ind.net_liquidity.delta_4w)}B`,
+      ind.net_liquidity.delta_4w));
   }
   if (ind.dxy?.current != null)
-    chips.push(`<span class="indicator-chip ${classify("DXY")}"><span class="lbl">DXY</span><span class="val">${ind.dxy.current.toFixed(1)}</span></span>`);
+    chips.push(chip(classify("DXY"), "dxy", "DXY", ind.dxy.current.toFixed(1), ind.dxy.current));
   if (ind.credit_spread?.current_bps != null)
-    chips.push(`<span class="indicator-chip ${classify("HY OAS")}"><span class="lbl">HY OAS</span><span class="val">${Math.round(ind.credit_spread.current_bps)}bps</span></span>`);
+    chips.push(chip(classify("HY OAS"), "credit-spread", "HY OAS", `${Math.round(ind.credit_spread.current_bps)}bps`, ind.credit_spread.current_bps));
   if (ind.spy_200dma?.above_200dma != null) {
     const c = ind.spy_200dma.above_200dma ? "bull" : "bear";
     const sign = ind.spy_200dma.pct_from_200dma >= 0 ? "+" : "";
-    chips.push(`<span class="indicator-chip ${c}"><span class="lbl">SPY vs 200DMA</span><span class="val">${sign}${ind.spy_200dma.pct_from_200dma.toFixed(1)}%</span></span>`);
+    chips.push(chip(c, "spy-200dma", "SPY vs 200DMA", `${sign}${ind.spy_200dma.pct_from_200dma.toFixed(1)}%`,
+      ind.spy_200dma.above_200dma ? "true" : "false"));
   }
 
   banner.innerHTML = `
-    <span class="regime-pill ${regimeClass}">REGIME: ${escapeText(m.regime || "?")}</span>
+    <span class="regime-pill glossary-clickable ${regimeClass}" data-glossary="regime">REGIME: ${escapeText(m.regime || "?")}</span>
     ${chips.join("")}
-    <span class="muted small" style="margin-left:auto; flex-shrink:0;">click → Macro tab</span>
+    <span class="banner-jump muted small">click background → Macro tab</span>
   `;
-  banner.addEventListener("click", () => activateTab("macro"), { once: false });
+  // The banner background opens the Macro tab, but clicking a chip/regime
+  // pill should open the glossary popover — defer to the centralized
+  // data-glossary delegator and skip the tab jump when that fires.
+  banner.addEventListener("click", (e) => {
+    if (e.target.closest("[data-glossary], [data-glossary-cell]")) return;
+    activateTab("macro");
+  });
 }
 
 function renderMacroView() {
@@ -1019,7 +1370,7 @@ function renderMacroView() {
   const regimeCard = `
     <article class="regime-card">
       <div class="headline">
-        <span class="regime-pill ${regimeClass}">REGIME: ${escapeText(m.regime || "?")}</span>
+        <span class="regime-pill glossary-clickable ${regimeClass}" data-glossary="regime">REGIME: ${escapeText(m.regime || "?")}</span>
         <span class="muted small">Last updated ${formatTimestamp(m.last_updated)}</span>
       </div>
       <p class="reasoning">${escapeText(m.regime_reasoning || "")}</p>
@@ -1052,7 +1403,7 @@ function renderIndicatorCards(ind) {
 
   if (ind.vix) {
     const sig = ind.vix.current == null ? "neut" : (ind.vix.current < 20 ? "bull" : ind.vix.current > 25 ? "bear" : "neut");
-    cards.push(card("VIX", fmtN(ind.vix.current, 2), ind.vix.regime, sig,
+    cards.push(card("VIX", "vix", fmtN(ind.vix.current, 2), ind.vix.regime, sig,
       ind.vix.sma_20d != null ? `20d SMA ${ind.vix.sma_20d.toFixed(1)}` : "",
       ind.vix.description));
   }
@@ -1061,19 +1412,19 @@ function renderIndicatorCards(ind) {
     const sig = v == null ? "neut" : (v > 50 ? "bull" : v < 30 ? "bear" : "neut");
     const cnnFallback = ind.fear_greed.source?.includes("CRYPTO") ? " ⚠️ fallback" : "";
     const deltaTxt = ind.fear_greed.prev_week != null ? `vs ${ind.fear_greed.prev_week.toFixed(0)} prev week` : "";
-    cards.push(card(`Fear & Greed${cnnFallback}`, fmtN(v, 0), ind.fear_greed.regime, sig, deltaTxt, ind.fear_greed.description));
+    cards.push(card(`Fear & Greed${cnnFallback}`, "fear-greed-index", fmtN(v, 0), ind.fear_greed.regime, sig, deltaTxt, ind.fear_greed.description));
   }
   if (ind.net_liquidity) {
     const d = ind.net_liquidity.direction;
     const sig = d === "expanding" ? "bull" : d === "contracting" ? "bear" : "neut";
     const valStr = ind.net_liquidity.current != null ? `$${(ind.net_liquidity.current / 1000).toFixed(2)}T` : "—";
     const deltas = `Δ4w ${fmtSigned(ind.net_liquidity.delta_4w, "B")} · Δ13w ${fmtSigned(ind.net_liquidity.delta_13w, "B")}`;
-    cards.push(card("Net Liquidity", valStr, ind.net_liquidity.direction, sig, deltas, ind.net_liquidity.description));
+    cards.push(card("Net Liquidity", "net-liquidity", valStr, ind.net_liquidity.direction, sig, deltas, ind.net_liquidity.description));
   }
   if (ind.dxy) {
     const v = ind.dxy.current;
     const sig = v == null ? "neut" : (v < 100 ? "bull" : v > 105 ? "bear" : "neut");
-    cards.push(card("DXY", fmtN(v, 2), ind.dxy.regime, sig,
+    cards.push(card("DXY", "dxy", fmtN(v, 2), ind.dxy.regime, sig,
       ind.dxy.sma_50d != null ? `50d SMA ${ind.dxy.sma_50d.toFixed(1)}` : "",
       ind.dxy.description));
   }
@@ -1082,7 +1433,7 @@ function renderIndicatorCards(ind) {
     const sig = bps == null ? "neut" : (bps < 400 ? "bull" : bps > 500 ? "bear" : "neut");
     const deltaTxt = ind.credit_spread.delta_4w_bps != null
       ? `Δ4w ${fmtSigned(ind.credit_spread.delta_4w_bps, "bps")}` : "";
-    cards.push(card("HY Credit Spread", bps != null ? `${Math.round(bps)} bps` : "—",
+    cards.push(card("HY Credit Spread", "credit-spread", bps != null ? `${Math.round(bps)} bps` : "—",
       ind.credit_spread.regime, sig, deltaTxt, ind.credit_spread.description));
   }
   if (ind.spy_200dma) {
@@ -1092,15 +1443,17 @@ function renderIndicatorCards(ind) {
     const val = ind.spy_200dma.price != null ? `$${ind.spy_200dma.price.toFixed(2)}` : "—";
     const tag = above == null ? "?" : above ? "Above" : "Below";
     const deltaTxt = pct != null ? `${pct >= 0 ? "+" : ""}${pct.toFixed(2)}% vs 200DMA ($${(ind.spy_200dma.dma_200 || 0).toFixed(2)})` : "";
-    cards.push(card("SPY vs 200DMA", val, tag, sig, deltaTxt, ind.spy_200dma.description));
+    cards.push(card("SPY vs 200DMA", "spy-200dma", val, tag, sig, deltaTxt, ind.spy_200dma.description));
   }
   return cards.join("");
 }
 
-function card(title, val, tag, sig, deltas, desc) {
+function card(title, glossaryId, val, tag, sig, deltas, desc) {
+  const titleAttr = glossaryId ? ` class="ind-title glossary-clickable" data-glossary="${escapeAttr(glossaryId)}"` : ` class="ind-title"`;
+  const titleIcon = glossaryId ? glossaryIcon() : "";
   return `
     <article class="macro-card">
-      <div class="ind-title">${escapeText(title)}</div>
+      <div${titleAttr}>${escapeText(title)}${titleIcon}</div>
       <div class="ind-val">${val}</div>
       ${tag ? `<span class="ind-tag ${sig}">${escapeText(tag)}</span>` : ""}
       ${deltas ? `<div class="ind-deltas">${escapeText(deltas)}</div>` : ""}
@@ -1134,10 +1487,10 @@ function renderSectorRotationTable() {
         <tr>
           <th data-rsort="etf" class="${sortInd('etf')}">ETF</th>
           <th data-rsort="name" class="${sortInd('name')}">Sector</th>
-          <th data-rsort="mansfield_rs" class="num ${sortInd('mansfield_rs')}">Mansfield RS</th>
-          <th data-rsort="ratio_above_sma" class="${sortInd('ratio_above_sma')}">Above 52w SMA?</th>
-          <th data-rsort="ratio_slope_30d" class="num ${sortInd('ratio_slope_30d')}">30d Slope</th>
-          <th data-rsort="regime_tag" class="${sortInd('regime_tag')}">Tag</th>
+          <th data-rsort="mansfield_rs" class="num ${sortInd('mansfield_rs')} glossary-clickable" data-glossary="mansfield-rs">Mansfield RS${glossaryIcon()}</th>
+          <th data-rsort="ratio_above_sma" class="${sortInd('ratio_above_sma')} glossary-clickable" data-glossary="ratio-vs-spy">Above 52w SMA?${glossaryIcon()}</th>
+          <th data-rsort="ratio_slope_30d" class="num ${sortInd('ratio_slope_30d')} glossary-clickable" data-glossary="ratio-slope-30d">30d Slope${glossaryIcon()}</th>
+          <th data-rsort="regime_tag" class="${sortInd('regime_tag')} glossary-clickable" data-glossary="sector-rotation">Tag${glossaryIcon()}</th>
         </tr>
       </thead>
       <tbody>
@@ -1158,7 +1511,9 @@ function renderSectorRotationTable() {
 
 function wireRotationHeaders() {
   document.querySelectorAll('#rotation-table thead th[data-rsort]').forEach(th => {
-    th.addEventListener("click", () => {
+    th.addEventListener("click", (e) => {
+      // ⓘ icon clicks go to the glossary delegator; everything else sorts.
+      if (e.target.closest(".glossary-info")) return;
       const key = th.dataset.rsort;
       if (state.rotationSortKey === key) {
         state.rotationSortDir = state.rotationSortDir === "asc" ? "desc" : "asc";

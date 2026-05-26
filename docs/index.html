@@ -88,6 +88,36 @@
     </main>
   </section>
 
+  <!-- Glossary view -->
+  <section id="view-glossary" class="view" hidden>
+    <main class="glossary-main">
+      <div class="glossary-controls">
+        <input id="glossary-search" type="search" placeholder="Search terms…" autocomplete="off" autocapitalize="off" spellcheck="false">
+      </div>
+      <div id="glossary-sections"></div>
+      <div id="empty-glossary" hidden>No terms match.</div>
+    </main>
+  </section>
+
+  <!-- Glossary popover modal -->
+  <div id="glossary-modal" class="modal" hidden aria-hidden="true" role="dialog" aria-labelledby="glossary-modal-title">
+    <div class="modal-backdrop" data-close-glossary></div>
+    <div class="modal-card" role="document">
+      <header class="modal-header">
+        <div class="modal-title-row">
+          <h2 id="glossary-modal-title"></h2>
+          <span id="glossary-modal-category" class="muted small"></span>
+        </div>
+        <button class="modal-close" aria-label="Close" data-close-glossary>✕</button>
+      </header>
+      <div id="glossary-modal-body"></div>
+      <footer class="modal-footer">
+        <a href="#" id="glossary-modal-fullview" class="modal-btn ghost">Open in Glossary tab →</a>
+        <button class="modal-btn" data-close-glossary>Close</button>
+      </footer>
+    </div>
+  </div>
+
   <!-- Rating reasoning modal -->
   <div id="rating-modal" class="modal" hidden aria-hidden="true" role="dialog" aria-labelledby="rating-modal-title">
     <div class="modal-backdrop" data-close-modal></div>
