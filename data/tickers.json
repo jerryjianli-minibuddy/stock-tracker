@@ -4237,5 +4237,280 @@
     "pillars_total": 5,
     "pillar_eligibility": "PASS",
     "binding_constraint_thesis": null
+  },
+  {
+    "ticker": "MSFT",
+    "company": "Microsoft",
+    "sector": "Software",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 67.6% passes \u226560% software",
+        "metric_value": 0.6763265207634582,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +18.3% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.1829703422487369,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 41.2 (rev growth +18.3% + FCF margin 22.9%); passes \u226540 software",
+        "metric_value": 41.20692519051397,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 9.9x \u00f7 TTM proxy growth 18% = 0.54 \u2014 passes hard gate <2.5",
+        "metric_value": 0.5420550608424336,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS"
+  },
+  {
+    "ticker": "NOW",
+    "company": "ServiceNow",
+    "sector": "Software",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 75.1% passes \u226560% software",
+        "metric_value": 0.7506631299734748,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +22.1% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.22085492227979275,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 55.2 (rev growth +22.1% + FCF margin 33.1%); passes \u226540 software",
+        "metric_value": 55.20870237569021,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 7.3x \u00f7 TTM proxy growth 22% = 0.33 \u2014 passes hard gate <2.5",
+        "metric_value": 0.3327070967741935,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible"
+  },
+  {
+    "ticker": "CRM",
+    "company": "Salesforce",
+    "sector": "Software",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 77.6% passes \u226560% software",
+        "metric_value": 0.7760914204088921,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +12.1% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.12088461923346343,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Manual flip \u2014 Marc Benioff co-founder & CEO since founding (1999)",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 46.8 (rev growth +12.1% + FCF margin 34.7%); passes \u226540 software",
+        "metric_value": 46.77118537277924,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 4.2x \u00f7 TTM proxy growth 12% = 0.35 \u2014 passes hard gate <2.5",
+        "metric_value": 0.3473560182119205,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible"
+  },
+  {
+    "ticker": "SNOW",
+    "company": "Snowflake",
+    "sector": "Software",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 66.8% passes \u226560% software",
+        "metric_value": 0.6679649593378162,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +30.1% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.30120899500390164,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 54.0 (rev growth +30.1% + FCF margin 23.9%); passes \u226540 software",
+        "metric_value": 53.972860401138625,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 12.4x \u00f7 TTM proxy growth 30% = 0.41 \u2014 passes hard gate <2.5",
+        "metric_value": 0.4123050840443571,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible"
+  },
+  {
+    "ticker": "ORCL",
+    "company": "Oracle",
+    "sector": "Software",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 64.6% passes \u226560% software",
+        "metric_value": 0.645607911576498,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +21.7% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.21656050955414013,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -16.9 (rev growth +21.7% + FCF margin -38.6%); below threshold \u226540 software",
+        "metric_value": -16.948105611542953,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 10.6x \u00f7 TTM proxy growth 22% = 0.49 \u2014 passes hard gate <2.5",
+        "metric_value": 0.4907635294117647,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS"
   }
 ]
