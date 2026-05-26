@@ -1672,5 +1672,67 @@
       "ratio_above_sma": false,
       "ratio_slope_30d": 13.57
     }
+  ],
+  "MU": [
+    {
+      "date": "2026-05-25",
+      "price": 751.0,
+      "market_cap": 846928216064.0,
+      "pe_forward": 7.309794,
+      "pe_trailing": 35.457977,
+      "ps_ratio": 14.572312,
+      "ev_to_sales": 14.507,
+      "ev_to_ebitda": 22.909,
+      "peg_ratio": 0.26,
+      "rev_growth_yoy": 1.962870979759096,
+      "eps_growth_yoy": 7.560283687943263,
+      "gross_margin": 0.7441324392288349,
+      "op_margin": 0.6762363788767812,
+      "fcf_ttm": 10281000000.0,
+      "debt_to_equity": 14.902,
+      "dma_50": 519.0096014404297,
+      "dma_150": 380.2789334106445,
+      "dma_200": 322.55575035095217,
+      "high_52w": 818.6699829101562,
+      "low_52w": 90.93000030517578,
+      "volume_avg_30d": 46441253.333333336,
+      "rs_proxy": 2.2110359920290006,
+      "ratio_vs_spy": 1.007188,
+      "ratio_sma_52w": 0.411207,
+      "mansfield_rs": 144.93,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 62.0
+    }
+  ],
+  "SNDK": [
+    {
+      "date": "2026-05-25",
+      "price": 1478.68994140625,
+      "market_cap": 218977370112.0,
+      "pe_forward": 8.431499,
+      "pe_trailing": 50.501366,
+      "ps_ratio": 16.609327,
+      "ev_to_sales": 16.342,
+      "ev_to_ebitda": 38.255,
+      "peg_ratio": null,
+      "rev_growth_yoy": 2.510324483775811,
+      "eps_growth_yoy": 2.72768192048012,
+      "gross_margin": 0.7835294117647059,
+      "op_margin": 0.6998319327731093,
+      "fcf_ttm": 4460000000.0,
+      "debt_to_equity": 1.503,
+      "dma_50": 1005.0655969238281,
+      "dma_150": 581.0275998942058,
+      "dma_200": 456.54022500991823,
+      "high_52w": 1600.0,
+      "low_52w": 35.790000915527344,
+      "volume_avg_30d": 15337476.666666666,
+      "rs_proxy": 5.372509736904528,
+      "ratio_vs_spy": 1.983115,
+      "ratio_sma_52w": 0.538204,
+      "mansfield_rs": 268.47,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 42.85
+    }
   ]
 }

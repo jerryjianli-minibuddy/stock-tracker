@@ -4512,5 +4512,115 @@
     "pillars_passed": 3,
     "pillars_total": 5,
     "pillar_eligibility": "PASS"
+  },
+  {
+    "ticker": "MU",
+    "company": "Micron Technology",
+    "sector": "Memory",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 74.4% passes \u226535% hardware",
+        "metric_value": 0.7441324392288349,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +196.3% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 1.962870979759096,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 214.0 (rev growth +196.3% + FCF margin 17.7%); passes \u226525 hardware",
+        "metric_value": 213.97666561934713,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 14.5x \u00f7 TTM proxy growth 196% = 0.07 \u2014 passes hard gate <2.5",
+        "metric_value": 0.07390704814322768,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible"
+  },
+  {
+    "ticker": "SNDK",
+    "company": "Sandisk",
+    "sector": "Memory",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 78.4% passes \u226535% hardware",
+        "metric_value": 0.7835294117647059,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +251.0% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 2.510324483775811,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 284.9 (rev growth +251.0% + FCF margin 33.8%); passes \u226525 hardware",
+        "metric_value": 284.8613314179207,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 16.3x \u00f7 TTM proxy growth 251% = 0.07 \u2014 passes hard gate <2.5",
+        "metric_value": 0.06509915393654524,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible"
   }
 ]

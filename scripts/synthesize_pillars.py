@@ -38,6 +38,7 @@ DOCS = ROOT / "docs" / "data"
 SOFTWARE_SECTORS = {"AI Infra", "Software", "Healthcare AI", "Thematic ETFs"}
 HARDWARE_SECTORS = {
     "Semis - Packaging", "Semis - SiC", "Semis - Process", "Semis - Analog/Sensors",
+    "Memory",
     "Power Conversion", "Physical AI / Robotics", "Space & Defense",
     "Critical Materials", "Bitcoin Mining / AI HPC",
 }

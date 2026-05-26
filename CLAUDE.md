@@ -58,6 +58,7 @@ As of last edit to this file (re-read `data/tickers.json` to confirm — this li
 - `Semis - Packaging`
 - `Semis - Process`
 - `Semis - Analog/Sensors`
+- `Memory`
 - `Bitcoin Mining / AI HPC`
 - `Power Conversion`
 - `Critical Materials`
