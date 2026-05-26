@@ -39,16 +39,24 @@ BACKOFF_BASE = 1.0
 
 # Snapshot field order (also the order they appear in JSON output).
 SNAPSHOT_FIELDS = [
+    # Price + valuation
     "price",
     "market_cap",
     "pe_forward",
     "pe_trailing",
+    "ps_ratio",
+    "ev_to_sales",
+    "ev_to_ebitda",
+    "peg_ratio",
+    # Growth + margins
     "rev_growth_yoy",
     "eps_growth_yoy",
     "gross_margin",
     "op_margin",
+    # Cash + balance
     "fcf_ttm",
     "debt_to_equity",
+    # Technicals
     "dma_50",
     "dma_150",
     "dma_200",
@@ -56,7 +64,17 @@ SNAPSHOT_FIELDS = [
     "low_52w",
     "volume_avg_30d",
     "rs_proxy",
+    # Mansfield Relative Strength vs SPY
+    "ratio_vs_spy",
+    "ratio_sma_52w",
+    "mansfield_rs",
+    "ratio_above_sma",
+    "ratio_slope_30d",
+    "ratio_history_90d",
 ]
+
+# Fields excluded from per-day history rows (history.json) — keeps history light.
+HISTORY_EXCLUDED_FIELDS = {"ratio_history_90d"}
 
 log = logging.getLogger("refresh")
 console = Console()
@@ -83,18 +101,20 @@ def main() -> int:
         for sym in symbols
     }
 
-    spy_6mo = _fetch_spy_6mo_return()
-    if spy_6mo is None:
-        log.warning("SPY benchmark unavailable; rs_proxy will be null this run")
+    spy_hist = _fetch_spy_history()
+    spy_6mo = _spy_6mo_return_from_hist(spy_hist)
+    if spy_hist is None or getattr(spy_hist, "empty", True):
+        log.warning("SPY benchmark unavailable; rs_proxy and Mansfield RS will be null this run")
     else:
-        log.info("SPY 6mo return: %+.2f%%", spy_6mo * 100)
+        log.info("SPY 1y history cached (%d rows); 6mo return: %+.2f%%",
+                 len(spy_hist), (spy_6mo or 0) * 100)
 
     snapshots: dict[str, dict] = {}
     for i, sym in enumerate(symbols):
         if i > 0:
             time.sleep(THROTTLE_SECONDS)
         try:
-            snap = _fetch_one(sym, spy_6mo)
+            snap = _fetch_one(sym, spy_6mo, spy_hist)
             snapshots[sym] = snap
             n_ok = sum(1 for k in SNAPSHOT_FIELDS if snap.get(k) is not None)
             log.info("  %s: %d/%d fields", sym, n_ok, len(SNAPSHOT_FIELDS))
@@ -172,6 +192,8 @@ def _append_history(snaps: dict[str, dict], history: dict[str, list[dict]]) -> N
     for sym, snap in snaps.items():
         entry: dict[str, Any] = {"date": today}
         for k in SNAPSHOT_FIELDS:
+            if k in HISTORY_EXCLUDED_FIELDS:
+                continue
             entry[k] = snap.get(k)
         rows = history.get(sym, [])
         rows = [r for r in rows if r.get("date") != today]
@@ -195,7 +217,7 @@ def _utc_now_iso() -> str:
 
 # ---------- yfinance fetch ----------
 
-def _fetch_one(sym: str, spy_6mo_return: Optional[float]) -> dict:
+def _fetch_one(sym: str, spy_6mo_return: Optional[float], spy_hist=None) -> dict:
     t = yf.Ticker(sym)
     info = _safe(lambda: t.info) or {}
     hist_1y = _with_retry(
@@ -207,10 +229,16 @@ def _fetch_one(sym: str, spy_6mo_return: Optional[float]) -> dict:
     q_cash = _safe(lambda: t.quarterly_cashflow)
 
     snap: dict[str, Any] = {k: None for k in SNAPSHOT_FIELDS}
+    # ratio_history_90d defaults to [] not None so it serializes as an array
+    snap["ratio_history_90d"] = []
     snap["price"] = _safe(lambda: float(hist_1y["Close"].iloc[-1]))
     snap["market_cap"] = _info_float(info, "marketCap")
     snap["pe_forward"] = _info_float(info, "forwardPE")
     snap["pe_trailing"] = _info_float(info, "trailingPE")
+    snap["ps_ratio"] = _info_float(info, "priceToSalesTrailing12Months")
+    snap["ev_to_sales"] = _info_float(info, "enterpriseToRevenue")
+    snap["ev_to_ebitda"] = _info_float(info, "enterpriseToEbitda")
+    snap["peg_ratio"] = _info_float(info, "pegRatio")
     snap["debt_to_equity"] = _info_float(info, "debtToEquity")
 
     snap["rev_growth_yoy"] = _safe(
@@ -256,16 +284,78 @@ def _fetch_one(sym: str, spy_6mo_return: Optional[float]) -> dict:
     if stock_6mo is not None and spy_6mo_return is not None:
         snap["rs_proxy"] = stock_6mo - spy_6mo_return
 
+    # Mansfield Relative Strength vs SPY (52w ratio + 30d slope + 90d history)
+    mansfield = _compute_mansfield(hist_1y, spy_hist)
+    if mansfield:
+        snap.update(mansfield)
+
     snap["fetched_at"] = _utc_now_iso()
     return snap
 
 
-def _fetch_spy_6mo_return() -> Optional[float]:
+def _fetch_spy_history():
+    """Fetch SPY 1-year daily history once per run; cached implicitly via main()."""
     try:
-        hist = yf.Ticker(SPY_TICKER).history(period="6mo", auto_adjust=False)
-        return _period_return(hist)
+        return yf.Ticker(SPY_TICKER).history(period="1y", auto_adjust=False)
     except Exception as e:  # noqa: BLE001
         log.warning("SPY benchmark fetch failed: %s", e)
+        return None
+
+
+def _spy_6mo_return_from_hist(spy_hist) -> Optional[float]:
+    """Derive 6-month return from the cached 1y history (last ~126 trading days)."""
+    if spy_hist is None or getattr(spy_hist, "empty", True):
+        return None
+    close = spy_hist["Close"].dropna()
+    if len(close) < 2:
+        return None
+    slice_6mo = close.iloc[-126:] if len(close) >= 126 else close
+    first, last = float(slice_6mo.iloc[0]), float(slice_6mo.iloc[-1])
+    if first == 0 or math.isnan(first) or math.isnan(last):
+        return None
+    return (last - first) / first
+
+
+def _compute_mansfield(ticker_hist, spy_hist) -> Optional[dict]:
+    """Compute Mansfield Relative Strength against SPY.
+
+    Returns dict with ratio_vs_spy / ratio_sma_52w / mansfield_rs /
+    ratio_above_sma / ratio_slope_30d / ratio_history_90d, or None on
+    failure. Same math as scripts/fetch_macro.py — kept in sync deliberately.
+    """
+    if ticker_hist is None or spy_hist is None:
+        return None
+    if getattr(ticker_hist, "empty", True) or getattr(spy_hist, "empty", True):
+        return None
+    try:
+        import pandas as pd  # local import — pandas comes in transitively via yfinance
+        aligned = pd.concat(
+            [ticker_hist["Close"], spy_hist["Close"]], axis=1, join="inner"
+        ).dropna()
+        aligned.columns = ["t", "s"]
+        if len(aligned) < 30:
+            return None
+        ratio = aligned["t"] / aligned["s"]
+        sma_window = min(len(ratio), 252)
+        sma = float(ratio.rolling(sma_window).mean().iloc[-1])
+        if math.isnan(sma):
+            sma = float(ratio.mean())
+        current = float(ratio.iloc[-1])
+        if sma <= 0 or math.isnan(current):
+            return None
+        mansfield = ((current / sma) - 1) * 100
+        slope_30d = ((current / float(ratio.iloc[-30])) - 1) * 100 if len(ratio) >= 30 else None
+        history_90 = [round(float(x), 6) for x in ratio.iloc[-90:].tolist()]
+        return {
+            "ratio_vs_spy": round(current, 6),
+            "ratio_sma_52w": round(sma, 6),
+            "mansfield_rs": round(mansfield, 2),
+            "ratio_above_sma": bool(current >= sma),
+            "ratio_slope_30d": round(slope_30d, 2) if slope_30d is not None else None,
+            "ratio_history_90d": history_90,
+        }
+    except Exception as e:  # noqa: BLE001
+        log.warning("Mansfield RS computation failed: %s", e)
         return None
 
 

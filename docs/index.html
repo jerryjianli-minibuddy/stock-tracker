@@ -18,6 +18,8 @@
     </div>
   </header>
 
+  <div id="macro-banner" hidden></div>
+
   <nav id="tabs" aria-label="Views"></nav>
 
   <!-- Watchlist view -->
@@ -41,6 +43,12 @@
             <th data-sort="pct_from_high" class="num">% From High</th>
             <th data-sort="above_200dma">Above 200DMA</th>
             <th data-sort="rs_proxy" class="num">RS</th>
+            <th data-sort="ps_ratio" class="num">P/S</th>
+            <th data-sort="ev_to_sales" class="num">EV/S</th>
+            <th data-sort="ev_to_ebitda" class="num">EV/EBITDA</th>
+            <th data-sort="mansfield_rs" class="num">Mansfield</th>
+            <th data-sort="ratio_above_sma">vs SPY 52w</th>
+            <th>Ratio Trend</th>
             <th data-sort="rating">Rating</th>
           </tr>
         </thead>
@@ -60,6 +68,14 @@
     </main>
   </section>
 
+  <!-- Macro view -->
+  <section id="view-macro" class="view" hidden>
+    <main class="macro-main">
+      <div id="macro-detail"></div>
+      <div id="sector-rotation"></div>
+    </main>
+  </section>
+
   <!-- Bottlenecks view -->
   <section id="view-bottlenecks" class="view" hidden>
     <main class="bottlenecks-main">
@@ -69,6 +85,25 @@
       </div>
     </main>
   </section>
+
+  <!-- Rating reasoning modal -->
+  <div id="rating-modal" class="modal" hidden aria-hidden="true" role="dialog" aria-labelledby="rating-modal-title">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card" role="document">
+      <header class="modal-header">
+        <div class="modal-title-row">
+          <h2 id="rating-modal-title"></h2>
+          <span id="rating-modal-pill"></span>
+        </div>
+        <button class="modal-close" aria-label="Close" data-close-modal>✕</button>
+      </header>
+      <div id="rating-modal-body"></div>
+      <footer class="modal-footer">
+        <button id="rating-modal-copy" class="modal-btn">Copy override snippet</button>
+        <button class="modal-btn ghost" data-close-modal>Close</button>
+      </footer>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

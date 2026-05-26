@@ -1,0 +1,135 @@
+{
+  "last_updated": "2026-05-26T00:10:33Z",
+  "sectors": [
+    {
+      "ratio_vs_spy": 0.241926,
+      "ratio_sma_52w": 0.210519,
+      "mansfield_rs": 14.92,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 13.99,
+      "etf": "XLK",
+      "name": "Technology",
+      "regime_tag": "Leading"
+    },
+    {
+      "ratio_vs_spy": 0.069658,
+      "ratio_sma_52w": 0.078948,
+      "mansfield_rs": -11.77,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -7.49,
+      "etf": "XLF",
+      "name": "Financials",
+      "regime_tag": "Lagging"
+    },
+    {
+      "ratio_vs_spy": 0.079784,
+      "ratio_sma_52w": 0.072487,
+      "mansfield_rs": 10.07,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": -4.15,
+      "etf": "XLE",
+      "name": "Energy",
+      "regime_tag": "Weakening"
+    },
+    {
+      "ratio_vs_spy": 0.230366,
+      "ratio_sma_52w": 0.237804,
+      "mansfield_rs": -3.13,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -8.5,
+      "etf": "XLI",
+      "name": "Industrials",
+      "regime_tag": "Lagging"
+    },
+    {
+      "ratio_vs_spy": 0.201022,
+      "ratio_sma_52w": 0.218064,
+      "mansfield_rs": -7.81,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -6.79,
+      "etf": "XLV",
+      "name": "Healthcare",
+      "regime_tag": "Lagging"
+    },
+    {
+      "ratio_vs_spy": 0.113728,
+      "ratio_sma_52w": 0.122554,
+      "mansfield_rs": -7.2,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -4.32,
+      "etf": "XLP",
+      "name": "Consumer Staples",
+      "regime_tag": "Lagging"
+    },
+    {
+      "ratio_vs_spy": 0.159836,
+      "ratio_sma_52w": 0.173954,
+      "mansfield_rs": -8.12,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -3.74,
+      "etf": "XLY",
+      "name": "Consumer Discretionary",
+      "regime_tag": "Lagging"
+    },
+    {
+      "ratio_vs_spy": 0.06082,
+      "ratio_sma_52w": 0.065835,
+      "mansfield_rs": -7.62,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -10.05,
+      "etf": "XLU",
+      "name": "Utilities",
+      "regime_tag": "Lagging"
+    },
+    {
+      "ratio_vs_spy": 0.067445,
+      "ratio_sma_52w": 0.070504,
+      "mansfield_rs": -4.34,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -11.33,
+      "etf": "XLB",
+      "name": "Materials",
+      "regime_tag": "Lagging"
+    },
+    {
+      "ratio_vs_spy": 0.059761,
+      "ratio_sma_52w": 0.063144,
+      "mansfield_rs": -5.36,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -4.69,
+      "etf": "XLRE",
+      "name": "Real Estate",
+      "regime_tag": "Lagging"
+    },
+    {
+      "ratio_vs_spy": 0.154847,
+      "ratio_sma_52w": 0.170245,
+      "mansfield_rs": -9.04,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -7.47,
+      "etf": "XLC",
+      "name": "Communications",
+      "regime_tag": "Lagging"
+    },
+    {
+      "ratio_vs_spy": 0.77292,
+      "ratio_sma_52w": 0.537444,
+      "mansfield_rs": 43.81,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 19.61,
+      "etf": "SMH",
+      "name": "Semiconductors",
+      "regime_tag": "Leading"
+    },
+    {
+      "ratio_vs_spy": 0.176573,
+      "ratio_sma_52w": 0.164939,
+      "mansfield_rs": 7.05,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": -8.26,
+      "etf": "XBI",
+      "name": "Biotech",
+      "regime_tag": "Weakening"
+    }
+  ]
+}

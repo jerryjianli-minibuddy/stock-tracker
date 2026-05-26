@@ -1,0 +1,55 @@
+{
+  "last_updated": "2026-05-26T00:10:32Z",
+  "regime": "RISK-ON",
+  "regime_reasoning": "5 of 6 signals bullish; risk appetite confirmed.",
+  "signals_bullish": [
+    "VIX 16.6 (Normal)",
+    "Net Liq expanding (+$230B / 4w)",
+    "DXY 99.2 (Neutral)",
+    "HY OAS 278bps (Complacent)",
+    "SPY > 200DMA (+9.8%)"
+  ],
+  "signals_bearish": [],
+  "indicators": {
+    "vix": {
+      "current": 16.59,
+      "sma_20d": 17.56,
+      "regime": "Normal",
+      "description": "VIX measures 30-day implied volatility on S&P 500 options. Low VIX = complacency, high VIX = stress."
+    },
+    "fear_greed": {
+      "value": 34.0,
+      "regime": "Fear",
+      "prev_week": 25.0,
+      "source": "alternative.me (CRYPTO \u2014 fallback, not equities)",
+      "description": "Crypto Fear & Greed Index (fallback when CNN equity index unavailable). Different market \u2014 interpret with caution."
+    },
+    "net_liquidity": {
+      "current": 5931.4,
+      "delta_4w": 230.0,
+      "delta_13w": 231.2,
+      "direction": "expanding",
+      "units": "$B",
+      "description": "Net liquidity = Fed balance sheet \u2212 Treasury General Account \u2212 Reverse Repo. Risk assets follow the trend."
+    },
+    "dxy": {
+      "current": 99.24,
+      "sma_50d": 98.94,
+      "regime": "Neutral",
+      "description": "DXY = US Dollar Index. Rising DXY tightens global liquidity; rule of thumb: >105 things break, >110 historical crisis."
+    },
+    "credit_spread": {
+      "current_bps": 278.0,
+      "delta_4w_bps": -8.0,
+      "regime": "Complacent",
+      "description": "ICE BofA US High Yield Option-Adjusted Spread (bps). The bond market's fear gauge \u2014 leads equity stress."
+    },
+    "spy_200dma": {
+      "price": 745.64,
+      "dma_200": 678.85,
+      "above_200dma": true,
+      "pct_from_200dma": 9.84,
+      "description": "SPY 200-day moving average \u2014 the primary trend filter. Above = uptrend, below = downtrend."
+    }
+  }
+}

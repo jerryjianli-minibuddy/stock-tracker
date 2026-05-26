@@ -6,6 +6,10 @@
       "market_cap": 5215507972096.0,
       "pe_forward": 17.027882,
       "pe_trailing": 33.026073,
+      "ps_ratio": 20.574726,
+      "ev_to_sales": 20.398,
+      "ev_to_ebitda": 31.24,
+      "peg_ratio": 0.66,
       "rev_growth_yoy": 0.8522763378875221,
       "eps_growth_yoy": 2.1447368421052633,
       "gross_margin": 0.749335293757275,
@@ -18,7 +22,12 @@
       "high_52w": 236.5399932861328,
       "low_52w": 129.16000366210938,
       "volume_avg_30d": 156308483.33333334,
-      "rs_proxy": 0.06455813069281235
+      "rs_proxy": 0.036876503504754715,
+      "ratio_vs_spy": 0.288785,
+      "ratio_sma_52w": 0.271239,
+      "mansfield_rs": 6.47,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 4.66
     }
   ],
   "AVGO": [
@@ -28,6 +37,10 @@
       "market_cap": 1960815624192.0,
       "pe_forward": 22.681368,
       "pe_trailing": 80.57199,
+      "ps_ratio": 28.716434,
+      "ev_to_sales": 29.476,
+      "ev_to_ebitda": 54.079,
+      "peg_ratio": 0.9,
       "rev_growth_yoy": 0.2946500402252615,
       "eps_growth_yoy": 0.3157894736842106,
       "gross_margin": 0.681321526591062,
@@ -40,7 +53,12 @@
       "high_52w": 442.3599853515625,
       "low_52w": 226.17999267578125,
       "volume_avg_30d": 19623863.333333332,
-      "rs_proxy": -0.019284622659122022
+      "rs_proxy": -0.04696624984717966,
+      "ratio_vs_spy": 0.555415,
+      "ratio_sma_52w": 0.498837,
+      "mansfield_rs": 11.34,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 0.35
     }
   ],
   "WOLF": [
@@ -50,6 +68,10 @@
       "market_cap": 3378418176.0,
       "pe_forward": -13.964036,
       "pe_trailing": null,
+      "ps_ratio": 4.7416396,
+      "ev_to_sales": 5.676,
+      "ev_to_ebitda": -14.803,
+      "peg_ratio": null,
       "rev_growth_yoy": -0.16786703601108033,
       "eps_growth_yoy": -0.2798611539479938,
       "gross_margin": -0.2663115845539281,
@@ -62,7 +84,12 @@
       "high_52w": 80.81999969482422,
       "low_52w": 8.050000190734863,
       "volume_avg_30d": 8320126.666666667,
-      "rs_proxy": 2.7548691630033337
+      "rs_proxy": 2.727187535815276,
+      "ratio_vs_spy": 0.093732,
+      "ratio_sma_52w": 0.035165,
+      "mansfield_rs": 166.55,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 166.29
     }
   ],
   "PLTR": [
@@ -72,6 +99,10 @@
       "market_cap": 328144093184.0,
       "pe_forward": 65.98917,
       "pe_trailing": 153.79776,
+      "ps_ratio": 62.812626,
+      "ev_to_sales": 61.337,
+      "ev_to_ebitda": 158.769,
+      "peg_ratio": 1.97,
       "rev_growth_yoy": 0.8471163256416494,
       "eps_growth_yoy": 3.25,
       "gross_margin": 0.8678180527421883,
@@ -84,7 +115,12 @@
       "high_52w": 207.52000427246094,
       "low_52w": 118.93000030517578,
       "volume_avg_30d": 43117793.333333336,
-      "rs_proxy": -0.2713727077391496
+      "rs_proxy": -0.29905433492720723,
+      "ratio_vs_spy": 0.183574,
+      "ratio_sma_52w": 0.238531,
+      "mansfield_rs": -23.04,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -4.85
     }
   ],
   "IREN": [
@@ -94,6 +130,10 @@
       "market_cap": 20309831680.0,
       "pe_forward": -42.25279,
       "pe_trailing": 73.8052,
+      "ps_ratio": 26.826746,
+      "ev_to_sales": 29.14,
+      "ev_to_ebitda": 149.899,
+      "peg_ratio": 3.11,
       "rev_growth_yoy": -0.00019333945574943206,
       "eps_growth_yoy": -9.57142857142857,
       "gross_margin": 0.6462239718222315,
@@ -106,7 +146,12 @@
       "high_52w": 76.87000274658203,
       "low_52w": 8.279999732971191,
       "volume_avg_30d": 48226596.666666664,
-      "rs_proxy": 0.05698512133690184
+      "rs_proxy": 0.0293034941488442,
+      "ratio_vs_spy": 0.076216,
+      "ratio_sma_52w": 0.056854,
+      "mansfield_rs": 34.06,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 21.41
     }
   ],
   "MRVL": [
@@ -116,6 +161,10 @@
       "market_cap": 171897356288.0,
       "pe_forward": 35.994133,
       "pe_trailing": 64.16013,
+      "ps_ratio": 20.976906,
+      "ev_to_sales": 21.209,
+      "ev_to_ebitda": 66.097,
+      "peg_ratio": 2.3,
       "rev_growth_yoy": 0.22080994827775943,
       "eps_growth_yoy": 1.0,
       "gross_margin": 0.5173750394375084,
@@ -128,7 +177,12 @@
       "high_52w": 198.39999389648438,
       "low_52w": 58.61000061035156,
       "volume_avg_30d": 26070980.0,
-      "rs_proxy": 1.2281105988029897
+      "rs_proxy": 1.2004289716149321,
+      "ratio_vs_spy": 0.263304,
+      "ratio_sma_52w": 0.135492,
+      "mansfield_rs": 94.33,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 37.59
     }
   ],
   "AAOI": [
@@ -138,6 +192,10 @@
       "market_cap": 14563260416.0,
       "pe_forward": 38.032272,
       "pe_trailing": null,
+      "ps_ratio": 28.724379,
+      "ev_to_sales": 28.41,
+      "ev_to_ebitda": -524.62,
+      "peg_ratio": 0.78,
       "rev_growth_yoy": 0.5135741395367468,
       "eps_growth_yoy": -0.05555555555555561,
       "gross_margin": 0.29055734928280313,
@@ -150,7 +208,12 @@
       "high_52w": 233.6699981689453,
       "low_52w": 15.0600004196167,
       "volume_avg_30d": 11157643.333333334,
-      "rs_proxy": 6.961982934097283
+      "rs_proxy": 6.934301306909225,
+      "ratio_vs_spy": 0.243402,
+      "ratio_sma_52w": 0.080117,
+      "mansfield_rs": 203.81,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 9.01
     }
   ],
   "BESIY": [
@@ -160,6 +223,10 @@
       "market_cap": 24960552960.0,
       "pe_forward": null,
       "pe_trailing": 142.5792,
+      "ps_ratio": 39.490482,
+      "ev_to_sales": 39.358,
+      "ev_to_ebitda": 119.148,
+      "peg_ratio": 2.23,
       "rev_growth_yoy": 0.20510647728680098,
       "eps_growth_yoy": -0.12162162162162159,
       "gross_margin": 0.6348855197183022,
@@ -172,7 +239,12 @@
       "high_52w": 320.3999938964844,
       "low_52w": 116.77999877929688,
       "volume_avg_30d": 8436.666666666666,
-      "rs_proxy": 1.0820346171636543
+      "rs_proxy": 1.0543529899755968,
+      "ratio_vs_spy": 0.42259,
+      "ratio_sma_52w": 0.269543,
+      "mansfield_rs": 56.78,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 17.53
     }
   ],
   "AMKR": [
@@ -182,6 +254,10 @@
       "market_cap": 16297617408.0,
       "pe_forward": 26.815392,
       "pe_trailing": 37.787357,
+      "ps_ratio": 2.3048184,
+      "ev_to_sales": 2.277,
+      "ev_to_ebitda": 13.473,
+      "peg_ratio": 0.76,
       "rev_growth_yoy": 0.27476760683275636,
       "eps_growth_yoy": 2.666666666666667,
       "gross_margin": 0.1418839307390451,
@@ -194,7 +270,12 @@
       "high_52w": 79.2300033569336,
       "low_52w": 17.790000915527344,
       "volume_avg_30d": 4982920.0,
-      "rs_proxy": 0.8689981770739232
+      "rs_proxy": 0.8413165498858656,
+      "ratio_vs_spy": 0.088179,
+      "ratio_sma_52w": 0.057096,
+      "mansfield_rs": 54.44,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 0.1
     }
   ],
   "TSM": [
@@ -204,6 +285,10 @@
       "market_cap": 2098032410624.0,
       "pe_forward": 20.726833,
       "pe_trailing": 34.722748,
+      "ps_ratio": 0.5112284,
+      "ev_to_sales": 2.008,
+      "ev_to_ebitda": 2.886,
+      "peg_ratio": 1.26,
       "rev_growth_yoy": 0.351323787607557,
       "eps_growth_yoy": 0.5839311334289814,
       "gross_margin": 0.6624575805889452,
@@ -216,7 +301,12 @@
       "high_52w": 421.9700012207031,
       "low_52w": 190.02999877929688,
       "volume_avg_30d": 14040856.666666666,
-      "rs_proxy": 0.306154361837614
+      "rs_proxy": 0.27847273464955635,
+      "ratio_vs_spy": 0.542514,
+      "ratio_sma_52w": 0.445607,
+      "mansfield_rs": 21.75,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 0.72
     }
   ],
   "INTC": [
@@ -226,6 +316,10 @@
       "market_cap": 602315816960.0,
       "pe_forward": 77.83233,
       "pe_trailing": null,
+      "ps_ratio": 11.203166,
+      "ev_to_sales": 11.684,
+      "ev_to_ebitda": 44.317,
+      "peg_ratio": 1.36,
       "rev_growth_yoy": 0.07184021473119129,
       "eps_growth_yoy": -2.8421052631578947,
       "gross_margin": 0.39382779700964865,
@@ -238,7 +332,12 @@
       "high_52w": 132.75,
       "low_52w": 18.969999313354492,
       "volume_avg_30d": 144400880.0,
-      "rs_proxy": 2.2334120572984677
+      "rs_proxy": 2.20573043011041,
+      "ratio_vs_spy": 0.160721,
+      "ratio_sma_52w": 0.061719,
+      "mansfield_rs": 160.41,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 69.18
     }
   ],
   "ADI": [
@@ -248,6 +347,10 @@
       "market_cap": 193407647744.0,
       "pe_forward": 26.965614,
       "pe_trailing": 59.175858,
+      "ps_ratio": 15.180903,
+      "ev_to_sales": 15.595,
+      "ev_to_ebitda": 32.308,
+      "peg_ratio": 0.91,
       "rev_growth_yoy": 0.37248926921579295,
       "eps_growth_yoy": 1.105263157894737,
       "gross_margin": 0.6733328457705539,
@@ -260,7 +363,12 @@
       "high_52w": 435.7200012207031,
       "low_52w": 206.0,
       "volume_avg_30d": 3886466.6666666665,
-      "rs_proxy": 0.5435958168573447
+      "rs_proxy": 0.515914189669287,
+      "ratio_vs_spy": 0.532522,
+      "ratio_sma_52w": 0.42103,
+      "mansfield_rs": 26.48,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 4.39
     }
   ],
   "TXN": [
@@ -270,6 +378,10 @@
       "market_cap": 281409781760.0,
       "pe_forward": 32.777344,
       "pe_trailing": 52.946915,
+      "ps_ratio": 15.262489,
+      "ev_to_sales": 15.748,
+      "ev_to_ebitda": 33.509,
+      "peg_ratio": 1.48,
       "rev_growth_yoy": 0.18579503563529123,
       "eps_growth_yoy": 0.31249999999999994,
       "gross_margin": 0.5801036269430052,
@@ -282,7 +394,12 @@
       "high_52w": 315.57000732421875,
       "low_52w": 152.72999572753906,
       "volume_avg_30d": 8101470.0,
-      "rs_proxy": 0.8024533938049105
+      "rs_proxy": 0.7747717666168529,
+      "ratio_vs_spy": 0.414691,
+      "ratio_sma_52w": 0.300903,
+      "mansfield_rs": 37.82,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 31.29
     }
   ],
   "AMBA": [
@@ -292,6 +409,10 @@
       "market_cap": 3840072960.0,
       "pe_forward": 80.60136,
       "pe_trailing": null,
+      "ps_ratio": 9.828649,
+      "ev_to_sales": 9.047,
+      "ev_to_ebitda": -51.052,
+      "peg_ratio": 2.28,
       "rev_growth_yoy": 0.20058322918526453,
       "eps_growth_yoy": 0.2083333333333333,
       "gross_margin": 0.5840661465097604,
@@ -304,7 +425,12 @@
       "high_52w": 96.69000244140625,
       "low_52w": 48.29999923706055,
       "volume_avg_30d": 832593.3333333334,
-      "rs_proxy": -0.13756125788329523
+      "rs_proxy": -0.16524288507135287,
+      "ratio_vs_spy": 0.117416,
+      "ratio_sma_52w": 0.104856,
+      "mansfield_rs": 11.98,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 48.36
     }
   ],
   "TER": [
@@ -314,6 +440,10 @@
       "market_cap": 56110972928.0,
       "pe_forward": 37.678097,
       "pe_trailing": 66.624535,
+      "ps_ratio": 14.8173685,
+      "ev_to_sales": 14.774,
+      "ev_to_ebitda": 48.17,
+      "peg_ratio": 1.42,
       "rev_growth_yoy": 0.8703972698634932,
       "eps_growth_yoy": 3.1475409836065573,
       "gross_margin": 0.6089299443116303,
@@ -326,7 +456,12 @@
       "high_52w": 422.1099853515625,
       "low_52w": 75.98999786376953,
       "volume_avg_30d": 3760526.6666666665,
-      "rs_proxy": 1.0446583071286135
+      "rs_proxy": 1.016976679940556,
+      "ratio_vs_spy": 0.480715,
+      "ratio_sma_52w": 0.295968,
+      "mansfield_rs": 62.42,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": -10.89
     }
   ],
   "QCOM": [
@@ -336,6 +471,10 @@
       "market_cap": 251020640256.0,
       "pe_forward": 22.391518,
       "pe_trailing": 25.636168,
+      "ps_ratio": 5.6426883,
+      "ev_to_sales": 5.766,
+      "ev_to_ebitda": 19.732,
+      "peg_ratio": 1.01,
       "rev_growth_yoy": -0.03461153110483651,
       "eps_growth_yoy": 1.73015873015873,
       "gross_margin": 0.5376922351165204,
@@ -348,7 +487,12 @@
       "high_52w": 247.89999389648438,
       "low_52w": 121.98999786376953,
       "volume_avg_30d": 25095140.0,
-      "rs_proxy": 0.32786020172131103
+      "rs_proxy": 0.30017857453325336,
+      "ratio_vs_spy": 0.319403,
+      "ratio_sma_52w": 0.239469,
+      "mansfield_rs": 33.38,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 66.98
     }
   ],
   "TDY": [
@@ -358,6 +502,10 @@
       "market_cap": 28744912896.0,
       "pe_forward": 23.812212,
       "pe_trailing": 31.447037,
+      "ps_ratio": 4.617212,
+      "ev_to_sales": 4.931,
+      "ev_to_ebitda": 19.957,
+      "peg_ratio": 1.4,
       "rev_growth_yoy": 0.0760052417408097,
       "eps_growth_yoy": 0.21553884711779434,
       "gross_margin": 0.4318953913210692,
@@ -370,7 +518,12 @@
       "high_52w": 693.3800048828125,
       "low_52w": 483.0199890136719,
       "volume_avg_30d": 330103.3333333333,
-      "rs_proxy": 0.14517167341687467
+      "rs_proxy": 0.11749004622881704,
+      "ratio_vs_spy": 0.832104,
+      "ratio_sma_52w": 0.8544,
+      "mansfield_rs": -2.61,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -12.97
     }
   ],
   "MPWR": [
@@ -380,6 +533,10 @@
       "market_cap": 78107369472.0,
       "pe_forward": 52.714527,
       "pe_trailing": 113.63903,
+      "ps_ratio": 26.413591,
+      "ev_to_sales": 25.958,
+      "ev_to_ebitda": 89.548,
+      "peg_ratio": 2.09,
       "rev_growth_yoy": 0.26135982206997366,
       "eps_growth_yoy": 0.395017793594306,
       "gross_margin": 0.553436087467436,
@@ -392,7 +549,12 @@
       "high_52w": 1675.4200439453125,
       "low_52w": 643.3599853515625,
       "volume_avg_30d": 621563.3333333334,
-      "rs_proxy": 0.6653531847802663
+      "rs_proxy": 0.6376715575922086,
+      "ratio_vs_spy": 2.132142,
+      "ratio_sma_52w": 1.498414,
+      "mansfield_rs": 42.29,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 6.6
     }
   ],
   "MP": [
@@ -402,6 +564,10 @@
       "market_cap": 11475310592.0,
       "pe_forward": 55.136425,
       "pe_trailing": null,
+      "ps_ratio": 33.015923,
+      "ev_to_sales": 32.22,
+      "ev_to_ebitda": -2732.018,
+      "peg_ratio": null,
       "rev_growth_yoy": 0.490692320342049,
       "eps_growth_yoy": 0.7142857142857143,
       "gross_margin": -0.17355955388366115,
@@ -414,7 +580,12 @@
       "high_52w": 100.2509994506836,
       "low_52w": 18.639999389648438,
       "volume_avg_30d": 6686080.0,
-      "rs_proxy": -0.023206965885574388
+      "rs_proxy": -0.05088859307363203,
+      "ratio_vs_spy": 0.086449,
+      "ratio_sma_52w": 0.087655,
+      "mansfield_rs": -1.38,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": 4.42
     }
   ],
   "TEM": [
@@ -424,6 +595,10 @@
       "market_cap": 8292300800.0,
       "pe_forward": -335.85455,
       "pe_trailing": null,
+      "ps_ratio": 6.078651,
+      "ev_to_sales": 6.577,
+      "ev_to_ebitda": -48.432,
+      "peg_ratio": null,
       "rev_growth_yoy": 0.36122657261170654,
       "eps_growth_yoy": -0.7749999999999998,
       "gross_margin": 0.6378362384952142,
@@ -436,7 +611,12 @@
       "high_52w": 104.31999969482422,
       "low_52w": 41.72999954223633,
       "volume_avg_30d": 6178493.333333333,
-      "rs_proxy": -0.5078568297438686
+      "rs_proxy": -0.5355384569319261,
+      "ratio_vs_spy": 0.061933,
+      "ratio_sma_52w": 0.098745,
+      "mansfield_rs": -37.28,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -7.58
     }
   ],
   "TSLA": [
@@ -446,6 +626,10 @@
       "market_cap": 1599975981056.0,
       "pe_forward": 169.74606,
       "pe_trailing": 383.7928,
+      "ps_ratio": 16.346468,
+      "ev_to_sales": 16.059,
+      "ev_to_ebitda": 141.681,
+      "peg_ratio": 5.87,
       "rev_growth_yoy": 0.1578484613395397,
       "eps_growth_yoy": 0.08333333333333341,
       "gross_margin": 0.21083664626792334,
@@ -458,7 +642,12 @@
       "high_52w": 498.8299865722656,
       "low_52w": 273.2099914550781,
       "volume_avg_30d": 60450516.666666664,
-      "rs_proxy": -0.0953097118141488
+      "rs_proxy": -0.12299133900220643,
+      "ratio_vs_spy": 0.571335,
+      "ratio_sma_52w": 0.58787,
+      "mansfield_rs": -2.81,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": 11.23
     }
   ],
   "SYM": [
@@ -468,6 +657,10 @@
       "market_cap": 32614332416.0,
       "pe_forward": 70.86273,
       "pe_trailing": null,
+      "ps_ratio": 12.9574,
+      "ev_to_sales": 2.079,
+      "ev_to_ebitda": 231.129,
+      "peg_ratio": 4.62,
       "rev_growth_yoy": 0.23074459975511732,
       "eps_growth_yoy": 1.5,
       "gross_margin": 0.22166508987701042,
@@ -480,7 +673,12 @@
       "high_52w": 87.87999725341797,
       "low_52w": 27.260000228881836,
       "volume_avg_30d": 1791546.6666666667,
-      "rs_proxy": -0.1407934564785813
+      "rs_proxy": -0.16847508366663894,
+      "ratio_vs_spy": 0.072461,
+      "ratio_sma_52w": 0.082211,
+      "mansfield_rs": -11.86,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -8.96
     }
   ],
   "ROK": [
@@ -490,6 +688,10 @@
       "market_cap": 50328096768.0,
       "pe_forward": 31.165611,
       "pe_trailing": 46.96677,
+      "ps_ratio": 5.7165036,
+      "ev_to_sales": 6.135,
+      "ev_to_ebitda": 27.432,
+      "peg_ratio": 2.4,
       "rev_growth_yoy": 0.11894052973513243,
       "eps_growth_yoy": 0.3963963963963963,
       "gross_margin": 0.5024564537740063,
@@ -502,7 +704,12 @@
       "high_52w": 463.489990234375,
       "low_52w": 301.7900085449219,
       "volume_avg_30d": 774673.3333333334,
-      "rs_proxy": 0.06169567333186601
+      "rs_proxy": 0.034014046143808374,
+      "ratio_vs_spy": 0.60658,
+      "ratio_sma_52w": 0.559688,
+      "mansfield_rs": 8.38,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 2.06
     }
   ],
   "OUST": [
@@ -512,6 +719,10 @@
       "market_cap": 2357809152.0,
       "pe_forward": -925.75,
       "pe_trailing": null,
+      "ps_ratio": 12.72222,
+      "ev_to_sales": 11.882,
+      "ev_to_ebitda": -32.579,
+      "peg_ratio": null,
       "rev_growth_yoy": 0.48866143662662415,
       "eps_growth_yoy": 0.33333333333333326,
       "gross_margin": 0.42895961134670013,
@@ -524,7 +735,12 @@
       "high_52w": 41.650001525878906,
       "low_52w": 10.0600004196167,
       "volume_avg_30d": 4245813.333333333,
-      "rs_proxy": 0.6177937682105429
+      "rs_proxy": 0.5901121410224852,
+      "ratio_vs_spy": 0.049662,
+      "ratio_sma_52w": 0.037225,
+      "mansfield_rs": 33.41,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 55.73
     }
   ],
   "ARM": [
@@ -534,6 +750,10 @@
       "market_cap": 326126206976.0,
       "pe_forward": 100.325356,
       "pe_trailing": 356.40698,
+      "ps_ratio": 66.28581,
+      "ev_to_sales": 65.642,
+      "ev_to_ebitda": 280.345,
+      "peg_ratio": 2.66,
       "rev_growth_yoy": null,
       "eps_growth_yoy": 0.44999999999999984,
       "gross_margin": null,
@@ -546,7 +766,12 @@
       "high_52w": 315.0,
       "low_52w": 100.0199966430664,
       "volume_avg_30d": 11091713.333333334,
-      "rs_proxy": 1.160323052708324
+      "rs_proxy": 1.1326414255202664,
+      "ratio_vs_spy": 0.41107,
+      "ratio_sma_52w": 0.220563,
+      "mansfield_rs": 86.37,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 78.98
     }
   ],
   "ABB": [
@@ -556,6 +781,10 @@
       "market_cap": null,
       "pe_forward": null,
       "pe_trailing": null,
+      "ps_ratio": null,
+      "ev_to_sales": null,
+      "ev_to_ebitda": null,
+      "peg_ratio": null,
       "rev_growth_yoy": null,
       "eps_growth_yoy": null,
       "gross_margin": null,
@@ -568,7 +797,12 @@
       "high_52w": null,
       "low_52w": null,
       "volume_avg_30d": null,
-      "rs_proxy": null
+      "rs_proxy": null,
+      "ratio_vs_spy": null,
+      "ratio_sma_52w": null,
+      "mansfield_rs": null,
+      "ratio_above_sma": null,
+      "ratio_slope_30d": null
     }
   ],
   "SERV": [
@@ -578,6 +812,10 @@
       "market_cap": 740284992.0,
       "pe_forward": -4.8333335,
       "pe_trailing": null,
+      "ps_ratio": 142.49951,
+      "ev_to_sales": 94.337,
+      "ev_to_ebitda": -3.636,
+      "peg_ratio": null,
       "rev_growth_yoy": 5.781818181818182,
       "eps_growth_yoy": -1.8260869565217392,
       "gross_margin": -3.01642091152815,
@@ -590,7 +828,12 @@
       "high_52w": 18.639999389648438,
       "low_52w": 7.659999847412109,
       "volume_avg_30d": 3852770.0,
-      "rs_proxy": -0.20686715172553963
+      "rs_proxy": -0.23454877891359727,
+      "ratio_vs_spy": 0.011668,
+      "ratio_sma_52w": 0.016532,
+      "mansfield_rs": -29.42,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -5.71
     }
   ],
   "RBRK": [
@@ -600,6 +843,10 @@
       "market_cap": 13704876032.0,
       "pe_forward": 114.28031,
       "pe_trailing": null,
+      "ps_ratio": 10.412528,
+      "ev_to_sales": 9.848,
+      "ev_to_ebitda": -40.479,
+      "peg_ratio": null,
       "rev_growth_yoy": 0.46332429290972493,
       "eps_growth_yoy": 0.29508196721311475,
       "gross_margin": 0.8154594846485421,
@@ -612,7 +859,12 @@
       "high_52w": 103.0,
       "low_52w": 42.25,
       "volume_avg_30d": 3055093.3333333335,
-      "rs_proxy": -0.1268803443694803
+      "rs_proxy": -0.15456197155753795,
+      "ratio_vs_spy": 0.089306,
+      "ratio_sma_52w": 0.110556,
+      "mansfield_rs": -19.22,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": 26.05
     }
   ],
   "FIG": [
@@ -622,6 +874,10 @@
       "market_cap": 11999431680.0,
       "pe_forward": 67.34476,
       "pe_trailing": null,
+      "ps_ratio": 10.335178,
+      "ev_to_sales": 8.972,
+      "ev_to_ebitda": -7.197,
+      "peg_ratio": 4.13,
       "rev_growth_yoy": 0.4611764293445633,
       "eps_growth_yoy": -16.28446079818851,
       "gross_margin": 0.7940672806720269,
@@ -634,7 +890,12 @@
       "high_52w": 142.9199981689453,
       "low_52w": 16.600000381469727,
       "volume_avg_30d": 21354930.0,
-      "rs_proxy": -0.4747497751968107
+      "rs_proxy": -0.5024314023848684,
+      "ratio_vs_spy": 0.030457,
+      "ratio_sma_52w": 0.060242,
+      "mansfield_rs": -49.44,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": 8.95
     }
   ],
   "APP": [
@@ -644,6 +905,10 @@
       "market_cap": 161815347200.0,
       "pe_forward": 21.968098,
       "pe_trailing": 41.848827,
+      "ps_ratio": 26.25086,
+      "ev_to_sales": 26.428,
+      "ev_to_ebitda": 33.437,
+      "peg_ratio": 1.32,
       "rev_growth_yoy": 0.5897241870827128,
       "eps_growth_yoy": 1.131736526946108,
       "gross_margin": 0.8894775377771651,
@@ -656,7 +921,12 @@
       "high_52w": 745.6099853515625,
       "low_52w": 320.0,
       "volume_avg_30d": 4460200.0,
-      "rs_proxy": -0.2545589350187936
+      "rs_proxy": -0.28224056220685123,
+      "ratio_vs_spy": 0.645995,
+      "ratio_sma_52w": 0.748813,
+      "mansfield_rs": -13.73,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": 6.17
     }
   ],
   "MNDY": [
@@ -666,6 +936,10 @@
       "market_cap": 4075400960.0,
       "pe_forward": 14.652215,
       "pe_trailing": 34.521835,
+      "ps_ratio": 3.1324854,
+      "ev_to_sales": 2.122,
+      "ev_to_ebitda": 147.092,
+      "peg_ratio": 0.28,
       "rev_growth_yoy": 0.2445172719220549,
       "eps_growth_yoy": 0.09615384615384602,
       "gross_margin": 0.8914665565883307,
@@ -678,7 +952,12 @@
       "high_52w": 316.9800109863281,
       "low_52w": 57.5,
       "volume_avg_30d": 1936176.6666666667,
-      "rs_proxy": -0.5706843865392848
+      "rs_proxy": -0.5983660137273423,
+      "ratio_vs_spy": 0.106023,
+      "ratio_sma_52w": 0.253784,
+      "mansfield_rs": -58.22,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": 14.46
     }
   ],
   "CRWD": [
@@ -688,6 +967,10 @@
       "market_cap": 168874803200.0,
       "pe_forward": 107.72588,
       "pe_trailing": null,
+      "ps_ratio": 35.09448,
+      "ev_to_sales": 34.06,
+      "ev_to_ebitda": -3512.279,
+      "peg_ratio": 5.47,
       "rev_growth_yoy": 0.2331867160177528,
       "eps_growth_yoy": 1.4054054054054055,
       "gross_margin": 0.7612195729196591,
@@ -700,7 +983,12 @@
       "high_52w": 674.8400268554688,
       "low_52w": 342.7200012207031,
       "volume_avg_30d": 3063500.0,
-      "rs_proxy": 0.19405528506730804
+      "rs_proxy": 0.1663736578792504,
+      "ratio_vs_spy": 0.889786,
+      "ratio_sma_52w": 0.703811,
+      "mansfield_rs": 26.42,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 51.77
     }
   ],
   "NOC": [
@@ -710,6 +998,10 @@
       "market_cap": 78910955520.0,
       "pe_forward": 18.424044,
       "pe_trailing": 17.421762,
+      "ps_ratio": 1.862557,
+      "ev_to_sales": 2.228,
+      "ev_to_ebitda": 12.918,
+      "peg_ratio": 4.14,
       "rev_growth_yoy": 0.043620616814533164,
       "eps_growth_yoy": 0.8493975903614458,
       "gross_margin": 0.19836048982896468,
@@ -722,7 +1014,12 @@
       "high_52w": 774.0,
       "low_52w": 468.2900085449219,
       "volume_avg_30d": 809330.0,
-      "rs_proxy": -0.13265529376041812
+      "rs_proxy": -0.16033692094847574,
+      "ratio_vs_spy": 0.745105,
+      "ratio_sma_52w": 0.899504,
+      "mansfield_rs": -17.16,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -24.97
     }
   ],
   "HXL": [
@@ -732,6 +1029,10 @@
       "market_cap": 6501069312.0,
       "pe_forward": 27.079674,
       "pe_trailing": 57.07947,
+      "ps_ratio": 3.352968,
+      "ev_to_sales": 3.84,
+      "ev_to_ebitda": 21.58,
+      "peg_ratio": 1.34,
       "rev_growth_yoy": 0.09857612267250822,
       "eps_growth_yoy": 0.4000000000000001,
       "gross_margin": 0.26859421734795613,
@@ -744,7 +1045,12 @@
       "high_52w": 98.26000213623047,
       "low_52w": 50.540000915527344,
       "volume_avg_30d": 1132303.3333333333,
-      "rs_proxy": 0.06680910887899266
+      "rs_proxy": 0.03912748169093502,
+      "ratio_vs_spy": 0.115592,
+      "ratio_sma_52w": 0.108637,
+      "mansfield_rs": 6.4,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": -5.78
     }
   ],
   "KRMN": [
@@ -754,6 +1060,10 @@
       "market_cap": 8494935552.0,
       "pe_forward": 69.57258,
       "pe_trailing": 278.69565,
+      "ps_ratio": 16.255575,
+      "ev_to_sales": 17.773,
+      "ev_to_ebitda": 68.122,
+      "peg_ratio": null,
       "rev_growth_yoy": 0.5102273181255244,
       "eps_growth_yoy": 2.5,
       "gross_margin": 0.4223596322994511,
@@ -766,7 +1076,12 @@
       "high_52w": 118.37999725341797,
       "low_52w": 41.290000915527344,
       "volume_avg_30d": 1988643.3333333333,
-      "rs_proxy": -0.11187925884913136
+      "rs_proxy": -0.139560886037189,
+      "ratio_vs_spy": 0.085966,
+      "ratio_sma_52w": 0.106574,
+      "mansfield_rs": -19.34,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -32.82
     }
   ],
   "RKLB": [
@@ -776,6 +1091,10 @@
       "market_cap": 78587043840.0,
       "pe_forward": -12319.419,
       "pe_trailing": null,
+      "ps_ratio": 115.64095,
+      "ev_to_sales": 113.786,
+      "ev_to_ebitda": -469.126,
+      "peg_ratio": null,
       "rev_growth_yoy": 0.634573179188865,
       "eps_growth_yoy": 0.4166666666666666,
       "gross_margin": 0.38180066683969893,
@@ -788,7 +1107,12 @@
       "high_52w": 139.75999450683594,
       "low_52w": 24.670000076293945,
       "volume_avg_30d": 26971293.333333332,
-      "rs_proxy": 2.083106141565862
+      "rs_proxy": 2.0554245143778043,
+      "ratio_vs_spy": 0.182072,
+      "ratio_sma_52w": 0.090202,
+      "mansfield_rs": 101.85,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 76.89
     }
   ],
   "IRDM": [
@@ -798,6 +1122,10 @@
       "market_cap": 5163743232.0,
       "pe_forward": 36.44776,
       "pe_trailing": 49.333332,
+      "ps_ratio": 5.8957744,
+      "ev_to_sales": 7.811,
+      "ev_to_ebitda": 15.598,
+      "peg_ratio": 2.87,
       "rev_growth_yoy": 0.01944824505067992,
       "eps_growth_yoy": -0.25925925925925924,
       "gross_margin": 0.7140013786366106,
@@ -810,7 +1138,12 @@
       "high_52w": 48.939998626708984,
       "low_52w": 15.649999618530273,
       "volume_avg_30d": 2507646.6666666665,
-      "rs_proxy": 1.8776380226643825
+      "rs_proxy": 1.849956395476325,
+      "ratio_vs_spy": 0.065501,
+      "ratio_sma_52w": 0.037406,
+      "mansfield_rs": 75.11,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 27.53
     }
   ],
   "MDA": [
@@ -818,8 +1151,12 @@
       "date": "2026-05-25",
       "price": 43.11000061035156,
       "market_cap": 5981554688.0,
-      "pe_forward": 35.805073,
+      "pe_forward": 35.73099,
       "pe_trailing": 74.32759,
+      "ps_ratio": 2.849988,
+      "ev_to_sales": null,
+      "ev_to_ebitda": null,
+      "peg_ratio": null,
       "rev_growth_yoy": 0.32222222222222224,
       "eps_growth_yoy": -0.15384615384615388,
       "gross_margin": 0.2482223658694247,
@@ -832,7 +1169,12 @@
       "high_52w": 43.65999984741211,
       "low_52w": 23.229999542236328,
       "volume_avg_30d": 699133.3333333334,
-      "rs_proxy": 0.2846662776930696
+      "rs_proxy": 0.25698465050501196,
+      "ratio_vs_spy": 0.057816,
+      "ratio_sma_52w": 0.046601,
+      "mansfield_rs": 24.07,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 26.69
     }
   ],
   "LHX": [
@@ -842,6 +1184,10 @@
       "market_cap": 58120298496.0,
       "pe_forward": 22.884447,
       "pe_trailing": 33.91087,
+      "ps_ratio": 4.5208693,
+      "ev_to_sales": 5.915,
+      "ev_to_ebitda": 35.436,
+      "peg_ratio": 1.76,
       "rev_growth_yoy": 0.11925175370226032,
       "eps_growth_yoy": 0.3333333333333334,
       "gross_margin": 0.2440807799442897,
@@ -854,7 +1200,12 @@
       "high_52w": 379.2300109863281,
       "low_52w": 235.72000122070312,
       "volume_avg_30d": 1437703.3333333333,
-      "rs_proxy": 0.017815945373042874
+      "rs_proxy": -0.009865681815014765,
+      "ratio_vs_spy": 0.418406,
+      "ratio_sma_52w": 0.451939,
+      "mansfield_rs": -7.42,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -19.8
     }
   ],
   "KTOS": [
@@ -864,6 +1215,10 @@
       "market_cap": 10534873088.0,
       "pe_forward": 52.319847,
       "pe_trailing": 330.47058,
+      "ps_ratio": 7.444088,
+      "ev_to_sales": 6.54,
+      "ev_to_ebitda": 113.99,
+      "peg_ratio": 36.41,
       "rev_growth_yoy": 0.2260409781890284,
       "eps_growth_yoy": 1.3333333333333337,
       "gross_margin": 0.24150943396226415,
@@ -876,7 +1231,12 @@
       "high_52w": 134.0,
       "low_52w": 34.970001220703125,
       "volume_avg_30d": 4104266.6666666665,
-      "rs_proxy": -0.35694676383001267
+      "rs_proxy": -0.38462839101807034,
+      "ratio_vs_spy": 0.075345,
+      "ratio_sma_52w": 0.11049,
+      "mansfield_rs": -31.81,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -29.72
     }
   ],
   "FLY": [
@@ -886,6 +1246,10 @@
       "market_cap": 7931643392.0,
       "pe_forward": -43.356396,
       "pe_trailing": null,
+      "ps_ratio": 42.901806,
+      "ev_to_sales": 40.205,
+      "ev_to_ebitda": -33.071,
+      "peg_ratio": null,
       "rev_growth_yoy": 0.4480171873601289,
       "eps_growth_yoy": -0.2080667169697725,
       "gross_margin": 0.215890404184028,
@@ -898,7 +1262,12 @@
       "high_52w": 73.80000305175781,
       "low_52w": 16.0,
       "volume_avg_30d": 6397766.666666667,
-      "rs_proxy": 1.82093385274379
+      "rs_proxy": 1.7932522255557324,
+      "ratio_vs_spy": 0.066386,
+      "ratio_sma_52w": 0.044956,
+      "mansfield_rs": 47.67,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 17.39
     }
   ],
   "VOYG": [
@@ -908,6 +1277,10 @@
       "market_cap": 2645462272.0,
       "pe_forward": -36.18589,
       "pe_trailing": null,
+      "ps_ratio": 15.826118,
+      "ev_to_sales": 16.479,
+      "ev_to_ebitda": -25.863,
+      "peg_ratio": null,
       "rev_growth_yoy": 0.02141594459095256,
       "eps_growth_yoy": -0.2875138622325834,
       "gross_margin": -0.0438631334052091,
@@ -920,7 +1293,12 @@
       "high_52w": 73.94999694824219,
       "low_52w": 17.40999984741211,
       "volume_avg_30d": 1927560.0,
-      "rs_proxy": 1.0249716312006694
+      "rs_proxy": 0.9972900040126118,
+      "ratio_vs_spy": 0.059868,
+      "ratio_sma_52w": 0.046949,
+      "mansfield_rs": 27.52,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 36.64
     }
   ],
   "LUNR": [
@@ -930,6 +1308,10 @@
       "market_cap": 6138905088.0,
       "pe_forward": -286.95715,
       "pe_trailing": null,
+      "ps_ratio": 18.365385,
+      "ev_to_sales": 22.222,
+      "ev_to_ebitda": -92.112,
+      "peg_ratio": null,
       "rev_growth_yoy": 1.9369522103512251,
       "eps_growth_yoy": -1.272727272727273,
       "gross_margin": 0.14707291836845832,
@@ -942,7 +1324,12 @@
       "high_52w": 38.54999923706055,
       "low_52w": 7.78000020980835,
       "volume_avg_30d": 13544910.0,
-      "rs_proxy": 3.1361018231449114
+      "rs_proxy": 3.1084201959568536,
+      "ratio_vs_spy": 0.051312,
+      "ratio_sma_52w": 0.022538,
+      "mansfield_rs": 127.67,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 44.22
     }
   ],
   "RDW": [
@@ -952,6 +1339,10 @@
       "market_cap": 3479088384.0,
       "pe_forward": -42.658535,
       "pe_trailing": null,
+      "ps_ratio": 9.378658,
+      "ev_to_sales": 9.503,
+      "ev_to_ebitda": -19.76,
+      "peg_ratio": null,
       "rev_growth_yoy": 0.5794771561202052,
       "eps_growth_yoy": -3.444444444444445,
       "gross_margin": 0.26613867920636886,
@@ -964,7 +1355,12 @@
       "high_52w": 22.25,
       "low_52w": 4.869999885559082,
       "volume_avg_30d": 35356320.0,
-      "rs_proxy": 2.1298888956282163
+      "rs_proxy": 2.1022072684401585,
+      "ratio_vs_spy": 0.023456,
+      "ratio_sma_52w": 0.015971,
+      "mansfield_rs": 46.87,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 61.1
     }
   ],
   "PL": [
@@ -974,6 +1370,10 @@
       "market_cap": 15806036992.0,
       "pe_forward": -1971.111,
       "pe_trailing": null,
+      "ps_ratio": 51.363827,
+      "ev_to_sales": 49.31,
+      "ev_to_ebitda": -337.36,
+      "peg_ratio": null,
       "rev_growth_yoy": 0.41050134840952657,
       "eps_growth_yoy": -3.0,
       "gross_margin": 0.5416829835755914,
@@ -986,7 +1386,12 @@
       "high_52w": 45.779998779296875,
       "low_52w": 3.5299999713897705,
       "volume_avg_30d": 10093720.0,
-      "rs_proxy": 2.7281450251094688
+      "rs_proxy": 2.700463397921411,
+      "ratio_vs_spy": 0.059479,
+      "ratio_sma_52w": 0.026283,
+      "mansfield_rs": 126.3,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 18.91
     }
   ],
   "BKSY": [
@@ -996,6 +1401,10 @@
       "market_cap": 1776408960.0,
       "pe_forward": -87.834854,
       "pe_trailing": null,
+      "ps_ratio": 18.162762,
+      "ev_to_sales": 19.138,
+      "ev_to_ebitda": -80.276,
+      "peg_ratio": null,
       "rev_growth_yoy": -0.29684538315732467,
       "eps_growth_yoy": -0.9523809523809523,
       "gross_margin": 0.6470588235294118,
@@ -1008,7 +1417,12 @@
       "high_52w": 48.65999984741211,
       "low_52w": 10.420999526977539,
       "volume_avg_30d": 2237780.0,
-      "rs_proxy": 1.8675454908910663
+      "rs_proxy": 1.8398638637030087,
+      "ratio_vs_spy": 0.0642,
+      "ratio_sma_52w": 0.033908,
+      "mansfield_rs": 89.34,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 26.61
     }
   ],
   "APH": [
@@ -1018,6 +1432,10 @@
       "market_cap": 162464759808.0,
       "pe_forward": 23.466444,
       "pe_trailing": 37.839542,
+      "ps_ratio": 6.2718506,
+      "ev_to_sales": 6.823,
+      "ev_to_ebitda": 21.63,
+      "peg_ratio": 1.13,
       "rev_growth_yoy": 0.5838910829349407,
       "eps_growth_yoy": 0.24137931034482762,
       "gross_margin": 0.3674754924476057,
@@ -1030,7 +1448,12 @@
       "high_52w": 167.0399932861328,
       "low_52w": 83.44000244140625,
       "volume_avg_30d": 10093526.666666666,
-      "rs_proxy": -0.15721977102393597
+      "rs_proxy": -0.18490139821199358,
+      "ratio_vs_spy": 0.17711,
+      "ratio_sma_52w": 0.188258,
+      "mansfield_rs": -5.92,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -16.35
     }
   ],
   "HEI": [
@@ -1040,6 +1463,10 @@
       "market_cap": 42000621568.0,
       "pe_forward": 47.202415,
       "pe_trailing": 59.494072,
+      "ps_ratio": 9.064744,
+      "ev_to_sales": 9.667,
+      "ev_to_ebitda": 35.413,
+      "peg_ratio": 2.81,
       "rev_growth_yoy": 0.14400779637786806,
       "eps_growth_yoy": 0.1250000000000001,
       "gross_margin": 0.3860265980644537,
@@ -1052,7 +1479,12 @@
       "high_52w": 361.69000244140625,
       "low_52w": 256.1099853515625,
       "volume_avg_30d": 741320.0,
-      "rs_proxy": -0.1311539549375459
+      "rs_proxy": -0.15883558212560353,
+      "ratio_vs_spy": 0.403734,
+      "ratio_sma_52w": 0.470373,
+      "mansfield_rs": -14.17,
+      "ratio_above_sma": false,
+      "ratio_slope_30d": -5.71
     }
   ],
   "UFO": [
@@ -1062,6 +1494,10 @@
       "market_cap": null,
       "pe_forward": null,
       "pe_trailing": 27.99577,
+      "ps_ratio": null,
+      "ev_to_sales": null,
+      "ev_to_ebitda": null,
+      "peg_ratio": null,
       "rev_growth_yoy": null,
       "eps_growth_yoy": null,
       "gross_margin": null,
@@ -1074,7 +1510,12 @@
       "high_52w": 62.11000061035156,
       "low_52w": 23.89699935913086,
       "volume_avg_30d": 1129756.6666666667,
-      "rs_proxy": 0.7952489780388384
+      "rs_proxy": 0.7675673508507808,
+      "ratio_vs_spy": 0.083016,
+      "ratio_sma_52w": 0.057934,
+      "mansfield_rs": 43.29,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 10.62
     }
   ],
   "ROKT": [
@@ -1084,6 +1525,10 @@
       "market_cap": null,
       "pe_forward": null,
       "pe_trailing": 35.493977,
+      "ps_ratio": null,
+      "ev_to_sales": null,
+      "ev_to_ebitda": null,
+      "peg_ratio": null,
       "rev_growth_yoy": null,
       "eps_growth_yoy": null,
       "gross_margin": null,
@@ -1096,7 +1541,12 @@
       "high_52w": 125.58999633789062,
       "low_52w": 56.939998626708984,
       "volume_avg_30d": 51393.333333333336,
-      "rs_proxy": 0.5457855924327392
+      "rs_proxy": 0.5181039652446815,
+      "ratio_vs_spy": 0.168164,
+      "ratio_sma_52w": 0.127438,
+      "mansfield_rs": 31.96,
+      "ratio_above_sma": true,
+      "ratio_slope_30d": 3.55
     }
   ]
 }

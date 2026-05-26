@@ -18,7 +18,18 @@ Operational instructions for Claude Code sessions working in this repo.
   "report_refs":           ["ai-infra-2026-q1"],
   "catalyst":              "",
   "risks":                 "",
-  "rating":                "",
+  "rating":                "Strong",
+  "rating_reasoning": {
+    "summary":          "One-paragraph explanation of why this rating.",
+    "primary_drivers":  ["...", "..."],
+    "key_risks":        ["...", "..."],
+    "evidence": [
+      {"type": "report", "ref_id": "ai-infra-2026-q1", "ref_name": "AI Infra Q1 2026", "rank": 1, "reasoning": "verbatim from report ranking"},
+      {"type": "bottleneck", "ref_id": "power-density", "ref_name": "Power Density", "role": "winner", "physics_summary": "from bottleneck physics"}
+    ],
+    "rated_date":       "2026-05-25",
+    "rated_by":         "auto"
+  },
   "notes":                 "",
   "date_added":            "2026-05-25"
 }
@@ -29,8 +40,14 @@ Field rules:
 - **String fields** (`ticker`, `company`, `sector`, `thesis`, `catalyst`, `risks`, `rating`, `notes`, `date_added`) — all strings. `rating` is one of `"Strong" | "Watch" | "Pass" | ""` (empty = unrated); the dashboard styles only those three values.
 - **`bottlenecks_addressed`** — array of `id` strings from `data/bottlenecks.json`. **Every id must resolve** to an existing entry — same rule as `reports.json[].rankings[].bottlenecks_addressed`. Defaults to `[]` for tickers not yet tagged. Hand-edits are allowed when you know a ticker plays in a space independent of any single report.
 - **`report_refs`** — array of `id` strings from `data/reports.json`. Back-reference: which reports include this ticker. Primarily maintained by the ingestion workflow (forward ref lives in `reports.json[].rankings[].ticker`); rarely hand-edited. Defaults to `[]`.
+- **`rating_reasoning`** — structured object the dashboard surfaces in the clickable rating modal. The user expects every rated ticker to have one; an unrated ticker may still carry a reasoning object explaining *why* it's unrated. Subfield rules:
+  - `summary` — 2-4 sentences; the punch-line of the rating.
+  - `primary_drivers` / `key_risks` — bullet arrays. Specific to this ticker — not boilerplate. Drivers should mirror the report `reasoning` and the bottleneck role; risks should be the things that would force a downgrade.
+  - `evidence` — array of cross-references with `{type: "report"|"bottleneck", ref_id, ref_name, ...}` plus type-specific extras (`rank`/`reasoning` for reports, `role`/`physics_summary` for bottlenecks). The dashboard renders each as a clickable link that jumps to the Reports or Bottlenecks tab. Every `ref_id` must resolve in the corresponding file.
+  - `rated_date` — ISO date the reasoning was synthesized.
+  - `rated_by` — `"auto"` (synthesized by `scripts/synthesize_ratings.py` or `/ingest`) or `"manual"` (user-curated). **The ingest workflow MUST preserve `rated_by == "manual"` entries unchanged** when recomputing reasoning. See *"Recomputing rating reasoning"* below.
 
-Existing entries created before these fields were added are allowed to omit them; treat omission as equivalent to `[]`.
+Existing entries created before these fields were added are allowed to omit them; treat omission as equivalent to `[]` (or `null` for `rating_reasoning`).
 
 ## Existing sectors
 
@@ -162,13 +179,30 @@ When the user says **"ingest"** or **"process reports"** with no other context, 
      - If the ticker isn't in `tickers.json` yet, create the entry per the *"When adding tickers from a research report"* rules, with `bottlenecks_addressed` and `report_refs` populated from this report.
 
    Skipping any of the three leaves dangling references. Treat them as a single atomic write.
-10. **Append a dedup entry to `reports/.processed.json`** for each file processed: `processed_at` (current UTC ISO 8601), `tickers_added`, `tickers_updated`, `report_id` (the `id` from the new `reports.json` entry, for cross-reference).
-11. **Move processed files to `reports/archive/`** (preserve filename — don't rename). Verify the `pdf_path` in `reports.json` matches the final archive location.
-12. **Remind the user to commit and push** (see the section below).
+10. **Recompute `rating_reasoning`** for every ticker whose `bottlenecks_addressed` or `report_refs` changed in step 9 — per *"Recomputing rating reasoning"* below. Preserve `rated_by == "manual"` entries unchanged. Include the resulting reasoning diff in the confirmation in step 8 (you may need a second confirmation pass if reasoning changes are extensive).
+11. **Append a dedup entry to `reports/.processed.json`** for each file processed: `processed_at` (current UTC ISO 8601), `tickers_added`, `tickers_updated`, `report_id` (the `id` from the new `reports.json` entry, for cross-reference).
+12. **Move processed files to `reports/archive/`** (preserve filename — don't rename). Verify the `pdf_path` in `reports.json` matches the final archive location.
+13. **Remind the user to commit and push** (see the section below).
 
 If the user says **"ingest &lt;filename&gt;"** with an explicit path, process just that file. Still archive it and record it in `.processed.json` afterwards.
 
 If a file fails to parse (corrupt PDF, encrypted, no tickers found), surface the error to the user, leave the file in `reports/` (don't archive it), and don't add it to `.processed.json` — so a retry will pick it up.
+
+## Recomputing rating reasoning
+
+`scripts/synthesize_ratings.py` is the one-shot bootstrap that authored the `rating_reasoning` block on every ticker. After any ingest that adds reports, bottleneck winners, or rating changes, **regenerate reasoning for affected tickers** so the dashboard modal stays in sync.
+
+Rules:
+
+1. **Skip tickers with `rated_by == "manual"`.** That's a user override — never overwrite.
+2. **Mechanically rebuild `evidence`** from the freshly merged `reports.json` + `bottlenecks.json` for every auto-rated ticker (the `build_evidence` helper in `synthesize_ratings.py` is the reference implementation).
+3. **Re-synthesize `summary` / `primary_drivers` / `key_risks`** when the evidence changes materially — e.g. a new report ranking, a new bottleneck winner role. If only the price snapshot changed, leave the prose alone.
+4. **Stamp `rated_date` with today** and keep `rated_by == "auto"`.
+5. **Show the user the diff** before writing (same as the main ingest diff) — and only the tickers whose reasoning actually changed.
+
+When the user types **"resynthesize ratings"** or **"recompute reasoning"**, run the same loop but force a re-author of every auto-rated ticker (still preserving `manual`). This is the right answer when the user is changing the rating taxonomy itself, not just adding evidence.
+
+A ticker can also be *manually* overridden from the dashboard: clicking a rating opens the modal, which has a **Copy override snippet** button. The snippet sets `rated_by: "manual"` and is meant to be pasted directly into `data/tickers.json`. After paste, the user commits and pushes — and from that point on, ingest workflows must leave that block alone.
 
 ## After editing tickers.json
 
