@@ -20,7 +20,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,23 +36,40 @@ jobs:
       - name: Install project dependencies
         run: uv sync
 
-      - name: Run refresh.py
-        # Non-zero exit here fails the job; GitHub will email repo admins.
+      # ---- DAILY UPDATE CHAIN ----
+      # 1. fetch_macro.py — VIX / F&G / Put-Call / Net Liquidity / DXY /
+      #    HY OAS / SPY-200DMA + sector rotation. Reads the prior
+      #    macro.json to preserve the rolling 30-day F&G + P/C history.
+      #    `continue-on-error: true` because CNN's endpoint can intermittently
+      #    block bots — we'd rather ship a refresh with stale macro than fail
+      #    the whole job. The fetcher writes a visibly-broken state when it
+      #    fails so the dashboard shows "— unavailable".
+      - name: Fetch macro indicators
+        run: uv run python scripts/fetch_macro.py
+        continue-on-error: true
+
+      # 2. refresh.py — per-ticker yfinance snapshots, history append,
+      #    Mansfield RS, valuation multiples. Mirrors all data/*.json into
+      #    docs/data/ for GitHub Pages.
+      - name: Fetch ticker snapshots + history
         run: uv run python scripts/refresh.py
+
+      # 3. synthesize_pillars.py — recompute 5-Pillar scores from fresh
+      #    snapshots. Preserves manual founder-led flips (evidence prefix
+      #    "Manual flip — …") and never touches binding_constraint_thesis.
+      - name: Recompute pillar scores
+        run: uv run python scripts/synthesize_pillars.py
 
       - name: Commit updated data (if any)
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # refresh.py writes to both /data/ (canonical) and /docs/data/
-          # (Pages mirror) — commit both if either changed.
+          # All three scripts write to /data/ (canonical) and /docs/data/
+          # (Pages mirror). Commit only if something actually changed.
           if git diff --quiet -- data/ docs/data/; then
             echo "no data changes — nothing to commit"
             exit 0
           fi
-          # refresh.py writes data/snapshots.json + data/history.json, and
-          # mirrors all data/*.json into docs/data/. Add only files that
-          # actually changed — `git add -A -- ...` handles new files too.
           git add -A -- data/ docs/data/
-          git commit -m "Daily refresh $(date -u +%Y-%m-%d)"
+          git commit -m "Daily refresh $(date -u +%Y-%m-%d) — macro + snapshots + pillars"
           git push

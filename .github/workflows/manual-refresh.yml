@@ -22,7 +22,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,8 +38,16 @@ jobs:
       - name: Install project dependencies
         run: uv sync
 
-      - name: Run refresh.py
+      # Same 3-step chain as daily-refresh: macro → snapshots → pillars.
+      - name: Fetch macro indicators
+        run: uv run python scripts/fetch_macro.py
+        continue-on-error: true
+
+      - name: Fetch ticker snapshots + history
         run: uv run python scripts/refresh.py
+
+      - name: Recompute pillar scores
+        run: uv run python scripts/synthesize_pillars.py
 
       - name: Commit updated data (if any)
         run: |

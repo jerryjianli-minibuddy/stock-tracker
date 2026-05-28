@@ -517,9 +517,30 @@ The endpoint sits behind a Cloudflare-style bot check that rejects bare Python U
 
 Clicking a rating chip in the watchlist (Strong / Watch / Pass) opens the **per-ticker reasoning modal** (`rating_reasoning` content), not the glossary. The Rating column header is sortable but does *not* open the glossary (the rating system is documented in this file and in the `rating-system` glossary entry, but reaching it from a sort-first header would conflict with the sort cycle). To read the rating-system definition, use the Glossary tab.
 
-## After editing tickers.json
+## Daily auto-update chain
 
-Remind the user to commit and push so the next Actions run picks up the new tickers:
+`.github/workflows/daily-refresh.yml` runs every weekday at **22:00 UTC** (~3 pm PT, post-close) and refreshes EVERYTHING the dashboard depends on. The chain has three steps, in order:
+
+| Step | Script | What it updates |
+|---|---|---|
+| 1 | `scripts/fetch_macro.py` | `data/macro.json` (VIX, F&G, Put/Call, Net Liquidity, DXY, HY OAS, SPY-200DMA + regime synthesis) and `data/sector_rotation.json`. Appends today's F&G + P/C scores to the rolling 30-day history. `continue-on-error: true` — if CNN blocks the bot today, the workflow still ships the rest of the refresh; the fetcher writes a visibly-broken state and the dashboard shows "— unavailable". |
+| 2 | `scripts/refresh.py` | `data/snapshots.json` (per-ticker yfinance: price, market cap, multiples, growth, margins, Mansfield RS, ratio history) and `data/history.json` (appends today's price). Also mirrors all `data/*.json` into `docs/data/` for GitHub Pages. |
+| 3 | `scripts/synthesize_pillars.py` | Recomputes the 5-Pillar scores on every ticker from the fresh snapshots. **Preserves manual founder-led flips** (evidence prefix `"Manual flip — …"`) and **never modifies `binding_constraint_thesis`**. |
+
+The job commits all three result sets in a single push: `Daily refresh YYYY-MM-DD — macro + snapshots + pillars`.
+
+### What does NOT update daily (intentionally)
+
+- **`data/tickers.json`** — sector, rating, thesis, rating_reasoning, report_refs, bottlenecks_addressed, risks, binding_constraint_thesis, forward_3yr_cagr_pct are all user/Claude-curated. The daily job only rewrites the auto-computed `five_pillars` / `pillars_passed` / `pillar_eligibility` block via step 3.
+- **`data/reports.json`** and **`data/bottlenecks.json`** — only touched by the `/ingest` workflow (user-confirmed).
+- **`data/glossary.json`** — hand-curated.
+- **`rating_reasoning`** — never auto-recomputed by the daily chain (that's `scripts/synthesize_ratings.py`, which is a one-shot bootstrap that overwrites auto-rated tickers but preserves `rated_by: "manual"` entries; run manually on demand).
+
+### Manual trigger
+
+For mid-day refreshes (e.g., right after adding new tickers, or to pull fresh macro after CNN unblocks), trigger the same chain via **GitHub Actions tab → manual-refresh → Run workflow** (with an optional reason input). `manual-refresh.yml` runs the identical 3-step chain.
+
+### After editing `tickers.json`
 
 ```bash
 git add data/tickers.json
@@ -527,7 +548,7 @@ git commit -m "Add <TICKERS> to watchlist"
 git push
 ```
 
-The next refresh — daily cron at 22:00 UTC weekdays, or manual via **Actions tab → manual-refresh → Run workflow** — will fetch snapshots for the new tickers and commit them back to `data/snapshots.json` + `data/history.json` + the `docs/data/` mirror.
+Then either wait for the next 22:00 UTC daily run, or trigger `manual-refresh` to backfill snapshots + pillars for the new tickers immediately.
 
 ## File ownership at a glance
 
