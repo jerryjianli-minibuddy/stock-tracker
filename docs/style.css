@@ -394,6 +394,95 @@ tr.data-row.flash-target td { animation: flash 1.2s ease-out 1; }
 .small { font-size: 0.75rem; }
 code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-elev); padding: 0.1rem 0.35rem; border-radius: 4px; }
 
+/* ----- Leverage column + modal ----- */
+.leverage-cell { cursor: pointer; font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+.leverage-cell:hover { background: var(--bg-row-hover); }
+.lev-num { font-size: 0.85rem; }
+.lev-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.02em; padding: 0.1rem 0.5rem; border-radius: 4px; }
+/* Bucket tints — applied to the cell directly */
+.leverage-cell.leverage-net_cash  { color: var(--accent); }
+.leverage-cell.leverage-net_cash .lev-label { background: var(--accent-bg); color: var(--accent); }
+.leverage-cell.leverage-low       { color: var(--green); background: rgba(52, 211, 153, 0.06); }
+.leverage-cell.leverage-moderate  { color: var(--green); }
+.leverage-cell.leverage-elevated  { background: var(--yellow-bg); color: var(--yellow); }
+.leverage-cell.leverage-high      { background: rgba(248, 113, 113, 0.10); color: var(--yellow); }
+.leverage-cell.leverage-danger    { background: var(--red-bg); color: var(--red); font-weight: 700; }
+.leverage-cell.leverage-burning   { background: var(--red-bg); color: var(--red); }
+.leverage-cell.leverage-burning .lev-label { background: var(--red-bg); color: var(--red); }
+.leverage-cell.leverage-unknown   { color: var(--text-muted); }
+
+.leverage-badge { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.15rem 0.55rem; border-radius: 4px; margin-left: 0.6rem; }
+.leverage-badge.leverage-net_cash { background: var(--accent-bg); color: var(--accent); }
+.leverage-badge.leverage-low      { background: var(--green-bg); color: var(--green); }
+.leverage-badge.leverage-moderate { background: var(--green-bg); color: var(--green); }
+.leverage-badge.leverage-elevated { background: var(--yellow-bg); color: var(--yellow); }
+.leverage-badge.leverage-high     { background: var(--yellow-bg); color: var(--yellow); }
+.leverage-badge.leverage-danger   { background: var(--red-bg);    color: var(--red); }
+.leverage-badge.leverage-burning  { background: var(--red-bg);    color: var(--red); }
+.leverage-badge.leverage-unknown  { background: var(--gray-bg);   color: var(--text-muted); }
+
+#leverage-modal-body { padding: 1.1rem; overflow-y: auto; flex: 1; font-size: 0.875rem; line-height: 1.55; }
+.lev-section { margin-bottom: 1.1rem; }
+.lev-section:last-child { margin-bottom: 0; }
+.lev-section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; margin-bottom: 0.4rem; }
+.lev-section-label.glossary-clickable { display: inline-flex; align-items: center; gap: 0.15rem; cursor: help; }
+.lev-table { width: 100%; border-collapse: collapse; }
+.lev-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+.lev-row-label { color: var(--text); }
+.lev-row-label.glossary-clickable { cursor: help; }
+.lev-row-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+.lev-why { padding-top: 0.55rem; border-top: 1px dashed var(--border); }
+.lev-why p { margin: 0.45rem 0; }
+.lev-phase-note { background: var(--bg); border-left: 3px solid var(--accent); padding: 0.55rem 0.8rem; border-radius: 0 4px 4px 0; }
+
+/* ----- Credit cycle: macro banner chip + Macro tab card ----- */
+.credit-chip { font-weight: 600; }
+.credit-chip.credit-expansion   { border-color: var(--green) !important; color: var(--green) !important; }
+.credit-chip.credit-late-cycle  { border-color: var(--yellow) !important; color: var(--yellow) !important; }
+.credit-chip.credit-contraction { border-color: var(--red) !important; color: var(--red) !important; }
+.credit-chip.credit-recovery    { border-color: var(--accent) !important; color: var(--accent) !important; }
+
+.credit-card {
+  background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem;
+  border-left-width: 4px;
+}
+.credit-card.credit-card-expansion   { border-left-color: var(--green); }
+.credit-card.credit-card-late-cycle  { border-left-color: var(--yellow); }
+.credit-card.credit-card-contraction { border-left-color: var(--red); }
+.credit-card.credit-card-recovery    { border-left-color: var(--accent); }
+.credit-headline { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.credit-phase-pill { font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 999px; letter-spacing: 0.04em; font-size: 0.85rem; }
+.credit-phase-pill.credit-expansion   { background: var(--green-bg);   color: var(--green); }
+.credit-phase-pill.credit-late-cycle  { background: var(--yellow-bg);  color: var(--yellow); }
+.credit-phase-pill.credit-contraction { background: var(--red-bg);     color: var(--red); }
+.credit-phase-pill.credit-recovery    { background: var(--accent-bg);  color: var(--accent); }
+.credit-reasoning { margin: 0.4rem 0 0.6rem; color: var(--text); }
+.credit-positioning { margin: 0.4rem 0 0.9rem; color: var(--text); font-size: 0.875rem; }
+.credit-section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; margin: 0.6rem 0 0.35rem; }
+.credit-signals { width: 100%; border-collapse: collapse; }
+.credit-signals td { padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+.credit-sig-name { font-weight: 600; width: 35%; }
+.credit-sig-name.glossary-clickable { cursor: help; }
+.credit-sig-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; width: 25%; }
+.credit-sig-sub  { width: 40%; }
+.credit-most-levered { margin-top: 0.9rem; padding-top: 0.6rem; border-top: 1px dashed var(--border); }
+.credit-most-levered-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.credit-levered-chip {
+  display: inline-flex; align-items: baseline; gap: 0.3rem;
+  padding: 0.25rem 0.6rem; border-radius: 6px; border: 1px solid var(--border);
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: 0.78rem; cursor: pointer; user-select: none;
+}
+.credit-levered-chip:hover { border-color: var(--text-muted); }
+.credit-levered-chip strong { font-family: var(--font-sans); }
+.credit-levered-chip.leverage-elevated { background: var(--yellow-bg); color: var(--yellow); }
+.credit-levered-chip.leverage-high     { background: var(--yellow-bg); color: var(--yellow); }
+.credit-levered-chip.leverage-danger   { background: var(--red-bg);    color: var(--red); }
+.credit-levered-chip.leverage-moderate { background: rgba(52, 211, 153, 0.06); color: var(--green); }
+.credit-levered-chip.leverage-low      { color: var(--green); }
+.credit-levered-chip.leverage-burning  { background: var(--red-bg);    color: var(--red); }
+
 /* ----- 5-Pillar framework — table cell + modal ----- */
 /* Compact 5-dot strip shown in the Pillars column. The whole cell is
    clickable to open the breakdown modal. */

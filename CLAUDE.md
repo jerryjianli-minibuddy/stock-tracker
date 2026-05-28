@@ -466,6 +466,77 @@ Plain stock metrics are self-explanatory; the watchlist table is for *sorting an
 
 Rule of thumb: **plain stock metrics → sort only; framework concepts and macro indicators → glossary clickable.** When adding a new term, decide which side of that line it falls on.
 
+### Credit cycle + per-company leverage
+
+The dashboard has **two-level credit/debt analysis** that complements the existing HY OAS spread indicator:
+
+1. **Per-company leverage** — every ticker's snapshot carries `net_debt_to_ebitda`, `total_debt`, `total_cash`, `net_debt`, `ebitda`, `current_ratio`, `interest_coverage`, `debt_to_equity`, plus `cash_runway_quarters` for unprofitable names. Surfaced as a **Leverage** column in the watchlist (between Pillars and Rating), color-coded by zone (blue net-cash → red danger). Clicking the cell opens a modal with the full debt breakdown and a phase-keyed positioning note ("In Late Cycle, trim names above 4× net-debt/EBITDA").
+
+2. **Aggregate credit cycle** — synthesized 4-phase composite in `indicators.credit_cycle`: **EXPANSION** (credit flowing), **LATE CYCLE** (banks tightening), **CONTRACTION** (credit crunch), **RECOVERY** (early thaw). Surfaced as a **Credit chip** in the macro banner + a full **Credit Cycle card** on the Macro tab with all 6 underlying signals (HY OAS, IG OAS, HY-IG differential, SLOOS bank lending standards, C&I loan growth, Corp Debt/GDP) and a clickable cross-link to the user's top 5 most-levered holdings.
+
+#### Per-company leverage schema (in `snapshots.json`)
+
+```json
+{
+  "net_debt_to_ebitda": 0.86,   // headline metric — negative = net cash
+  "debt_to_equity":     0.45,   // yfinance reports as %, refresh.py normalises to ratio
+  "total_debt":         1.2e10,
+  "total_cash":         8.0e9,
+  "net_debt":           4.0e9,
+  "ebitda":             4.6e9,
+  "current_ratio":      1.85,
+  "interest_coverage":  12.3,   // EBIT / interest expense, TTM
+  "cash_runway_quarters": 5.2   // null for cash-positive names
+}
+```
+
+**Zone thresholds** (in `leverageBucket()` in `docs/app.js`):
+
+| Bucket | Threshold | Color |
+|---|---|---|
+| `net_cash` | net_debt < 0 | blue |
+| `low` | 0 ≤ NDE < 1.5x | green |
+| `moderate` | 1.5–3.0x | lime |
+| `elevated` | 3.0–4.5x | yellow |
+| `high` | 4.5–6.0x | orange |
+| `danger` | > 6.0x | red |
+| `burning` | EBITDA ≤ 0 (show runway in quarters instead) | red |
+| `unknown` | no yfinance data | gray |
+
+#### Credit cycle data sources
+
+All FRED, no API key needed (CSV endpoint `fred.stlouisfed.org/graph/fredgraph.csv?id=<SERIES>`):
+
+| Series ID | What it is | Used for |
+|---|---|---|
+| `BAMLH0A0HYM2` | ICE BofA US High Yield OAS (daily, %) | HY spread + 4w delta |
+| `BAMLC0A0CM` | ICE BofA US Corporate IG OAS (daily, %) | IG spread + HY-IG differential |
+| `DRTSCILM` | Senior Loan Officer Survey: net % tightening C&I to large/medium firms (quarterly) | The **leading** signal — banks see corporate cash before bond markets |
+| `TOTCI` | Total C&I loans outstanding (weekly, $B) | 13-week + 52-week growth |
+| `BCNSDODNS` | Nonfinancial corporate debt (quarterly, **$millions** — normalised /1000 to billions for the GDP ratio) | Debt-to-GDP trend |
+| `GDP` | Nominal GDP (quarterly, $B) | Debt-to-GDP denominator |
+
+**Unit normalisation gotcha:** `BCNSDODNS` is reported in $millions while `GDP` is in $billions — divide debt by 1000 before computing the ratio (`_credit_debt_gdp_block` in `fetch_macro.py` handles this).
+
+#### Credit phase synthesis (`_synthesize_credit_phase`)
+
+Decision tree, ordered by severity. Returns `(phase, reasoning)`:
+
+```
+CONTRACTION  if  spreads widening   AND banks sharply tightening (SLOOS > 20)
+                                    AND (C&I contracting OR HY-IG diff widening)
+RECOVERY     if  spreads narrowing  AND banks easing
+LATE CYCLE   if  spreads still tight AND banks tightening (SLOOS > 5)
+EXPANSION    if  spreads tight       AND banks not tightening (SLOOS ≤ 5)
+LATE CYCLE   otherwise (cautious default when signals mixed)
+```
+
+The thresholds are tuned for the current cycle. If the user wants Expansion to hold longer (require deeper SLOOS tightening before flipping), raise the `> 5` threshold in `_synthesize_credit_phase` and document the change in the commit message.
+
+#### Glossary entries
+
+Under category `Macro`: `credit-cycle`, `net-debt-to-ebitda`, `bank-lending-standards-sloos`, `hy-ig-differential`, `interest-coverage`, `cash-runway`. Under `5-Pillar Framework`: `leverage`.
+
 ### Macro indicators — CNN F&G + Put/Call
 
 `scripts/fetch_macro.py` pulls Fear & Greed and Put/Call together from CNN's data endpoint:

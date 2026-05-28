@@ -466,6 +466,255 @@ def _credit_regime(bps: float) -> str:
     return "Risk-off confirmed"
 
 
+# ============ Credit cycle (composite) ============
+#
+# Distinct from the equity risk-on/off regime. Credit cycles tend to last
+# longer than equity cycles and "end" not from valuation but from rising
+# debt-service cost + spread widening + bank tightening combining to make
+# refinancing impossible. The 2010-2019 expansion was the longest in history
+# specifically because ZIRP kept debt service trivial despite rising leverage.
+#
+# Four phases per Theme-to-Pick framework:
+#   EXPANSION   — spreads tight, banks easing, C&I growing
+#   LATE CYCLE  — spreads still tight but banks starting to tighten
+#   CONTRACTION — spreads widening, banks tightening hard, C&I shrinking
+#   RECOVERY    — spreads peaked + narrowing, banks stopping the tightening
+
+def fetch_credit_cycle() -> dict:
+    """Pull all the credit-cycle FRED series, compute each indicator's regime,
+    synthesize the 4-phase composite."""
+    hy = _safe(lambda: _fetch_fred_csv("BAMLH0A0HYM2"), label="HY OAS")  # %, daily
+    ig = _safe(lambda: _fetch_fred_csv("BAMLC0A0CM"),   label="IG OAS")  # %, daily
+    # Senior Loan Officer survey — net % of banks tightening C&I lending standards
+    # for large/medium firms. Quarterly series.
+    sloos = _safe(lambda: _fetch_fred_csv("DRTSCILM"), label="SLOOS")
+    # Total C&I Loans outstanding ($B), weekly.
+    cni = _safe(lambda: _fetch_fred_csv("TOTCI"), label="C&I Loans")
+    # Nonfinancial corporate debt outstanding ($B), quarterly.
+    corp_debt = _safe(lambda: _fetch_fred_csv("BCNSDODNS"), label="Nonfinancial Corp Debt")
+    # GDP (for debt/GDP ratio), quarterly.
+    gdp = _safe(lambda: _fetch_fred_csv("GDP"), label="GDP")
+
+    indicators: dict[str, Any] = {}
+    indicators["hy_oas"] = _credit_hy_block(hy)
+    indicators["ig_oas"] = _credit_ig_block(ig)
+    indicators["hy_ig_diff"] = _credit_hy_ig_diff_block(hy, ig)
+    indicators["sloos"] = _credit_sloos_block(sloos)
+    indicators["cni_loans"] = _credit_cni_block(cni)
+    indicators["corp_debt_to_gdp"] = _credit_debt_gdp_block(corp_debt, gdp)
+
+    phase, reasoning = _synthesize_credit_phase(indicators)
+    return {
+        "phase":      phase,
+        "reasoning":  reasoning,
+        "indicators": indicators,
+        "last_updated": _utc_now_iso(),
+        "description": ("Credit cycle composite — synthesized from HY OAS, IG OAS, "
+                        "HY-IG spread differential, SLOOS bank lending standards, "
+                        "C&I loan growth, and corporate-debt/GDP."),
+    }
+
+
+def _credit_hy_block(df) -> dict:
+    if df is None or df.empty:
+        return {"current_bps": None, "delta_4w_bps": None, "regime": None, "source": "FRED BAMLH0A0HYM2"}
+    df = df.copy()
+    df["bps"] = df["value"] * 100
+    current_bps = float(df["bps"].iloc[-1])
+    delta_4w = float(current_bps - df["bps"].iloc[-21]) if len(df) >= 21 else None
+    return {
+        "current_bps":   round(current_bps, 0),
+        "delta_4w_bps":  round(delta_4w, 0) if delta_4w is not None else None,
+        "regime":        _credit_regime(current_bps),
+        "source":        "FRED BAMLH0A0HYM2 (ICE BofA US High Yield OAS)",
+    }
+
+
+def _credit_ig_block(df) -> dict:
+    if df is None or df.empty:
+        return {"current_bps": None, "delta_4w_bps": None, "regime": None, "source": "FRED BAMLC0A0CM"}
+    df = df.copy()
+    df["bps"] = df["value"] * 100
+    current_bps = float(df["bps"].iloc[-1])
+    delta_4w = float(current_bps - df["bps"].iloc[-21]) if len(df) >= 21 else None
+    return {
+        "current_bps":   round(current_bps, 0),
+        "delta_4w_bps":  round(delta_4w, 0) if delta_4w is not None else None,
+        "regime":        _ig_regime(current_bps),
+        "source":        "FRED BAMLC0A0CM (ICE BofA US Corporate IG OAS)",
+    }
+
+
+def _ig_regime(bps: float) -> str:
+    # IG runs roughly 1/3 to 1/2 of HY in normal times
+    if bps < 100: return "Complacent"
+    if bps < 150: return "Normal"
+    if bps < 250: return "Stressed"
+    return "Risk-off confirmed"
+
+
+def _credit_hy_ig_diff_block(hy_df, ig_df) -> dict:
+    """The 'spread of spreads' — HY OAS minus IG OAS. When this widens,
+    investors are demanding much more to hold junk vs quality. A leading
+    indicator of credit stress that often inflects before either component
+    alone does."""
+    if hy_df is None or ig_df is None or hy_df.empty or ig_df.empty:
+        return {"current_bps": None, "delta_4w_bps": None, "source": "computed: HY OAS - IG OAS"}
+    # Both series are daily; align on date and take the most-recent overlap
+    merged = hy_df[["date", "value"]].merge(
+        ig_df[["date", "value"]], on="date", how="inner", suffixes=("_hy", "_ig")
+    ).sort_values("date").reset_index(drop=True)
+    if merged.empty:
+        return {"current_bps": None, "delta_4w_bps": None, "source": "computed: HY OAS - IG OAS"}
+    merged["diff_bps"] = (merged["value_hy"] - merged["value_ig"]) * 100
+    current = float(merged["diff_bps"].iloc[-1])
+    delta_4w = float(current - merged["diff_bps"].iloc[-21]) if len(merged) >= 21 else None
+    return {
+        "current_bps":  round(current, 0),
+        "delta_4w_bps": round(delta_4w, 0) if delta_4w is not None else None,
+        "trend":        ("widening" if delta_4w is not None and delta_4w > 10
+                         else "narrowing" if delta_4w is not None and delta_4w < -10
+                         else "stable"),
+        "source":       "computed: HY OAS - IG OAS",
+    }
+
+
+def _credit_sloos_block(df) -> dict:
+    """Net percent of banks tightening C&I lending standards for large/medium
+    firms. Quarterly. Positive = tightening (bad for credit), negative =
+    easing (good for credit). The SINGLE most-cited leading indicator of
+    the credit cycle turn."""
+    if df is None or df.empty:
+        return {"current_pct": None, "regime": None, "source": "FRED DRTSCILM"}
+    current = float(df["value"].iloc[-1])
+    prev = float(df["value"].iloc[-2]) if len(df) >= 2 else None
+    return {
+        "current_pct":   round(current, 1),
+        "prev_quarter":  round(prev, 1) if prev is not None else None,
+        "delta_qoq":     round(current - prev, 1) if prev is not None else None,
+        "regime":        _sloos_regime(current),
+        "trend":         ("tightening" if prev is not None and current - prev > 5
+                          else "easing"    if prev is not None and current - prev < -5
+                          else "stable"),
+        "source":        "FRED DRTSCILM (Senior Loan Officer Opinion Survey — net % tightening C&I to L/M firms)",
+    }
+
+
+def _sloos_regime(pct: float) -> str:
+    if pct < -10: return "Easing"
+    if pct < 10:  return "Neutral"
+    if pct < 30:  return "Tightening"
+    return "Sharp tightening"
+
+
+def _credit_cni_block(df) -> dict:
+    """Total Commercial & Industrial Loans outstanding ($B), weekly. 13-week
+    and 52-week % change capture both near-term inflections and the broader
+    cycle direction."""
+    if df is None or df.empty:
+        return {"current_b": None, "delta_13w_pct": None, "delta_52w_pct": None, "source": "FRED TOTCI"}
+    current = float(df["value"].iloc[-1])
+    d13 = ((current - float(df["value"].iloc[-14])) / float(df["value"].iloc[-14]) * 100
+           if len(df) >= 14 and float(df["value"].iloc[-14]) != 0 else None)
+    d52 = ((current - float(df["value"].iloc[-53])) / float(df["value"].iloc[-53]) * 100
+           if len(df) >= 53 and float(df["value"].iloc[-53]) != 0 else None)
+    return {
+        "current_b":     round(current, 1),
+        "delta_13w_pct": round(d13, 2) if d13 is not None else None,
+        "delta_52w_pct": round(d52, 2) if d52 is not None else None,
+        "trend":         ("expanding"    if d13 is not None and d13 > 0.5
+                          else "contracting" if d13 is not None and d13 < -0.5
+                          else "flat"),
+        "source":        "FRED TOTCI (Commercial & Industrial Loans, weekly $B)",
+    }
+
+
+def _credit_debt_gdp_block(corp_debt, gdp) -> dict:
+    """Nonfinancial corporate debt / GDP — the aggregate leverage level.
+    Both quarterly series. The trend matters more than the absolute level."""
+    if corp_debt is None or gdp is None or corp_debt.empty or gdp.empty:
+        return {"current_pct": None, "source": "FRED BCNSDODNS / GDP"}
+    merged = corp_debt[["date", "value"]].merge(
+        gdp[["date", "value"]], on="date", how="inner", suffixes=("_debt", "_gdp")
+    ).sort_values("date").reset_index(drop=True)
+    if merged.empty:
+        return {"current_pct": None, "source": "FRED BCNSDODNS / GDP"}
+    # FRED reports BCNSDODNS in $millions and GDP in $billions — normalize
+    # by dividing debt by 1000 so both are on the same units before the ratio.
+    merged["ratio"] = (merged["value_debt"] / 1000.0) / merged["value_gdp"] * 100
+    current = float(merged["ratio"].iloc[-1])
+    prev_yr = float(merged["ratio"].iloc[-5]) if len(merged) >= 5 else None  # ~4 quarters back
+    return {
+        "current_pct":   round(current, 1),
+        "prev_year_pct": round(prev_yr, 1) if prev_yr is not None else None,
+        "delta_yoy_pct": round(current - prev_yr, 1) if prev_yr is not None else None,
+        "trend":         ("rising" if prev_yr is not None and current - prev_yr > 0.5
+                          else "falling" if prev_yr is not None and current - prev_yr < -0.5
+                          else "stable"),
+        "source":        "computed: FRED BCNSDODNS / GDP",
+    }
+
+
+def _synthesize_credit_phase(ind: dict) -> tuple[str, str]:
+    """4-phase credit cycle synthesis. Each input indicator votes; the phase
+    is determined by the majority bullish/bearish lean + trajectory."""
+    reasons: list[str] = []
+
+    hy_bps    = (ind.get("hy_oas") or {}).get("current_bps")
+    hy_delta  = (ind.get("hy_oas") or {}).get("delta_4w_bps")
+    ig_bps    = (ind.get("ig_oas") or {}).get("current_bps")
+    diff_bps  = (ind.get("hy_ig_diff") or {}).get("current_bps")
+    diff_trend = (ind.get("hy_ig_diff") or {}).get("trend")
+    sloos_pct = (ind.get("sloos") or {}).get("current_pct")
+    sloos_trend = (ind.get("sloos") or {}).get("trend")
+    cni_d13   = (ind.get("cni_loans") or {}).get("delta_13w_pct")
+
+    # Spreads
+    spreads_tight = hy_bps is not None and hy_bps < 400
+    spreads_widening = hy_delta is not None and hy_delta > 25
+    spreads_narrowing = hy_delta is not None and hy_delta < -25
+    # Banks
+    banks_tightening_hard = sloos_pct is not None and sloos_pct > 20
+    banks_tightening = sloos_pct is not None and sloos_pct > 5
+    banks_easing = sloos_pct is not None and sloos_pct < -5
+    banks_stopping_tightening = (sloos_trend == "easing")
+    # C&I loans
+    cni_expanding = cni_d13 is not None and cni_d13 > 0.5
+    cni_contracting = cni_d13 is not None and cni_d13 < -0.5
+
+    # Decision tree, ordered by severity (Contraction first, Recovery next)
+    if spreads_widening and banks_tightening_hard and (cni_contracting or diff_trend == "widening"):
+        phase = "CONTRACTION"
+        reasons.append("HY spreads widening")
+        if banks_tightening_hard: reasons.append(f"banks sharply tightening (SLOOS {sloos_pct:+.0f}%)")
+        if cni_contracting:       reasons.append("C&I loans contracting")
+        if diff_trend == "widening": reasons.append("HY-IG differential widening")
+    elif spreads_narrowing and banks_stopping_tightening:
+        phase = "RECOVERY"
+        reasons.append("HY spreads narrowing from elevated levels")
+        if banks_stopping_tightening: reasons.append("banks slowing the tightening")
+    elif spreads_tight and banks_tightening:
+        phase = "LATE CYCLE"
+        reasons.append(f"spreads still tight ({hy_bps:.0f}bps) but banks tightening (SLOOS {sloos_pct:+.0f}%)")
+        if not cni_expanding: reasons.append("C&I loan growth slowing")
+    elif spreads_tight and (banks_easing or sloos_pct is None or sloos_pct < 5):
+        phase = "EXPANSION"
+        if spreads_tight: reasons.append(f"spreads tight ({hy_bps:.0f}bps)")
+        if banks_easing:  reasons.append(f"banks easing (SLOOS {sloos_pct:+.0f}%)")
+        elif sloos_pct is not None: reasons.append(f"banks neutral (SLOOS {sloos_pct:+.0f}%)")
+        if cni_expanding: reasons.append("C&I loans expanding")
+    else:
+        # Fall-through: not a clean fit. Default to LATE CYCLE as the
+        # cautious read when signals are mixed but spreads aren't blowing out.
+        phase = "LATE CYCLE"
+        reasons.append("signals mixed — defaulting to Late Cycle until they confirm Contraction or revert to Expansion")
+        if hy_bps is not None:   reasons.append(f"HY OAS {hy_bps:.0f}bps")
+        if sloos_pct is not None: reasons.append(f"SLOOS {sloos_pct:+.0f}%")
+
+    reasoning = "; ".join(reasons) + "."
+    return phase, reasoning
+
+
 def fetch_spy_check(spy_hist: Optional[pd.DataFrame]) -> dict:
     if spy_hist is None or spy_hist.empty:
         return {"price": None, "dma_200": None, "above_200dma": None, "pct_from_200dma": None,
@@ -647,6 +896,10 @@ def main() -> int:
 
     fear_greed, put_call = fetch_fear_greed_and_put_call(prev_macro)
 
+    log.info("fetching credit cycle...")
+    credit_cycle = fetch_credit_cycle()
+    log.info("credit cycle: %s — %s", credit_cycle.get("phase"), credit_cycle.get("reasoning"))
+
     indicators = {
         "vix":           fetch_vix(),
         "fear_greed":    fear_greed,
@@ -654,6 +907,7 @@ def main() -> int:
         "net_liquidity": fetch_net_liquidity(),
         "dxy":           fetch_dxy(),
         "credit_spread": fetch_credit_spread(),
+        "credit_cycle":  credit_cycle,
         "spy_200dma":    fetch_spy_check(spy_hist),
     }
 

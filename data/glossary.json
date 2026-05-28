@@ -1511,6 +1511,285 @@
       "how_to_use": "Use contrarian at extremes. P/C score >80 alongside market all-time highs is a setup to trim \u2014 the marginal call buyer is exhausted. P/C score <20 alongside a 15%+ drawdown is a setup to add \u2014 forced put buyers have unloaded their hedges.",
       "origin": "CBOE Put/Call ratio (raw) \u2014 normalized to 0-100 by CNN as one of the 7 components of the Fear & Greed Index.",
       "common_pitfalls": "**INVERTED vs the raw CBOE ratio.** The raw P/C ratio is HIGH when fear is high (more puts than calls); CNN's normalized score is LOW when fear is high. The dashboard uses CNN's 'higher = more greed' convention everywhere \u2014 don't read it like a raw P/C ratio. For raw equity-only vs index breakdown, would need separate CBOE feed integration (future enhancement)."
+    },
+    {
+      "id": "credit-cycle",
+      "category": "Macro",
+      "term": "Credit Cycle (Expansion / Late Cycle / Contraction / Recovery)",
+      "short_definition": "Four-phase composite that tracks the corporate-credit availability cycle. Distinct from the equity risk-on/off regime \u2014 credit cycles last longer and turn on different signals.",
+      "formula": "Decision tree across 6 inputs: HY OAS level + 4w delta, IG OAS, HY-IG differential trend, SLOOS bank-lending standards, C&I loan growth (13w/52w), Corp Debt/GDP trend.",
+      "what_it_measures": "Whether the credit spigot is opening or closing for corporate borrowers. Credit cycles often LEAD equity cycles by months. The 2010-2019 expansion was the longest in history not because debt levels were low \u2014 they weren't \u2014 but because ZIRP kept debt service trivial. Credit cycles end when rising debt-service cost + widening spreads + bank tightening combine to make refinancing impossible (or punitively expensive).",
+      "interpretation_scale": [
+        {
+          "range": "EXPANSION",
+          "label": "Credit flowing",
+          "color": "green",
+          "meaning": "Spreads tight & stable, banks easing, C&I loans growing. Levered growth names can work; risk-on for cyclicals."
+        },
+        {
+          "range": "LATE CYCLE",
+          "label": "Tightening setup",
+          "color": "yellow",
+          "meaning": "Spreads still tight but banks starting to tighten, C&I loan growth slowing, leverage at high levels. Begin de-risking high-leverage names; favor net-cash balance sheets; watch refinancing calendars."
+        },
+        {
+          "range": "CONTRACTION",
+          "label": "Credit crunch",
+          "color": "red",
+          "meaning": "Spreads widening, banks tightening hard, C&I loans shrinking, HY-IG differential blowing out. Avoid leverage entirely; net-cash companies only; distressed opportunities emerging but early."
+        },
+        {
+          "range": "RECOVERY",
+          "label": "Early thaw",
+          "color": "lime",
+          "meaning": "Spreads peaked & narrowing, banks stopping the tightening, early credit thaw. Credit thawing \u2014 levered survivors re-rate hardest; early-cycle positioning."
+        }
+      ],
+      "how_to_use": "Treat as a positioning regime overlay on top of the equity regime. EXPANSION + RISK-ON = max risk; CONTRACTION + RISK-OFF = max defense; the cross-phases (e.g., LATE CYCLE + RISK-ON) are setup-watches. The credit cycle changes the WEIGHT you give to per-company leverage: in Expansion, 4x net-debt/EBITDA on a growth name is fine; in Contraction, the same name breaks.",
+      "origin": "Theme-to-Pick framework synthesis of standard credit-cycle analysis (SLOOS as the leading indicator, HY/IG spreads as concurrent, C&I loans as confirming).",
+      "common_pitfalls": "The cycle can stay in Late Cycle for years before turning \u2014 patience matters more than precision. SLOOS is quarterly and lags fast inflections; HY OAS is daily and over-reacts to single-name credit events. Use them together, not separately."
+    },
+    {
+      "id": "net-debt-to-ebitda",
+      "category": "Macro",
+      "term": "Net Debt / EBITDA (Leverage)",
+      "short_definition": "Total debt minus cash, divided by EBITDA. How many years of earnings the company needs to pay off its net debt. The single most important leverage metric.",
+      "formula": "(total_debt - total_cash) / EBITDA",
+      "what_it_measures": "Translates 'how much debt' into 'how many years to pay it back'. A net-cash company (negative value) plays offense in any cycle. >4-5x with weak interest coverage is where companies break in a downturn. Cyclical industries can carry more (REIT 6x, telco 4x, software 0-1x) \u2014 but the threshold for 'safe' tightens dramatically when credit conditions deteriorate.",
+      "interpretation_scale": [
+        {
+          "range": "Negative (net cash)",
+          "label": "Strongest",
+          "color": "blue",
+          "meaning": "Net cash \u2014 can play offense, buy back shares, weather any storm. Best position in a credit downturn."
+        },
+        {
+          "range": "0 \u2013 1.5x",
+          "label": "Low",
+          "color": "green",
+          "meaning": "Conservative; no refinancing risk."
+        },
+        {
+          "range": "1.5 \u2013 3.0x",
+          "label": "Moderate",
+          "color": "lime",
+          "meaning": "Normal for most mature companies."
+        },
+        {
+          "range": "3.0 \u2013 4.5x",
+          "label": "Elevated",
+          "color": "yellow",
+          "meaning": "Refinancing risk emerges if rates climb or earnings fall."
+        },
+        {
+          "range": "4.5 \u2013 6.0x",
+          "label": "High",
+          "color": "orange",
+          "meaning": "Vulnerable. One earnings miss or rate cycle and the model breaks."
+        },
+        {
+          "range": ">6.0x",
+          "label": "Dangerous",
+          "color": "red",
+          "meaning": "Distressed leverage territory. Watch carefully through any credit tightening."
+        }
+      ],
+      "how_to_use": "Filter watchlist by leverage when the credit cycle turns. In Expansion, ignore. In Late Cycle, trim names above 4x. In Contraction, exit everything above 3x. Pair with interest_coverage \u2014 a 3x company with 10x interest coverage is fine; the same 3x with 1.5x coverage is broken.",
+      "common_pitfalls": "Negative EBITDA breaks the ratio. For unprofitable names, use cash_runway_quarters instead. EBITDA flatters capital-intensive businesses; cross-check against FCF for capex-heavy names like Oracle (which currently has $48B TTM capex \u2014 net-debt/EBITDA looks fine but FCF is deeply negative)."
+    },
+    {
+      "id": "bank-lending-standards-sloos",
+      "category": "Macro",
+      "term": "Senior Loan Officer Survey (SLOOS)",
+      "short_definition": "Net percent of US banks tightening lending standards for commercial & industrial loans to large/medium firms. The single best LEADING indicator of the credit cycle turn.",
+      "formula": "FRED DRTSCILM. Banks survey quarterly; net = (% tightening \u2212 % easing).",
+      "what_it_measures": "Banks see corporate cash flow before the bond market does, and they're the marginal credit provider. When banks tighten lending standards, the marginal new loan dries up \u2014 and that shows up in C&I loan growth a quarter later, in earnings 2 quarters later, in spreads 3 quarters later. SLOOS leads the cycle.",
+      "interpretation_scale": [
+        {
+          "range": "< -10",
+          "label": "Easing",
+          "color": "green",
+          "meaning": "Banks loosening standards. Credit flowing freely. Bullish for cyclicals and levered growth."
+        },
+        {
+          "range": "-10 to +10",
+          "label": "Neutral",
+          "color": "gray"
+        },
+        {
+          "range": "+10 to +30",
+          "label": "Tightening",
+          "color": "orange",
+          "meaning": "Banks pulling back. Watch refinancing calendars; lean toward net-cash names."
+        },
+        {
+          "range": "> +30",
+          "label": "Sharp tightening",
+          "color": "red",
+          "meaning": "Recession-class signal. Historically precedes corporate defaults by 6-12 months."
+        }
+      ],
+      "how_to_use": "Watch the inflection more than the level. SLOOS going from -5 to +5 is a bigger tell than going from +20 to +25 (the second is already screaming). The series is quarterly, so combine with daily HY OAS for timing.",
+      "origin": "Federal Reserve Senior Loan Officer Opinion Survey, published quarterly since 1990.",
+      "common_pitfalls": "Quarterly cadence means it lags fast inflections (e.g., March 2023 SVB stress wasn't visible until April release). Banks survey their own behavior, so it's somewhat self-fulfilling \u2014 but that's exactly what makes it a good leading indicator."
+    },
+    {
+      "id": "hy-ig-differential",
+      "category": "Macro",
+      "term": "HY-IG Spread Differential",
+      "short_definition": "High-yield OAS minus investment-grade OAS \u2014 the 'spread of spreads'. Widening = junk getting punished relative to quality; a leading credit-stress signal.",
+      "formula": "HY OAS (BAMLH0A0HYM2) - IG OAS (BAMLC0A0CM)",
+      "what_it_measures": "When both HY and IG widen together, it's a systemic risk-off move. When HY widens MORE than IG (differential blows out), it's specifically a junk-credit problem \u2014 the market is repricing default risk. The differential often inflects before either component alone does because it filters out the rates-driven moves that affect both equally.",
+      "interpretation_scale": [
+        {
+          "range": "<150bps",
+          "label": "Risk-on",
+          "color": "green",
+          "meaning": "Healthy risk appetite; junk close to quality."
+        },
+        {
+          "range": "150-250bps",
+          "label": "Normal",
+          "color": "gray"
+        },
+        {
+          "range": "250-400bps",
+          "label": "Stressed",
+          "color": "orange",
+          "meaning": "Investors demanding more to hold junk; rotation to quality emerging."
+        },
+        {
+          "range": ">400bps",
+          "label": "Risk-off",
+          "color": "red",
+          "meaning": "Default fear pricing in; flight to quality."
+        }
+      ],
+      "how_to_use": "Track the trend, not the level. Widening from low levels (e.g., 150 \u2192 200) is a more meaningful signal than wide-and-stable (e.g., 350 \u2192 360).",
+      "common_pitfalls": "In a Fed-rate-cut scenario, the differential can widen mechanically as duration-sensitive IG outperforms HY \u2014 it's not always a credit-stress signal. Cross-check with absolute HY OAS level."
+    },
+    {
+      "id": "interest-coverage",
+      "category": "Macro",
+      "term": "Interest Coverage Ratio",
+      "short_definition": "EBIT divided by interest expense. How many times the company can pay its interest from operating earnings. Below 2x is danger; below 1x is technical insolvency.",
+      "formula": "EBIT_TTM / Interest_Expense_TTM",
+      "what_it_measures": "Whether a company can service its debt from current earnings. A 10x coverage means a 90% EBIT collapse before interest can't be paid. A 1.5x coverage means a 33% EBIT decline triggers a covenant breach or restructuring conversation.",
+      "interpretation_scale": [
+        {
+          "range": ">10x",
+          "label": "Safe",
+          "color": "green",
+          "meaning": "Comfortable; lots of cushion even in earnings downturn."
+        },
+        {
+          "range": "5-10x",
+          "label": "Adequate",
+          "color": "lime"
+        },
+        {
+          "range": "2-5x",
+          "label": "Tight",
+          "color": "yellow",
+          "meaning": "Vulnerable to earnings shock or rate refi."
+        },
+        {
+          "range": "<2x",
+          "label": "Danger",
+          "color": "red",
+          "meaning": "One bad year and the company defaults on covenants."
+        },
+        {
+          "range": "Negative",
+          "label": "Burning EBIT",
+          "color": "red",
+          "meaning": "Operating losses; debt service from cash reserves only."
+        }
+      ],
+      "how_to_use": "Pair with net-debt/EBITDA. A 3x leveraged company with 8x coverage is fine; the same 3x with 2x coverage is broken in any downturn.",
+      "common_pitfalls": "Cash-rich companies often have NEGATIVE interest expense (interest income > interest expense). The metric becomes immaterial there \u2014 just confirm the company isn't relying on debt service."
+    },
+    {
+      "id": "cash-runway",
+      "category": "Macro",
+      "term": "Cash Runway (Quarters)",
+      "short_definition": "For unprofitable companies, how many quarters of cash on hand at the current burn rate before they need to raise.",
+      "formula": "total_cash / (|FCF_TTM| / 4)",
+      "what_it_measures": "The countdown clock for a cash-burning company. Below 4 quarters means a forced raise is coming (dilution, debt at bad terms, or distress). 8+ quarters gives flexibility to time the raise from a position of strength.",
+      "interpretation_scale": [
+        {
+          "range": "< 4 quarters",
+          "label": "Forced raise imminent",
+          "color": "red",
+          "meaning": "Dilution likely; equity holders take the haircut."
+        },
+        {
+          "range": "4-8 quarters",
+          "label": "Tight",
+          "color": "orange",
+          "meaning": "Will need to raise; better hope the macro is friendly when they do."
+        },
+        {
+          "range": "8-16 quarters",
+          "label": "Adequate",
+          "color": "yellow"
+        },
+        {
+          "range": "16+ quarters",
+          "label": "Long runway",
+          "color": "green",
+          "meaning": "Can be patient about timing the raise."
+        }
+      ],
+      "how_to_use": "For pre-profitability names: < 8 quarters in a Late Cycle / Contraction macro = high probability of dilutive raise at the bottom. The pattern repeats every cycle.",
+      "common_pitfalls": "Burn rate is rarely linear \u2014 companies often cut costs into a downturn to extend runway. A 6-quarter runway today can become 12 if management acts. But waiting until cash gets tight is the wrong end of the negotiation."
+    },
+    {
+      "id": "leverage",
+      "category": "5-Pillar Framework",
+      "term": "Per-company Leverage",
+      "short_definition": "How indebted this company is, and what that means in the current credit cycle. Composite of net debt, leverage ratio, interest coverage, current ratio, and (when unprofitable) cash runway.",
+      "what_it_measures": "Each ticker's individual exposure to refinancing risk. In a rising-rate or risk-off regime, highly levered companies face refinancing risk: when their debt matures, they must roll it at higher rates, compressing margins or forcing dilution. Net debt/EBITDA above 4-5x with weak interest coverage is where companies break in a downturn. Net-cash companies can play offense while levered peers play defense.",
+      "interpretation_scale": [
+        {
+          "range": "Net cash",
+          "label": "Strongest",
+          "color": "blue",
+          "meaning": "Plays offense in any cycle. Buys back stock, makes acquisitions, weathers any credit storm."
+        },
+        {
+          "range": "Low",
+          "label": "Safe",
+          "color": "green",
+          "meaning": "Conservative balance sheet; no refinancing risk."
+        },
+        {
+          "range": "Moderate",
+          "label": "Normal",
+          "color": "lime",
+          "meaning": "Typical for mature companies; ride the cycle normally."
+        },
+        {
+          "range": "Elevated",
+          "label": "Watch",
+          "color": "yellow",
+          "meaning": "Trim in Late Cycle; avoid in Contraction."
+        },
+        {
+          "range": "High/Danger",
+          "label": "Vulnerable",
+          "color": "red",
+          "meaning": "Refinancing risk dominant; avoid through Late Cycle and Contraction."
+        },
+        {
+          "range": "Burning",
+          "label": "Runway-bound",
+          "color": "red",
+          "meaning": "Pre-profitability; raise risk overhangs."
+        }
+      ],
+      "how_to_use": "Click the Leverage column cell to see the full debt breakdown for any ticker. Cross-reference against the Credit Cycle phase: a 4x-levered name in Expansion is fine; in Contraction it's the position you regret. The Credit Cycle card surfaces your top 5 most-levered holdings for fast triage when the cycle turns.",
+      "common_pitfalls": "Don't compare across industries \u2014 banks, REITs, utilities normally carry far more leverage than tech or healthcare. Compare ticker against its own history and against its sector peers."
     }
   ]
 }

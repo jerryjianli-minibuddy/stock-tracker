@@ -56,6 +56,14 @@ SNAPSHOT_FIELDS = [
     # Cash + balance
     "fcf_ttm",
     "debt_to_equity",
+    "total_debt",
+    "total_cash",
+    "net_debt",
+    "ebitda",
+    "net_debt_to_ebitda",
+    "current_ratio",
+    "interest_coverage",
+    "cash_runway_quarters",
     # Technicals
     "dma_50",
     "dma_150",
@@ -239,7 +247,33 @@ def _fetch_one(sym: str, spy_6mo_return: Optional[float], spy_hist=None) -> dict
     snap["ev_to_sales"] = _info_float(info, "enterpriseToRevenue")
     snap["ev_to_ebitda"] = _info_float(info, "enterpriseToEbitda")
     snap["peg_ratio"] = _info_float(info, "pegRatio")
-    snap["debt_to_equity"] = _info_float(info, "debtToEquity")
+    # ---- Balance-sheet / leverage block ----
+    # yfinance reports debtToEquity as a percentage (45 means 0.45x), so
+    # divide by 100 here for ratio-shape consistency with the rest of the file.
+    dte_raw = _info_float(info, "debtToEquity")
+    snap["debt_to_equity"] = (dte_raw / 100.0) if dte_raw is not None else None
+
+    total_debt = _info_float(info, "totalDebt")
+    total_cash = _info_float(info, "totalCash")
+    ebitda     = _info_float(info, "ebitda")
+    snap["total_debt"]  = total_debt
+    snap["total_cash"]  = total_cash
+    snap["net_debt"]    = (total_debt - total_cash) if (total_debt is not None and total_cash is not None) else None
+    snap["ebitda"]      = ebitda
+    # Net debt / EBITDA — the headline leverage metric. Reported as null when
+    # EBITDA is missing or ≤ 0 (company is unprofitable; runway is the right
+    # frame instead).
+    if snap["net_debt"] is not None and ebitda is not None and ebitda > 0:
+        snap["net_debt_to_ebitda"] = snap["net_debt"] / ebitda
+    else:
+        snap["net_debt_to_ebitda"] = None
+    snap["current_ratio"] = _info_float(info, "currentRatio")
+    # Interest coverage = EBIT / interest expense (when available). yfinance
+    # exposes both inconsistently; pull from quarterly income stmt with
+    # _ttm_sum (last 4 quarters of operating income / interest expense).
+    snap["interest_coverage"] = _safe(lambda: _interest_coverage(q_income))
+    # Cash runway is computed AFTER fcf_ttm is set further down — see the
+    # block right after snap["fcf_ttm"] = _safe(lambda: _ttm_fcf(q_cash))
 
     snap["rev_growth_yoy"] = _safe(
         lambda: _yoy_growth(q_income, ["Total Revenue", "TotalRevenue"])
@@ -264,6 +298,8 @@ def _fetch_one(sym: str, spy_6mo_return: Optional[float], spy_hist=None) -> dict
         )
     )
     snap["fcf_ttm"] = _safe(lambda: _ttm_fcf(q_cash))
+    # Now that fcf_ttm is set, compute the cash runway (null for cash-positive).
+    snap["cash_runway_quarters"] = _cash_runway_quarters(total_cash, snap["fcf_ttm"])
 
     snap["dma_50"] = _safe(
         lambda: float(hist_1y["Close"].rolling(50).mean().iloc[-1])
@@ -487,6 +523,52 @@ def _latest_margin(q_df, num_rows: list[str], den_rows: list[str]) -> Optional[f
     if math.isnan(n) or math.isnan(d) or d == 0:
         return None
     return n / d
+
+
+def _interest_coverage(q_income) -> Optional[float]:
+    """EBIT / interest expense, TTM. Both pulled from the quarterly income
+    statement (sum of last 4 quarters). When a company has negative or
+    zero interest expense (net interest INCOME — common for cash-rich
+    names), report None — the metric doesn't make sense there."""
+    if q_income is None or getattr(q_income, "empty", True):
+        return None
+    ebit_row = _find_row(q_income, [
+        "Operating Income", "OperatingIncome",
+        "EBIT", "Operating Revenue",
+    ])
+    int_row = _find_row(q_income, [
+        "Interest Expense", "InterestExpense",
+        "Interest Expense Non Operating", "InterestExpenseNonOperating",
+    ])
+    if ebit_row is None or int_row is None:
+        return None
+    try:
+        ebit = float(ebit_row.iloc[:4].sum())
+        # Interest expense is reported as a positive number in yfinance's
+        # quarterly_income_stmt (it's a cost). Take absolute value to be safe.
+        interest = abs(float(int_row.iloc[:4].sum()))
+    except (TypeError, ValueError, IndexError):
+        return None
+    if math.isnan(ebit) or math.isnan(interest) or interest <= 0:
+        return None
+    return ebit / interest
+
+
+def _cash_runway_quarters(total_cash: Optional[float], fcf_ttm: Optional[float]) -> Optional[float]:
+    """For unprofitable companies (negative FCF), how many quarters of cash
+    they have at the current burn rate. Returns None for cash-generators
+    (positive FCF) or when inputs are missing.
+
+    Math: total_cash / (|fcf_ttm| / 4)  — the divisor is QUARTERLY burn.
+    """
+    if total_cash is None or fcf_ttm is None:
+        return None
+    if fcf_ttm >= 0:
+        return None  # not burning; runway isn't the right frame
+    quarterly_burn = abs(fcf_ttm) / 4.0
+    if quarterly_burn <= 0:
+        return None
+    return total_cash / quarterly_burn
 
 
 def _ttm_fcf(q_cash) -> Optional[float]:

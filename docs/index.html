@@ -88,6 +88,24 @@
     </main>
   </section>
 
+  <!-- Leverage / debt breakdown modal -->
+  <div id="leverage-modal" class="modal" hidden aria-hidden="true" role="dialog" aria-labelledby="leverage-modal-title">
+    <div class="modal-backdrop" data-close-leverage></div>
+    <div class="modal-card" role="document">
+      <header class="modal-header">
+        <div class="modal-title-row">
+          <h2 id="leverage-modal-title"></h2>
+          <span id="leverage-modal-badge"></span>
+        </div>
+        <button class="modal-close" aria-label="Close" data-close-leverage>✕</button>
+      </header>
+      <div id="leverage-modal-body"></div>
+      <footer class="modal-footer">
+        <button class="modal-btn ghost" data-close-leverage>Close</button>
+      </footer>
+    </div>
+  </div>
+
   <!-- Pillar Breakdown modal (5-Pillar framework, per Theme_to_Pick_Pipeline.md) -->
   <div id="pillar-modal" class="modal" hidden aria-hidden="true" role="dialog" aria-labelledby="pillar-modal-title">
     <div class="modal-backdrop" data-close-pillar></div>

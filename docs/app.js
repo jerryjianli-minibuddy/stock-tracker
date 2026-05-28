@@ -29,6 +29,7 @@ const SORTABLE_COLS = {
   above_200dma:    "bool",
   rating:          "rating",
   pillars_passed:  "num",
+  net_debt_to_ebitda: "num",
 };
 
 const state = {
@@ -137,6 +138,7 @@ async function init() {
   renderGlossary();
   wireGlossaryModalOnce();
   wirePillarModalOnce();
+  wireLeverageModalOnce();
   activateTab(restoreActiveTab());
 }
 
@@ -490,6 +492,7 @@ function renderWatchlist() {
           <th>vs SPY 52w</th>
           <th>Ratio Trend</th>
           ${th("pillars_passed", "Pillars",       "")}
+          ${th("net_debt_to_ebitda", "Leverage", "")}
           ${th("rating",         "Rating",        "")}
         </tr>
       </thead>
@@ -515,6 +518,7 @@ function renderWatchlist() {
       if (e.target.closest(".rating-clickable")) return;
       if (e.target.closest("[data-glossary]")) return;
       if (e.target.closest("[data-pillars-ticker]")) return;
+      if (e.target.closest("[data-leverage-ticker]")) return;
       const t = tr.dataset.ticker;
       if (state.expanded.has(t)) state.expanded.delete(t);
       else state.expanded.add(t);
@@ -525,6 +529,12 @@ function renderWatchlist() {
     cell.addEventListener("click", (e) => {
       e.stopPropagation();
       openPillarModal(cell.dataset.pillarsTicker);
+    });
+  });
+  wrap.querySelectorAll("[data-leverage-ticker]").forEach((cell) => {
+    cell.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openLeverageModal(cell.dataset.leverageTicker);
     });
   });
   wirePillClicks(wrap);
@@ -542,7 +552,7 @@ function renderTickerRow(r, rankInfo, sectorSize, showSector) {
   const sectorCell = showSector
     ? `<td class="sector-col">${escapeText(r.sector || "")}</td>`
     : "";
-  const colspan = showSector ? 21 : 20;
+  const colspan = showSector ? 22 : 21;
   return `
     <tr class="data-row ${exp ? "expanded" : ""}" data-ticker="${escapeAttr(r.ticker)}">
       <td class="rank-cell ${rankClass}" title="${escapeAttr(tooltip)}">${rank}</td>
@@ -565,6 +575,7 @@ function renderTickerRow(r, rankInfo, sectorSize, showSector) {
       <td class="${above200Class(r.ratio_above_sma)}">${ratioAboveSmaText(r.ratio_above_sma)}</td>
       <td class="ratio-trend-cell">${miniSparkline(r.ratio_history_90d || [])}</td>
       <td class="pillars-cell" data-pillars-ticker="${escapeAttr(r.ticker)}" title="Open pillar breakdown">${pillarDots(r)}</td>
+      <td class="leverage-cell ${leverageCellClass(r)}" data-leverage-ticker="${escapeAttr(r.ticker)}" title="Open leverage breakdown">${leverageCellText(r)}</td>
       <td class="rating-col">${ratingPill(r.rating, r.ticker)}</td>
     </tr>
     ${exp ? `<tr class="detail-row"><td colspan="${colspan}">${renderTickerDetail(r)}</td></tr>` : ""}
@@ -1484,6 +1495,16 @@ function renderMacroBanner() {
     chips.push(chip(classify("DXY"), "dxy", "DXY", ind.dxy.current.toFixed(1), ind.dxy.current));
   if (ind.credit_spread?.current_bps != null)
     chips.push(chip(classify("HY OAS"), "credit-spread", "HY OAS", `${Math.round(ind.credit_spread.current_bps)}bps`, ind.credit_spread.current_bps));
+  if (ind.credit_cycle?.phase) {
+    const cyclePhase = ind.credit_cycle.phase;
+    const cycleClass = (
+      cyclePhase === "EXPANSION"   ? "bull" :
+      cyclePhase === "RECOVERY"    ? "bull" :
+      cyclePhase === "LATE CYCLE"  ? "neut" :
+      cyclePhase === "CONTRACTION" ? "bear" : "neut"
+    );
+    chips.push(`<span class="indicator-chip glossary-clickable credit-chip credit-${cyclePhase.toLowerCase().replace(' ', '-')} ${cycleClass}" data-glossary="credit-cycle"><span class="lbl">Credit</span><span class="val">${escapeText(cyclePhase)}</span></span>`);
+  }
   if (ind.spy_200dma?.above_200dma != null) {
     const c = ind.spy_200dma.above_200dma ? "bull" : "bear";
     const sign = ind.spy_200dma.pct_from_200dma >= 0 ? "+" : "";
@@ -1536,11 +1557,107 @@ function renderMacroView() {
   // Indicator cards
   const cards = renderIndicatorCards(m.indicators || {});
 
-  detail.innerHTML = regimeCard + `<div id="macro-indicators-grid">${cards}</div>`;
+  // Credit Cycle card — synthesized phase + 6 underlying signals + cross-link
+  // to the user's most-levered holdings
+  const creditCard = renderCreditCycleCard(m.indicators?.credit_cycle);
+
+  detail.innerHTML = regimeCard + creditCard + `<div id="macro-indicators-grid">${cards}</div>`;
+
+  // Wire the cross-link clicks (ticker pills inside the credit-cycle card
+  // jump to that ticker's row + open its leverage modal).
+  detail.querySelectorAll("[data-credit-jump-ticker]").forEach((el) =>
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const sym = el.dataset.creditJumpTicker;
+      jumpToTicker(sym);
+      // Open leverage modal after the watchlist renders
+      requestAnimationFrame(() => openLeverageModal(sym));
+    })
+  );
 
   // Sector rotation
   rot.innerHTML = renderSectorRotationTable();
   wireRotationHeaders();
+}
+
+function renderCreditCycleCard(cc) {
+  if (!cc || !cc.phase) {
+    return `<article class="credit-card">
+      <div class="muted">Credit cycle data unavailable — run scripts/fetch_macro.py.</div>
+    </article>`;
+  }
+  const phase = cc.phase;
+  const phaseClass = phase.toLowerCase().replace(" ", "-");
+  const phaseNote = ({
+    "EXPANSION":   "Credit tailwind — levered growth names can work; risk-on for cyclicals.",
+    "LATE CYCLE":  "Begin de-risking high-leverage names; favor net-cash balance sheets; watch refinancing calendars.",
+    "CONTRACTION": "Avoid leverage entirely; net-cash companies only; distressed opportunities emerging but early.",
+    "RECOVERY":    "Credit thawing — levered survivors re-rate hardest; early-cycle positioning."
+  })[phase] || "";
+
+  const ind = cc.indicators || {};
+  const row = (label, value, gloss, sub) => `
+    <tr>
+      <td class="credit-sig-name${gloss ? " glossary-clickable" : ""}"${gloss ? ` data-glossary="${escapeAttr(gloss)}"` : ""}>
+        ${escapeText(label)}${gloss ? glossaryIcon() : ""}
+      </td>
+      <td class="credit-sig-value num">${value}</td>
+      <td class="credit-sig-sub muted small">${sub || ""}</td>
+    </tr>`;
+
+  const hy = ind.hy_oas || {};
+  const igOas = ind.ig_oas || {};
+  const diff = ind.hy_ig_diff || {};
+  const sloos = ind.sloos || {};
+  const cni = ind.cni_loans || {};
+  const debt = ind.corp_debt_to_gdp || {};
+
+  const signalsHtml = `
+    <table class="credit-signals">
+      <tbody>
+        ${row("HY OAS",          hy.current_bps != null ? `${hy.current_bps}bps` : "—",          "credit-spread", hy.delta_4w_bps != null ? `Δ4w ${hy.delta_4w_bps >= 0 ? "+" : ""}${hy.delta_4w_bps}bps · ${escapeText(hy.regime || "")}` : "")}
+        ${row("IG OAS",          igOas.current_bps != null ? `${igOas.current_bps}bps` : "—",    null,           igOas.delta_4w_bps != null ? `Δ4w ${igOas.delta_4w_bps >= 0 ? "+" : ""}${igOas.delta_4w_bps}bps · ${escapeText(igOas.regime || "")}` : "")}
+        ${row("HY − IG diff",    diff.current_bps != null ? `${diff.current_bps}bps` : "—",       "hy-ig-differential", diff.delta_4w_bps != null ? `Δ4w ${diff.delta_4w_bps >= 0 ? "+" : ""}${diff.delta_4w_bps}bps · ${escapeText(diff.trend || "")}` : "")}
+        ${row("Bank Lending (SLOOS)", sloos.current_pct != null ? `${sloos.current_pct >= 0 ? "+" : ""}${sloos.current_pct}%` : "—", "bank-lending-standards-sloos", sloos.delta_qoq != null ? `QoQ ${sloos.delta_qoq >= 0 ? "+" : ""}${sloos.delta_qoq} · ${escapeText(sloos.regime || "")}` : "")}
+        ${row("C&I Loans",       cni.current_b != null ? `$${cni.current_b}B` : "—",             null,           cni.delta_13w_pct != null ? `13w ${cni.delta_13w_pct >= 0 ? "+" : ""}${cni.delta_13w_pct.toFixed(2)}% · ${escapeText(cni.trend || "")}` : "")}
+        ${row("Corp Debt / GDP", debt.current_pct != null ? `${debt.current_pct}%` : "—",        null,           debt.delta_yoy_pct != null ? `YoY ${debt.delta_yoy_pct >= 0 ? "+" : ""}${debt.delta_yoy_pct} · ${escapeText(debt.trend || "")}` : "")}
+      </tbody>
+    </table>
+  `;
+
+  // Cross-link: top 5 most-levered tickers by net_debt_to_ebitda (so when the
+  // cycle turns Late/Contraction, the user instantly sees which of THEIR names
+  // are most exposed).
+  const levered = state.rows
+    .filter((r) => r.net_debt_to_ebitda != null && r.net_debt_to_ebitda > 0)
+    .sort((a, b) => b.net_debt_to_ebitda - a.net_debt_to_ebitda)
+    .slice(0, 5);
+  const leveredHtml = levered.length === 0 ? "" : `
+    <div class="credit-most-levered">
+      <div class="credit-section-label">Your most levered holdings</div>
+      <div class="credit-most-levered-list">
+        ${levered.map(r => `
+          <span class="credit-levered-chip leverage-${leverageBucket(r)}" data-credit-jump-ticker="${escapeAttr(r.ticker)}" title="${escapeAttr(`${r.sector} — click to view leverage breakdown`)}">
+            <strong>${escapeText(r.ticker)}</strong> ${r.net_debt_to_ebitda.toFixed(1)}x
+          </span>
+        `).join("")}
+      </div>
+    </div>
+  `;
+
+  return `
+    <article class="credit-card credit-card-${phaseClass}">
+      <div class="credit-headline">
+        <span class="credit-phase-pill credit-${phaseClass} glossary-clickable" data-glossary="credit-cycle">CREDIT: ${escapeText(phase)}${glossaryIcon()}</span>
+        <span class="muted small">Last updated ${escapeText(formatTimestamp(cc.last_updated))}</span>
+      </div>
+      <p class="credit-reasoning">${escapeText(cc.reasoning || "")}</p>
+      <p class="credit-positioning"><strong>Positioning:</strong> ${escapeText(phaseNote)}</p>
+      <div class="credit-section-label">Underlying signals</div>
+      ${signalsHtml}
+      ${leveredHtml}
+    </article>
+  `;
 }
 
 function renderIndicatorCards(ind) {
@@ -2007,6 +2124,160 @@ function copyBindingThesisSnippet(t, btn) {
       onOk();
     } catch { onFail(); }
   }
+}
+
+// ============ Leverage column + modal ============
+//
+// Headline metric is net_debt_to_ebitda; cash-burners show runway in
+// quarters instead. The cell colour-codes by zone (blue net-cash, green
+// low, lime moderate, yellow elevated, orange high, red danger/burning).
+// Clicking opens a modal with the full debt breakdown.
+
+function leverageBucket(r) {
+  const nde = r.net_debt_to_ebitda;
+  const runway = r.cash_runway_quarters;
+  const ebitda = r.ebitda;
+  if (nde == null) {
+    if (runway != null) return "burning";    // unprofitable cash-burner
+    if (ebitda != null && ebitda <= 0) return "burning";
+    return "unknown";
+  }
+  if (nde < 0)    return "net_cash";
+  if (nde < 1.5)  return "low";
+  if (nde < 3)    return "moderate";
+  if (nde < 4.5)  return "elevated";
+  if (nde < 6)    return "high";
+  return "danger";
+}
+
+function leverageCellClass(r) {
+  return `leverage-${leverageBucket(r)}`;
+}
+
+function leverageCellText(r) {
+  const bucket = leverageBucket(r);
+  const nde = r.net_debt_to_ebitda;
+  const runway = r.cash_runway_quarters;
+  if (bucket === "net_cash") return `<span class="lev-label">Net Cash</span>`;
+  if (bucket === "burning") {
+    if (runway != null) return `<span class="lev-label">${runway.toFixed(1)}q runway</span>`;
+    return `<span class="lev-label">N/A — burning</span>`;
+  }
+  if (bucket === "unknown") return `<span class="muted">—</span>`;
+  return `<span class="lev-num">${nde.toFixed(1)}x</span>`;
+}
+
+function fmtMoney(v) {
+  if (v == null) return "—";
+  const abs = Math.abs(v);
+  if (abs >= 1e12) return `${v < 0 ? "−" : ""}$${(abs / 1e12).toFixed(2)}T`;
+  if (abs >= 1e9)  return `${v < 0 ? "−" : ""}$${(abs / 1e9).toFixed(2)}B`;
+  if (abs >= 1e6)  return `${v < 0 ? "−" : ""}$${(abs / 1e6).toFixed(0)}M`;
+  return `${v < 0 ? "−" : ""}$${abs.toLocaleString()}`;
+}
+
+let _leverageModalWired = false;
+function wireLeverageModalOnce() {
+  if (_leverageModalWired) return;
+  _leverageModalWired = true;
+  document.querySelectorAll("#leverage-modal [data-close-leverage]").forEach((el) =>
+    el.addEventListener("click", closeLeverageModal)
+  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeLeverageModal();
+  });
+}
+
+function openLeverageModal(ticker) {
+  wireLeverageModalOnce();
+  const r = state.tickerByT.get(String(ticker).toUpperCase());
+  if (!r) return;
+  // Merge in snapshot fields if not already on the joined row (defensive)
+  const snap = state.snapshots?.[r.ticker.toUpperCase()] || {};
+  const data = { ...r, ...snap };
+
+  const bucket = leverageBucket(data);
+  const badgeText = ({
+    net_cash: "Net Cash", low: "Low Leverage", moderate: "Moderate",
+    elevated: "Elevated", high: "High", danger: "Dangerous",
+    burning: "Burning Cash", unknown: "Insufficient Data"
+  })[bucket];
+
+  document.getElementById("leverage-modal-title").textContent = `${data.ticker} — ${data.company || ""}`;
+  document.getElementById("leverage-modal-badge").innerHTML =
+    `<span class="leverage-badge leverage-${bucket}">${escapeText(badgeText)}</span>`;
+  document.getElementById("leverage-modal-body").innerHTML = renderLeverageModalBody(data);
+  const modal = document.getElementById("leverage-modal");
+  modal.hidden = false;
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closeLeverageModal() {
+  const modal = document.getElementById("leverage-modal");
+  if (!modal) return;
+  modal.hidden = true;
+  modal.setAttribute("aria-hidden", "true");
+}
+
+function renderLeverageModalBody(d) {
+  const row = (label, value, gloss) => `
+    <tr>
+      <td class="lev-row-label${gloss ? " glossary-clickable" : ""}"${gloss ? ` data-glossary="${escapeAttr(gloss)}"` : ""}>
+        ${escapeText(label)}${gloss ? glossaryIcon() : ""}
+      </td>
+      <td class="lev-row-value num">${value}</td>
+    </tr>`;
+
+  const ndeText = d.net_debt_to_ebitda == null
+    ? '<span class="muted">— (EBITDA missing or ≤ 0)</span>'
+    : `${d.net_debt_to_ebitda.toFixed(2)}x`;
+  const icText = d.interest_coverage == null
+    ? '<span class="muted">—</span>'
+    : (d.interest_coverage > 1000 ? '>1000x (net cash, immaterial)' : `${d.interest_coverage.toFixed(1)}x`);
+  const runwayText = d.cash_runway_quarters == null
+    ? '<span class="muted">— (positive FCF; not applicable)</span>'
+    : `${d.cash_runway_quarters.toFixed(1)} quarters`;
+
+  // Why-this-matters note keyed to credit cycle phase if available
+  const phase = state.macro?.indicators?.credit_cycle?.phase;
+  const phaseNote = ({
+    "EXPANSION":   "Credit is flowing. Even elevated-leverage names can work — refinancing cost is low. Lean offensive.",
+    "LATE CYCLE":  "Banks tightening. Begin de-risking names above 4× net-debt/EBITDA. Net-cash balance sheets get a premium.",
+    "CONTRACTION": "Credit crunch. Avoid leverage entirely. Net-cash companies only — levered names compound their problems through refinancing windows.",
+    "RECOVERY":    "Credit thawing. Levered survivors re-rate fastest. Highest beta is in the names that survived contraction with leverage intact."
+  })[phase] || null;
+
+  return `
+    <div class="lev-section">
+      <div class="lev-section-label">Headline leverage</div>
+      <table class="lev-table">
+        <tbody>
+          ${row("Net Debt / EBITDA",      ndeText,                         "net-debt-to-ebitda")}
+          ${row("Debt / Equity",          d.debt_to_equity == null ? "—" : `${d.debt_to_equity.toFixed(2)}x`)}
+          ${row("Interest Coverage",      icText,                          "interest-coverage")}
+          ${row("Current Ratio",          d.current_ratio == null ? "—" : d.current_ratio.toFixed(2))}
+        </tbody>
+      </table>
+    </div>
+    <div class="lev-section">
+      <div class="lev-section-label">Balance-sheet detail</div>
+      <table class="lev-table">
+        <tbody>
+          ${row("Total Debt",   fmtMoney(d.total_debt))}
+          ${row("Total Cash",   fmtMoney(d.total_cash))}
+          ${row("Net Debt",     fmtMoney(d.net_debt))}
+          ${row("EBITDA (TTM)", fmtMoney(d.ebitda))}
+          ${row("FCF (TTM)",    fmtMoney(d.fcf_ttm))}
+          ${row("Cash Runway",  runwayText,                                "cash-runway")}
+        </tbody>
+      </table>
+    </div>
+    <div class="lev-section lev-why">
+      <div class="lev-section-label glossary-clickable" data-glossary="leverage">Why this matters${glossaryIcon()}</div>
+      <p>In a rising-rate or risk-off regime, highly levered companies face refinancing risk: when their debt matures, they must roll it at higher rates, compressing margins or forcing dilution. Net-debt/EBITDA above 4-5× with weak interest coverage is where companies break in a downturn. Net-cash companies can play offense while levered peers play defense.</p>
+      ${phase ? `<p class="lev-phase-note"><strong>Current credit cycle: ${escapeText(phase)}.</strong> ${escapeText(phaseNote || "")}</p>` : ""}
+    </div>
+  `;
 }
 
 function ratingPill(r, ticker) {
