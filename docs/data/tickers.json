@@ -94,14 +94,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 132.2 (rev growth +85.2% + FCF margin 47.0%); passes \u226540 software",
-        "metric_value": 132.20207773931696,
+        "metric_value": 132.20208416022405,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 20.1x \u00f7 forward growth 40% = 0.50 \u2014 passes hard gate <2.5",
-        "metric_value": 0.503425,
+        "evidence": "EV/S 20.3x \u00f7 forward growth 40% = 0.51 \u2014 passes hard gate <2.5",
+        "metric_value": 0.507375,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -180,14 +180,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 71.8 (rev growth +29.5% + FCF margin 42.3%); passes \u226540 software",
-        "metric_value": 71.80559273916047,
+        "metric_value": 71.80559094702687,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 30.0x \u00f7 TTM proxy growth 29% = 1.02 \u2014 passes hard gate <2.5",
-        "metric_value": 1.0185642593856654,
+        "evidence": "EV/S 31.7x \u00f7 TTM proxy growth 29% = 1.08 \u2014 passes hard gate <2.5",
+        "metric_value": 1.0771761638225255,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -263,7 +263,7 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 136.2 (rev growth +84.7% + FCF margin 51.5%); passes \u226540 software",
-        "metric_value": 136.17002481131715,
+        "metric_value": 136.1700262750642,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
@@ -326,7 +326,7 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = -281.9 (rev growth -0.0% + FCF margin -281.9%); below threshold \u226525 hardware",
-        "metric_value": -281.9131750374607,
+        "metric_value": -281.91318139198995,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
@@ -396,15 +396,15 @@
     "five_pillars": {
       "moat": {
         "pass": true,
-        "evidence": "Gross margin 51.7% below threshold \u226560% software; Bottleneck winner: Optical Interconnect Bandwidth",
-        "metric_value": 0.5173750394375084,
+        "evidence": "Gross margin 52.1% below threshold \u226560% software; Bottleneck winner: Optical Interconnect Bandwidth",
+        "metric_value": 0.5214657953511457,
         "metric_label": "Gross Margin",
         "metric_threshold": "\u226560% software"
       },
       "tam": {
         "pass": true,
-        "evidence": "Revenue growth YoY +22.1% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
-        "metric_value": 0.22080994827775943,
+        "evidence": "Revenue growth YoY +27.6% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.2756819500870575,
         "metric_label": "3yr Revenue CAGR (proxy: YoY)",
         "metric_threshold": "\u226520%"
       },
@@ -416,23 +416,23 @@
         "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
       },
       "capital_efficiency": {
-        "pass": false,
-        "evidence": "Rule of 40 = 39.1 (rev growth +22.1% + FCF margin 17.0%); below threshold \u226540 software",
-        "metric_value": 39.06657065711503,
+        "pass": true,
+        "evidence": "Rule of 40 = 46.6 (rev growth +27.6% + FCF margin 19.1%); passes \u226540 software",
+        "metric_value": 46.6284321774588,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 21.5x \u00f7 TTM proxy growth 22% = 0.97 \u2014 passes hard gate <2.5",
-        "metric_value": 0.9719670769997508,
+        "evidence": "EV/S 20.9x \u00f7 TTM proxy growth 28% = 0.76 \u2014 passes hard gate <2.5",
+        "metric_value": 0.7564151368421053,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
     },
-    "pillars_passed": 4,
+    "pillars_passed": 5,
     "pillars_total": 5,
-    "pillar_eligibility": "SWING-eligible",
+    "pillar_eligibility": "CORE-eligible",
     "binding_constraint_thesis": null
   },
   {
@@ -511,14 +511,14 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = -31.1 (rev growth +51.4% + FCF margin -82.5%); below threshold \u226540 software",
-        "metric_value": -31.14396409516749,
+        "metric_value": -31.143963445765735,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 28.1x \u00f7 TTM proxy growth 51% = 0.55 \u2014 passes hard gate <2.5",
-        "metric_value": 0.5480610847226285,
+        "evidence": "EV/S 26.4x \u00f7 TTM proxy growth 51% = 0.51 \u2014 passes hard gate <2.5",
+        "metric_value": 0.5147650156965975,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -619,14 +619,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 47.5 (rev growth +20.5% + FCF margin 26.9%); passes \u226525 hardware",
-        "metric_value": 47.460248758634016,
+        "metric_value": 47.46024656300699,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 40.6x \u00f7 TTM proxy growth 21% = 1.98 \u2014 passes hard gate <2.5",
-        "metric_value": 1.9773144435263459,
+        "evidence": "EV/S 41.4x \u00f7 TTM proxy growth 21% = 2.02 \u2014 passes hard gate <2.5",
+        "metric_value": 2.0161235543125913,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -709,14 +709,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 29.8 (rev growth +27.5% + FCF margin 2.4%); passes \u226525 hardware",
-        "metric_value": 29.84162370554415,
+        "metric_value": 29.841623821166493,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 2.5x \u00f7 TTM proxy growth 27% = 0.09 \u2014 passes hard gate <2.5",
-        "metric_value": 0.09109516324912015,
+        "evidence": "EV/S 2.4x \u00f7 TTM proxy growth 27% = 0.09 \u2014 passes hard gate <2.5",
+        "metric_value": 0.08902068290345501,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -821,14 +821,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 60.6 (rev growth +35.1% + FCF margin 25.5%); passes \u226525 hardware",
-        "metric_value": 60.64950725725225,
+        "metric_value": 60.64950770749098,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
         "evidence": "EV/S 2.1x \u00f7 TTM proxy growth 35% = 0.06 \u2014 passes hard gate <2.5",
-        "metric_value": 0.06042858681608767,
+        "metric_value": 0.0596600649865849,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -913,7 +913,7 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = 1.4 (rev growth +7.2% + FCF margin -5.8%); below threshold \u226525 hardware",
-        "metric_value": 1.3826335903282665,
+        "metric_value": 1.3826336744188543,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
@@ -1004,14 +1004,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 73.1 (rev growth +37.2% + FCF margin 35.8%); passes \u226525 hardware",
-        "metric_value": 73.0815837001427,
+        "metric_value": 73.08158568000934,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
         "evidence": "EV/S 16.4x \u00f7 TTM proxy growth 37% = 0.44 \u2014 passes hard gate <2.5",
-        "metric_value": 0.4389925120373562,
+        "metric_value": 0.44116707132521243,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -1095,14 +1095,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 38.8 (rev growth +18.6% + FCF margin 20.2%); passes \u226525 hardware",
-        "metric_value": 38.760651047720685,
+        "metric_value": 38.760649686568925,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 16.2x \u00f7 TTM proxy growth 19% = 0.87 \u2014 passes hard gate <2.5",
-        "metric_value": 0.8694527248677248,
+        "evidence": "EV/S 15.6x \u00f7 TTM proxy growth 19% = 0.84 \u2014 passes hard gate <2.5",
+        "metric_value": 0.8383969973544974,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -1187,7 +1187,7 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 34.9 (rev growth +20.1% + FCF margin 14.8%); passes \u226525 hardware",
-        "metric_value": 34.904675775522264,
+        "metric_value": 34.90467613533819,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
@@ -1272,7 +1272,7 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 101.6 (rev growth +87.0% + FCF margin 14.6%); passes \u226525 hardware",
-        "metric_value": 101.64771832993674,
+        "metric_value": 101.64771963033115,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
@@ -1363,7 +1363,7 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = 24.6 (rev growth -3.5% + FCF margin 28.1%); below threshold \u226525 hardware",
-        "metric_value": 24.64206996738078,
+        "metric_value": 24.642069707601692,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
@@ -1455,7 +1455,7 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = 24.5 (rev growth +7.6% + FCF margin 16.9%); below threshold \u226525 hardware",
-        "metric_value": 24.52579981012695,
+        "metric_value": 24.525800695976255,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
@@ -1538,14 +1538,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 47.3 (rev growth +26.1% + FCF margin 21.2%); passes \u226525 hardware",
-        "metric_value": 47.32640925316849,
+        "metric_value": 47.326409647002585,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 26.5x \u00f7 TTM proxy growth 26% = 1.01 \u2014 passes hard gate <2.5",
-        "metric_value": 1.0124739062959474,
+        "evidence": "EV/S 26.7x \u00f7 TTM proxy growth 26% = 1.02 \u2014 passes hard gate <2.5",
+        "metric_value": 1.0207383747321928,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -1641,14 +1641,14 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = -41.2 (rev growth +49.1% + FCF margin -90.3%); below threshold \u226525 hardware",
-        "metric_value": -41.200611763349045,
+        "metric_value": -41.20061308739018,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 32.6x \u00f7 TTM proxy growth 49% = 0.66 \u2014 passes hard gate <2.5",
-        "metric_value": 0.6644489560642113,
+        "evidence": "EV/S 32.3x \u00f7 TTM proxy growth 49% = 0.66 \u2014 passes hard gate <2.5",
+        "metric_value": 0.6591299406816583,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -1724,14 +1724,14 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = 20.0 (rev growth +36.1% + FCF margin -16.1%); below threshold \u226540 software",
-        "metric_value": 20.017382053427777,
+        "metric_value": 20.017381494816938,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 6.7x \u00f7 TTM proxy growth 36% = 0.19 \u2014 passes hard gate <2.5",
-        "metric_value": 0.18567294071163362,
+        "evidence": "EV/S 7.2x \u00f7 TTM proxy growth 36% = 0.20 \u2014 passes hard gate <2.5",
+        "metric_value": 0.20067737397027463,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -1806,14 +1806,14 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = 22.9 (rev growth +15.8% + FCF margin 7.2%); below threshold \u226525 hardware",
-        "metric_value": 22.93653387758856,
+        "metric_value": 22.936533215281173,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 16.6x \u00f7 TTM proxy growth 16% = 1.05 \u2014 passes hard gate <2.5",
-        "metric_value": 1.0522117136304063,
+        "evidence": "EV/S 16.7x \u00f7 TTM proxy growth 16% = 1.06 \u2014 passes hard gate <2.5",
+        "metric_value": 1.0564562909567496,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -1890,14 +1890,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 52.8 (rev growth +23.1% + FCF margin 29.7%); passes \u226525 hardware",
-        "metric_value": 52.81908441915207,
+        "metric_value": 52.81908457752956,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 2.1x \u00f7 TTM proxy growth 23% = 0.09 \u2014 passes hard gate <2.5",
-        "metric_value": 0.08923285754835251,
+        "evidence": "EV/S 1.8x \u00f7 TTM proxy growth 23% = 0.08 \u2014 passes hard gate <2.5",
+        "metric_value": 0.07865839555622137,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -1972,14 +1972,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 27.1 (rev growth +11.9% + FCF margin 15.2%); passes \u226525 hardware",
-        "metric_value": 27.103048820750633,
+        "metric_value": 27.103050491686144,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
         "evidence": "EV/S 6.2x \u00f7 TTM proxy growth 12% = 0.52 \u2014 passes hard gate <2.5",
-        "metric_value": 0.5198396218487394,
+        "metric_value": 0.5184944117647059,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -2055,14 +2055,14 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = 11.5 (rev growth +48.9% + FCF margin -37.4%); below threshold \u226525 hardware",
-        "metric_value": 11.494967548556716,
+        "metric_value": 11.494969960457254,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 14.4x \u00f7 TTM proxy growth 49% = 0.29 \u2014 passes hard gate <2.5",
-        "metric_value": 0.2937821347046281,
+        "evidence": "EV/S 15.0x \u00f7 TTM proxy growth 49% = 0.31 \u2014 passes hard gate <2.5",
+        "metric_value": 0.3065721760943183,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -2138,14 +2138,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 39.4 (rev growth +20.1% + FCF margin 19.3%); passes \u226525 hardware",
-        "metric_value": 39.35308196830855,
+        "metric_value": 39.35308149801759,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": false,
-        "evidence": "EV/S 65.1x \u00f7 TTM proxy growth 20% = 3.24 \u2014 fails hard gate <2.5",
-        "metric_value": 3.2436948995983936,
+        "evidence": "EV/S 72.2x \u00f7 TTM proxy growth 20% = 3.60 \u2014 fails hard gate <2.5",
+        "metric_value": 3.5959594779116464,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -2300,7 +2300,7 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = -2268.1 (rev growth +578.2% + FCF margin -2846.3%); below threshold \u226525 hardware",
-        "metric_value": -2268.1126124124976,
+        "metric_value": -2268.1128878895697,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
@@ -2381,14 +2381,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 64.4 (rev growth +46.3% + FCF margin 18.1%); passes \u226540 software",
-        "metric_value": 64.40275614200418,
+        "metric_value": 64.40275565010847,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 9.7x \u00f7 forward growth 28% = 0.35 \u2014 passes hard gate <2.5",
-        "metric_value": 0.3474285714285714,
+        "evidence": "EV/S 10.4x \u00f7 forward growth 28% = 0.37 \u2014 passes hard gate <2.5",
+        "metric_value": 0.3721785714285714,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -2464,14 +2464,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 66.1 (rev growth +46.1% + FCF margin 19.9%); passes \u226540 software",
-        "metric_value": 66.05394009791476,
+        "metric_value": 66.05394199214503,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 8.3x \u00f7 forward growth 25% = 0.33 \u2014 passes hard gate <2.5",
-        "metric_value": 0.33396000000000003,
+        "evidence": "EV/S 9.3x \u00f7 forward growth 25% = 0.37 \u2014 passes hard gate <2.5",
+        "metric_value": 0.37256,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -2548,14 +2548,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 130.4 (rev growth +59.0% + FCF margin 71.4%); passes \u226540 software",
-        "metric_value": 130.39226799555465,
+        "metric_value": 130.39226857514262,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 31.1x \u00f7 forward growth 30% = 1.04 \u2014 passes hard gate <2.5",
-        "metric_value": 1.0374333333333334,
+        "evidence": "EV/S 33.6x \u00f7 forward growth 30% = 1.12 \u2014 passes hard gate <2.5",
+        "metric_value": 1.1196666666666668,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -2631,14 +2631,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 47.8 (rev growth +24.5% + FCF margin 23.4%); passes \u226540 software",
-        "metric_value": 47.82998920235244,
+        "metric_value": 47.82999056325673,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 2.0x \u00f7 forward growth 22% = 0.09 \u2014 passes hard gate <2.5",
-        "metric_value": 0.09204545454545454,
+        "evidence": "EV/S 2.1x \u00f7 forward growth 22% = 0.09 \u2014 passes hard gate <2.5",
+        "metric_value": 0.09386363636363636,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -2714,14 +2714,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 49.1 (rev growth +23.3% + FCF margin 25.8%); passes \u226540 software",
-        "metric_value": 49.118521660755604,
+        "metric_value": 49.11852205681228,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 33.1x \u00f7 forward growth 22% = 1.50 \u2014 passes hard gate <2.5",
-        "metric_value": 1.5048181818181818,
+        "evidence": "EV/S 37.6x \u00f7 forward growth 22% = 1.71 \u2014 passes hard gate <2.5",
+        "metric_value": 1.71,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -2807,14 +2807,14 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = 12.2 (rev growth +4.4% + FCF margin 7.8%); below threshold \u226525 hardware",
-        "metric_value": 12.162944295716851,
+        "metric_value": 12.162944487953723,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
         "evidence": "EV/S 2.2x \u00f7 TTM proxy growth 4% = 0.51 \u2014 passes hard gate <2.5",
-        "metric_value": 0.5075581598062954,
+        "metric_value": 0.5135186440677967,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -2898,7 +2898,7 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = 20.5 (rev growth +9.9% + FCF margin 10.6%); below threshold \u226525 hardware",
-        "metric_value": 20.461563246991226,
+        "metric_value": 20.461562659543603,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
@@ -2981,14 +2981,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 45.1 (rev growth +51.0% + FCF margin -5.9%); passes \u226525 hardware",
-        "metric_value": 45.09165028028609,
+        "metric_value": 45.09165028972801,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 17.6x \u00f7 TTM proxy growth 51% = 0.35 \u2014 passes hard gate <2.5",
-        "metric_value": 0.34545386681282547,
+        "evidence": "EV/S 16.1x \u00f7 TTM proxy growth 51% = 0.32 \u2014 passes hard gate <2.5",
+        "metric_value": 0.3155456289394355,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -3073,7 +3073,7 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = 16.9 (rev growth +63.5% + FCF margin -46.5%); below threshold \u226525 hardware",
-        "metric_value": 16.913581609854944,
+        "metric_value": 16.913580394050413,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
@@ -3154,14 +3154,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 36.8 (rev growth +1.9% + FCF margin 34.8%); passes \u226525 hardware",
-        "metric_value": 36.75925276018067,
+        "metric_value": 36.75925431835439,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": false,
-        "evidence": "EV/S 8.1x \u00f7 TTM proxy growth 2% = 4.17 \u2014 fails hard gate <2.5",
-        "metric_value": 4.1746697343862165,
+        "evidence": "EV/S 8.2x \u00f7 TTM proxy growth 2% = 4.20 \u2014 fails hard gate <2.5",
+        "metric_value": 4.198836439339555,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -3244,7 +3244,7 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 27.4 (rev growth +32.2% + FCF margin -4.8%); passes \u226525 hardware",
-        "metric_value": 27.419477852696723,
+        "metric_value": 27.419477829709265,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
@@ -3327,14 +3327,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 32.1 (rev growth +11.9% + FCF margin 20.1%); passes \u226525 hardware",
-        "metric_value": 32.06363211094805,
+        "metric_value": 32.06363086691157,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 5.9x \u00f7 TTM proxy growth 12% = 0.49 \u2014 passes hard gate <2.5",
-        "metric_value": 0.4918166666666667,
+        "evidence": "EV/S 6.0x \u00f7 TTM proxy growth 12% = 0.50 \u2014 passes hard gate <2.5",
+        "metric_value": 0.500621568627451,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -3408,14 +3408,14 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = 13.2 (rev growth +22.6% + FCF margin -9.4%); below threshold \u226525 hardware",
-        "metric_value": 13.213198834550262,
+        "metric_value": 13.213198991020821,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 6.7x \u00f7 TTM proxy growth 23% = 0.30 \u2014 passes hard gate <2.5",
-        "metric_value": 0.2959197953216375,
+        "evidence": "EV/S 7.6x \u00f7 TTM proxy growth 23% = 0.34 \u2014 passes hard gate <2.5",
+        "metric_value": 0.33595678362573106,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -3493,14 +3493,14 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = -94.5 (rev growth +44.8% + FCF margin -139.3%); below threshold \u226525 hardware",
-        "metric_value": -94.4509784692408,
+        "metric_value": -94.45097789102857,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 46.9x \u00f7 TTM proxy growth 45% = 1.05 \u2014 passes hard gate <2.5",
-        "metric_value": 1.0479062260230179,
+        "evidence": "EV/S 37.2x \u00f7 TTM proxy growth 45% = 0.83 \u2014 passes hard gate <2.5",
+        "metric_value": 0.8310395460358055,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -3574,14 +3574,14 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = -150.5 (rev growth +2.1% + FCF margin -152.6%); below threshold \u226525 hardware",
-        "metric_value": -150.48048471576993,
+        "metric_value": -150.4804675982419,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": false,
-        "evidence": "EV/S 17.9x \u00f7 TTM proxy growth 2% = 8.35 \u2014 fails hard gate <2.5",
-        "metric_value": 8.348919621109607,
+        "evidence": "EV/S 19.0x \u00f7 TTM proxy growth 2% = 8.88 \u2014 fails hard gate <2.5",
+        "metric_value": 8.87516304465494,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -3655,7 +3655,7 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 153.6 (rev growth +193.7% + FCF margin -40.1%); passes \u226525 hardware",
-        "metric_value": 153.62042883396026,
+        "metric_value": 153.62042954276723,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
@@ -3735,14 +3735,14 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = 13.7 (rev growth +57.9% + FCF margin -44.3%); below threshold \u226525 hardware",
-        "metric_value": 13.69014600747736,
+        "metric_value": 13.690146638074395,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 13.0x \u00f7 TTM proxy growth 58% = 0.22 \u2014 passes hard gate <2.5",
-        "metric_value": 0.22392599713297917,
+        "evidence": "EV/S 14.0x \u00f7 TTM proxy growth 58% = 0.24 \u2014 passes hard gate <2.5",
+        "metric_value": 0.24142452989290833,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -3816,14 +3816,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 57.8 (rev growth +41.1% + FCF margin 16.7%); passes \u226525 hardware",
-        "metric_value": 57.757800480446505,
+        "metric_value": 57.757800315151734,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 56.2x \u00f7 forward growth 30% = 1.87 \u2014 passes hard gate <2.5",
-        "metric_value": 1.8735333333333335,
+        "evidence": "EV/S 57.2x \u00f7 forward growth 30% = 1.91 \u2014 passes hard gate <2.5",
+        "metric_value": 1.9080333333333332,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -3899,7 +3899,7 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = -104.9 (rev growth -29.7% + FCF margin -75.2%); below threshold \u226525 hardware",
-        "metric_value": -104.85963065938493,
+        "metric_value": -104.85962791332562,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
@@ -3980,14 +3980,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 76.3 (rev growth +58.4% + FCF margin 17.9%); passes \u226525 hardware",
-        "metric_value": 76.26949620709595,
+        "metric_value": 76.2694965269501,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 7.2x \u00f7 TTM proxy growth 58% = 0.12 \u2014 passes hard gate <2.5",
-        "metric_value": 0.1235161866790075,
+        "evidence": "EV/S 7.6x \u00f7 TTM proxy growth 58% = 0.13 \u2014 passes hard gate <2.5",
+        "metric_value": 0.12956183475134386,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -4277,7 +4277,7 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 41.2 (rev growth +18.3% + FCF margin 22.9%); passes \u226540 software",
-        "metric_value": 41.206927737209135,
+        "metric_value": 41.20692689981583,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
@@ -4332,7 +4332,7 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 55.2 (rev growth +22.1% + FCF margin 33.1%); passes \u226540 software",
-        "metric_value": 55.20870291651572,
+        "metric_value": 55.20870129373657,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
@@ -4364,16 +4364,16 @@
     "binding_constraint_thesis": null,
     "five_pillars": {
       "moat": {
-        "pass": false,
-        "evidence": "Data missing \u2014 verify manually",
-        "metric_value": null,
+        "pass": true,
+        "evidence": "Gross margin 76.9% passes \u226560% software",
+        "metric_value": 0.769154765112728,
         "metric_label": "Gross Margin",
         "metric_threshold": "\u226560% software"
       },
       "tam": {
         "pass": false,
-        "evidence": "Revenue growth missing \u2014 verify manually",
-        "metric_value": null,
+        "evidence": "Revenue growth YoY +13.3% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.13266863363516126,
         "metric_label": "3yr Revenue CAGR (proxy: YoY)",
         "metric_threshold": "\u226520%"
       },
@@ -4385,23 +4385,23 @@
         "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
       },
       "capital_efficiency": {
-        "pass": false,
-        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
-        "metric_value": null,
+        "pass": true,
+        "evidence": "Rule of 40 = 47.5 (rev growth +13.3% + FCF margin 34.2%); passes \u226540 software",
+        "metric_value": 47.49834238379992,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
-        "pass": false,
-        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
-        "metric_value": null,
+        "pass": true,
+        "evidence": "EV/S 4.6x \u00f7 TTM proxy growth 13% = 0.35 \u2014 passes hard gate <2.5",
+        "metric_value": 0.3459747699386503,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
     },
-    "pillars_passed": 1,
+    "pillars_passed": 4,
     "pillars_total": 5,
-    "pillar_eligibility": "PASS"
+    "pillar_eligibility": "SWING-eligible"
   },
   {
     "ticker": "SNOW",
@@ -4497,14 +4497,14 @@
       "capital_efficiency": {
         "pass": false,
         "evidence": "Rule of 40 = -16.9 (rev growth +21.7% + FCF margin -38.6%); below threshold \u226540 software",
-        "metric_value": -16.948104499656157,
+        "metric_value": -16.94810599847298,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 10.6x \u00f7 TTM proxy growth 22% = 0.49 \u2014 passes hard gate <2.5",
-        "metric_value": 0.4884085294117647,
+        "evidence": "EV/S 12.1x \u00f7 TTM proxy growth 22% = 0.56 \u2014 passes hard gate <2.5",
+        "metric_value": 0.5605823529411765,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -4552,14 +4552,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 214.0 (rev growth +196.3% + FCF margin 17.7%); passes \u226525 hardware",
-        "metric_value": 213.9766656810552,
+        "metric_value": 213.97666552657867,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
         "evidence": "EV/S 17.9x \u00f7 TTM proxy growth 196% = 0.09 \u2014 passes hard gate <2.5",
-        "metric_value": 0.09144768140697158,
+        "metric_value": 0.09096369646359208,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -4607,14 +4607,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 284.9 (rev growth +251.0% + FCF margin 33.8%); passes \u226525 hardware",
-        "metric_value": 284.8613324961209,
+        "metric_value": 284.8613304409143,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 17.6x \u00f7 TTM proxy growth 251% = 0.07 \u2014 passes hard gate <2.5",
-        "metric_value": 0.07007460634547591,
+        "evidence": "EV/S 18.2x \u00f7 TTM proxy growth 251% = 0.07 \u2014 passes hard gate <2.5",
+        "metric_value": 0.0723890481786134,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
