@@ -13,5 +13,7 @@ build/
 reports/**/*.pdf
 reports/**/*.textClipping
 
-# Dev tooling (per-machine launch config for Claude Preview MCP, etc.)
-.claude/
+# Per-machine launch config for Claude Preview MCP (everything else under
+# .claude/ — including commands/ — is checked in and shared).
+.claude/launch.json
+.claude/settings.local.json

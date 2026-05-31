@@ -588,6 +588,70 @@ The endpoint sits behind a Cloudflare-style bot check that rejects bare Python U
 
 Clicking a rating chip in the watchlist (Strong / Watch / Pass) opens the **per-ticker reasoning modal** (`rating_reasoning` content), not the glossary. The Rating column header is sortable but does *not* open the glossary (the rating system is documented in this file and in the `rating-system` glossary entry, but reaching it from a sort-first header would conflict with the sort cycle). To read the rating-system definition, use the Glossary tab.
 
+## Local management CLI (`scripts/manage.py`)
+
+Adding, removing, moving, rating tickers and creating/renaming/merging sectors is done through a typer-based CLI. Run via `uv run python scripts/manage.py <command>`.
+
+### Ticker commands
+
+| Command | Effect |
+|---|---|
+| `add <SYM> --sector "<S>" [--rating Watch] [--thesis "…"]` | Add a ticker. Validates yfinance (use `--skip-validate` to override), fetches a fresh snapshot, sets `date_added` to today. Refuses duplicates (offers to move instead). |
+| `remove <SYM> [--reason "…"]` | Confirm + archive entry to `data/removed_tickers.json` with `removed_at` + `removal_reason`, then drop from `tickers.json` / `snapshots.json` / `history.json` + mirrors. |
+| `move <SYM> --to "<NEW_SECTOR>"` | Move a ticker between sectors. Preserves all other fields. Prompts if destination sector doesn't exist. |
+| `rate <SYM> --rating Strong\|Watch\|Pass\|""` `[--note "…"]` | Quick rating change. Appends `note` to `notes` with today's date if provided. |
+
+### Sector commands
+
+| Command | Effect |
+|---|---|
+| `sector-add "<NAME>"` | Reserve a sector name (it appears as a tab once you add tickers to it; sectors are derived from `tickers.json` content, not a registry file). |
+| `sector-remove "<NAME>"` | Empty sector → message-only. Non-empty → prompts `move\|delete\|cancel`; on `move`, asks for destination. |
+| `sector-rename "<OLD>" --to "<NEW>"` | Walks `tickers.json` + `reports.json` + `bottlenecks.json`, updates every `sector` field. Surfaces count touched. |
+| `sector-merge "<A>" --into "<B>"` | Moves all of `A`'s tickers into `B`, de-dups by ticker (KEEPS the destination entry on conflict, with a warning). |
+
+### Utility commands
+
+| Command | Effect |
+|---|---|
+| `list [--sector "<S>"]` | Print tickers grouped by sector (or filtered to one). |
+| `sectors` | Sector roster with ticker counts. |
+| `validate [--online]` | Sanity-check `tickers.json` for duplicates, missing sectors, dangling refs from reports/bottlenecks. `--online` adds a yfinance check per ticker (slow). |
+
+### Conventions
+
+- **All mutating commands accept `--push`** — auto-runs `git add -A data/ docs/data/ && git commit -m "<auto-message>" && git push`. Without `--push`, the command prints the recommended `git` commands so the user can review the diff first.
+- **`add` runs the full chain**: yfinance validation → write tickers.json → fetch single-ticker snapshot via `refresh._fetch_one()` → resynthesize pillars via `synthesize_pillars.main()`. The dashboard shows the new ticker with full data immediately.
+- **`remove` archives, doesn't delete history**. The archived entry in `removed_tickers.json` preserves the full state at removal time, including pillar score, rating, and reason — so "why did we drop this?" is answerable months later.
+
+## Claude Code slash commands
+
+These live in `.claude/commands/` and are invokable via `/<name>` in a Claude Code session. They wrap the CLI with conversational defaults (e.g., asking which sector to use, surfacing duplicate prompts, populating thesis from an ingested report).
+
+| Slash command | What it does |
+|---|---|
+| `/add-ticker <SYM> [SECTOR]` | Validates symbol, asks which sector if not given, runs `manage.py add` with full chain (snapshot + pillars), reminds to commit + push. Multi-ticker form: `/add-ticker AAPL MSFT NOW Software`. |
+| `/remove-ticker <SYM>` | Surfaces current data + cross-refs, asks for an archive reason, runs `manage.py remove`. |
+| `/manage-sectors` | Shows the current sector list with counts, then takes natural-language instructions (`add` / `remove` / `rename` / `merge`) and routes to the right CLI command. Calls out the move-or-delete prompt for non-empty sector removals. |
+
+When extending the CLI with new commands, add a matching slash command (and document it here) so the Claude Code workflow stays first-class.
+
+## Manage tab (dashboard planner)
+
+The dashboard is a static site — it can't write `tickers.json`. The **Manage tab** is a planning UI: queue up adds / removes / moves / sector renames in the browser, then click **Show CLI commands** (auto-copied to clipboard) to get a ready-to-paste block:
+
+```
+uv run python scripts/manage.py add AAPL --sector "Software" --rating Watch
+uv run python scripts/manage.py move IREN --to "Memory"
+uv run python scripts/manage.py remove KRMN --reason "Leverage 5.8x, no thesis"
+…
+git add -A data/ docs/data/ && git commit -m "Apply 3 change(s) from Manage tab" && git push
+```
+
+Or **Show JSON diff** to get a structured blob to hand to a Claude Code session for execution. Either way, **nothing in the Manage tab modifies live data** — the warning banner at the top is explicit. The user copies the output, runs the commands locally, and pushes to GitHub; Pages picks up the change on the next CDN refresh.
+
+The Manage tab queue is in-memory only — a page refresh wipes pending changes. That's intentional: it forces the user to commit before walking away from the planning session.
+
 ## Daily auto-update chain
 
 `.github/workflows/daily-refresh.yml` runs every weekday at **22:00 UTC** (~3 pm PT, post-close) and refreshes EVERYTHING the dashboard depends on. The chain has three steps, in order:

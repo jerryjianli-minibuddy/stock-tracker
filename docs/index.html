@@ -77,6 +77,69 @@
     </main>
   </section>
 
+  <!-- Manage view (planning UI — no backend writes; emits CLI commands + JSON diff for me to commit) -->
+  <section id="view-manage" class="view" hidden>
+    <main class="manage-main">
+      <div class="manage-banner">
+        <strong>⚠ Read-only planner.</strong>
+        Changes here are <em>not</em> saved to the live dashboard.
+        Use this view to plan adds / moves / removes, then click <strong>Generate edits</strong>
+        and run the CLI commands (or paste the JSON diff into Claude Code) to actually apply.
+      </div>
+
+      <div class="manage-grid">
+        <section class="manage-card">
+          <h2>Tickers</h2>
+          <div class="manage-add-row">
+            <input id="manage-add-symbol" type="text" placeholder="Symbol (e.g. AAPL)" maxlength="8" autocomplete="off" spellcheck="false">
+            <select id="manage-add-sector"></select>
+            <select id="manage-add-rating">
+              <option value="Watch">Watch</option>
+              <option value="Strong">Strong</option>
+              <option value="Pass">Pass</option>
+              <option value="">— (unrated)</option>
+            </select>
+            <button id="manage-add-btn" class="ghost-btn">+ Add</button>
+          </div>
+          <div class="manage-table-wrap">
+            <table id="manage-tickers-table" class="manage-table">
+              <thead><tr><th>Ticker</th><th>Company</th><th>Sector</th><th>Rating</th><th>Action</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="manage-card">
+          <h2>Sectors</h2>
+          <div class="manage-add-row">
+            <input id="manage-sector-new" type="text" placeholder="New sector name…" autocomplete="off">
+            <button id="manage-sector-add-btn" class="ghost-btn">+ Add</button>
+          </div>
+          <div class="manage-table-wrap">
+            <table id="manage-sectors-table" class="manage-table">
+              <thead><tr><th>Sector</th><th>Count</th><th>Rename to</th><th>Action</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <section class="manage-card pending-card">
+        <div class="pending-header">
+          <h2>Pending changes <span id="pending-count" class="muted">(0)</span></h2>
+          <button id="manage-clear-btn" class="ghost-btn">Clear all</button>
+        </div>
+        <ul id="pending-list"></ul>
+        <div class="manage-output-row">
+          <button id="manage-emit-cli" class="ghost-btn">Show CLI commands</button>
+          <button id="manage-emit-diff" class="ghost-btn">Show JSON diff</button>
+        </div>
+        <pre id="manage-output" hidden></pre>
+        <div id="manage-copied" hidden class="muted small">Copied to clipboard.</div>
+      </section>
+    </main>
+  </section>
+
   <!-- Glossary view -->
   <section id="view-glossary" class="view" hidden>
     <main class="glossary-main">

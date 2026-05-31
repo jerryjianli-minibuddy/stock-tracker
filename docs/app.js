@@ -194,6 +194,7 @@ function renderTabs() {
     `<button class="tab" data-tab="reports">Reports <span class="count">(${state.reports.length})</span></button>`,
     `<button class="tab" data-tab="bottlenecks">Bottlenecks <span class="count">(${state.bottlenecks.length})</span></button>`,
     `<button class="tab" data-tab="glossary">Glossary <span class="count">(${state.glossary.length})</span></button>`,
+    `<button class="tab" data-tab="manage">Manage</button>`,
     macroTab,
   ].join("");
   nav.querySelectorAll(".tab").forEach((b) =>
@@ -205,6 +206,7 @@ function activeTabKey() {
   if (state.view === "reports")     return "reports";
   if (state.view === "bottlenecks") return "bottlenecks";
   if (state.view === "glossary")    return "glossary";
+  if (state.view === "manage")      return "manage";
   if (state.view === "macro")       return "macro";
   if (state.sector === "All")       return "all";
   return `sector:${state.sector}`;
@@ -221,6 +223,7 @@ function activateTab(tabId) {
   if (tabId === "reports")        state.view = "reports";
   else if (tabId === "bottlenecks") state.view = "bottlenecks";
   else if (tabId === "glossary")    state.view = "glossary";
+  else if (tabId === "manage")      state.view = "manage";
   else if (tabId === "macro")       state.view = "macro";
   else if (tabId === "all") { state.view = "watchlist"; state.sector = "All"; }
   else if (typeof tabId === "string" && tabId.startsWith("sector:")) {
@@ -240,6 +243,8 @@ function activateTab(tabId) {
 
   if (state.view === "watchlist") {
     renderWatchlist();
+  } else if (state.view === "manage") {
+    renderManage();
   }
 
   requestAnimationFrame(() => applyScrollTarget());
@@ -248,7 +253,7 @@ function activateTab(tabId) {
 function restoreActiveTab() {
   const saved = localStorage.getItem(STORAGE_KEYS.activeTab);
   if (!saved) return "all";
-  if (["all", "reports", "bottlenecks", "glossary", "macro"].includes(saved)) return saved;
+  if (["all", "reports", "bottlenecks", "glossary", "manage", "macro"].includes(saved)) return saved;
   if (saved.startsWith("sector:")) {
     const s = saved.slice(7);
     if (getSectorsInOrder(state.tickers).includes(s)) return saved;
@@ -1436,6 +1441,221 @@ function renderGlossary() {
   container.innerHTML = html;
   empty.hidden = totalMatching > 0;
   if (totalMatching === 0) empty.textContent = `No terms match "${q}".`;
+}
+
+// ============ Manage tab (read-only planner, emits CLI commands + JSON diff) ============
+//
+// The dashboard is static — it can't write tickers.json. The Manage tab lets
+// the user accumulate planned changes (add/remove/move/rate tickers; add/
+// rename/remove sectors) and then click "Generate edits" to get:
+//   (a) a copy-pasteable block of CLI commands for scripts/manage.py, OR
+//   (b) a JSON diff blob the user can paste into Claude Code.
+//
+// Pending changes live in-memory only — refresh wipes them. That's
+// intentional: nothing leaves this browser tab until the user explicitly
+// copies the output and runs the commands.
+
+const _manageState = {
+  pending: [],        // [{type, ...}] — see _pendingChange shapes below
+};
+
+function renderManage() {
+  // Sector dropdown contents (current sectors + "+ new" option)
+  const sectors = getSectorsInOrder(state.tickers);
+  const addSectorSel = document.getElementById("manage-add-sector");
+  addSectorSel.innerHTML = sectors.map(s =>
+    `<option value="${escapeAttr(s)}">${escapeText(s)}</option>`
+  ).join("") + `<option value="__new__">— New sector —</option>`;
+
+  // Ticker table — every row has a sector dropdown (planned reassign) + remove btn
+  const tbody = document.querySelector("#manage-tickers-table tbody");
+  tbody.innerHTML = state.tickers.map(t => `
+    <tr data-ticker="${escapeAttr(t.ticker)}">
+      <td><strong>${escapeText(t.ticker)}</strong></td>
+      <td>${escapeText(t.company || "")}</td>
+      <td>
+        <select class="manage-sector-select" data-sym="${escapeAttr(t.ticker)}" data-orig="${escapeAttr(t.sector || "")}">
+          ${sectors.map(s => `<option value="${escapeAttr(s)}"${s === t.sector ? " selected" : ""}>${escapeText(s)}</option>`).join("")}
+        </select>
+      </td>
+      <td><span class="muted">${escapeText(t.rating || "—")}</span></td>
+      <td><button class="ghost-btn manage-remove-btn" data-sym="${escapeAttr(t.ticker)}">× Remove</button></td>
+    </tr>
+  `).join("");
+
+  // Sector table — count + rename input + remove btn
+  const counts = state.tickers.reduce((acc, t) => ((acc[t.sector] = (acc[t.sector] || 0) + 1), acc), {});
+  const stbody = document.querySelector("#manage-sectors-table tbody");
+  stbody.innerHTML = sectors.map(s => `
+    <tr data-sector="${escapeAttr(s)}">
+      <td><strong>${escapeText(s)}</strong></td>
+      <td class="num">${counts[s] || 0}</td>
+      <td><input type="text" class="manage-sector-rename" data-orig="${escapeAttr(s)}" placeholder="rename to…"></td>
+      <td>
+        <button class="ghost-btn manage-sector-rename-btn" data-orig="${escapeAttr(s)}">Rename</button>
+        <button class="ghost-btn manage-sector-remove-btn" data-name="${escapeAttr(s)}">× Remove</button>
+      </td>
+    </tr>
+  `).join("");
+
+  _wireManageHandlers();
+  _renderPending();
+}
+
+function _wireManageHandlers() {
+  // Per-row sector dropdown change → queue a 'move' pending change
+  document.querySelectorAll(".manage-sector-select").forEach((sel) => {
+    sel.addEventListener("change", () => {
+      const sym = sel.dataset.sym;
+      const orig = sel.dataset.orig;
+      const target = sel.value;
+      if (target === "__new__") {
+        const name = prompt("New sector name:");
+        if (!name) { sel.value = orig; return; }
+        _pushPending({ type: "move", ticker: sym, from: orig, to: name });
+      } else if (target !== orig) {
+        _pushPending({ type: "move", ticker: sym, from: orig, to: target });
+      }
+    });
+  });
+  // Remove button
+  document.querySelectorAll(".manage-remove-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const sym = btn.dataset.sym;
+      const reason = prompt(`Reason for removing ${sym}? (optional, for institutional memory)`, "") || "";
+      _pushPending({ type: "remove", ticker: sym, reason });
+    });
+  });
+  // Add ticker form
+  document.getElementById("manage-add-btn").onclick = () => {
+    const symEl = document.getElementById("manage-add-symbol");
+    const sectorEl = document.getElementById("manage-add-sector");
+    const ratingEl = document.getElementById("manage-add-rating");
+    const sym = (symEl.value || "").trim().toUpperCase();
+    if (!sym) { symEl.focus(); return; }
+    let sector = sectorEl.value;
+    if (sector === "__new__") {
+      sector = prompt("New sector name:") || "";
+      if (!sector) return;
+    }
+    const rating = ratingEl.value;
+    _pushPending({ type: "add", ticker: sym, sector, rating });
+    symEl.value = "";
+  };
+  // Sector add
+  document.getElementById("manage-sector-add-btn").onclick = () => {
+    const input = document.getElementById("manage-sector-new");
+    const name = (input.value || "").trim();
+    if (!name) { input.focus(); return; }
+    _pushPending({ type: "sector-add", name });
+    input.value = "";
+  };
+  // Sector rename buttons (per row)
+  document.querySelectorAll(".manage-sector-rename-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const orig = btn.dataset.orig;
+      const inp = document.querySelector(`.manage-sector-rename[data-orig="${cssEscape(orig)}"]`);
+      const to = (inp?.value || "").trim();
+      if (!to || to === orig) return;
+      _pushPending({ type: "sector-rename", from: orig, to });
+      inp.value = "";
+    });
+  });
+  // Sector remove
+  document.querySelectorAll(".manage-sector-remove-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const name = btn.dataset.name;
+      _pushPending({ type: "sector-remove", name });
+    });
+  });
+  // Clear / emit buttons
+  document.getElementById("manage-clear-btn").onclick = () => {
+    _manageState.pending = [];
+    _renderPending();
+    document.getElementById("manage-output").hidden = true;
+  };
+  document.getElementById("manage-emit-cli").onclick  = () => _emitOutput("cli");
+  document.getElementById("manage-emit-diff").onclick = () => _emitOutput("diff");
+}
+
+function _pushPending(change) {
+  _manageState.pending.push(change);
+  _renderPending();
+}
+
+function _renderPending() {
+  const ul = document.getElementById("pending-list");
+  const countEl = document.getElementById("pending-count");
+  if (!ul) return;
+  countEl.textContent = `(${_manageState.pending.length})`;
+  if (_manageState.pending.length === 0) {
+    ul.innerHTML = `<li class="muted small">No pending changes. Use the controls above to plan adds / moves / removes.</li>`;
+    return;
+  }
+  ul.innerHTML = _manageState.pending.map((c, i) => {
+    const txt = _describePending(c);
+    return `<li><span class="pending-idx">${i + 1}.</span> ${escapeText(txt)} <button class="pending-x" data-idx="${i}">×</button></li>`;
+  }).join("");
+  ul.querySelectorAll(".pending-x").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      _manageState.pending.splice(Number(btn.dataset.idx), 1);
+      _renderPending();
+    });
+  });
+}
+
+function _describePending(c) {
+  switch (c.type) {
+    case "add":            return `Add ${c.ticker} → ${c.sector} (${c.rating || "—"})`;
+    case "remove":         return `Remove ${c.ticker}${c.reason ? ` — "${c.reason}"` : ""}`;
+    case "move":           return `Move ${c.ticker}: ${c.from || "(unset)"} → ${c.to}`;
+    case "rate":           return `Rate ${c.ticker} ${c.rating}`;
+    case "sector-add":     return `Add sector "${c.name}"`;
+    case "sector-remove":  return `Remove sector "${c.name}"`;
+    case "sector-rename":  return `Rename sector "${c.from}" → "${c.to}"`;
+    default:               return JSON.stringify(c);
+  }
+}
+
+function _emitOutput(kind) {
+  const pre = document.getElementById("manage-output");
+  if (_manageState.pending.length === 0) {
+    pre.textContent = "(No pending changes — make some above first.)";
+    pre.hidden = false;
+    return;
+  }
+  let text;
+  if (kind === "cli") {
+    const cmds = _manageState.pending.map(_toCLI).join("\n");
+    text = `# Run from the repo root:\n${cmds}\n\n# Then commit + push:\ngit add -A data/ docs/data/ && git commit -m "Apply ${_manageState.pending.length} change(s) from Manage tab" && git push`;
+  } else {
+    const diff = _manageState.pending.map(c => ({ ...c }));
+    text = `Apply these changes to data/tickers.json (and reports.json/bottlenecks.json for sector renames):\n\n${JSON.stringify(diff, null, 2)}\n\nUse scripts/manage.py for each — see CLAUDE.md → "Local management CLI".`;
+  }
+  pre.textContent = text;
+  pre.hidden = false;
+  // Copy to clipboard
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      const c = document.getElementById("manage-copied");
+      c.hidden = false;
+      setTimeout(() => { c.hidden = true; }, 2500);
+    }).catch(() => {});
+  }
+}
+
+function _toCLI(c) {
+  const q = (s) => `"${String(s).replace(/"/g, '\\"')}"`;
+  switch (c.type) {
+    case "add":           return `uv run python scripts/manage.py add ${c.ticker} --sector ${q(c.sector)} --rating ${c.rating || "Watch"}`;
+    case "remove":        return `uv run python scripts/manage.py remove ${c.ticker}` + (c.reason ? ` --reason ${q(c.reason)}` : "");
+    case "move":          return `uv run python scripts/manage.py move ${c.ticker} --to ${q(c.to)}`;
+    case "rate":          return `uv run python scripts/manage.py rate ${c.ticker} --rating ${c.rating}`;
+    case "sector-add":    return `uv run python scripts/manage.py sector-add ${q(c.name)}`;
+    case "sector-remove": return `uv run python scripts/manage.py sector-remove ${q(c.name)}`;
+    case "sector-rename": return `uv run python scripts/manage.py sector-rename ${q(c.from)} --to ${q(c.to)}`;
+    default:              return `# unknown: ${JSON.stringify(c)}`;
+  }
 }
 
 // ============ macro banner + macro view ============
