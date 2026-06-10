@@ -1576,6 +1576,9 @@ function _wireManageHandlers() {
   };
   document.getElementById("manage-emit-cli").onclick  = () => _emitOutput("cli");
   document.getElementById("manage-emit-diff").onclick = () => _emitOutput("diff");
+  document.getElementById("manage-gh-connect").onclick = () => _ghConnect();
+  document.getElementById("manage-apply-btn").onclick  = () => _applyViaGitHub();
+  _updateGhStatus();
 }
 
 function _pushPending(change) {
@@ -1655,6 +1658,259 @@ function _toCLI(c) {
     case "sector-remove": return `uv run python scripts/manage.py sector-remove ${q(c.name)}`;
     case "sector-rename": return `uv run python scripts/manage.py sector-rename ${q(c.from)} --to ${q(c.to)}`;
     default:              return `# unknown: ${JSON.stringify(c)}`;
+  }
+}
+
+// ============ Manage tab: direct apply via GitHub API ============
+//
+// No backend required. The user pastes a fine-grained personal access token
+// (this repo only; permissions: Contents RW + Actions RW) which lives in
+// sessionStorage — cleared when the tab closes, never persisted to disk.
+//
+// "Apply via GitHub" then:
+//   1. Reads the current data/tickers.json + data/removed_tickers.json
+//      straight from the GitHub Contents API (NOT the possibly-stale Pages
+//      copy — avoids clobbering a daily-refresh commit).
+//   2. Applies the pending queue to those arrays client-side.
+//   3. Commits data/tickers.json + docs/data/tickers.json (mirror) +
+//      data/removed_tickers.json in ONE atomic commit via the Git trees API.
+//   4. Triggers the manual-refresh workflow (workflow_dispatch) so new
+//      tickers get snapshots + pillars within a few minutes.
+//
+// Pages redeploys from the commit, so the change is visible on next reload.
+
+const GH_OWNER  = "jerryjianli-minibuddy";
+const GH_REPO   = "stock-tracker";
+const GH_BRANCH = "main";
+const GH_TOKEN_KEY = "stock-tracker.ghToken"; // sessionStorage
+
+function _ghToken() { return sessionStorage.getItem(GH_TOKEN_KEY) || ""; }
+
+function _ghConnect() {
+  let tok = null;
+  try {
+    tok = prompt(
+      "Paste a GitHub fine-grained personal access token.\n\n" +
+      "Create one at github.com → Settings → Developer settings →\n" +
+      "Fine-grained tokens → Generate new token:\n" +
+      "  • Repository access: Only select repositories → stock-tracker\n" +
+      "  • Permissions: Contents (Read and write), Actions (Read and write)\n\n" +
+      "Stored in sessionStorage only — cleared when this tab closes."
+    );
+  } catch {
+    // Some embedded contexts disable prompt(); surface guidance instead.
+    const status = document.getElementById("manage-apply-status");
+    if (status) status.textContent =
+      "This browser blocks prompt dialogs — run sessionStorage.setItem('stock-tracker.ghToken', '<token>') in the console instead.";
+  }
+  if (tok && tok.trim()) sessionStorage.setItem(GH_TOKEN_KEY, tok.trim());
+  _updateGhStatus();
+}
+
+function _updateGhStatus() {
+  const btn = document.getElementById("manage-gh-connect");
+  if (!btn) return;
+  btn.textContent = _ghToken() ? "🔑 GitHub: connected (click to replace)" : "🔑 Connect GitHub";
+}
+
+async function _gh(path, opts = {}) {
+  const res = await fetch(`https://api.github.com${path}`, {
+    ...opts,
+    headers: {
+      "Authorization": `Bearer ${_ghToken()}`,
+      "Accept": "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2022-11-28",
+      ...(opts.headers || {}),
+    },
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(`GitHub ${opts.method || "GET"} ${path} → ${res.status} ${text.slice(0, 180)}`);
+  }
+  return res.status === 204 ? null : res.json();
+}
+
+async function _ghReadJson(path) {
+  try {
+    const data = await _gh(`/repos/${GH_OWNER}/${GH_REPO}/contents/${encodeURIComponent(path).replace(/%2F/g, "/")}?ref=${GH_BRANCH}`);
+    const bytes = Uint8Array.from(atob((data.content || "").replace(/\n/g, "")), (ch) => ch.charCodeAt(0));
+    return JSON.parse(new TextDecoder().decode(bytes));
+  } catch (e) {
+    if (String(e).includes("404")) return null; // file doesn't exist yet
+    throw e;
+  }
+}
+
+// One atomic commit containing several files (Git data API: tree → commit → ref).
+async function _ghCommitFiles(files, message) {
+  const base = `/repos/${GH_OWNER}/${GH_REPO}`;
+  const ref = await _gh(`${base}/git/ref/heads/${GH_BRANCH}`);
+  const headSha = ref.object.sha;
+  const headCommit = await _gh(`${base}/git/commits/${headSha}`);
+  const tree = await _gh(`${base}/git/trees`, {
+    method: "POST",
+    body: JSON.stringify({
+      base_tree: headCommit.tree.sha,
+      tree: files.map((f) => ({ path: f.path, mode: "100644", type: "blob", content: f.content })),
+    }),
+  });
+  const commit = await _gh(`${base}/git/commits`, {
+    method: "POST",
+    body: JSON.stringify({ message, tree: tree.sha, parents: [headSha] }),
+  });
+  await _gh(`${base}/git/refs/heads/${GH_BRANCH}`, {
+    method: "PATCH",
+    body: JSON.stringify({ sha: commit.sha }),
+  });
+  return commit.sha;
+}
+
+async function _ghTriggerRefresh(reason) {
+  await _gh(`/repos/${GH_OWNER}/${GH_REPO}/actions/workflows/manual-refresh.yml/dispatches`, {
+    method: "POST",
+    body: JSON.stringify({ ref: GH_BRANCH, inputs: { reason } }),
+  });
+}
+
+// Apply the pending queue to in-memory copies of tickers + removed arrays.
+// Mutates both arrays; returns human-readable summary lines for the commit msg.
+function _applyPendingToData(tickers, removed) {
+  const today = new Date().toISOString().slice(0, 10);
+  const summary = [];
+  const findT = (sym) => tickers.find((t) => t.ticker.toUpperCase() === String(sym).toUpperCase());
+  const archive = (t, reason) => removed.push({ ...t, removed_at: today, removal_reason: reason || "(via Manage tab)" });
+
+  for (const c of _manageState.pending) {
+    switch (c.type) {
+      case "add": {
+        if (findT(c.ticker)) { summary.push(`skip add ${c.ticker} (already exists)`); break; }
+        tickers.push({
+          ticker: c.ticker.toUpperCase(),
+          // Browser can't reach yfinance (CORS) — company name backfills are
+          // a CLI affair; symbol placeholder is fine until then.
+          company: c.ticker.toUpperCase(),
+          sector: c.sector,
+          thesis: "", one_line_thesis: "",
+          bottlenecks_addressed: [], report_refs: [],
+          catalyst: "", risks: [],
+          rating: c.rating ?? "Watch",
+          notes: "", date_added: today,
+          binding_constraint_thesis: null,
+        });
+        summary.push(`add ${c.ticker} → ${c.sector}`);
+        break;
+      }
+      case "remove": {
+        const t = findT(c.ticker);
+        if (!t) { summary.push(`skip remove ${c.ticker} (not found)`); break; }
+        archive(t, c.reason);
+        tickers.splice(tickers.indexOf(t), 1);
+        summary.push(`remove ${c.ticker}`);
+        break;
+      }
+      case "move": {
+        const t = findT(c.ticker);
+        if (!t) { summary.push(`skip move ${c.ticker} (not found)`); break; }
+        t.sector = c.to;
+        summary.push(`move ${c.ticker} → ${c.to}`);
+        break;
+      }
+      case "rate": {
+        const t = findT(c.ticker);
+        if (!t) { summary.push(`skip rate ${c.ticker} (not found)`); break; }
+        t.rating = c.rating;
+        summary.push(`rate ${c.ticker} ${c.rating || "unrated"}`);
+        break;
+      }
+      case "sector-add":
+        // Sectors derive from tickers — nothing to write until a ticker uses it.
+        summary.push(`sector "${c.name}" noted (appears once a ticker uses it)`);
+        break;
+      case "sector-rename": {
+        let n = 0;
+        for (const t of tickers) if (t.sector === c.from) { t.sector = c.to; n++; }
+        summary.push(`rename sector "${c.from}" → "${c.to}" (${n})`);
+        break;
+      }
+      case "sector-remove": {
+        const inSector = tickers.filter((t) => t.sector === c.name);
+        if (inSector.length === 0) { summary.push(`sector "${c.name}" already empty`); break; }
+        let dest = null;
+        try {
+          dest = prompt(
+            `Sector "${c.name}" still has ${inSector.length} ticker(s): ` +
+            `${inSector.map((t) => t.ticker).join(", ")}.\n\n` +
+            `Type a destination sector to MOVE them, or type DELETE to remove them all:`
+          );
+        } catch { /* prompt blocked → treated as cancel */ }
+        if (!dest || !dest.trim()) { summary.push(`skip sector-remove "${c.name}" (cancelled)`); break; }
+        if (dest.trim().toUpperCase() === "DELETE") {
+          for (const t of inSector) {
+            archive(t, `sector "${c.name}" deleted via Manage tab`);
+            tickers.splice(tickers.indexOf(t), 1);
+          }
+          summary.push(`delete sector "${c.name}" + ${inSector.length} ticker(s)`);
+        } else {
+          for (const t of inSector) t.sector = dest.trim();
+          summary.push(`remove sector "${c.name}" (moved ${inSector.length} → ${dest.trim()})`);
+        }
+        break;
+      }
+      default:
+        summary.push(`skip unknown change: ${JSON.stringify(c)}`);
+    }
+  }
+  return summary;
+}
+
+async function _applyViaGitHub() {
+  const status = document.getElementById("manage-apply-status");
+  const btn = document.getElementById("manage-apply-btn");
+  if (_manageState.pending.length === 0) {
+    status.textContent = "No pending changes — queue some adds/moves/removes above first.";
+    return;
+  }
+  if (!_ghToken()) {
+    _ghConnect();
+    if (!_ghToken()) { status.textContent = "Not connected — token required to apply."; return; }
+  }
+  btn.disabled = true;
+  try {
+    status.textContent = "Reading current data from GitHub…";
+    const [tickers, removed] = await Promise.all([
+      _ghReadJson("data/tickers.json"),
+      _ghReadJson("data/removed_tickers.json").then((r) => r || []),
+    ]);
+    if (!Array.isArray(tickers)) throw new Error("could not read data/tickers.json from GitHub");
+
+    const summary = _applyPendingToData(tickers, removed);
+
+    status.textContent = "Committing…";
+    const body = JSON.stringify(tickers, null, 2) + "\n";
+    const sha = await _ghCommitFiles(
+      [
+        { path: "data/tickers.json",        content: body },
+        { path: "docs/data/tickers.json",   content: body },
+        { path: "data/removed_tickers.json", content: JSON.stringify(removed, null, 2) + "\n" },
+      ],
+      `Manage tab: ${summary.join("; ")}`.slice(0, 300),
+    );
+
+    status.textContent = "Triggering data-refresh workflow…";
+    let workflowNote = "Refresh workflow started — new tickers get full data in ~3-5 min.";
+    try { await _ghTriggerRefresh("Manage tab apply"); }
+    catch { workflowNote = "⚠ Could not trigger the refresh workflow (token may lack Actions permission) — new tickers will backfill on the next daily run."; }
+
+    _manageState.pending = [];
+    _renderPending();
+    status.innerHTML =
+      `✓ Committed <code>${escapeText(sha.slice(0, 7))}</code>. ${escapeText(workflowNote)} ` +
+      `<a href="https://github.com/${GH_OWNER}/${GH_REPO}/commit/${escapeAttr(sha)}" target="_blank" rel="noopener">view commit ↗</a> · ` +
+      `reload this page in ~1 min to see the change.`;
+  } catch (e) {
+    status.textContent = `✗ ${e.message}`;
+  } finally {
+    btn.disabled = false;
   }
 }
 

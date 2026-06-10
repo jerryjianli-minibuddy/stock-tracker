@@ -81,10 +81,11 @@
   <section id="view-manage" class="view" hidden>
     <main class="manage-main">
       <div class="manage-banner">
-        <strong>⚠ Read-only planner.</strong>
-        Changes here are <em>not</em> saved to the live dashboard.
-        Use this view to plan adds / moves / removes, then click <strong>Generate edits</strong>
-        and run the CLI commands (or paste the JSON diff into Claude Code) to actually apply.
+        <strong>Plan changes below, then apply.</strong>
+        Easiest path: <strong>Connect GitHub</strong> once (fine-grained token, this repo only),
+        queue your adds / moves / removes, and click <strong>Apply via GitHub</strong> —
+        the dashboard commits the change and kicks off the data-refresh workflow automatically.
+        No terminal needed. (The CLI-commands / JSON-diff buttons remain as the offline fallback.)
       </div>
 
       <div class="manage-grid">
@@ -131,9 +132,13 @@
         </div>
         <ul id="pending-list"></ul>
         <div class="manage-output-row">
+          <button id="manage-apply-btn" class="ghost-btn apply-btn">▲ Apply via GitHub</button>
+          <button id="manage-gh-connect" class="ghost-btn">🔑 Connect GitHub</button>
+          <span class="manage-output-spacer"></span>
           <button id="manage-emit-cli" class="ghost-btn">Show CLI commands</button>
           <button id="manage-emit-diff" class="ghost-btn">Show JSON diff</button>
         </div>
+        <div id="manage-apply-status" class="muted small"></div>
         <pre id="manage-output" hidden></pre>
         <div id="manage-copied" hidden class="muted small">Copied to clipboard.</div>
       </section>

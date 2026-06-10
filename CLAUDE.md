@@ -636,21 +636,36 @@ These live in `.claude/commands/` and are invokable via `/<name>` in a Claude Co
 
 When extending the CLI with new commands, add a matching slash command (and document it here) so the Claude Code workflow stays first-class.
 
-## Manage tab (dashboard planner)
+## Manage tab (add/remove tickers + sectors from the browser)
 
-The dashboard is a static site — it can't write `tickers.json`. The **Manage tab** is a planning UI: queue up adds / removes / moves / sector renames in the browser, then click **Show CLI commands** (auto-copied to clipboard) to get a ready-to-paste block:
+The **Manage tab** lets the user edit the watchlist directly from the dashboard — no terminal, no backend, no database. It works by committing to the GitHub repo through the GitHub REST API using a personal access token the user pastes once per browser session.
 
-```
-uv run python scripts/manage.py add AAPL --sector "Software" --rating Watch
-uv run python scripts/manage.py move IREN --to "Memory"
-uv run python scripts/manage.py remove KRMN --reason "Leverage 5.8x, no thesis"
-…
-git add -A data/ docs/data/ && git commit -m "Apply 3 change(s) from Manage tab" && git push
-```
+### How it works (the "Apply via GitHub" path)
 
-Or **Show JSON diff** to get a structured blob to hand to a Claude Code session for execution. Either way, **nothing in the Manage tab modifies live data** — the warning banner at the top is explicit. The user copies the output, runs the commands locally, and pushes to GitHub; Pages picks up the change on the next CDN refresh.
+1. **Connect GitHub** (once per session): the user pastes a **fine-grained PAT** scoped to ONLY this repo with **Contents: Read and write** + **Actions: Read and write**. Stored in `sessionStorage` (key `stock-tracker.ghToken`) — cleared when the tab closes, never persisted.
+2. The user queues changes in the UI (add ticker form, per-row sector dropdowns, × Remove buttons, sector rename/remove).
+3. **Apply via GitHub** then:
+   - Re-reads `data/tickers.json` + `data/removed_tickers.json` from the GitHub Contents API (NOT the possibly-stale Pages copy — avoids clobbering a daily-refresh commit that landed since page load),
+   - applies the queue client-side (`_applyPendingToData` in `docs/app.js`),
+   - commits `data/tickers.json` + `docs/data/tickers.json` (mirror) + `data/removed_tickers.json` in **one atomic commit** via the Git trees API (`_ghCommitFiles`),
+   - triggers `manual-refresh.yml` via `workflow_dispatch` so new tickers get snapshots + pillars within ~3-5 min,
+   - Pages redeploys from the commit; reload shows the change.
 
-The Manage tab queue is in-memory only — a page refresh wipes pending changes. That's intentional: it forces the user to commit before walking away from the planning session.
+Removals are archived into `removed_tickers.json` with date + reason, same as the CLI. A `sector-remove` on a non-empty sector prompts in-browser for a destination (or `DELETE` to drop all its tickers).
+
+Known limitation: the browser can't reach yfinance (CORS), so browser-added tickers get the symbol as a placeholder `company` name and **no upfront validation** — a typo'd symbol just shows empty data columns after the refresh runs. Fix the name later via CLI/Claude Code, or prefer `/add-ticker` when validation matters.
+
+### Offline fallback (no token)
+
+**Show CLI commands** emits a paste-ready `scripts/manage.py` block (auto-copied to clipboard); **Show JSON diff** emits a structured blob to hand to a Claude Code session. Same queue, manual execution.
+
+The pending queue is in-memory only — a page refresh wipes it. Apply (or copy the commands) before navigating away.
+
+### Token notes for future sessions
+
+- The PAT is the **user's own credential**; never ask them to paste it into chat. If a Manage-tab apply fails with 401/403, have them mint a fresh fine-grained token (repo-scoped, Contents RW + Actions RW) and reconnect.
+- Repo constants live at the top of the GitHub-apply section in `docs/app.js`: `GH_OWNER`, `GH_REPO`, `GH_BRANCH`. Update these if the repo is ever renamed/forked.
+- Concurrent-write race: if the daily-refresh Action commits between the read and the ref update, the `PATCH refs` fails (non-fast-forward) and the user just clicks Apply again. No corruption is possible — the commit is atomic or absent.
 
 ## Daily auto-update chain
 
