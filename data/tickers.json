@@ -712,15 +712,15 @@
     "five_pillars": {
       "moat": {
         "pass": false,
-        "evidence": "Data missing \u2014 verify manually",
-        "metric_value": null,
+        "evidence": "Gross margin 44.2% below threshold \u226560% software",
+        "metric_value": 0.44207249277295974,
         "metric_label": "Gross Margin",
         "metric_threshold": "\u226560% software"
       },
       "tam": {
         "pass": false,
-        "evidence": "Revenue growth missing \u2014 verify manually",
-        "metric_value": null,
+        "evidence": "Revenue growth YoY +2.4% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.02437357630979499,
         "metric_label": "3yr Revenue CAGR (proxy: YoY)",
         "metric_threshold": "\u226520%"
       },
@@ -733,20 +733,20 @@
       },
       "capital_efficiency": {
         "pass": false,
-        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
-        "metric_value": null,
+        "evidence": "Rule of 40 = 9.3 (rev growth +2.4% + FCF margin 6.9%); below threshold \u226540 software",
+        "metric_value": 9.3037308194177,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
-        "pass": false,
-        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
-        "metric_value": null,
+        "pass": true,
+        "evidence": "EV/S 3.8x \u00f7 TTM proxy growth 2% = 1.55 \u2014 passes hard gate <2.5",
+        "metric_value": 1.5545523364485982,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
     },
-    "pillars_passed": 0,
+    "pillars_passed": 1,
     "pillars_total": 5,
     "pillar_eligibility": "PASS"
   },
@@ -766,9 +766,9 @@
     "binding_constraint_thesis": null,
     "five_pillars": {
       "moat": {
-        "pass": false,
-        "evidence": "Data missing \u2014 verify manually",
-        "metric_value": null,
+        "pass": true,
+        "evidence": "Gross margin 49.1% passes \u226535% hardware",
+        "metric_value": 0.49126544524925436,
         "metric_label": "Gross Margin",
         "metric_threshold": "\u226535% hardware"
       },
@@ -801,7 +801,7 @@
         "metric_threshold": "<2.5 hard gate"
       }
     },
-    "pillars_passed": 0,
+    "pillars_passed": 1,
     "pillars_total": 5,
     "pillar_eligibility": "PASS"
   }
