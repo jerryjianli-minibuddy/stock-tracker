@@ -1,0 +1,4026 @@
+[
+  {
+    "ticker": "AVGO",
+    "company": "Broadcom",
+    "sector": "AI Infra",
+    "thesis": "",
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Not directly ranked in any ingested report, but tagged as a structural winner in two of the most important AI-infrastructure bottlenecks \u2014 HBM memory bandwidth and optical interconnect. Indirect evidence supports a Watch designation; would upgrade to Strong if a deep-dive ranks AVGO top-3 explicitly.",
+      "primary_drivers": [
+        "Winner of the HBM memory-bandwidth bottleneck \u2014 direct beneficiary of the HBM3e \u2192 HBM4 stacking arc alongside NVDA, Micron, SK Hynix.",
+        "Winner of the optical interconnect-bandwidth bottleneck \u2014 #2 share at 800G/1.6T behind Marvell, with growing share at 1.6T.",
+        "Hyperscaler ASIC anchor (Google TPU, Meta MTIA, OpenAI custom inference) \u2014 repeatedly cited across reports as a Tier-1 incumbent that other names re-rate against."
+      ],
+      "key_risks": [
+        "No direct report evidence \u2014 thesis rests entirely on bottleneck-level structural positioning. Upgrade requires a dedicated ingest.",
+        "Mansfield RS moderately extended \u2014 discipline on entry timing matters.",
+        "Customer concentration with hyperscalers \u2014 single large-customer insourcing event (e.g., Google reducing TPU partnership) materially impacts the franchise."
+      ],
+      "evidence": [
+        {
+          "type": "bottleneck",
+          "ref_id": "memory-bandwidth",
+          "ref_name": "HBM Memory Bandwidth",
+          "role": "winner",
+          "physics_summary": "Inference is memory-bandwidth-bound, not compute-bound. Each token generation requires loading the full model weights from HBM to SRAM."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "interconnect-bandwidth",
+          "ref_name": "Optical Interconnect Bandwidth",
+          "role": "winner",
+          "physics_summary": "At 800Gbps and 1.6Tbps per lane, copper signals fall apart after a few feet; data must be converted to laser light via optical transceivers \u2014 thumb-drive-sized devices containing tiny lasers that switch state in well under a nanosecond with extremely consistent timing. PAM4 modulation (4-level pulse amplitude) crams 2 bits into each pulse, doubling the data rate without doubling laser switching speed."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Bottleneck winner: HBM Memory Bandwidth, Optical Interconnect Bandwidth",
+        "metric_value": null,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 1,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "IREN",
+    "company": "IREN Limited",
+    "sector": "Bitcoin Mining / AI HPC",
+    "thesis": "",
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "In watchlist for the Bitcoin-mining \u2192 AI HPC hosting pivot; no ingested research to anchor a rating. Mentioned in passing in other reports' watchlists.",
+      "primary_drivers": [],
+      "key_risks": [],
+      "evidence": [],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 64.6% passes \u226535% hardware",
+        "metric_value": 0.6462239718222315,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY -0.0% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": -0.00019333945574943206,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -281.9 (rev growth -0.0% + FCF margin -281.9%); below threshold \u226525 hardware",
+        "metric_value": -281.91318574033465,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 1,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "BESIY",
+    "company": "BE Semiconductor (Besi)",
+    "sector": "Semis - Packaging",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "hybrid-bonding",
+      "advanced-packaging"
+    ],
+    "report_refs": [
+      "ai-physical-bottlenecks-2026-05",
+      "besi-deep-dive-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Strong",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Hybrid-bonding near-monopoly on equipment for 3D stacking. Two reports both rank it #1 \u2014 'best 3-year asymmetric play' that compounds across HBM4 and TSMC SoIC. Caveat: at \u20ac260+, the Besi deep-dive recommends Hold/Trim until a 25-35% pullback or HBM4 volume-order confirmation.",
+      "primary_drivers": [
+        "~67% D2W hybrid-bonding market share; 100nm placement in production, 50nm prototype shipping, sub-25nm in development.",
+        "Applied Materials 9% equity stake + joint Kinex platform creates a flywheel of early customer roadmap visibility.",
+        "150+ cumulative hybrid bonders shipped to 18 customers; six integrated production lines with 30 bonders at TSMC.",
+        "HBM4 + TSMC SoIC ramp 2026-2028 is the structural demand driver \u2014 winner of both hybrid-bonding AND advanced-packaging bottlenecks."
+      ],
+      "key_risks": [
+        "SK Hynix reportedly sticking with MR-MUF for HBM4 16-high per TrendForce Jan 2026 \u2014 direct threat to one bull driver.",
+        "Valuation 142x trailing / 70x forward prices flawless execution through 2027-2028.",
+        "84% Asia concentration (China 45% + APAC 39% in Q4 2025) \u2014 geopolitical tail risk.",
+        "Mansfield RS +57 \u2014 extended; entry timing matters even at Strong rating."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "ai-physical-bottlenecks-2026-05",
+          "ref_title": "AI's Next Physical Bottlenecks",
+          "rank_in_report": 1,
+          "report_reasoning": "Near-monopoly on equipment for 3D stacking with ~67% D2W hybrid-bonding share. Multi-bottleneck exposure: HBM4 advanced logic + TSMC SoIC-X ramp + future CoWoP transition. Best 3-year asymmetric play in the ranking \u2014 physics-anchored, hidden monopoly, compounds across multiple bottlenecks. Key risk: lumpy exposure to AI/HBM4 adoption pace (SK Hynix's reported MR-MUF gamble for HBM4 16-high is a direct threat to one bull driver)."
+        },
+        {
+          "type": "report",
+          "ref_id": "besi-deep-dive-2026-05",
+          "ref_title": "BE Semiconductor Industries (Besi): A High School-Friendly Deep Dive",
+          "rank_in_report": 1,
+          "report_reasoning": "World leader in hybrid bonding equipment: 42% share of die-attach equipment, 75% of advanced die-attach, ~67% of D2W hybrid bonding per Microsilicon Tech. Crown jewel achieves 100nm placement accuracy in production, 50nm prototype shipping for customer qualification, sub-25nm in development. Adopted first by Sony for image sensors (2016), then AMD 3D V-Cache, now ramping in TSMC SoIC and (eventually) HBM4/HBM4E memory. 18 customers, 150+ cumulative bonders shipped; six integrated production lines with 30 Besi hybrid bonders running at a leading logic customer (industry consensus: TSMC, not officially named). Applied Materials 9% equity stake + joint Kinex platform creates a flywheel: Besi sees early roadmaps from Intel, TSMC, SK Hynix, Samsung that pure back-end players (Hanmi, K&S) can't access. Bear case has weight: SK Hynix has reportedly decided to stick with MR-MUF for HBM4 16-high per TrendForce Jan 2026 (direct threat to one bull driver); 2025 net income fell -28% despite the AI narrative; 84% Asia concentration (China 45% + APAC 39% in Q4 2025); valuation 142x trailing prices in flawless execution through 2027-2028. M&A optionality from Applied/Lam takeover talks creates a soft floor (~30% strategic premium) but if walked away the stock could shed 10-20% on the news alone."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "advanced-packaging",
+          "ref_name": "Advanced Packaging (CoWoS / ABF / Interposers)",
+          "role": "winner",
+          "physics_summary": "The actual supply gate for AI accelerators is not memory \u2014 it is the packaging system (CoWoS + ABF substrates + interposers) that turns logic dies and HBM stacks into a usable AI package. The market fixates on HBM because it is visible and countable; CoWoS sits one layer deeper, oversubscribed through at least mid-2026."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "hybrid-bonding",
+          "ref_name": "Hybrid Bonding (Atomic-Level Chip Stacking)",
+          "role": "winner",
+          "physics_summary": "Hybrid bonding welds two chips together copper-to-copper at room temperature with 100-nanometer placement accuracy \u2014 the only known way to stack the memory and logic chips that next-generation AI accelerators (NVIDIA Rubin, AMD MI400) and HBM4 16-high memory require. The process: polish surfaces to sub-0.5nm roughness via chemical mechanical polishing \u2014 for scale, a water molecule is 0.3nm, so we're polishing to a few atoms of variation; activate the oxide layer with plasma so it 'wants' to bond; place within ~100nm of target (the equivalent of landing a jumbo jet on a runway with less than the width of a virus of placement error); press at room temperature so the oxide-to-oxide layers stick; then anneal at ~200\u00b0C so copper atoms diffuse across the interface and merge."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 63.5% passes \u226535% hardware; Bottleneck winner: Advanced Packaging (CoWoS / ABF / Interposers), Hybrid Bonding (Atomic-Level Chip Stacking)",
+        "metric_value": 0.6348855197183022,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +20.5% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.20510647728680098,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 47.5 (rev growth +20.5% + FCF margin 26.9%); passes \u226525 hardware",
+        "metric_value": 47.46024837444721,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 40.2x \u00f7 TTM proxy growth 21% = 1.96 \u2014 passes hard gate <2.5",
+        "metric_value": 1.9604939118413525,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "AMKR",
+    "company": "Amkor Technology",
+    "sector": "Semis - Packaging",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "advanced-packaging"
+    ],
+    "report_refs": [
+      "ai-physical-bottlenecks-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Strong",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Ranked #2 in AI's Next Physical Bottlenecks as the only credible CoWoS second source. The market mis-prices Amkor as a commodity OSAT, but its structural role in the AI advanced-packaging chokepoint is what justifies the Strong rating.",
+      "primary_drivers": [
+        "Ranked #2 in the AI Physical Bottlenecks framework \u2014 directly behind BESIY as the highest-conviction advanced-packaging name.",
+        "TSMC Arizona partner; the only credible second source for CoWoS capacity outside Taiwan \u2014 a structural role the market is pricing as generic OSAT.",
+        "Winner of the advanced-packaging bottleneck: CoWoS + ABF substrates are the actual AI supply gate (not HBM), oversubscribed through mid-2026."
+      ],
+      "key_risks": [
+        "OSAT-margin reversion if industry pricing power weakens through the cycle.",
+        "US-fab strategic uncertainty \u2014 Arizona ramp execution unproven; capex commitments are large.",
+        "Single-source dependency on TSMC's roadmap \u2014 if TSMC accelerates internal back-end capacity, AMKR's second-source value erodes."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "ai-physical-bottlenecks-2026-05",
+          "ref_title": "AI's Next Physical Bottlenecks",
+          "rank_in_report": 2,
+          "report_reasoning": "TSMC Arizona partner; trades like commodity OSAT despite being critical advanced-packaging US infrastructure. The market doesn't yet differentiate Amkor's structural role as the only credible CoWoS second source from generic outsourced assembly economics. Risk: OSAT-margin reversion, US-fab strategic uncertainty."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "advanced-packaging",
+          "ref_name": "Advanced Packaging (CoWoS / ABF / Interposers)",
+          "role": "winner",
+          "physics_summary": "The actual supply gate for AI accelerators is not memory \u2014 it is the packaging system (CoWoS + ABF substrates + interposers) that turns logic dies and HBM stacks into a usable AI package. The market fixates on HBM because it is visible and countable; CoWoS sits one layer deeper, oversubscribed through at least mid-2026."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 14.2% below threshold \u226535% hardware; Bottleneck winner: Advanced Packaging (CoWoS / ABF / Interposers)",
+        "metric_value": 0.1418839307390451,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +27.5% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.27476760683275636,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 29.8 (rev growth +27.5% + FCF margin 2.4%); passes \u226525 hardware",
+        "metric_value": 29.841623720004506,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 2.4x \u00f7 TTM proxy growth 27% = 0.09 \u2014 passes hard gate <2.5",
+        "metric_value": 0.08610913154111796,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "TSM",
+    "company": "TSMC",
+    "sector": "Semis - Packaging",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "advanced-packaging",
+      "compute-density"
+    ],
+    "report_refs": [
+      "ai-physical-bottlenecks-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Owns the CoWoS packaging bottleneck and the leading-edge process-node frontier. Watch (not Strong) because the AI-infra trade is crowded \u2014 real franchise, fully priced into expectations.",
+      "primary_drivers": [
+        "CoWoS ~75% share \u2014 winner of advanced-packaging and compute-density bottlenecks.",
+        "N3 in HVM 2025; N2 ramp 2026; A16 (with Super Power Rail) targeting 2027 \u2014 process leadership intact.",
+        "SoIC-X at 6\u03bcm pitch \u2014 TSMC's hybrid-bonding integration is the platform Besi's equipment ships into."
+      ],
+      "key_risks": [
+        "'Everyone knows it' \u2014 rank 5 in the asymmetry framework (least asymmetric of the 5).",
+        "Geopolitical Taiwan tail risk \u2014 single-jurisdiction concentration.",
+        "Multiple expansion limited \u2014 crowded long."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "ai-physical-bottlenecks-2026-05",
+          "ref_title": "AI's Next Physical Bottlenecks",
+          "rank_in_report": 5,
+          "report_reasoning": "Owns the CoWoS packaging bottleneck but everyone knows it. Crowded trade with limited multiple expansion despite genuine supply-side leverage. Real franchise, fully priced into expectations."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "backside-power-delivery",
+          "ref_name": "Backside Power Delivery",
+          "role": "winner",
+          "physics_summary": "Modern AI accelerators draw 1,000+ amps at sub-1V supply rails. At Rubin-class power densities (~1,800W/GPU, Rubin Ultra targeting ~3,600W), IR drop (voltage loss to resistance through the power distribution network) reached ~7% on conventional front-side power delivery \u2014 meaning ~7% of supplied power was wasted heating the interconnect before reaching transistors."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "advanced-packaging",
+          "ref_name": "Advanced Packaging (CoWoS / ABF / Interposers)",
+          "role": "winner",
+          "physics_summary": "The actual supply gate for AI accelerators is not memory \u2014 it is the packaging system (CoWoS + ABF substrates + interposers) that turns logic dies and HBM stacks into a usable AI package. The market fixates on HBM because it is visible and countable; CoWoS sits one layer deeper, oversubscribed through at least mid-2026."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "hybrid-bonding",
+          "ref_name": "Hybrid Bonding (Atomic-Level Chip Stacking)",
+          "role": "winner",
+          "physics_summary": "Hybrid bonding welds two chips together copper-to-copper at room temperature with 100-nanometer placement accuracy \u2014 the only known way to stack the memory and logic chips that next-generation AI accelerators (NVIDIA Rubin, AMD MI400) and HBM4 16-high memory require. The process: polish surfaces to sub-0.5nm roughness via chemical mechanical polishing \u2014 for scale, a water molecule is 0.3nm, so we're polishing to a few atoms of variation; activate the oxide layer with plasma so it 'wants' to bond; place within ~100nm of target (the equivalent of landing a jumbo jet on a runway with less than the width of a virus of placement error); press at room temperature so the oxide-to-oxide layers stick; then anneal at ~200\u00b0C so copper atoms diffuse across the interface and merge."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "compute-density",
+          "ref_name": "Compute Density at the Reticle Limit",
+          "role": "winner",
+          "physics_summary": "Modern AI accelerators are reticle-limited \u2014 the maximum die area that can be patterned in a single EUV exposure is ~858 mm\u00b2 at current ASML reticle limits. To pack more transistors into a single accelerator package, designers must either shrink the process node (TSMC N3 \u2192 N2 \u2192 A16 \u2192 A14, each step costing ~$15-30B in new fab capex) or stack multiple dies in 3D via hybrid bonding."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 66.2% passes \u226535% hardware; Bottleneck winner: Backside Power Delivery, Advanced Packaging (CoWoS / ABF / Interposers), Hybrid Bonding (Atomic-Level Chip Stacking)",
+        "metric_value": 0.6624575805889452,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +35.1% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.351323787607557,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 60.6 (rev growth +35.1% + FCF margin 25.5%); passes \u226525 hardware",
+        "metric_value": 60.649506067107225,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 3.8x \u00f7 TTM proxy growth 35% = 0.11 \u2014 passes hard gate <2.5",
+        "metric_value": 0.10722302710136704,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "ADI",
+    "company": "Analog Devices",
+    "sector": "Semis - Analog/Sensors",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Strong",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Smoking-gun mispricing in humanoid silicon. CEO Roche explicitly invoked humanoids on May 20 Q2 FY26 call; stock fell -7% on the beat \u2014 definition of expectation gap. Default supplier to ALL major humanoid programs given signal-chain/power/connectivity breadth.",
+      "primary_drivers": [
+        "Tier 1 Highest Conviction in humanoid robotics ranking (40% allocation of the sleeve).",
+        "Winner of the humanoid-silicon bottleneck \u2014 sells into every major humanoid program (signal chain + power + connectivity at every joint and subsystem).",
+        "CEO Vincent Roche on May 20 Q2 FY26 call: 'humanoids and other advanced robotics modalities are steadily increasing our opportunity pipeline value' \u2014 explicit smoking gun.",
+        "Forward P/E ~33-35x is roughly in-line with semis industry median (34.29 per GuruFocus) \u2014 NOT a Physical AI premium. ZERO Physical AI revenue line item in any sell-side model."
+      ],
+      "key_risks": [
+        "Industrial cycle exposure (~50% of revenue) \u2014 if recovery stalls, multiple compresses.",
+        "Stock fell -7% on a $110M beat \u2014 buy-side fatigue / expectation mismatch is real.",
+        "Auto exposure is genuinely cyclical."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "physical-ai-humanoid-2026-05",
+          "ref_title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+          "rank_in_report": 1,
+          "report_reasoning": "Tier 1 \u2014 Highest conviction. Sensors, signal chain, power management, and connectivity at 'every joint and subsystem' \u2014 ADI sells into ALL major humanoid programs as a default supplier given its breadth. Industrial = 50% of total revenue. CEO Vincent Roche explicitly invoked humanoids on May 20 2026 Q2 FY26 call: 'As robots make up ever larger percentages of investments in factories and elsewhere, our higher value products and subsystems for content-rich robotics are aiding automation's fast recovery. Longer term, humanoids and other advanced robotics modalities are steadily increasing our opportunity pipeline value.' That is the smoking gun. Yet stock fell -7% pre-market despite beating consensus by ~$110M \u2014 definition of expectation gap. Forward P/E ~33-35x is roughly in-line with Semiconductors industry median (34.29 per GuruFocus), NOT a Physical AI premium. ZERO Physical AI revenue line item in any sell-side model. Catalysts: Physical AI bookings disclosure at next analyst day; named humanoid customer attach (Apptronik, Figure, 1X); continued >30% YoY industrial growth forcing analyst trend upgrade from cyclical to secular."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "humanoid-silicon",
+          "ref_name": "Edge AI Silicon for Humanoid Robots",
+          "role": "winner",
+          "physics_summary": "Each humanoid robot requires a stack of silicon: a high-TOPS edge AI SoC for vision and planning (NVIDIA Jetson Thor delivers 2,000+ FP4 TFLOPS; Qualcomm Dragonwing IQ10 700 TOPS in an 18-core Oryon CPU; Ambarella CV7 with 2.5\u00d7 the AI performance of CV5 at 8K vision resolution), sensor-fusion ICs (mmWave radar like TI's IWR6243, LiDAR time-of-flight, force/torque sensors at every joint), motor control ICs (typically 30-50 actuators per humanoid at $5-15 in BOM each), and power management distributed across the body. ADI sells signal-chain + power + connectivity at every joint and subsystem as a default supplier given its breadth \u2014 industrial is 50% of ADI's revenue."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 67.3% passes \u226535% hardware; Bottleneck winner: Edge AI Silicon for Humanoid Robots",
+        "metric_value": 0.6733328457705539,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +37.2% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.37248926921579295,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 73.1 (rev growth +37.2% + FCF margin 35.8%); passes \u226525 hardware",
+        "metric_value": 73.08158720178895,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 15.9x \u00f7 TTM proxy growth 37% = 0.43 \u2014 passes hard gate <2.5",
+        "metric_value": 0.42564984578964543,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "TXN",
+    "company": "Texas Instruments",
+    "sector": "Semis - Analog/Sensors",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Strong",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Named TI-NVIDIA Jetson Thor partnership (mmWave radar IWR6243 + motor control + sensing); Apptronik named as public customer. Market not yet rewarding humanoid headlines \u2014 stock fell -2.18% on announcement day.",
+      "primary_drivers": [
+        "Tier 1 in humanoid robotics ranking (35% allocation).",
+        "Public design win at the NVIDIA Jetson Thor reference design level (announced March 5, 2026) \u2014 Apptronik named as a public customer.",
+        "Winner of the humanoid-silicon bottleneck \u2014 mmWave radar (IWR6243), real-time motor control, sensing, and power integrated at the reference-platform level.",
+        "Forward P/E ~30-35x is in-line with TXN's own 20-year average of 25.75 \u2014 capex anxiety is mispricing the upside, NOT Physical AI premium."
+      ],
+      "key_risks": [
+        "Mega-fab capex cycle depresses FCF \u2014 capex-anxiety is what defines the current multiple.",
+        "Humanoid not yet in any sell-side model \u2014 narrative risk that the design wins don't translate to revenue line items.",
+        "Stock fell -2.18% on the day of the NVIDIA announcement \u2014 market not yet rewarding humanoid headlines."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "physical-ai-humanoid-2026-05",
+          "ref_title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+          "rank_in_report": 1,
+          "report_reasoning": "Tier 1 \u2014 Highest conviction. Headline TI-NVIDIA Jetson Thor partnership announced March 5 2026: TI partnered with NVIDIA to bring mmWave radar (IWR6243), real-time motor control, sensing, and power into the Jetson Thor humanoid reference design \u2014 Apptronik named as a public customer. TI's GM of industrial automation Giovanni Campanella now speaks regularly on humanoid panels. Trailing P/E 49x elevated but forward 29.87-34.98 is basically in-line with TXN's own 20-year average of 25.75 (FinanceCharts) \u2014 what's defining the multiple is capex anxiety on the mega-fab cycle, NOT Physical AI. Stock fell -2.18% on the day of the NVIDIA announcement \u2014 market is NOT yet rewarding humanoid headlines. Catalysts: second tier-1 humanoid OEM publicly adopting Jetson Thor + TI sensor fusion reference design; industrial recovery from trough levels in 2026; dollar-content disclosure per humanoid."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "humanoid-silicon",
+          "ref_name": "Edge AI Silicon for Humanoid Robots",
+          "role": "winner",
+          "physics_summary": "Each humanoid robot requires a stack of silicon: a high-TOPS edge AI SoC for vision and planning (NVIDIA Jetson Thor delivers 2,000+ FP4 TFLOPS; Qualcomm Dragonwing IQ10 700 TOPS in an 18-core Oryon CPU; Ambarella CV7 with 2.5\u00d7 the AI performance of CV5 at 8K vision resolution), sensor-fusion ICs (mmWave radar like TI's IWR6243, LiDAR time-of-flight, force/torque sensors at every joint), motor control ICs (typically 30-50 actuators per humanoid at $5-15 in BOM each), and power management distributed across the body. ADI sells signal-chain + power + connectivity at every joint and subsystem as a default supplier given its breadth \u2014 industrial is 50% of ADI's revenue."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 58.0% passes \u226535% hardware; Bottleneck winner: Edge AI Silicon for Humanoid Robots",
+        "metric_value": 0.5801036269430052,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +18.6% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.18579503563529123,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 38.8 (rev growth +18.6% + FCF margin 20.2%); passes \u226525 hardware",
+        "metric_value": 38.760651081408895,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 14.8x \u00f7 TTM proxy growth 19% = 0.80 \u2014 passes hard gate <2.5",
+        "metric_value": 0.7989449206349206,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "AMBA",
+    "company": "Ambarella",
+    "sector": "Semis - Analog/Sensors",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Strong",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Highest-variance Tier-1 in the humanoid basket. Only Western public pure-play edge-AI vision SoC at a swallowable market cap (~$2.7-3.1B). M&A optionality is the asymmetric catalyst \u2014 Bloomberg banker-hiring report from June 2025 has not been confirmed dead.",
+      "primary_drivers": [
+        "Tier 1 in humanoid robotics ranking (25% allocation \u2014 call-option sizing).",
+        "CV7 8K vision SoC launched Jan 2026 with 2.5\u00d7 the AI performance of CV5; Cooper Development Platform supports 200+ model architectures.",
+        "45 million cumulative edge AI SoCs shipped per FY26 Annual Report \u2014 durable installed base.",
+        "M&A backstop: Bloomberg June 2025 banker-hiring report not confirmed dead. NXP, Renesas, Infineon, PE roll-ups all logical acquirers; CEO Fermi Wang consistently declines to comment."
+      ],
+      "key_risks": [
+        "Customer concentration: 73.1% of Q4 revenue and 69.7% of annual revenue through WT Microelectronics (single distributor).",
+        "52x forward P/E means execution must hit \u2014 no margin of safety on the multiple.",
+        "NVIDIA GR00T+Jetson lock-in is real \u2014 AMBA must win the 'second source' decision, which is not guaranteed.",
+        "Recent adverse patent ruling impacting U.S. exposure (Seeking Alpha Apr 2, 2026)."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "physical-ai-humanoid-2026-05",
+          "ref_title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+          "rank_in_report": 1,
+          "report_reasoning": "Tier 1 \u2014 Highest variance outcome (call option on the basket). The only Western public pure-play edge-AI vision SoC at swallowable market cap (~$2.7-3.1B). CV7 8K vision SoC (4nm Samsung, 2.5\u00d7 AI performance vs CV5) launched January 5 2026; Cooper Development Platform now supports 200+ model architectures; FY26 Annual Report disclosed 45 million cumulative edge AI SoCs shipped. The M&A angle is the asymmetric catalyst \u2014 Bloomberg reported June 24 2025 that AMBA hired bankers and contacted potential buyers including chip rivals and PE; that process has NOT been confirmed dead, and CEO Fermi Wang has consistently declined to comment. NXP, Renesas, Infineon, and PE roll-ups are all logical acquirers. Strategic logic: AMBA is the only Western public chip a buyer of size can swallow for a humanoid play, which provides downside support. 52x forward P/E means execution must hit; WT Microelectronics is 73.1% of Q4 revenue and 69.7% of annual \u2014 single-distributor concentration is a real risk factor."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "humanoid-silicon",
+          "ref_name": "Edge AI Silicon for Humanoid Robots",
+          "role": "winner",
+          "physics_summary": "Each humanoid robot requires a stack of silicon: a high-TOPS edge AI SoC for vision and planning (NVIDIA Jetson Thor delivers 2,000+ FP4 TFLOPS; Qualcomm Dragonwing IQ10 700 TOPS in an 18-core Oryon CPU; Ambarella CV7 with 2.5\u00d7 the AI performance of CV5 at 8K vision resolution), sensor-fusion ICs (mmWave radar like TI's IWR6243, LiDAR time-of-flight, force/torque sensors at every joint), motor control ICs (typically 30-50 actuators per humanoid at $5-15 in BOM each), and power management distributed across the body. ADI sells signal-chain + power + connectivity at every joint and subsystem as a default supplier given its breadth \u2014 industrial is 50% of ADI's revenue."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 58.4% passes \u226535% hardware; Bottleneck winner: Edge AI Silicon for Humanoid Robots",
+        "metric_value": 0.5838058132467092,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Forward 3yr revenue CAGR 25% passes \u226520% (source: Edge-AI / automotive ramp profile)",
+        "metric_value": 0.25,
+        "metric_label": "3yr Revenue CAGR (forward)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Manual flip \u2014 Fermi Wang \u2014 co-founder & CEO of Ambarella",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 21.4 (rev growth +16.9% + FCF margin 4.5%); below threshold \u226525 hardware",
+        "metric_value": 21.3564271843498,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 6.5x \u00f7 forward growth 25% = 0.26 \u2014 passes hard gate <2.5",
+        "metric_value": 0.25864,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": "The binding constraint on physical AI is sub-3W real-time computer vision at the edge (latency \u00d7 power \u00d7 BOM), and Ambarella's CV-architected SoC family is the only public-market pure-play with concurrent design wins across automotive, security, and humanoid robotics \u2014 chokepoint at the edge-AI vision layer.",
+    "forward_3yr_cagr_pct": 25,
+    "forward_3yr_cagr_source": "Edge-AI / automotive ramp profile",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "TER",
+    "company": "Teradyne",
+    "sector": "Semis - Analog/Sensors",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Robotics segment +32% YoY (4th consecutive growth quarter); Amazon Vulcan via Universal Robots real but small. Rerate already partly happened in late 2025 \u2014 not as cheap as ADI/TXN.",
+      "primary_drivers": [
+        "Robotics segment Q1 2026 $91M (+32% YoY) \u2014 4th consecutive growth quarter.",
+        "Amazon Vulcan via Universal Robots: UBS confirmed as 'first tangible outcome of TER's strategy to engage more directly with large OEMs'.",
+        "Insider selling halted in Q2 2026 \u2014 first time since 2018 per Hunterbrook/Citrini."
+      ],
+      "key_risks": [
+        "ATE (Automatic Test Equipment) is the dominant story \u2014 AI-related ATE is only ~15% of quarterly sales; robotics is ~7% of total.",
+        "Rerate already partly happened in late 2025 \u2014 not as cheap as ADI/TXN at current multiple.",
+        "ATE cyclicality on the AI cycle."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "physical-ai-humanoid-2026-05",
+          "ref_title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+          "rank_in_report": 2,
+          "report_reasoning": "Tier 2 \u2014 Solid but more obvious. Robotics segment +32% YoY in Q1 2026 to $91M (4th consecutive growth quarter); Amazon Vulcan via Universal Robots is real but small (UBS confirmed Vulcan as 'first tangible outcome of TER's strategy to engage more directly with large OEMs'); insider selling halted in Q2 2026 \u2014 first time since 2018 per Hunterbrook/Citrini. The catch: ATE (Automatic Test Equipment) is the dominant story \u2014 AI-related ATE is ~15% of quarterly sales and growing; robotics is ~7% of total. Cobot/humanoid optionality is real but small. Rerate already partly happened in late 2025. Not as cheap as ADI/TXN."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 60.9% passes \u226535% hardware",
+        "metric_value": 0.6089299443116303,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +87.0% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.8703972698634932,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 101.6 (rev growth +87.0% + FCF margin 14.6%); passes \u226525 hardware",
+        "metric_value": 101.64771957058069,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 15.2x \u00f7 TTM proxy growth 87% = 0.17 \u2014 passes hard gate <2.5",
+        "metric_value": 0.1748511918286099,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "QCOM",
+    "company": "Qualcomm",
+    "sector": "Semis - Analog/Sensors",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Dragonwing IQ10 (700 TOPS) + NEURA Robotics partnership. Defensive humanoid silicon play \u2014 forward P/E ~19x cheap but Apple modem loss + handset exposure dominate.",
+      "primary_drivers": [
+        "Dragonwing IQ10 series (700 TOPS, 18-core Oryon CPU) launched at CES 2026.",
+        "Strategic NEURA Robotics partnership announced March 9, 2026; Booster Robotics + VinMotion (Motion 2 humanoid) using prior-gen IQ9.",
+        "Forward P/E ~19x \u2014 cheapest of the humanoid silicon names by AI-peer standards."
+      ],
+      "key_risks": [
+        "Apple modem loss looming \u2014 primary multiple-compression catalyst.",
+        "Handset exposure (Snapdragon) dominates the narrative.",
+        "Robotics is buried inside IoT segment ($1.7B/quarter) with no segment breakout.",
+        "Less leveraged upside than AMBA on a humanoid M&A scenario."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "physical-ai-humanoid-2026-05",
+          "ref_title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+          "rank_in_report": 2,
+          "report_reasoning": "Tier 2. Dragonwing IQ10 series (700 TOPS, 18-core Oryon CPU) launched at CES 2026; strategic NEURA Robotics partnership announced March 9 2026; named partners include Booster Robotics and VinMotion (using prior-gen IQ9). Forward P/E ~19x looks attractive but Apple modem loss and handset exposure dominate the multiple. Robotics is buried inside IoT segment ($1.7B/quarter) \u2014 no segment breakout. Defensive play on humanoid silicon with less leveraged upside than AMBA but better margin of safety."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "humanoid-silicon",
+          "ref_name": "Edge AI Silicon for Humanoid Robots",
+          "role": "winner",
+          "physics_summary": "Each humanoid robot requires a stack of silicon: a high-TOPS edge AI SoC for vision and planning (NVIDIA Jetson Thor delivers 2,000+ FP4 TFLOPS; Qualcomm Dragonwing IQ10 700 TOPS in an 18-core Oryon CPU; Ambarella CV7 with 2.5\u00d7 the AI performance of CV5 at 8K vision resolution), sensor-fusion ICs (mmWave radar like TI's IWR6243, LiDAR time-of-flight, force/torque sensors at every joint), motor control ICs (typically 30-50 actuators per humanoid at $5-15 in BOM each), and power management distributed across the body. ADI sells signal-chain + power + connectivity at every joint and subsystem as a default supplier given its breadth \u2014 industrial is 50% of ADI's revenue."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 53.8% passes \u226535% hardware; Bottleneck winner: Edge AI Silicon for Humanoid Robots",
+        "metric_value": 0.5376922351165204,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY -3.5% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": -0.03461153110483651,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 24.6 (rev growth -3.5% + FCF margin 28.1%); below threshold \u226525 hardware",
+        "metric_value": 24.64206936031762,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 1,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "TDY",
+    "company": "Teledyne Technologies",
+    "sector": "Semis - Analog/Sensors",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05",
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Defense-tilted machine vision (Teledyne FLIR, DALSA) + loitering munitions. Humanoid optionality is incidental, not strategic. No direct SpaceX disclosure in the SpaceX IPO report either.",
+      "primary_drivers": [
+        "Teledyne FLIR runs UGVs (Black Hornet, SUGV) for defense \u2014 real revenue.",
+        "DALSA machine vision for industrial automation \u2014 humanoid optionality is incidental, not strategic.",
+        "Rogue 1 Block 2 loitering munition (Q3 2026 deliveries); LASSO program selection (May 13, 2026 \u2014 up to 130 Rogue 1 systems)."
+      ],
+      "key_risks": [
+        "No 2026 humanoid robot design wins disclosed.",
+        "Defense rotation risk if the cycle shifts.",
+        "Low growth (fails T pillar in the SpaceX IPO ranking at rank 16).",
+        "No direct SpaceX-named contract \u2014 sector beneficiary, not contracted revenue."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "physical-ai-humanoid-2026-05",
+          "ref_title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+          "rank_in_report": 2,
+          "report_reasoning": "Tier 2. Teledyne FLIR / DALSA machine-vision exposure real but defense-tilted: FLIR runs UGVs (Black Hornet, SUGV) for defense; DALSA machine vision for industrial automation. Defense engine: Rogue 1 Block 2 loitering munition (Q3 2026 deliveries), LASSO program selection (May 13 2026 \u2014 up to 130 Rogue 1 systems). No 2026 humanoid robot design wins disclosed. High-quality industrial conglomerate with incidental humanoid optionality, not a focused Physical AI play."
+        },
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 16,
+          "report_reasoning": "Tier 3. CORE rating, Operating layer, Phase 3. Teledyne \u2014 NASA MOSSI II $596M; broad sensors/imaging; NO direct SpaceX disclosure. 4/5 pillars (fails T). Risk: low growth, defensive."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 43.2% passes \u226535% hardware",
+        "metric_value": 0.4318953913210692,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +7.6% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.0760052417408097,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 24.5 (rev growth +7.6% + FCF margin 16.9%); below threshold \u226525 hardware",
+        "metric_value": 24.52580067543429,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 4.9x \u00f7 TTM proxy growth 8% = 0.65 \u2014 passes hard gate <2.5",
+        "metric_value": 0.6475869147005444,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "MPWR",
+    "company": "Monolithic Power Systems",
+    "sector": "Power Conversion",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "power-density"
+    ],
+    "report_refs": [
+      "ai-physical-bottlenecks-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Power conversion winner in next-gen GPU sockets, taking share from Vicor. Real share-gain story but well-followed \u2014 smaller asymmetry than ranks 1-3 in the same report.",
+      "primary_drivers": [
+        "Winning hyperscaler sockets from Vicor on next-gen GPU power conversion.",
+        "Share-gain story validated by the AI Physical Bottlenecks report at rank 4.",
+        "Direct beneficiary of rack-level power-density bottleneck (B200 1,200W, Rubin 1,800W, Rubin Ultra 3,600W)."
+      ],
+      "key_risks": [
+        "Well-followed name \u2014 higher valuation, smaller asymmetry than ranks 1-3.",
+        "Vicor competitive response \u2014 share gains are not guaranteed to compound.",
+        "Cyclical exposure on the broader semi cycle."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "ai-physical-bottlenecks-2026-05",
+          "ref_title": "AI's Next Physical Bottlenecks",
+          "rank_in_report": 4,
+          "report_reasoning": "Winning hyperscaler sockets from Vicor on next-gen GPU power conversion. The share-gain story is well-followed (higher valuation, well-watched name), so asymmetry is smaller than ranks 1-3. Risk: high valuation, well-loved."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 55.3% passes \u226535% hardware",
+        "metric_value": 0.553436087467436,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +26.1% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.26135982206997366,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 47.3 (rev growth +26.1% + FCF margin 21.2%); passes \u226525 hardware",
+        "metric_value": 47.32640841614888,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 25.4x \u00f7 TTM proxy growth 26% = 0.97 \u2014 passes hard gate <2.5",
+        "metric_value": 0.9737150797870746,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "MP",
+    "company": "MP Materials",
+    "sector": "Critical Materials",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "rare-earth-magnets",
+      "space-supply-chain"
+    ],
+    "report_refs": [
+      "mp-deep-dive-2026-05",
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Only US fully-integrated mine-to-magnet rare-earth producer. DoD $110/kg NdPr floor + Apple $500M + Saudi JV. Watch (post-parabolic) because the +355% May-Oct 2025 ramp tripped Phase 5; buy only on a $50-54 flush or $61 reclaim per the deep-dive.",
+      "primary_drivers": [
+        "DoW $400M Series A Convertible Preferred at $30.03 + 10-year $110/kg NdPr price floor (DoD-guaranteed downside).",
+        "Apple $500M definitive long-term agreement for 100%-recycled NdFeB magnets at Fort Worth; shipments begin 2027, $72M prepaid.",
+        "Saudi/Maaden JV (Nov 2025) \u2014 capital-light optionality at zero MP capex.",
+        "Only US ore body + only domestic HRE separation circuit being built \u2014 both chokepoint AND beneficiary of rare-earth-magnets bottleneck.",
+        "Also tagged as space-supply-chain winner in the SpaceX IPO report (rank 2 Tier 1 CORE)."
+      ],
+      "key_risks": [
+        "Phase 4 post-parabolic digestion (-43% from October 2025 ATH); the +355% in 5 months tripped Phase 5 smell test 6 months ago.",
+        "Insider selling: Litinsky $19.6M May 12-13, Corbett $1.5M May 8; insiders net -$53M TTM.",
+        "~38x P/S TTM full pricing \u2014 Rule-of-40 deeply negative on FCF -$328M.",
+        "Trump-Xi truce tail risk would flood NdPr market and compress non-PPA revenue.",
+        "Congressional appropriations risk on DoW Title III ($266M FY26 request vs ~$304M/yr floor cost)."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "mp-deep-dive-2026-05",
+          "ref_title": "MP Materials (MP) \u2014 Bucket 2 Swing-Trade Deep Dive",
+          "rank_in_report": 1,
+          "report_reasoning": "Only US fully-integrated mine-to-magnet rare earth producer. DoW (DoD-rebranded) Series A Convertible Preferred $400M at $30.03 conversion + warrant = 15% common as-converted, 7% PIK quarterly compounding; 10-year $110/kg NdPr price floor structured as contract-for-difference (DoW pays delta on every kg produced \u2014 sold, stockpiled, or internally consumed) with 30% DoW share of upside above $110, 50/50 EBITDA split above $170. 10-year magnet offtake of 100% of 10X output (commissioning 2028) with $140M minimum annual EBITDA guarantee. Apple $500M definitive long-term agreement for 100%-recycled NdFeB magnets at Fort Worth Independence, shipments begin 2027, $72M prepaid. Saudi/Maaden JV Nov 2025 (MP+DoW collectively 49%, capital-light). Q1 2026: 917 MT NdPr +63% YoY/+28% QoQ, 12,983 MT REO +6% YoY; $90.6M Materials revenue + $42.3M Price Protection Agreement income from the DoW floor = $132.9M consolidated; Materials segment adjusted EBITDA $36.7M (+$33M YoY); GAAP net loss -$7.97M. Balance sheet: $1.74B cash + ST investments vs ~$1.0B long-term debt. The binding 18-36 month constraint is heavy REE (Dy/Tb/Sm) separation outside China (Mountain Pass HRE circuit commissioning mid-2026) and finished magnet capacity outside China (10X 10,000 MT/yr commissions 2028). MP is both chokepoint AND beneficiary \u2014 owns the only US ore body + only domestic HRE separation circuit being built + DoW-guaranteed offtake. Verdict SWING-only because: Phase 4 (post-parabolic digestion at -43% from ATH); Litinsky $19.6M open-market sale May 12-13 + Corbett $1.5M May 8; ~38x P/S TTM; Rule-of-40 deeply negative on FCF -$328M. Entry: $50-54 flush OR $61 reclaim, 3-tranche to 2.5% of book. Tail risks: comprehensive Trump-Xi truce floods global market with Chinese NdPr (compresses non-PPA revenue to floor); congressional appropriations failure on DoW Title III ($266M FY26 request vs ~$304M/yr floor cost at current $60/kg)."
+        },
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 2,
+          "report_reasoning": "Tier 1. CORE rating, Control layer, Phase 4. DoD $110/kg NdPr floor through 2035; 15% Pentagon as-converted ownership; Apple $500M magnet deal; only US fully-integrated mine-to-magnet. 4/5 pillars (fails V at extended valuation). Already on user AutoTrade watchlist \u2014 flagged Tier 1 CORE but parabolic (+365% YTD 2025, +30% YTD 2026); enforce 7% portfolio cap. Risk: post-parabolic structure (-43% from ATH)."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "rare-earth-magnets",
+          "ref_name": "Rare-Earth Magnet Supply Outside China",
+          "role": "winner",
+          "physics_summary": "NdFeB permanent magnets are required for high-performance motors in EVs, wind turbines, humanoid robots, defense systems (an F-35 contains ~417 kg of REE), and consumer electronics. China holds ~70% of global rare-earth extraction but >90% of downstream processing \u2014 oxide separation, metal refining, and finished magnet production."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin -17.4% below threshold \u226535% hardware; Bottleneck winner: Rare-Earth Magnet Supply Outside China",
+        "metric_value": -0.17355955388366115,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +49.1% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.490692320342049,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -41.2 (rev growth +49.1% + FCF margin -90.3%); below threshold \u226525 hardware",
+        "metric_value": -41.20061329358997,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 28.7x \u00f7 TTM proxy growth 49% = 0.58 \u2014 passes hard gate <2.5",
+        "metric_value": 0.5848063809108884,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "SYM",
+    "company": "Symbotic",
+    "sector": "Physical AI / Robotics",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Pass",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "$22.7B backlog, Walmart APD deal real, GAAP profitable Q2 \u2014 but the stock has ALREADY rerated post-IPO. High-quality story but not unknown early entry. AI-enabled robotics framing is already embedded.",
+      "primary_drivers": [
+        "$22.4-22.7B backlog at Q2 FY26 \u2014 real and growing.",
+        "SoftBank Exotec JV ($11B contract); 87% revenue from Walmart pre-2025; new Walmart APD deal ($520M); diversification via Associated Wholesale Grocers (April 2026).",
+        "Q2 FY26: revenue $676M (+23% YoY), GAAP profitable."
+      ],
+      "key_risks": [
+        "Already rerated post-IPO \u2014 KeyBanc PT $70, DA Davidson $70, Needham $75 already in consensus.",
+        "P/S 2.6x with P/E -1047 (negative GAAP earnings) = full pricing.",
+        "Insiders sold ~178,492 shares (~$10.3M) over 90 days to April 10.",
+        "Stock down 21-28% YTD 2026 already shows mood shift."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "physical-ai-humanoid-2026-05",
+          "ref_title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+          "rank_in_report": 3,
+          "report_reasoning": "Tier 3 \u2014 Already rerated post-IPO. $22.4-22.7B backlog at Q2 FY26; Q2 revenue $676M +23% YoY, GAAP profitable. SoftBank Exotec JV ($11B contract) and 87% revenue from Walmart pre-2025; new Walmart APD deal ($520M); diversification via Associated Wholesale Grocers (April 2026). Stock down 21-28% YTD 2026, ~12% in 10 days through early May. Insiders sold ~178,492 shares (~$10.3M) over 90 days to April 10. Q1 FY26 full-year guidance was cut. KeyBanc PT $70, DA Davidson $70, Needham $75 already in consensus. High-quality story but not unknown early entry. AI-enabled robotics framing already embedded at 2.6x P/S with negative GAAP EPS (P/E -1047)."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 22.2% below threshold \u226535% hardware",
+        "metric_value": 0.22166508987701042,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +23.1% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.23074459975511732,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 52.8 (rev growth +23.1% + FCF margin 29.7%); passes \u226525 hardware",
+        "metric_value": 52.81908511627104,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 1.6x \u00f7 TTM proxy growth 23% = 0.07 \u2014 passes hard gate <2.5",
+        "metric_value": 0.06886401682580483,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "ROK",
+    "company": "Rockwell Automation",
+    "sector": "Physical AI / Robotics",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Pass",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Quality industrial automation play but the AI/data-center/warehouse automation narrative has already done the work. Forward P/E ~36.5x \u2014 not cheap. No CEO-level humanoid commentary.",
+      "primary_drivers": [
+        "Q2 FY26 (May 6 2026): Sales $2.239B (+12%), Adj EPS $3.30 vs $2.88 consensus; raised FY26 EPS to $12.50-$13.10.",
+        "OTTO AMRs gaining adoption across Automotive, Food & Beverage, Data Center pilots."
+      ],
+      "key_risks": [
+        "Forward P/E ~36.5x \u2014 recently rerated, not cheap.",
+        "No CEO-level humanoid commentary \u2014 narrative driver missing.",
+        "AI/data-center/warehouse automation narrative has already done the work \u2014 no asymmetric setup remaining."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "physical-ai-humanoid-2026-05",
+          "ref_title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+          "rank_in_report": 3,
+          "report_reasoning": "Tier 3. Q2 FY26 (May 6 2026): Sales $2.239B (+12%), Adj EPS $3.30 vs $2.88 consensus; raised FY26 EPS to $12.50-$13.10. Stock surged from $400 to ~$440+. OTTO AMRs gaining adoption (Automotive, Food & Beverage, Data Center pilots) but no specific humanoid commentary at CEO level. Forward P/E ~36.5x \u2014 recently rerated, not cheap. Quality industrial automation play but the AI / data-center / warehouse-automation narrative has already done the work."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 50.2% passes \u226535% hardware",
+        "metric_value": 0.5024564537740063,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +11.9% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.11894052973513243,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 27.1 (rev growth +11.9% + FCF margin 15.2%); passes \u226525 hardware",
+        "metric_value": 27.10304956241923,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 6.1x \u00f7 TTM proxy growth 12% = 0.52 \u2014 passes hard gate <2.5",
+        "metric_value": 0.5151313865546219,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "OUST",
+    "company": "Ouster",
+    "sector": "Physical AI / Robotics",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "humanoid-silicon"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Pass",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Branded 'sensing and perception platform for Physical AI' \u2014 but CEO Pacala himself warned of humanoid 'disillusionment' (TechCrunch Feb 9 2026). Already-narrative-priced at ~10-13x EV/sales. Hold if you own; trim into strength.",
+      "primary_drivers": [
+        "REV8 native color LiDAR launched Q1 2026; Stereolabs acquired Feb 9, 2026 for $35M cash + 1.8M shares (~$70M total).",
+        "NVIDIA DRIVE Hyperion qualified; Gecko Robotics integration.",
+        "Q1 2026 revenue $49M (+49% YoY) \u2014 real growth."
+      ],
+      "key_risks": [
+        "CEO Pacala's own TechCrunch warning (Feb 9 2026): 'There's going to be a little bit of disillusionment in physical AI as it turns out that it's much longer time to market for all these humanoids.'",
+        "Already-narrative-priced at ~10-13x EV/sales \u2014 closer to fair value than cheap.",
+        "Humanoid timeline longer than market thinks \u2014 the very CEO of the most 'Physical AI'-branded name flagging this."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "physical-ai-humanoid-2026-05",
+          "ref_title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+          "rank_in_report": 3,
+          "report_reasoning": "Tier 3 \u2014 Already-narrative-priced. Explicitly markets itself as 'sensing and perception platform for Physical AI'; REV8 native color LiDAR launched Q1 2026. Stereolabs acquired Feb 9 2026 for $35M cash + 1.8M shares (~$70M total per MarketScreener). NVIDIA DRIVE Hyperion qualified; Gecko Robotics integration. Honest red flag: CEO Pacala in TechCrunch interview Feb 9 2026: 'There's going to be a little bit of disillusionment in physical AI as it turns out that it's much longer time to market for all these humanoids.' That's the CEO of the most 'Physical AI'-branded name telling you the timeline is longer than the market thinks. Trades ~10-13x EV/sales \u2014 closer to fair value than cheap. Hold if you own; trim into strength."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 42.9% passes \u226535% hardware",
+        "metric_value": 0.42895961134670013,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +48.9% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.48866143662662415,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 11.5 (rev growth +48.9% + FCF margin -37.4%); below threshold \u226525 hardware",
+        "metric_value": 11.49496685215913,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 13.2x \u00f7 TTM proxy growth 49% = 0.27 \u2014 passes hard gate <2.5",
+        "metric_value": 0.27022799448137463,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "ARM",
+    "company": "ARM Holdings",
+    "sector": "Physical AI / Robotics",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "humanoid-silicon",
+      "compute-density"
+    ],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Pass",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Royalty model gets a sliver of every Jetson Thor + Dragonwing + edge AI SoC. Already aggressively rerated \u2014 up ~150-155% YTD 2026, trailing P/E ~265x. Humanoid contribution is rounding error vs the AGI CPU thesis already priced in.",
+      "primary_drivers": [
+        "Royalty model captures a sliver of every Jetson Thor, Dragonwing, and edge AI SoC.",
+        "AGI CPU launched March 2026 with $15B/year revenue target by 2031 \u2014 the actual driver of the multiple."
+      ],
+      "key_risks": [
+        "Trailing P/E ~265x \u2014 extreme valuation; up ~150-155% YTD 2026 = no margin of safety.",
+        "Humanoid contribution is rounding error vs the data-center CPU thesis already priced in.",
+        "Already aggressively rerated \u2014 Tier 3 'not early' verdict applies."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "physical-ai-humanoid-2026-05",
+          "ref_title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+          "rank_in_report": 3,
+          "report_reasoning": "Tier 3 \u2014 Already aggressively rerated. Royalty model gets a sliver of every Jetson Thor, Dragonwing, and edge AI SoC. Stock up ~150-155% YTD 2026 (102% YTD through May 18 + CNBC's 'weekly rally of almost 50%' through May 22) \u2014 new ATH following May 20 record FY26 results. Trailing P/E ~265x. ARM's growth narrative is dominated by the AGI CPU launched March 2026 ($15B/year revenue target by 2031) and data-center inference \u2014 humanoids are rounding error vs the data-center CPU thesis already priced in. Not early."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 97.9% passes \u226535% hardware",
+        "metric_value": 0.978523489932886,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +20.1% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.20064464141821112,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 39.4 (rev growth +20.1% + FCF margin 19.3%); passes \u226525 hardware",
+        "metric_value": 39.353082217452844,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S 74.6x \u00f7 TTM proxy growth 20% = 3.72 \u2014 fails hard gate <2.5",
+        "metric_value": 3.7162716867469876,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "ABB",
+    "company": "ABB",
+    "sector": "Physical AI / Robotics",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Pass",
+    "notes": "Robotics division sold to SoftBank for $5.375B EV \u2014 closes mid-late 2026. Public ABB no longer carries robotics optionality.",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Robotics being sold to SoftBank for $5.375B EV (closes mid-late 2026). The robotics optionality is GONE from public ABB \u2014 shareholders get cash gain but no ongoing humanoid exposure. Skip ABB itself; use the deal as confirmation of broader humanoid value.",
+      "primary_drivers": [
+        "SoftBank Robotics deal closes mid-to-late 2026: $5.375B EV, ~$2.4B pre-tax gain, ~$5.3B net cash to ABB.",
+        "Masayoshi Son: 'SoftBank's next frontier is Physical AI' \u2014 a $5.375B vote that smart money sees toll-booth value public markets don't credit."
+      ],
+      "key_risks": [
+        "Robotics optionality is GONE from public ABB after deal closes \u2014 shareholders get cash gain but no ongoing exposure.",
+        "Left with electrification segment (slow growth).",
+        "ABB Robotics divestiture closing risk \u2014 SoftBank deal subject to regulatory approval."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "physical-ai-humanoid-2026-05",
+          "ref_title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+          "rank_in_report": 3,
+          "report_reasoning": "Tier 3 \u2014 Optionality is GONE from public ABB. ABB Robotics being sold to SoftBank for $5.375B EV (announced after the originally-intended IPO plan was cancelled); expected to close mid-to-late 2026. Pre-tax gain ~$2.4B; net cash ~$5.3B to ABB. Reclassified as discontinued operations starting Q4 2025. Masayoshi Son: 'SoftBank's next frontier is Physical AI. Together with ABB Robotics, we will unite world-class technology and talent under our shared vision to fuse Artificial Super Intelligence and robotics.' That's a $5.375B vote that smart money sees toll-booth value the public market does not credit. ABB shareholders get cash gain but no ongoing exposure. Skip ABB itself; use the deal as confirmation of the broader thesis."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Data missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 0,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "SERV",
+    "company": "Serve Robotics",
+    "sector": "Physical AI / Robotics",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "physical-ai-humanoid-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Pass",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Robot OPERATOR, not supply-chain toll booth. Speculative; not aligned with the 'toll booth' philosophy of the humanoid report. Q1 revenue $3M, market cap ~$677M \u2014 still venture-stage.",
+      "primary_drivers": [
+        "Q1 2026 revenue $3M (+578% YoY, low base); full-year 2026 guidance reaffirmed at ~$26M.",
+        "Diligent Robotics acquired Jan 27 2026 for $25.7M (healthcare robots); ~2,000 robots deployed across 44 cities / 14 states.",
+        "Cash $197M after $91M ATM raise \u2014 runway extended."
+      ],
+      "key_risks": [
+        "$3M Q1 revenue on $677M market cap = pure narrative pricing.",
+        "Operator-model risk is high \u2014 execution-dependent, not a structural toll booth.",
+        "Freedom Broker downgraded to Hold May 13 2026 citing dilution + execution risk.",
+        "Not aligned with the toll-booth philosophy in the framework \u2014 speculative."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "physical-ai-humanoid-2026-05",
+          "ref_title": "Physical AI / Humanoid Robotics Supply Chain: Where the Mispricings Still Live",
+          "rank_in_report": 3,
+          "report_reasoning": "Tier 3 \u2014 Speculative; not aligned with 'toll booth' philosophy. Revenue $3M Q1 2026 (+578% YoY, +238% sequential); full-year 2026 guidance reaffirmed at ~$26M; market cap ~$677M. Acquired Diligent Robotics Jan 27 2026 for $25.7M (healthcare robots); footprint expanded to 44 cities / 14 states; ~2,000 robots deployed; cash $197M after $91M ATM raise. SERV is a robot OPERATOR, not a supply-chain toll booth. Freedom Broker downgraded to Hold May 13 citing dilution and execution risk."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin -301.6% below threshold \u226535% hardware",
+        "metric_value": -3.01642091152815,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +578.2% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 5.781818181818182,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Manual flip \u2014 Ali Kashani \u2014 co-founder & CEO of Serve Robotics",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -2268.1 (rev growth +578.2% + FCF margin -2846.3%); below threshold \u226525 hardware",
+        "metric_value": -2268.1127624094297,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 68.1x \u00f7 TTM proxy growth 578% = 0.12 \u2014 passes hard gate <2.5",
+        "metric_value": 0.11785220125786162,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "RBRK",
+    "company": "Rubrik",
+    "sector": "Software",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "software-basket-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "5/5 pillars cyber-resilience leader. 66 Rule of 40. Phase gate blocks entry below #1 in the leader-only correction regime \u2014 watchlist for next regime shift, not entry now.",
+      "primary_drivers": [
+        "5/5 pillar pass \u2014 Moat, TAM, Founder-led, Capital Efficiency, Valuation.",
+        "Cyber resilience category leader; 81% gross margin, ~28% rev CAGR, 20% FCF margin, 66 Rule of 40.",
+        "Founder-led; $13B market cap, 8.1x EV/S \u2014 sensible scale."
+      ],
+      "key_risks": [
+        "Phase 4-in-correction regime blocks entry below #1 in the leader-only methodology.",
+        "Q4 FY26 reported March 2026 \u2014 no fresh catalyst (outside 30-day window).",
+        "Watchlist priority for next regime shift; second-best behind PLTR."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "software-basket-2026-05",
+          "ref_title": "Theme-to-Pick Pipeline Re-Run \u2014 Shay Boloor 2027 Software Comps",
+          "rank_in_report": 2,
+          "report_reasoning": "5/5 pillars. Rubrik \u2014 cyber resilience leader. 81% gross margin, ~28% rev CAGR, 20% FCF margin, 66 Rule of 40. Founder-led, $13B market cap, 8.1x EV/S. Q4 FY26 reported March 2026 (outside the 30-day catalyst window) \u2014 no fresh catalyst, FLAG. Phase gate explicitly blocks entries below #1 in leader-only correction regime. Watchlist priority for the next regime shift."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Data missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Forward 3yr revenue CAGR 28% passes \u226520% (source: Software Basket report explicit)",
+        "metric_value": 0.28,
+        "metric_label": "3yr Revenue CAGR (forward)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'software-basket-2026-05': \"\u2026gross margin, ~28% rev CAGR, 20% FCF margin, 66 Rule of 40. Founder-led, $13B market cap, 8.1x EV/S. Q4 FY26 reported March 2026 (outside the 30-day catalyst window) \u2014 no fresh catalyst,\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 9.9x \u00f7 forward growth 28% = 0.35 \u2014 passes hard gate <2.5",
+        "metric_value": 0.35496428571428573,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": "The binding constraint on ransomware recovery is air-gapped, immutable, ML-classified backup with sub-hour RPO, and Rubrik is the leader executing the playbook CRWD ran 5 years ago; the pain is universal (every regulated enterprise) and the moat is built-in immutability \u2014 chokepoint at the cyber resilience / immutable-backup layer.",
+    "forward_3yr_cagr_pct": 28,
+    "forward_3yr_cagr_source": "Software Basket report explicit",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "FIG",
+    "company": "Figma",
+    "sector": "Software",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "software-basket-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Figma post-IPO; design collaboration leader. Q1 +46% YoY accelerating \u2014 first post-IPO quarter showing growth re-acceleration. Phase gate blocks entry below #1.",
+      "primary_drivers": [
+        "5/5 pillar pass; founder-led (Dylan Field still CEO).",
+        "Q1 2026 revenue +46% YoY to $333.4M, accelerating \u2014 first post-IPO quarter showing growth re-acceleration.",
+        "80% gross margin, ~25% CAGR, 73 Rule of 40; $12B market cap, 7.4x EV/S."
+      ],
+      "key_risks": [
+        "Phase gate blocks entry below #1 in the leader-only correction regime.",
+        "Post-IPO timeline \u2014 limited public history makes Phase classification harder.",
+        "Lockup considerations as more shares unlock."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "software-basket-2026-05",
+          "ref_title": "Theme-to-Pick Pipeline Re-Run \u2014 Shay Boloor 2027 Software Comps",
+          "rank_in_report": 3,
+          "report_reasoning": "5/5 pillars. Figma post-IPO; design collaboration leader. Q1 2026 (recent): revenue +46% YoY to $333.4M, accelerating \u2014 first post-IPO quarter showing growth re-acceleration. 80% gross margin, ~25% CAGR, 21% FCF margin, 73 Rule of 40. Founder-led (Dylan Field still CEO), $12B market cap, 7.4x EV/S. Watchlist priority but phase gate blocks entry."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 79.4% passes \u226560% software",
+        "metric_value": 0.7940672806720269,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Forward 3yr revenue CAGR 25% passes \u226520% (source: Software Basket report explicit)",
+        "metric_value": 0.25,
+        "metric_label": "3yr Revenue CAGR (forward)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'software-basket-2026-05': \"\u202680% gross margin, ~25% CAGR, 21% FCF margin, 73 Rule of 40. Founder-led (Dylan Field still CEO), $12B market cap, 7.4x EV/S. Watchlist priority but phase gate blocks entry.\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 66.1 (rev growth +46.1% + FCF margin 19.9%); passes \u226540 software",
+        "metric_value": 66.05394213597569,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 8.2x \u00f7 forward growth 25% = 0.33 \u2014 passes hard gate <2.5",
+        "metric_value": 0.3296,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 5,
+    "pillars_total": 5,
+    "pillar_eligibility": "CORE-eligible",
+    "binding_constraint_thesis": "The binding constraint on product design at AI-era cadence is browser-native real-time collaboration \u00d7 AI-first feature velocity, and Figma is the de facto standard with deep Fortune 500 penetration; the death of the Adobe acquisition cleared the only viable rival \u2014 chokepoint at the collaborative design layer.",
+    "forward_3yr_cagr_pct": 25,
+    "forward_3yr_cagr_source": "Software Basket report explicit",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "APP",
+    "company": "AppLovin",
+    "sector": "Software",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "software-basket-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "AppLovin ad-tech AI leverage. Q1 $1,842M (+59% YoY); adj EBITDA $1.56B (+66% YoY); 129 Rule of 40 (highest in basket). Phase gate blocks below #1.",
+      "primary_drivers": [
+        "5/5 pillar pass; founder-led; $160B market cap, 21x EV/S.",
+        "Q1 2026: revenue $1,842M (+59% YoY); adjusted EBITDA $1.56B up 66% YoY with 85% margin and 86% QoQ flow-through.",
+        "89% gross margin, ~30% CAGR, 71% FCF margin, 129 Rule of 40 \u2014 highest in the basket.",
+        "Axon platform launch announced for June 2026 as a fresh catalyst."
+      ],
+      "key_risks": [
+        "Phase gate blocks entry below #1.",
+        "Ad-tech cyclicality on macro.",
+        "Valuation rich at 21x EV/S \u2014 execution must continue at pace."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "software-basket-2026-05",
+          "ref_title": "Theme-to-Pick Pipeline Re-Run \u2014 Shay Boloor 2027 Software Comps",
+          "rank_in_report": 4,
+          "report_reasoning": "5/5 pillars. AppLovin \u2014 ad-tech AI leverage. Q1 2026 (per 8-K Ex. 99.1 May 6 2026): revenue $1,842M (+59% YoY); adjusted EBITDA $1.56B 'up 66% year over year with an 85% margin and an 86% quarter-over-quarter flow-through'; Axon platform launch announced for June 2026. 89% gross margin, ~30% CAGR, 71% FCF margin, 129 Rule of 40. Beat-and-raise. Founder-led, $160B market cap, 21x EV/S. Phase gate blocks entry below #1."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 88.9% passes \u226560% software",
+        "metric_value": 0.8894775377771651,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Forward 3yr revenue CAGR 30% passes \u226520% (source: Software Basket report explicit)",
+        "metric_value": 0.3,
+        "metric_label": "3yr Revenue CAGR (forward)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'software-basket-2026-05': \"\u2026~30% CAGR, 71% FCF margin, 129 Rule of 40. Beat-and-raise. Founder-led, $160B market cap, 21x EV/S. Phase gate blocks entry below #1.\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 130.4 (rev growth +59.0% + FCF margin 71.4%); passes \u226540 software",
+        "metric_value": 130.39227189633033,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 30.9x \u00f7 forward growth 30% = 1.03 \u2014 passes hard gate <2.5",
+        "metric_value": 1.0299,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 5,
+    "pillars_total": 5,
+    "pillar_eligibility": "CORE-eligible",
+    "binding_constraint_thesis": "The binding constraint on mobile-app monetization is auction-clearing efficiency at scale (AXON 2 ML pipeline), and AppLovin's ad network has compounded ARPU faster than any peer for six consecutive quarters; Unity and IronSource are not catching up \u2014 chokepoint at the mobile ad-tech layer.",
+    "forward_3yr_cagr_pct": 30,
+    "forward_3yr_cagr_source": "Software Basket report explicit",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "MNDY",
+    "company": "Monday.com",
+    "sector": "Software",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "software-basket-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Monday.com. Q1 +24% to $351.3M; record net adds of $500K+ ARR customers. 44 Rule of 40 \u2014 passes the hurdle but lowest of top 5. Phase gate blocks.",
+      "primary_drivers": [
+        "5/5 pillar pass; founder-led; $3.5B market cap, 2x EV/S.",
+        "Q1 2026 revenue +24% YoY to $351.3M; record net adds of $500K+ ARR customers.",
+        "Launched AI Work Platform with Native Agents."
+      ],
+      "key_risks": [
+        "44 Rule of 40 \u2014 passes hurdle but lowest of top 5 (vs PLTR 145, APP 129, RBRK 66, FIG 73).",
+        "FY26 guide modest at 18-19% \u2014 deceleration vs Q1 +24%.",
+        "Phase gate blocks entry below #1."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "software-basket-2026-05",
+          "ref_title": "Theme-to-Pick Pipeline Re-Run \u2014 Shay Boloor 2027 Software Comps",
+          "rank_in_report": 5,
+          "report_reasoning": "5/5 pillars. Monday.com. Q1 2026 (May 11 2026): revenue +24% to $351.3M; record net adds of $500K+ ARR customers; launched AI Work Platform with Native Agents. Beat, but FY26 guide modest (18-19%). 44 Rule of 40 \u2014 passes hurdle but lowest of top 5. Founder-led, $3.5B market cap, 2x EV/S. Phase gate blocks entry."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 89.1% passes \u226560% software",
+        "metric_value": 0.8914665565883307,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Forward 3yr revenue CAGR 22% passes \u226520% (source: Software Basket report \u2014 mid-20s sustained)",
+        "metric_value": 0.22,
+        "metric_label": "3yr Revenue CAGR (forward)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'software-basket-2026-05': \"\u202618-19%). 44 Rule of 40 \u2014 passes hurdle but lowest of top 5. Founder-led, $3.5B market cap, 2x EV/S. Phase gate blocks entry.\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 47.8 (rev growth +24.5% + FCF margin 23.4%); passes \u226540 software",
+        "metric_value": 47.82999076074971,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 2.3x \u00f7 forward growth 22% = 0.10 \u2014 passes hard gate <2.5",
+        "metric_value": 0.10436363636363635,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 5,
+    "pillars_total": 5,
+    "pillar_eligibility": "CORE-eligible",
+    "binding_constraint_thesis": "The binding constraint on no-code workflow at scale is the combination of horizontal flexibility \u00d7 per-team adoption \u00d7 AI feature velocity, and Monday's WorkOS architecture sustains record $500K+-ARR customer expansion; ServiceNow is too rigid for SMBs, Asana too narrow \u2014 chokepoint at the SMB-to-enterprise workflow platform layer.",
+    "forward_3yr_cagr_pct": 22,
+    "forward_3yr_cagr_source": "Software Basket report \u2014 mid-20s sustained",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "CRWD",
+    "company": "CrowdStrike",
+    "sector": "Software",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "software-basket-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "5/5 pillars and fresh Q1 FY27 pipeline acceleration. De-facto leader if PLTR's chokepoint thesis fails. But rebound from $342.72 \u2192 $594.08 ATH (+73.5%) means asymmetry has compressed.",
+      "primary_drivers": [
+        "5/5 pillar pass; founder-led (Kurtz); $144B market cap, 24x EV/S.",
+        "Fresh Q1 FY27 pipeline acceleration; 78% gross margin, ~22% CAGR, 26% FCF margin, 49 Rule of 40.",
+        "De-facto leader if PLTR's chokepoint thesis fails \u2014 secondary watchlist priority."
+      ],
+      "key_risks": [
+        "Rebound +73.5% from $342.72 52-week low to $594.08 ATH May 15 2026 compressed asymmetry.",
+        "Cheap score dropped to 12 from 20 \u2014 much less asymmetric than before the rebound.",
+        "Phase gate blocks entry below #1; PLTR remains the only authorized name."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "software-basket-2026-05",
+          "ref_title": "Theme-to-Pick Pipeline Re-Run \u2014 Shay Boloor 2027 Software Comps",
+          "rank_in_report": 13,
+          "report_reasoning": "5/5 pillars and fresh Q1 FY27 pipeline acceleration. CrowdStrike. 78% gross margin, ~22% CAGR, 26% FCF margin, 49 Rule of 40. Founder-led (Kurtz), $144B market cap, 24x EV/S. Rebounded +73.5% from $342.72 52-week low to $594.08 closing ATH May 15 2026 (MacroTrends) \u2014 that rebound means asymmetry has compressed (Cheap score drops to 12 from 20). De-facto leader if PLTR's chokepoint thesis fails. Watchlist."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 75.3% passes \u226560% software",
+        "metric_value": 0.7529807762395273,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Forward 3yr revenue CAGR 22% passes \u226520% (source: Software Basket report explicit)",
+        "metric_value": 0.22,
+        "metric_label": "3yr Revenue CAGR (forward)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'software-basket-2026-05': \"\u202678% gross margin, ~22% CAGR, 26% FCF margin, 49 Rule of 40. Founder-led (Kurtz), $144B market cap, 24x EV/S. Rebounded +73.5% from $342.72 52-week low to $594.08 closing ATH May 15 2026 (\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 53.7 (rev growth +25.6% + FCF margin 28.1%); passes \u226540 software",
+        "metric_value": 53.67116871003884,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 32.2x \u00f7 forward growth 22% = 1.46 \u2014 passes hard gate <2.5",
+        "metric_value": 1.4634545454545453,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 5,
+    "pillars_total": 5,
+    "pillar_eligibility": "CORE-eligible",
+    "binding_constraint_thesis": "The binding constraint on consolidating cyber spend is a single agent with credible AI threat detection at the kernel level, and Falcon is the only platform that has cleared the bar at scale (Rule of 40 = 49, 60K+ customers); SentinelOne and Microsoft Defender lag \u2014 chokepoint at the endpoint security platform layer.",
+    "forward_3yr_cagr_pct": 22,
+    "forward_3yr_cagr_source": "Software Basket report explicit",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "NOC",
+    "company": "Northrop Grumman",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "space-supply-chain"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Strong",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Named subcontractor on the $1.8B SpaceX Starshield/NRO program (Reuters May 2024). SDA Tranche 1/2 prime. 5/5 pillars. Best fundamental linkage to the SpaceX IPO trade \u2014 explicit Stage 1 initiate recommendation.",
+      "primary_drivers": [
+        "Tier 1 CORE rating in the SpaceX IPO ranking; 5/5 pillar pass.",
+        "Named subcontractor on the $1.8B SpaceX Starshield/NRO program per Reuters (May 2024) and Spaceflight Now.",
+        "SDA Tranche 1/2 prime per Wikipedia; Golden Dome architecture budget cycle late 2026.",
+        "Winner of the space-supply-chain bottleneck \u2014 one of only three names with publicly verifiable named SpaceX/Starshield revenue."
+      ],
+      "key_risks": [
+        "Slow grower as a percentage of revenue from pure space.",
+        "Defense rotation exposure.",
+        "Share of SpaceX revenue not disclosed at line-item level."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 1,
+          "report_reasoning": "Tier 1 \u2014 Highest conviction. CORE rating, Operating layer, Phase 3. Subcontractor on the $1.8B SpaceX Starshield/NRO program per Reuters and Spaceflight Now May 2024. SDA Tranche 1/2 prime per Wikipedia. Golden Dome budget cycle late 2026. 5/5 pillars. Risk: slow grower, defense rotation exposure."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "space-supply-chain",
+          "ref_name": "Named SpaceX / Starshield Contract Revenue",
+          "role": "winner",
+          "physics_summary": "SpaceX dominates global commercial launch with ~80% share via Falcon 9 reusability and Starship development. SpaceX confidentially filed S-1 on April 1, 2026, targeting June 12, 2026 Nasdaq listing under ticker $SPCX at $1.75-2T valuation and ~$75B raise \u2014 a record by valuation, but valuation is targeted, not priced."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 19.8% below threshold \u226535% hardware; Bottleneck winner: Named SpaceX / Starshield Contract Revenue",
+        "metric_value": 0.19836048982896468,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +4.4% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.043620616814533164,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 12.2 (rev growth +4.4% + FCF margin 7.8%); below threshold \u226525 hardware",
+        "metric_value": 12.162944358814153,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 2.2x \u00f7 TTM proxy growth 4% = 0.50 \u2014 passes hard gate <2.5",
+        "metric_value": 0.49953443099273603,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "HXL",
+    "company": "Hexcel",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "space-supply-chain"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Strong",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "ONLY publicly self-disclosed SpaceX composites supplier \u2014 Hexcel's own corporate page lists SpaceX alongside Airbus/Boeing/Lockheed. Starship hull/interstage exposure. Stage 1 initiate.",
+      "primary_drivers": [
+        "Tier 1 CORE rating in SpaceX IPO ranking; only publicly self-disclosed SpaceX composites supplier per Hexcel's own corporate composites page.",
+        "Starship hull/interstage exposure \u2014 direct, contracted SpaceX revenue (not retail-narrative read-through).",
+        "Winner of the space-supply-chain bottleneck.",
+        "4/5 pillars (fails T at slow growth) \u2014 but the F&G of the linkage trumps the growth gap."
+      ],
+      "key_risks": [
+        "Aerospace cyclical exposure on the broader business.",
+        "Fails T (slow growth) \u2014 share of SpaceX revenue not separately disclosed.",
+        "Composites pricing pressure in a downturn."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 3,
+          "report_reasoning": "Tier 1. CORE rating, Operating layer, Phase 3. ONLY publicly self-disclosed SpaceX composites supplier \u2014 Hexcel's own corporate composites page explicitly lists 'Airbus, Boeing, Bombardier, Mitsubishi Heavy Industries, Sikorsky, Kawasaki, SpaceX, Blue Origin, and Lockheed Martin' as customers. Starship hull/interstage. 4/5 pillars (fails T at slow growth). Risk: aerospace cyclical."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "space-supply-chain",
+          "ref_name": "Named SpaceX / Starshield Contract Revenue",
+          "role": "winner",
+          "physics_summary": "SpaceX dominates global commercial launch with ~80% share via Falcon 9 reusability and Starship development. SpaceX confidentially filed S-1 on April 1, 2026, targeting June 12, 2026 Nasdaq listing under ticker $SPCX at $1.75-2T valuation and ~$75B raise \u2014 a record by valuation, but valuation is targeted, not priced."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 26.9% below threshold \u226535% hardware; Bottleneck winner: Named SpaceX / Starshield Contract Revenue",
+        "metric_value": 0.26859421734795613,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +9.9% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.09857612267250822,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 20.5 (rev growth +9.9% + FCF margin 10.6%); below threshold \u226525 hardware",
+        "metric_value": 20.46156282623446,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 4.1x \u00f7 TTM proxy growth 10% = 0.42 \u2014 passes hard gate <2.5",
+        "metric_value": 0.4166323333333333,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "KRMN",
+    "company": "Karman Holdings",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "launch-capacity"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "Supplies SpaceX competitors (ULA / Blue Origin / SLS) \u2014 NOT a named SpaceX supplier per filings.",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Karman payload fairings/interstages. CRITICAL CAVEAT: SpaceX is NOT a named Karman customer per FY24 release \u2014 filings name ULA/Blue Origin/SLS. Karman supplies SpaceX's competitors. Watch because the IPO read-through is sympathy, not contracted SpaceX revenue.",
+      "primary_drivers": [
+        "Q1 2026 revenue +51% YoY; raised 2026 guide $720-735M; backlog +60% to $1B+.",
+        "Winner of the launch-capacity bottleneck \u2014 supplies major launch vehicles outside SpaceX.",
+        "Stage 2 SWING add candidate per the SpaceX IPO playbook (build during May 22 - June 8 window)."
+      ],
+      "key_risks": [
+        "CRITICAL: NOT a named SpaceX supplier per Karman's own FY24 release \u2014 filings name ULA / Blue Origin / NASA SLS. Read-through, not contracted SpaceX revenue.",
+        "Retail mis-narrative risk if investors discover the supplier list publicly.",
+        "Rich at ~20x sales (fails V); 1.5x D/E."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 4,
+          "report_reasoning": "Tier 1. CORE rating, Operating layer, Phase 4. Karman payload fairings/interstages. Q1 2026 +51% YoY; raised 2026 guide $720-735M; backlog +60% to $1B+. 4/5 pillars (fails V at ~20x sales). CRITICAL CAVEAT: SpaceX is NOT a named Karman customer per its FY24 release \u2014 filings name ULA / Blue Origin / NASA SLS. KRMN supplies SpaceX's competitors. The IPO read-through is sympathy, not contracted SpaceX revenue. Risk: rich valuation, 1.5x D/E."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 42.2% passes \u226535% hardware",
+        "metric_value": 0.4223596322994511,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +51.0% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.5102273181255244,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 45.1 (rev growth +51.0% + FCF margin -5.9%); passes \u226525 hardware",
+        "metric_value": 45.09165046789373,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 14.1x \u00f7 TTM proxy growth 51% = 0.28 \u2014 passes hard gate <2.5",
+        "metric_value": 0.2764650088086756,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "RKLB",
+    "company": "Rocket Lab",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "launch-capacity"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Only public launch + space-systems pure-play. Q1 revenue $200.3M (+63.5% YoY); $2.2B backlog (+108% YoY); Neutron Q4 2026. Watch (SWING) \u2014 already extended; report says 'Do NOT add' in Stage 1.",
+      "primary_drivers": [
+        "$200.3M Q1 (+63.5% YoY); $2.2B backlog (+108% YoY); Neutron first launch Q4 2026 fills the medium-lift gap.",
+        "Winner of the launch-capacity bottleneck \u2014 only public launch + space-systems pure-play.",
+        "Golden Dome partnership with Raytheon.",
+        "Already on user AutoTrade watchlist \u2014 flagged Tier 1 SWING."
+      ],
+      "key_risks": [
+        "Already parabolic \u2014 SpaceX IPO Stage 1 explicitly says 'Do NOT add to RKLB or MP' at current price.",
+        "$450M ATM dilution Q1 \u2014 share count growth tax.",
+        "Neutron delay risk \u2014 execution-dependent.",
+        "Post-IPO comp pressure as more space names list and absorb sector flows."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 5,
+          "report_reasoning": "Tier 1. SWING rating, Operating layer, Phase 4. Only public launch + space-systems pure-play. Q1 2026 revenue $200.3M (+63.5% YoY per RKLB 8-K May 7 2026); $2.2B backlog (+108% YoY); Neutron Q4 2026 first launch targeting medium-lift gap. Golden Dome partnership with Raytheon. 4/5 pillars (fails V). Already on user AutoTrade watchlist. Risk: Neutron delay; post-IPO comp pressure as $450M ATM dilutes Q1."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "launch-capacity",
+          "ref_name": "Earth-to-Orbit Launch Capacity",
+          "role": "winner",
+          "physics_summary": "Launch cost has fallen from ~$10,000/kg to LEO (Shuttle era) to ~$2,000/kg (Falcon 9) via first-stage reusability \u2014 boosters recovered and reflown 20+ times each. Starship targets 100-150 tons to LEO at $10-50/kg, an order of magnitude lower than any other vehicle if orbital refueling demos succeed."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 38.2% passes \u226535% hardware; Bottleneck winner: Earth-to-Orbit Launch Capacity",
+        "metric_value": 0.38180066683969893,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +63.5% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.634573179188865,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Manual flip \u2014 Peter Beck \u2014 founder, CEO & CTO; large insider holder",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 16.9 (rev growth +63.5% + FCF margin -46.5%); below threshold \u226525 hardware",
+        "metric_value": 16.913577667104107,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 90.3x \u00f7 TTM proxy growth 63% = 1.42 \u2014 passes hard gate <2.5",
+        "metric_value": 1.4236498320883528,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "IRDM",
+    "company": "Iridium Communications",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Strong",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "LEO satcom incumbent. ~17x FY27 P/E, 2.3% dividend yield, FCF positive. Explicit 'Stage 1 initiate' recommendation in the SpaceX IPO playbook.",
+      "primary_drivers": [
+        "Tier 2 CORE in SpaceX IPO ranking with explicit 'Stage 1 initiate' guidance.",
+        "~17x FY27 P/E \u2014 cheapest CORE name in the space basket.",
+        "2.3% dividend yield, FCF positive \u2014 durable cash returns.",
+        "LEO satcom incumbent \u2014 durable subscriber franchise."
+      ],
+      "key_risks": [
+        "Long-term Starlink competition \u2014 D2C and IoT segments under structural threat.",
+        "Fails T at ~7% growth \u2014 slower than pure-play space names."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 6,
+          "report_reasoning": "Tier 2 \u2014 Strong but conditional. CORE rating, Operating layer, Phase 3. Iridium \u2014 LEO satcom incumbent. ~17x FY27 P/E, 2.3% dividend yield, FCF positive. 4/5 pillars (fails T at ~7% growth). Risk: long-term Starlink competition."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 71.4% passes \u226535% hardware",
+        "metric_value": 0.7140013786366106,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +1.9% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.01944824505067992,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 36.8 (rev growth +1.9% + FCF margin 34.8%); passes \u226525 hardware",
+        "metric_value": 36.75925198219751,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S 7.6x \u00f7 TTM proxy growth 2% = 3.93 \u2014 fails hard gate <2.5",
+        "metric_value": 3.9314601292175158,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "MDA",
+    "company": "MDA Space",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "space-supply-chain"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Strong",
+    "notes": "TSX-listed (not US).",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "$1.1B CAD Globalstar C-3 prime contract (launched on SpaceX rockets). Canadarm-3. TSX-listed Tier 2 \u2014 named verifiable Starshield-adjacent supplier.",
+      "primary_drivers": [
+        "Tier 2 CORE in SpaceX IPO ranking; $1.1B CAD Globalstar C-3 prime contract (per MDA's own PRNewswire release Feb 25, 2025) \u2014 launched on SpaceX rockets.",
+        "Canadarm-3 NASA work; Telesat Lightspeed prime \u2014 diversified space-systems exposure.",
+        "Winner of the space-supply-chain bottleneck \u2014 named verifiable Starshield-adjacent supplier."
+      ],
+      "key_risks": [
+        "TSX-listed \u2014 thinner US retail liquidity.",
+        "Fails F (no founder signal).",
+        "Slower growth profile vs space pure-plays."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 7,
+          "report_reasoning": "Tier 2. CORE rating, Operating layer, Phase 3. TSX-listed. $1.1B CAD Globalstar C-3 prime contract per MDA PRNewswire February 25 2025 \u2014 launched on SpaceX rockets, making MDA a named verifiable Starshield-adjacent supplier. Canadarm-3; Telesat Lightspeed. 4/5 pillars (fails F). Risk: thinner US retail liquidity (TSX listing)."
+        },
+        {
+          "type": "bottleneck",
+          "ref_id": "space-supply-chain",
+          "ref_name": "Named SpaceX / Starshield Contract Revenue",
+          "role": "winner",
+          "physics_summary": "SpaceX dominates global commercial launch with ~80% share via Falcon 9 reusability and Starship development. SpaceX confidentially filed S-1 on April 1, 2026, targeting June 12, 2026 Nasdaq listing under ticker $SPCX at $1.75-2T valuation and ~$75B raise \u2014 a record by valuation, but valuation is targeted, not priced."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 24.8% below threshold \u226535% hardware; Bottleneck winner: Named SpaceX / Starshield Contract Revenue",
+        "metric_value": 0.2482223658694247,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +32.2% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.32222222222222224,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 27.4 (rev growth +32.2% + FCF margin -4.8%); passes \u226525 hardware",
+        "metric_value": 27.4194779267724,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "LHX",
+    "company": "L3Harris",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "space-supply-chain"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Strong",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "L3Harris \u2014 payload/comms primes; 70%+ recurring DoD revenue; 8.64% of ARKX ETF. 5/5 pillar pass; Tier 2 CORE Stage 1 initiate.",
+      "primary_drivers": [
+        "5/5 pillar pass; payload/comms primes for classified space.",
+        "70%+ recurring DoD revenue \u2014 durable franchise.",
+        "8.64% of ARKX ETF \u2014 institutional flow tailwind.",
+        "Winner of the space-supply-chain bottleneck."
+      ],
+      "key_risks": [
+        "Slow growth (typical defense prime).",
+        "Already heavily ETF-owned (8.64% ARKX) \u2014 limited new flow upside."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 8,
+          "report_reasoning": "Tier 2. CORE rating, Operating layer, Phase 3. L3Harris. Payload/comms primes; 70%+ recurring DoD; 8.64% of ARKX ETF. 5/5 pillars. Risk: slow growth."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 24.4% below threshold \u226535% hardware",
+        "metric_value": 0.2440807799442897,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +11.9% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.11925175370226032,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 32.1 (rev growth +11.9% + FCF margin 20.1%); passes \u226525 hardware",
+        "metric_value": 32.063631125722274,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 5.7x \u00f7 TTM proxy growth 12% = 0.48 \u2014 passes hard gate <2.5",
+        "metric_value": 0.48175392156862745,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "KTOS",
+    "company": "Kratos Defense",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Hypersonic targets + Golden Dome SBI; founder-led. SWING \u2014 3/5 pillars (fails M, V). Small-cap volatility.",
+      "primary_drivers": [
+        "Hypersonic targets \u2014 durable defense demand.",
+        "Golden Dome SBI exposure \u2014 late-2026 budget cycle catalyst.",
+        "Founder-led (DeMarco)."
+      ],
+      "key_risks": [
+        "3/5 pillars \u2014 fails Moat and Valuation.",
+        "Small-cap volatility \u2014 wider intraday ranges.",
+        "Defense rotation exposure."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 9,
+          "report_reasoning": "Tier 2. SWING rating, Beneficiary layer, Phase 3. Kratos \u2014 hypersonic targets; Golden Dome SBI exposure; founder-led (DeMarco). 3/5 pillars (fails M, V). Risk: small-cap volatility."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 24.2% below threshold \u226535% hardware",
+        "metric_value": 0.24150943396226415,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +22.6% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.2260409781890284,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'spacex-ipo-trade-2026-05': \"\u2026e 3. Kratos \u2014 hypersonic targets; Golden Dome SBI exposure; founder-led (DeMarco). 3/5 pillars (fails M, V). Risk: small-cap volatility.\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 13.2 (rev growth +22.6% + FCF margin -9.4%); below threshold \u226525 hardware",
+        "metric_value": 13.213199113392255,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 6.7x \u00f7 TTM proxy growth 23% = 0.30 \u2014 passes hard gate <2.5",
+        "metric_value": 0.2984414619883041,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "FLY",
+    "company": "Firefly Aerospace",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [
+      "launch-capacity"
+    ],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Firefly Aerospace. $1.4B backlog; 2026 guide $420-450M; Golden Dome SBI via SciTec. SWING \u2014 3/5 pillars (fails M, V, R). Material weakness disclosed; Cantor cut PT $65\u2192$35.",
+      "primary_drivers": [
+        "$1.4B backlog; 2026 guide $420-450M.",
+        "Golden Dome SBI via SciTec partnership.",
+        "Stage 2 SWING add candidate per the SpaceX IPO playbook.",
+        "Winner of the launch-capacity bottleneck."
+      ],
+      "key_risks": [
+        "Net loss $298M 2025; FCF -$238M.",
+        "Material weakness disclosed in financial reporting.",
+        "Cantor cut PT $65\u2192$35 \u2014 analyst capitulation.",
+        "3/5 pillars (fails M, V, R)."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 10,
+          "report_reasoning": "Tier 2. SWING rating, Operating layer, Phase 4. Firefly. $1.4B backlog; 2026 guide $420-450M; Golden Dome SBI via SciTec. 3/5 pillars (fails M, V, R). Risk: net loss $298M 2025; FCF -$238M; material weakness disclosed; Cantor cut PT $65\u2192$35."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 21.6% below threshold \u226535% hardware",
+        "metric_value": 0.215890404184028,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +44.8% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.4480171873601289,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -94.5 (rev growth +44.8% + FCF margin -139.3%); below threshold \u226525 hardware",
+        "metric_value": -94.45097263711256,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 28.7x \u00f7 TTM proxy growth 45% = 0.64 \u2014 passes hard gate <2.5",
+        "metric_value": 0.6397076007033248,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "VOYG",
+    "company": "Voyager Space",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Voyager \u2014 Starlab ISS successor. $217.5M NASA grant; Palantir partner. SWING \u2014 3/5 pillars (fails M, V, R). IPO'd June 2025 at $31, rallied to $69.75 then drifted; lockup risk.",
+      "primary_drivers": [
+        "Starlab ISS successor program; $217.5M NASA grant.",
+        "Palantir partner \u2014 adds operational credibility.",
+        "Stage 2 SWING add candidate per the playbook."
+      ],
+      "key_risks": [
+        "IPO June 2025 at $31; rallied to $69.75 then drifted \u2014 lockup risk active.",
+        "3/5 pillars (fails M, V, R).",
+        "Long-dated program risk (ISS successor commercialization is 2030+)."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 11,
+          "report_reasoning": "Tier 2. SWING rating, Operating layer, Phase 4. Voyager \u2014 Starlab ISS successor; $217.5M NASA grant; Palantir partner. 3/5 pillars (fails M, V, R). Risk: IPO'd June 2025 at $31; rallied to $69.75 then drifted; lockup risk."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin -4.4% below threshold \u226535% hardware",
+        "metric_value": -0.0438631334052091,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +2.1% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.02141594459095256,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -150.5 (rev growth +2.1% + FCF margin -152.6%); below threshold \u226525 hardware",
+        "metric_value": -150.48047857114327,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S 15.7x \u00f7 TTM proxy growth 2% = 7.33 \u2014 fails hard gate <2.5",
+        "metric_value": 7.327250933694182,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 0,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "LUNR",
+    "company": "Intuitive Machines",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Intuitive Machines. $943M backlog; 2026 guide $900M-$1B with positive adj. EBITDA; $4.8B NSN IDIQ. SWING \u2014 3/5 pillars (fails M, R). Lumpy revenue.",
+      "primary_drivers": [
+        "$943M backlog; 2026 guide $900M-$1B with POSITIVE adjusted EBITDA (rare in lunar names).",
+        "$4.8B NSN IDIQ contract vehicle.",
+        "Lunar lander franchise \u2014 only public name."
+      ],
+      "key_risks": [
+        "Lumpy revenue \u2014 mission-based, not recurring.",
+        "Dilution risk.",
+        "3/5 pillars (fails M, R)."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 12,
+          "report_reasoning": "Tier 2. SWING rating, Operating layer, Phase 4. Intuitive Machines. $943M backlog; 2026 guide $900M-$1B with positive adjusted EBITDA; $4.8B NSN IDIQ. 3/5 pillars (fails M, R). Risk: lumpy revenue; dilution."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 14.7% below threshold \u226535% hardware",
+        "metric_value": 0.14707291836845832,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +193.7% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 1.9369522103512251,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Manual flip \u2014 Stephen Altemus \u2014 co-founder & CEO of Intuitive Machines",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 153.6 (rev growth +193.7% + FCF margin -40.1%); passes \u226525 hardware",
+        "metric_value": 153.62042760915298,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 17.0x \u00f7 TTM proxy growth 194% = 0.09 \u2014 passes hard gate <2.5",
+        "metric_value": 0.08798358528892046,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "RDW",
+    "company": "Redwire",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Pass",
+    "notes": "ROSA contracts are with Boeing / Maxar, NOT SpaceX. Retail mis-narrative risk.",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Redwire \u2014 ROSA contracts are with Boeing/Maxar per primary source PRNewswire, NOT SpaceX. Retail mis-narrative as SpaceX supplier. 3/5 pillars (fails M, V, R). Explicit avoid in the SpaceX IPO report.",
+      "primary_drivers": [
+        "ROSA solar arrays (genuine business) + Edge Autonomy defense drones."
+      ],
+      "key_risks": [
+        "NOT a named SpaceX supplier \u2014 ROSA contracts are with Boeing/Maxar per primary source PRNewswire.",
+        "Retail mis-narrative as SpaceX supplier \u2014 sentiment-trap risk on IPO day.",
+        "3/5 pillars (fails M, V, R); dilution.",
+        "Explicit 'Avoid' in the SpaceX IPO playbook's Stage 1."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 13,
+          "report_reasoning": "Tier 3 \u2014 Speculative / sentiment-driven. SWING rating, Beneficiary layer, Phase 4. Redwire ROSA arrays \u2014 but contracts are with Boeing/Maxar per primary source PRNewswire, NOT SpaceX. Edge Autonomy defense drones. 3/5 pillars (fails M, V, R). Risk: retail mis-narrative as SpaceX supplier; dilution."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Gross margin 26.6% below threshold \u226535% hardware",
+        "metric_value": 0.26613867920636886,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +57.9% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.5794771561202052,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = 13.7 (rev growth +57.9% + FCF margin -44.3%); below threshold \u226525 hardware",
+        "metric_value": 13.69014701843085,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 10.1x \u00f7 TTM proxy growth 58% = 0.17 \u2014 passes hard gate <2.5",
+        "metric_value": 0.17394991145965089,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 2,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "PL",
+    "company": "Planet Labs",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Planet Labs \u2014 Earth-observation; defense ramp; founder-led. SWING \u2014 3/5 pillars (fails M, R). Continuing losses.",
+      "primary_drivers": [
+        "Earth-observation incumbent with high-frequency imaging cadence.",
+        "Defense ramp on Golden Dome / SDA architecture.",
+        "Founder-led."
+      ],
+      "key_risks": [
+        "Continuing losses; fails Moat and Rule-of-40 pillars.",
+        "Competitive Earth-obs market (BKSY, Maxar, etc.).",
+        "Tier 3 in the SpaceX IPO ranking."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 14,
+          "report_reasoning": "Tier 3. SWING rating, Operating layer, Phase 3. Planet Labs \u2014 Earth-observation; defense ramp; founder-led. 3/5 pillars (fails M, R). Risk: continuing losses."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 53.5% passes \u226535% hardware",
+        "metric_value": 0.5353266064790229,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Forward 3yr revenue CAGR 30% passes \u226520% (source: Planet Labs commercial EO expansion)",
+        "metric_value": 0.3,
+        "metric_label": "3yr Revenue CAGR (forward)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'spacex-ipo-trade-2026-05': \"\u2026er, Phase 3. Planet Labs \u2014 Earth-observation; defense ramp; founder-led. 3/5 pillars (fails M, R). Risk: continuing losses.\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 54.4 (rev growth +42.1% + FCF margin 12.3%); passes \u226525 hardware",
+        "metric_value": 54.369633483412734,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 34.0x \u00f7 forward growth 30% = 1.13 \u2014 passes hard gate <2.5",
+        "metric_value": 1.1348333333333334,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 5,
+    "pillars_total": 5,
+    "pillar_eligibility": "CORE-eligible",
+    "binding_constraint_thesis": "The binding constraint on Earth observation is daily-revisit cadence \u00d7 multispectral \u00d7 commercial pricing, and Planet's Dove constellation is the only operator at that combination; Maxar and BlackSky lack the daily-revisit cadence \u2014 chokepoint at the daily-imagery EO layer.",
+    "forward_3yr_cagr_pct": 30,
+    "forward_3yr_cagr_source": "Planet Labs commercial EO expansion",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "BKSY",
+    "company": "BlackSky",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Pass",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "BlackSky \u2014 Q1 2026 revenue -29.5% YoY (going backward per Simply Wall St). Analyst PTs cut $24\u2192$20. 2/5 pillars (fails M, T, R, V). Explicit avoid in the report's Stage 1.",
+      "primary_drivers": [
+        "Gen-3 constellation deployment continues.",
+        "$351M backlog; AFRL contracts."
+      ],
+      "key_risks": [
+        "Revenue going BACKWARD: Q1 2026 -29.5% YoY per Simply Wall St.",
+        "2/5 pillars \u2014 fails 4 of 5 (Moat, TAM, Rule-of-40, Valuation).",
+        "Analyst PTs cut $24 \u2192 $20.",
+        "Explicitly listed in 'Stage 1 \u2014 Avoid initiating' in the SpaceX IPO playbook."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 15,
+          "report_reasoning": "Tier 3. SWING rating, Operating layer, Phase 4. BlackSky \u2014 Gen-3 constellation; $351M backlog; AFRL. Q1 2026 revenue -29.5% YoY (going backward per Simply Wall St); analyst PTs cut $24\u2192$20. 2/5 pillars (fails M, T, R, V). Risk: revenue contraction."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 64.7% passes \u226535% hardware",
+        "metric_value": 0.6470588235294118,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY -29.7% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": -0.29684538315732467,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -104.9 (rev growth -29.7% + FCF margin -75.2%); below threshold \u226525 hardware",
+        "metric_value": -104.85963014612342,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 1,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "APH",
+    "company": "Amphenol",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Amphenol \u2014 oligopoly connectors across LEO sats (no SpaceX-named contract); AI data-center exposure. 5/5 pillars, but Tier 3 in the SpaceX IPO ranking because the SpaceX exposure is incidental, not the primary driver.",
+      "primary_drivers": [
+        "Oligopoly connectors across LEO sats per trade press (no SpaceX-named contract).",
+        "Real exposure to AI data-center growth \u2014 the actual driver.",
+        "5/5 pillar pass."
+      ],
+      "key_risks": [
+        "AI cyclicality \u2014 not pure space, AI-cap-spend dependent.",
+        "No SpaceX-named contract \u2014 sector beneficiary, not contracted revenue.",
+        "Rich valuation as a high-quality compounder."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 17,
+          "report_reasoning": "Tier 3. CORE rating, Operating layer, Phase 3. Amphenol \u2014 oligopoly connectors across LEO sats (incl. SpaceX per trade press, no SpaceX-named contract); AI data-center exposure. 5/5 pillars. Risk: AI cyclicality, not pure space."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 36.7% passes \u226535% hardware",
+        "metric_value": 0.3674754924476057,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +58.4% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.5838910829349407,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 76.3 (rev growth +58.4% + FCF margin 17.9%); passes \u226525 hardware",
+        "metric_value": 76.26949528633898,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 7.4x \u00f7 TTM proxy growth 58% = 0.13 \u2014 passes hard gate <2.5",
+        "metric_value": 0.12623929728382757,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "HEI",
+    "company": "Heico",
+    "sector": "Space & Defense",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Heico \u2014 aerospace aftermarket + electronic systems on classified space; family founder-led. 4/5 pillars (fails V at ~60x P/E). High-quality but rich.",
+      "primary_drivers": [
+        "Aerospace aftermarket franchise \u2014 durable cash flows.",
+        "Electronic systems on classified space contracts.",
+        "Family founder-led (Mendelson family)."
+      ],
+      "key_risks": [
+        "~60x P/E \u2014 rich valuation; fails V pillar.",
+        "Defensive growth profile \u2014 limited multi-bagger upside.",
+        "Tier 3 in the SpaceX IPO ranking."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 18,
+          "report_reasoning": "Tier 3. CORE rating, Operating layer, Phase 3. Heico \u2014 aerospace aftermarket + electronic systems on classified space; family founder-led. 4/5 pillars (fails V at ~60x P/E). Risk: valuation."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 41.4% passes \u226535% hardware",
+        "metric_value": 0.41398532978898944,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +25.3% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.253131660928021,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Report 'spacex-ipo-trade-2026-05': \"\u2026ftermarket + electronic systems on classified space; family founder-led. 4/5 pillars (fails V at ~60x P/E). Risk: valuation.\u2026\"",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 44.2 (rev growth +25.3% + FCF margin 18.9%); passes \u226525 hardware",
+        "metric_value": 44.167126294282724,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 9.9x \u00f7 TTM proxy growth 25% = 0.39 \u2014 passes hard gate <2.5",
+        "metric_value": 0.39078477831395536,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 5,
+    "pillars_total": 5,
+    "pillar_eligibility": "CORE-eligible",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "UFO",
+    "company": "Procure Space ETF",
+    "sector": "Thematic ETFs",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "ETF \u2014 basket-level space exposure (0.94% ER).",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "Procure Space ETF \u2014 basket exposure (0.94% ER). Top holdings Viasat/Garmin/RKLB/ASTS. The +31% YTD / +122% TTM is the WARNING, not the bullish signal.",
+      "primary_drivers": [
+        "Diversified basket exposure to the space theme; cleanest single-vehicle expression of 'space rerate'.",
+        "Top holdings Viasat / Garmin / RKLB / ASTS."
+      ],
+      "key_risks": [
+        "0.94% expense ratio \u2014 high for an ETF.",
+        "Already extended: +31% YTD / +122% TTM is the warning, not the bullish signal.",
+        "Concentration in 4-5 holdings \u2014 not as diversified as the 'basket' framing implies.",
+        "SpaceX IPO playbook: 'Avoid UFO/ROKT at these prices; if VIX spikes above 22 you can establish them on weakness.'"
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 19,
+          "report_reasoning": "Tier 3. SWING rating, Beneficiary layer, Phase 4. Procure Space ETF \u2014 cleanest basket expression. 0.94% expense ratio. Top holdings: Viasat / Garmin / RKLB / ASTS. +31% YTD / +122% TTM is the WARNING, not the bullish signal."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Data missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 0,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "ROKT",
+    "company": "SPDR Kensho Final Frontiers ETF",
+    "sector": "Thematic ETFs",
+    "thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [
+      "spacex-ipo-trade-2026-05"
+    ],
+    "catalyst": "",
+    "risks": [],
+    "rating": "Watch",
+    "notes": "ETF \u2014 A&D primes (LHX/NOC) + emerging space (0.45% ER).",
+    "date_added": "2026-05-25",
+    "rating_reasoning": {
+      "summary": "SPDR Kensho Final Frontiers ETF. 54% A&D primes (LHX, NOC) + emerging space. 0.45% expense ratio. Less euphoric than UFO but indistinguishable from ITA/XAR.",
+      "primary_drivers": [
+        "0.45% expense ratio \u2014 lower than UFO; cheap A&D + emerging space exposure.",
+        "54% A&D primes (LHX, NOC, etc.) \u2014 overlap with the SpaceX-supplier Tier 1 names."
+      ],
+      "key_risks": [
+        "Less euphoric than UFO but indistinguishable from ITA/XAR for most purposes.",
+        "Same 'Avoid at these prices' guidance from the SpaceX IPO playbook."
+      ],
+      "evidence": [
+        {
+          "type": "report",
+          "ref_id": "spacex-ipo-trade-2026-05",
+          "ref_title": "The SpaceX IPO Trade: 20 Public Equities Most Likely to Re-rate",
+          "rank_in_report": 20,
+          "report_reasoning": "Tier 3. SWING rating, Beneficiary layer, Phase 3. SPDR Kensho Final Frontiers ETF. 54% A&D primes (LHX, NOC) + emerging space. 0.45% expense ratio. Less euphoric than UFO but indistinguishable from ITA/XAR."
+        }
+      ],
+      "rated_date": "2026-05-25",
+      "rated_by": "auto"
+    },
+    "one_line_thesis": "",
+    "five_pillars": {
+      "moat": {
+        "pass": false,
+        "evidence": "Data missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth missing \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 inputs missing (rev growth or FCF margin) \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": false,
+        "evidence": "EV/S or positive growth missing \u2014 cannot compute PEG-equivalent; verify manually",
+        "metric_value": null,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 0,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "binding_constraint_thesis": null,
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "MSFT",
+    "company": "Microsoft",
+    "sector": "Software",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 67.6% passes \u226560% software",
+        "metric_value": 0.6763265207634582,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +18.3% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.1829703422487369,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 41.2 (rev growth +18.3% + FCF margin 22.9%); passes \u226540 software",
+        "metric_value": 41.206925580749754,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 9.6x \u00f7 TTM proxy growth 18% = 0.52 \u2014 passes hard gate <2.5",
+        "metric_value": 0.522707663026521,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "NOW",
+    "company": "ServiceNow",
+    "sector": "Software",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 75.1% passes \u226560% software",
+        "metric_value": 0.7506631299734748,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +22.1% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.22085492227979275,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 55.2 (rev growth +22.1% + FCF margin 33.1%); passes \u226540 software",
+        "metric_value": 55.20870243829833,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 7.7x \u00f7 TTM proxy growth 22% = 0.35 \u2014 passes hard gate <2.5",
+        "metric_value": 0.3488715542521994,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "CRM",
+    "company": "Salesforce",
+    "sector": "Software",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 76.9% passes \u226560% software",
+        "metric_value": 0.769154765112728,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": false,
+        "evidence": "Revenue growth YoY +13.3% below threshold \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.13266863363516126,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": true,
+        "evidence": "Manual flip \u2014 Marc Benioff co-founder & CEO since founding (1999)",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 47.5 (rev growth +13.3% + FCF margin 34.2%); passes \u226540 software",
+        "metric_value": 47.49834215783828,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 4.2x \u00f7 TTM proxy growth 13% = 0.32 \u2014 passes hard gate <2.5",
+        "metric_value": 0.31718122699386503,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "SNOW",
+    "company": "Snowflake",
+    "sector": "Software",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 66.6% passes \u226560% software",
+        "metric_value": 0.6660558136124134,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +33.5% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.3347910033260594,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 56.7 (rev growth +33.5% + FCF margin 23.2%); passes \u226540 software",
+        "metric_value": 56.658955466846535,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 16.5x \u00f7 TTM proxy growth 33% = 0.49 \u2014 passes hard gate <2.5",
+        "metric_value": 0.493531780598893,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "ORCL",
+    "company": "Oracle",
+    "sector": "Software",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 64.6% passes \u226560% software",
+        "metric_value": 0.645607911576498,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226560% software"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +21.7% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 0.21656050955414013,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": false,
+        "evidence": "Rule of 40 = -16.9 (rev growth +21.7% + FCF margin -38.6%); below threshold \u226540 software",
+        "metric_value": -16.94810499605782,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226540 software"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 11.5x \u00f7 TTM proxy growth 22% = 0.53 \u2014 passes hard gate <2.5",
+        "metric_value": 0.5316758823529412,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 3,
+    "pillars_total": 5,
+    "pillar_eligibility": "PASS",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  },
+  {
+    "ticker": "SNDK",
+    "company": "Sandisk",
+    "sector": "Memory",
+    "thesis": "",
+    "one_line_thesis": "",
+    "bottlenecks_addressed": [],
+    "report_refs": [],
+    "catalyst": "",
+    "risks": [],
+    "rating": "",
+    "notes": "",
+    "date_added": "2026-05-25",
+    "binding_constraint_thesis": null,
+    "five_pillars": {
+      "moat": {
+        "pass": true,
+        "evidence": "Gross margin 78.4% passes \u226535% hardware",
+        "metric_value": 0.7835294117647059,
+        "metric_label": "Gross Margin",
+        "metric_threshold": "\u226535% hardware"
+      },
+      "tam": {
+        "pass": true,
+        "evidence": "Revenue growth YoY +251.0% passes \u226520% (TTM proxy \u2014 set forward_3yr_cagr_pct on the ticker for an explicit consensus number)",
+        "metric_value": 2.510324483775811,
+        "metric_label": "3yr Revenue CAGR (proxy: YoY)",
+        "metric_threshold": "\u226520%"
+      },
+      "founder_led": {
+        "pass": null,
+        "evidence": "No founder-led mention in ingested reports \u2014 verify manually",
+        "metric_value": null,
+        "metric_label": "Founder-led signal",
+        "metric_threshold": "Founder CEO OR insider >5% OR explicit signal"
+      },
+      "capital_efficiency": {
+        "pass": true,
+        "evidence": "Rule of 40 = 284.9 (rev growth +251.0% + FCF margin 33.8%); passes \u226525 hardware",
+        "metric_value": 284.8613343233661,
+        "metric_label": "Rule of 40",
+        "metric_threshold": "\u226525 hardware"
+      },
+      "valuation_discipline": {
+        "pass": true,
+        "evidence": "EV/S 18.2x \u00f7 TTM proxy growth 251% = 0.07 \u2014 passes hard gate <2.5",
+        "metric_value": 0.07240498237367803,
+        "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
+        "metric_threshold": "<2.5 hard gate"
+      }
+    },
+    "pillars_passed": 4,
+    "pillars_total": 5,
+    "pillar_eligibility": "SWING-eligible",
+    "removed_at": "2026-06-19",
+    "removal_reason": "Watchlist reset to focused 10-name list (2026-06)"
+  }
+]
