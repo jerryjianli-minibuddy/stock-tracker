@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-19T22:44:28Z",
+  "last_updated": "2026-06-20T02:54:25Z",
   "regime": "MIXED",
   "regime_reasoning": "3 bullish vs 1 bearish \u2014 no clear regime; watch for confirmation.",
   "signals_bullish": [
@@ -145,10 +145,15 @@
           "date": "2026-06-19",
           "score": 37.3,
           "rating": "Fear"
+        },
+        {
+          "date": "2026-06-20",
+          "score": 37.3,
+          "rating": "Fear"
         }
       ],
       "data_timestamp": "2026-06-19T00:59:47+00:00",
-      "last_updated": "2026-06-19T22:44:24Z",
+      "last_updated": "2026-06-20T02:54:21Z",
       "source": "CNN production.dataviz.cnn.io",
       "description": "CNN Fear & Greed Index \u2014 composite of 7 sub-indicators (market momentum, price strength, breadth, put/call options, VIX, safe-haven demand, junk bond demand). 0=Extreme Fear, 100=Extreme Greed."
     },
@@ -247,10 +252,15 @@
           "date": "2026-06-19",
           "score": 42.0,
           "rating": "Fear"
+        },
+        {
+          "date": "2026-06-20",
+          "score": 42.0,
+          "rating": "Fear"
         }
       ],
       "data_timestamp": 1781816847000.0,
-      "last_updated": "2026-06-19T22:44:24Z",
+      "last_updated": "2026-06-20T02:54:21Z",
       "source": "CNN F&G sub-component (production.dataviz.cnn.io)",
       "note": "Higher score = more greedy/bullish positioning. CNN's normalized 0-100 version of the put/call ratio \u2014 INVERTED vs the raw CBOE ratio (where high = fear). For raw equity-only vs index breakdown, separate CBOE feed integration would be needed (not implemented).",
       "description": "Put/Call options positioning, CNN-normalized. <25 Extreme Fear / heavy put-buying (contrarian buy zone); >75 Extreme Greed / heavy call-buying (contrarian sell zone)."
@@ -320,7 +330,7 @@
           "source": "computed: FRED BCNSDODNS / GDP"
         }
       },
-      "last_updated": "2026-06-19T22:44:26Z",
+      "last_updated": "2026-06-20T02:54:23Z",
       "description": "Credit cycle composite \u2014 synthesized from HY OAS, IG OAS, HY-IG spread differential, SLOOS bank lending standards, C&I loan growth, and corporate-debt/GDP."
     },
     "spy_200dma": {
