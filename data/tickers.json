@@ -100,8 +100,8 @@
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 18.7x \u00f7 forward growth 40% = 0.47 \u2014 passes hard gate <2.5",
-        "metric_value": 0.46757499999999996,
+        "evidence": "EV/S 18.4x \u00f7 forward growth 40% = 0.46 \u2014 passes hard gate <2.5",
+        "metric_value": 0.46102499999999996,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -185,8 +185,8 @@
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 56.2x \u00f7 forward growth 30% = 1.87 \u2014 passes hard gate <2.5",
-        "metric_value": 1.8740333333333332,
+        "evidence": "EV/S 57.9x \u00f7 forward growth 30% = 1.93 \u2014 passes hard gate <2.5",
+        "metric_value": 1.9286333333333334,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -273,14 +273,14 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 46.6 (rev growth +27.6% + FCF margin 19.1%); passes \u226540 software",
-        "metric_value": 46.62843221956467,
+        "metric_value": 46.628433484809605,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226540 software"
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 27.5x \u00f7 TTM proxy growth 28% = 1.00 \u2014 passes hard gate <2.5",
-        "metric_value": 0.9962930105263158,
+        "evidence": "EV/S 24.8x \u00f7 TTM proxy growth 28% = 0.90 \u2014 passes hard gate <2.5",
+        "metric_value": 0.8988618947368421,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -372,8 +372,8 @@
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 21.7x \u00f7 TTM proxy growth 51% = 0.42 \u2014 passes hard gate <2.5",
-        "metric_value": 0.42223699229794287,
+        "evidence": "EV/S 18.8x \u00f7 TTM proxy growth 51% = 0.37 \u2014 passes hard gate <2.5",
+        "metric_value": 0.3666267156088525,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -464,8 +464,8 @@
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 12.4x \u00f7 TTM proxy growth 7% = 1.72 \u2014 passes hard gate <2.5",
-        "metric_value": 1.719788846153846,
+        "evidence": "EV/S 11.7x \u00f7 TTM proxy growth 7% = 1.63 \u2014 passes hard gate <2.5",
+        "metric_value": 1.6329294175824174,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -547,8 +547,8 @@
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 8.6x \u00f7 TTM proxy growth 36% = 0.24 \u2014 passes hard gate <2.5",
-        "metric_value": 0.23824382402927075,
+        "evidence": "EV/S 8.4x \u00f7 TTM proxy growth 36% = 0.23 \u2014 passes hard gate <2.5",
+        "metric_value": 0.23339921919483866,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -629,8 +629,8 @@
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 16.0x \u00f7 TTM proxy growth 16% = 1.02 \u2014 passes hard gate <2.5",
-        "metric_value": 1.0155943152031455,
+        "evidence": "EV/S 14.8x \u00f7 TTM proxy growth 16% = 0.94 \u2014 passes hard gate <2.5",
+        "metric_value": 0.9381782929226736,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -685,8 +685,8 @@
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 12.7x \u00f7 TTM proxy growth 346% = 0.04 \u2014 passes hard gate <2.5",
-        "metric_value": 0.036726728969056134,
+        "evidence": "EV/S 12.0x \u00f7 TTM proxy growth 346% = 0.03 \u2014 passes hard gate <2.5",
+        "metric_value": 0.03467301726014617,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }
@@ -740,8 +740,8 @@
       },
       "valuation_discipline": {
         "pass": true,
-        "evidence": "EV/S 3.5x \u00f7 TTM proxy growth 2% = 1.43 \u2014 passes hard gate <2.5",
-        "metric_value": 1.4318785046728972,
+        "evidence": "EV/S 3.3x \u00f7 TTM proxy growth 2% = 1.34 \u2014 passes hard gate <2.5",
+        "metric_value": 1.33546261682243,
         "metric_label": "EV/S NTM \u00f7 3yr CAGR (PEG-equivalent)",
         "metric_threshold": "<2.5 hard gate"
       }

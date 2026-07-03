@@ -1,14 +1,14 @@
 {
-  "last_updated": "2026-07-02T22:57:40Z",
+  "last_updated": "2026-07-03T22:55:35Z",
   "data": {
     "NVDA": {
       "price": 194.8300018310547,
       "market_cap": 4718977351680.0,
       "pe_forward": 15.26351,
-      "pe_trailing": 29.881903,
+      "pe_trailing": 29.83614,
       "ps_ratio": 18.615955,
-      "ev_to_sales": 18.703,
-      "ev_to_ebitda": 28.645,
+      "ev_to_sales": 18.441,
+      "ev_to_ebitda": 28.242,
       "peg_ratio": 0.61,
       "rev_growth_yoy": 0.8522763378875221,
       "eps_growth_yoy": 2.1447368421052633,
@@ -29,7 +29,7 @@
       "dma_200": 191.0272004699707,
       "high_52w": 236.5399932861328,
       "low_52w": 157.33999633789062,
-      "volume_avg_30d": 168181948.9,
+      "volume_avg_30d": 168596963.33333334,
       "rs_proxy": -0.056512212611956256,
       "ratio_vs_spy": 0.261594,
       "ratio_sma_52w": 0.275236,
@@ -128,7 +128,7 @@
         0.264938,
         0.261594
       ],
-      "fetched_at": "2026-07-02T22:57:29Z"
+      "fetched_at": "2026-07-03T22:55:21Z"
     },
     "PLTR": {
       "price": 129.3000030517578,
@@ -136,9 +136,9 @@
       "pe_forward": 61.7337,
       "pe_trailing": 145.2809,
       "ps_ratio": 59.334248,
-      "ev_to_sales": 56.221,
-      "ev_to_ebitda": 145.525,
-      "peg_ratio": 1.68,
+      "ev_to_sales": 57.859,
+      "ev_to_ebitda": 149.765,
+      "peg_ratio": 1.86,
       "rev_growth_yoy": 0.8471163256416494,
       "eps_growth_yoy": 3.243793452076339,
       "gross_margin": 0.8678180527421883,
@@ -158,7 +158,7 @@
       "dma_200": 157.9147499847412,
       "high_52w": 207.52000427246094,
       "low_52w": 106.37000274658203,
-      "volume_avg_30d": 43554456.86666667,
+      "volume_avg_30d": 43570220.0,
       "rs_proxy": -0.34924826596590886,
       "ratio_vs_spy": 0.173608,
       "ratio_sma_52w": 0.233596,
@@ -257,17 +257,17 @@
         0.168593,
         0.173608
       ],
-      "fetched_at": "2026-07-02T22:57:31Z"
+      "fetched_at": "2026-07-03T22:55:22Z"
     },
     "MRVL": {
       "price": 245.2899932861328,
-      "market_cap": 214764421120.0,
+      "market_cap": 214579691520.0,
       "pe_forward": 39.7043,
-      "pe_trailing": 84.29209,
-      "ps_ratio": 24.63714,
-      "ev_to_sales": 27.466,
-      "ev_to_ebitda": 88.283,
-      "peg_ratio": 1.68,
+      "pe_trailing": 84.00342,
+      "ps_ratio": 24.61595,
+      "ev_to_sales": 24.78,
+      "ev_to_ebitda": 79.651,
+      "peg_ratio": 1.39,
       "rev_growth_yoy": 0.2756819500870575,
       "eps_growth_yoy": -0.7999999999999999,
       "gross_margin": 0.5214657953511457,
@@ -287,7 +287,7 @@
       "dma_200": 122.63065017700195,
       "high_52w": 329.8800048828125,
       "low_52w": 61.439998626708984,
-      "volume_avg_30d": 59940339.03333333,
+      "volume_avg_30d": 59974376.666666664,
       "rs_proxy": 1.6263160270217867,
       "ratio_vs_spy": 0.329346,
       "ratio_sma_52w": 0.161963,
@@ -386,7 +386,7 @@
         0.364796,
         0.329346
       ],
-      "fetched_at": "2026-07-02T22:57:32Z"
+      "fetched_at": "2026-07-03T22:55:24Z"
     },
     "AAOI": {
       "price": 120.94999694824219,
@@ -394,8 +394,8 @@
       "pe_forward": 25.345768,
       "pe_trailing": null,
       "ps_ratio": 19.142727,
-      "ev_to_sales": 21.685,
-      "ev_to_ebitda": -400.439,
+      "ev_to_sales": 18.829,
+      "ev_to_ebitda": -347.686,
       "peg_ratio": 0.78,
       "rev_growth_yoy": 0.5135741395367468,
       "eps_growth_yoy": -0.05555555555555561,
@@ -416,7 +416,7 @@
       "dma_200": 82.2340752029419,
       "high_52w": 233.6699981689453,
       "low_52w": 18.5,
-      "volume_avg_30d": 13313803.266666668,
+      "volume_avg_30d": 13320386.666666666,
       "rs_proxy": 2.3645206904778475,
       "ratio_vs_spy": 0.162397,
       "ratio_sma_52w": 0.100673,
@@ -515,7 +515,7 @@
         0.186387,
         0.162397
       ],
-      "fetched_at": "2026-07-02T22:57:33Z"
+      "fetched_at": "2026-07-03T22:55:26Z"
     },
     "INTC": {
       "price": 120.3499984741211,
@@ -523,8 +523,8 @@
       "pe_forward": 77.05605,
       "pe_trailing": null,
       "ps_ratio": 11.250843,
-      "ev_to_sales": 12.355,
-      "ev_to_ebitda": 46.863,
+      "ev_to_sales": 11.731,
+      "ev_to_ebitda": 44.498,
       "peg_ratio": 1.36,
       "rev_growth_yoy": 0.07184021473119129,
       "eps_growth_yoy": -2.8421052631578947,
@@ -545,7 +545,7 @@
       "dma_200": 60.33454999923706,
       "high_52w": 142.35000610351562,
       "low_52w": 18.969999313354492,
-      "volume_avg_30d": 127833143.13333334,
+      "volume_avg_30d": 127923220.0,
       "rs_proxy": 1.964715186649643,
       "ratio_vs_spy": 0.161591,
       "ratio_sma_52w": 0.075472,
@@ -644,7 +644,7 @@
         0.170323,
         0.161591
       ],
-      "fetched_at": "2026-07-02T22:57:34Z"
+      "fetched_at": "2026-07-03T22:55:27Z"
     },
     "TEM": {
       "price": 60.27000045776367,
@@ -652,8 +652,8 @@
       "pe_forward": -565.0136,
       "pe_trailing": null,
       "ps_ratio": 7.933311,
-      "ev_to_sales": 8.606,
-      "ev_to_ebitda": -63.379,
+      "ev_to_sales": 8.431,
+      "ev_to_ebitda": -62.089,
       "peg_ratio": null,
       "rev_growth_yoy": 0.36122657261170654,
       "eps_growth_yoy": -0.7749999999999998,
@@ -674,7 +674,7 @@
       "dma_200": 63.083174781799315,
       "high_52w": 104.31999969482422,
       "low_52w": 41.72999954223633,
-      "volume_avg_30d": 7128863.733333333,
+      "volume_avg_30d": 7135610.0,
       "rs_proxy": -0.16065078120235562,
       "ratio_vs_spy": 0.080923,
       "ratio_sma_52w": 0.09459,
@@ -773,16 +773,16 @@
         0.0826,
         0.080923
       ],
-      "fetched_at": "2026-07-02T22:57:36Z"
+      "fetched_at": "2026-07-03T22:55:29Z"
     },
     "TSLA": {
       "price": 393.45001220703125,
       "market_cap": 1477689606144.0,
       "pe_forward": 154.47221,
-      "pe_trailing": 354.45947,
+      "pe_trailing": 357.68182,
       "ps_ratio": 15.097106,
-      "ev_to_sales": 16.031,
-      "ev_to_ebitda": 141.441,
+      "ev_to_sales": 14.809,
+      "ev_to_ebitda": 130.658,
       "peg_ratio": 6.16,
       "rev_growth_yoy": 0.1578484613395397,
       "eps_growth_yoy": 0.08333333333333341,
@@ -803,7 +803,7 @@
       "dma_200": 418.60775009155276,
       "high_52w": 498.8299865722656,
       "low_52w": 288.7699890136719,
-      "volume_avg_30d": 47213601.766666666,
+      "volume_avg_30d": 47276970.0,
       "rs_proxy": -0.2210803879063864,
       "ratio_vs_spy": 0.528277,
       "ratio_sma_52w": 0.587863,
@@ -902,16 +902,16 @@
         0.570291,
         0.528277
       ],
-      "fetched_at": "2026-07-02T22:57:37Z"
+      "fetched_at": "2026-07-03T22:55:30Z"
     },
     "MU": {
       "price": 975.5599975585938,
       "market_cap": 1101790838784.0,
       "pe_forward": 6.519448,
-      "pe_trailing": 22.031618,
+      "pe_trailing": 22.076488,
       "ps_ratio": 12.204964,
-      "ev_to_sales": 12.697,
-      "ev_to_ebitda": 16.801,
+      "ev_to_sales": 11.987,
+      "ev_to_ebitda": 15.862,
       "peg_ratio": 0.15,
       "rev_growth_yoy": 3.4571551446081066,
       "eps_growth_yoy": 13.684523809523812,
@@ -932,7 +932,7 @@
       "dma_200": 444.34445037841795,
       "high_52w": 1255.0,
       "low_52w": 103.37999725341797,
-      "volume_avg_30d": 56789239.0,
+      "volume_avg_30d": 56819266.666666664,
       "rs_proxy": 2.0331114093754157,
       "ratio_vs_spy": 1.309863,
       "ratio_sma_52w": 0.539562,
@@ -1031,16 +1031,16 @@
         1.384199,
         1.309863
       ],
-      "fetched_at": "2026-07-02T22:57:38Z"
+      "fetched_at": "2026-07-03T22:55:32Z"
     },
     "NOK": {
       "price": 12.069999694824219,
       "market_cap": 67381186560.0,
-      "pe_forward": 24.796104,
+      "pe_forward": 24.830282,
       "pe_trailing": 75.4375,
       "ps_ratio": 3.3697333,
-      "ev_to_sales": 3.49,
-      "ev_to_ebitda": 27.508,
+      "ev_to_sales": 3.255,
+      "ev_to_ebitda": 25.657,
       "peg_ratio": 1.26,
       "rev_growth_yoy": 0.02437357630979499,
       "eps_growth_yoy": 3.0,
@@ -1061,7 +1061,7 @@
       "dma_200": 8.597649993896484,
       "high_52w": 17.450000762939453,
       "low_52w": 4.0,
-      "volume_avg_30d": 115672548.46666667,
+      "volume_avg_30d": 115707653.33333333,
       "rs_proxy": 0.7647420586536273,
       "ratio_vs_spy": 0.016206,
       "ratio_sma_52w": 0.011197,
@@ -1160,7 +1160,7 @@
         0.017311,
         0.016206
       ],
-      "fetched_at": "2026-07-02T22:57:39Z"
+      "fetched_at": "2026-07-03T22:55:34Z"
     },
     "SPCX": {
       "price": 162.0,
@@ -1168,8 +1168,8 @@
       "pe_forward": 823.71484,
       "pe_trailing": null,
       "ps_ratio": 110.57553,
-      "ev_to_sales": 48.047,
-      "ev_to_ebitda": 234.773,
+      "ev_to_sales": 49.387,
+      "ev_to_ebitda": 241.32,
       "peg_ratio": null,
       "rev_growth_yoy": null,
       "eps_growth_yoy": null,
@@ -1190,7 +1190,7 @@
       "dma_200": null,
       "high_52w": 225.63999938964844,
       "low_52w": 147.11000061035156,
-      "volume_avg_30d": 169149009.7142857,
+      "volume_avg_30d": 169218092.85714287,
       "rs_proxy": -0.08565718709027186,
       "ratio_vs_spy": null,
       "ratio_sma_52w": null,
@@ -1198,7 +1198,7 @@
       "ratio_above_sma": null,
       "ratio_slope_30d": null,
       "ratio_history_90d": [],
-      "fetched_at": "2026-07-02T22:57:40Z"
+      "fetched_at": "2026-07-03T22:55:35Z"
     }
   }
 }
