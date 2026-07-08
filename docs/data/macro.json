@@ -1,65 +1,61 @@
 {
-  "last_updated": "2026-07-07T22:52:10Z",
+  "last_updated": "2026-07-08T22:56:28Z",
   "regime": "MIXED",
-  "regime_reasoning": "4 bullish vs 0 bearish \u2014 no clear regime; watch for confirmation.",
+  "regime_reasoning": "3 bullish vs 1 bearish \u2014 no clear regime; watch for confirmation.",
   "signals_bullish": [
-    "VIX 16.1 (Normal)",
-    "Net Liq expanding (+$5B / 4w)",
-    "HY OAS 272bps (Complacent)",
-    "SPY > 200DMA (+7.9%)"
+    "VIX 16.9 (Normal)",
+    "HY OAS 267bps (Complacent)",
+    "SPY > 200DMA (+7.5%)"
   ],
-  "signals_bearish": [],
+  "signals_bearish": [
+    "Net Liq contracting ($-56B / 4w)"
+  ],
   "indicators": {
     "vix": {
-      "current": 16.13,
-      "sma_20d": 17.84,
+      "current": 16.9,
+      "sma_20d": 17.74,
       "regime": "Normal",
       "description": "VIX measures 30-day implied volatility on S&P 500 options. Low VIX = complacency, high VIX = stress."
     },
     "fear_greed": {
-      "value": 43.0,
+      "value": 42.2,
       "regime": "Fear",
       "rating_raw": "fear",
-      "prev_close": 43.9,
-      "prev_week": 30.9,
-      "prev_month": 41.8,
-      "prev_year": 75.1,
+      "prev_close": 43.0,
+      "prev_week": 30.5,
+      "prev_month": 39.9,
+      "prev_year": 74.6,
       "components": {
         "market_momentum": {
-          "score": 49.2,
+          "score": 45.2,
           "rating": "neutral"
         },
         "price_strength": {
-          "score": 44.4,
+          "score": 44.0,
           "rating": "fear"
         },
         "price_breadth": {
-          "score": 25.0,
+          "score": 23.2,
           "rating": "extreme fear"
         },
         "put_call_options": {
-          "score": 58.8,
-          "rating": "greed"
+          "score": 53.0,
+          "rating": "neutral"
         },
         "volatility_vix": {
           "score": 50.0,
           "rating": "neutral"
         },
         "safe_haven_demand": {
-          "score": 47.0,
+          "score": 51.4,
           "rating": "neutral"
         },
         "junk_bond_demand": {
-          "score": 26.6,
+          "score": 28.8,
           "rating": "fear"
         }
       },
       "history_30d": [
-        {
-          "date": "2026-05-28",
-          "score": 60.2,
-          "rating": "Greed"
-        },
         {
           "date": "2026-05-29",
           "score": 60.2,
@@ -204,24 +200,24 @@
           "date": "2026-07-07",
           "score": 43.0,
           "rating": "Fear"
+        },
+        {
+          "date": "2026-07-08",
+          "score": 42.2,
+          "rating": "Fear"
         }
       ],
-      "data_timestamp": "2026-07-07T22:32:51+00:00",
-      "last_updated": "2026-07-07T22:52:07Z",
+      "data_timestamp": "2026-07-08T22:37:43+00:00",
+      "last_updated": "2026-07-08T22:56:25Z",
       "source": "CNN production.dataviz.cnn.io",
       "description": "CNN Fear & Greed Index \u2014 composite of 7 sub-indicators (market momentum, price strength, breadth, put/call options, VIX, safe-haven demand, junk bond demand). 0=Extreme Fear, 100=Extreme Greed."
     },
     "put_call": {
-      "cnn_score": 58.8,
-      "cnn_rating": "greed",
-      "zone": "Greed",
-      "interpretation": "Greed \u2014 call buying outpacing puts / bullish positioning.",
+      "cnn_score": 53.0,
+      "cnn_rating": "neutral",
+      "zone": "Neutral",
+      "interpretation": "Neutral \u2014 balanced put/call positioning.",
       "history_30d": [
-        {
-          "date": "2026-05-28",
-          "score": 95.8,
-          "rating": "Extreme Greed"
-        },
         {
           "date": "2026-05-29",
           "score": 97.8,
@@ -366,54 +362,59 @@
           "date": "2026-07-07",
           "score": 58.8,
           "rating": "Greed"
+        },
+        {
+          "date": "2026-07-08",
+          "score": 53.0,
+          "rating": "Neutral"
         }
       ],
-      "data_timestamp": 1783458754000.0,
-      "last_updated": "2026-07-07T22:52:07Z",
+      "data_timestamp": 1783544063000.0,
+      "last_updated": "2026-07-08T22:56:25Z",
       "source": "CNN F&G sub-component (production.dataviz.cnn.io)",
       "note": "Higher score = more greedy/bullish positioning. CNN's normalized 0-100 version of the put/call ratio \u2014 INVERTED vs the raw CBOE ratio (where high = fear). For raw equity-only vs index breakdown, separate CBOE feed integration would be needed (not implemented).",
       "description": "Put/Call options positioning, CNN-normalized. <25 Extreme Fear / heavy put-buying (contrarian buy zone); >75 Extreme Greed / heavy call-buying (contrarian sell zone)."
     },
     "net_liquidity": {
-      "current": 5839.8,
-      "delta_4w": 4.6,
-      "delta_13w": 27.6,
-      "direction": "expanding",
+      "current": 5841.0,
+      "delta_4w": -55.9,
+      "delta_13w": -104.3,
+      "direction": "contracting",
       "units": "$B",
       "description": "Net liquidity = Fed balance sheet \u2212 Treasury General Account \u2212 Reverse Repo. Risk assets follow the trend."
     },
     "dxy": {
-      "current": 101.12,
-      "sma_50d": 99.55,
+      "current": 101.07,
+      "sma_50d": 99.6,
       "regime": "Mildly tight",
       "description": "DXY = US Dollar Index. Rising DXY tightens global liquidity; rule of thumb: >105 things break, >110 historical crisis."
     },
     "credit_spread": {
-      "current_bps": 272.0,
-      "delta_4w_bps": -3.0,
+      "current_bps": 267.0,
+      "delta_4w_bps": -11.0,
       "regime": "Complacent",
       "description": "ICE BofA US High Yield Option-Adjusted Spread (bps). The bond market's fear gauge \u2014 leads equity stress."
     },
     "credit_cycle": {
       "phase": "LATE CYCLE",
-      "reasoning": "spreads still tight (272bps) but banks tightening (SLOOS +8%).",
+      "reasoning": "spreads still tight (267bps) but banks tightening (SLOOS +8%).",
       "indicators": {
         "hy_oas": {
-          "current_bps": 272.0,
-          "delta_4w_bps": -3.0,
+          "current_bps": 267.0,
+          "delta_4w_bps": -11.0,
           "regime": "Complacent",
           "source": "FRED BAMLH0A0HYM2 (ICE BofA US High Yield OAS)"
         },
         "ig_oas": {
-          "current_bps": 75.0,
-          "delta_4w_bps": 0.0,
+          "current_bps": 76.0,
+          "delta_4w_bps": 1.0,
           "regime": "Complacent",
           "source": "FRED BAMLC0A0CM (ICE BofA US Corporate IG OAS)"
         },
         "hy_ig_diff": {
-          "current_bps": 197.0,
-          "delta_4w_bps": -3.0,
-          "trend": "stable",
+          "current_bps": 191.0,
+          "delta_4w_bps": -12.0,
+          "trend": "narrowing",
           "source": "computed: HY OAS - IG OAS"
         },
         "sloos": {
@@ -439,14 +440,14 @@
           "source": "computed: FRED BCNSDODNS / GDP"
         }
       },
-      "last_updated": "2026-07-07T22:52:10Z",
+      "last_updated": "2026-07-08T22:56:28Z",
       "description": "Credit cycle composite \u2014 synthesized from HY OAS, IG OAS, HY-IG spread differential, SLOOS bank lending standards, C&I loan growth, and corporate-debt/GDP."
     },
     "spy_200dma": {
-      "price": 747.71,
-      "dma_200": 693.19,
+      "price": 745.4,
+      "dma_200": 693.6,
       "above_200dma": true,
-      "pct_from_200dma": 7.87,
+      "pct_from_200dma": 7.47,
       "description": "SPY 200-day moving average \u2014 the primary trend filter. Above = uptrend, below = downtrend."
     }
   }
