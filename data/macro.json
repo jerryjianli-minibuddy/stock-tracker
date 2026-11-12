@@ -1,45 +1,45 @@
 {
-  "last_updated": "2026-11-11T01:36:03Z",
+  "last_updated": "2026-11-12T02:36:13Z",
   "regime": "MIXED",
   "regime_reasoning": "3 bullish vs 1 bearish \u2014 no clear regime; watch for confirmation.",
   "signals_bullish": [
-    "VIX 19.5 (Normal)",
+    "VIX 17.5 (Normal)",
     "HY OAS 334bps (Normal)",
-    "SPY > 200DMA (+2.6%)"
+    "SPY > 200DMA (+3.9%)"
   ],
   "signals_bearish": [
     "Net Liq contracting ($-76B / 4w)"
   ],
   "indicators": {
     "vix": {
-      "current": 19.46,
-      "sma_20d": 19.27,
+      "current": 17.49,
+      "sma_20d": 19.3,
       "regime": "Normal",
       "description": "VIX measures 30-day implied volatility on S&P 500 options. Low VIX = complacency, high VIX = stress."
     },
     "fear_greed": {
-      "value": 33.5,
+      "value": 37.0,
       "regime": "Fear",
       "rating_raw": "fear",
-      "prev_close": 31.7,
-      "prev_week": 23.5,
+      "prev_close": 33.5,
+      "prev_week": 34.2,
       "prev_month": 43.5,
-      "prev_year": 29.9,
+      "prev_year": 30.5,
       "components": {
         "market_momentum": {
-          "score": 13.2,
+          "score": 17.0,
           "rating": "extreme fear"
         },
         "price_strength": {
-          "score": 47.6,
+          "score": 50.6,
           "rating": "neutral"
         },
         "price_breadth": {
-          "score": 50.2,
+          "score": 53.4,
           "rating": "neutral"
         },
         "put_call_options": {
-          "score": 16.2,
+          "score": 19.4,
           "rating": "extreme fear"
         },
         "volatility_vix": {
@@ -47,20 +47,15 @@
           "rating": "neutral"
         },
         "safe_haven_demand": {
-          "score": 10.6,
+          "score": 17.4,
           "rating": "extreme fear"
         },
         "junk_bond_demand": {
-          "score": 46.4,
+          "score": 51.0,
           "rating": "neutral"
         }
       },
       "history_30d": [
-        {
-          "date": "2026-09-30",
-          "score": 31.6,
-          "rating": "Fear"
-        },
         {
           "date": "2026-10-01",
           "score": 30.8,
@@ -205,24 +200,24 @@
           "date": "2026-11-11",
           "score": 33.5,
           "rating": "Fear"
+        },
+        {
+          "date": "2026-11-12",
+          "score": 37.0,
+          "rating": "Fear"
         }
       ],
-      "data_timestamp": "2026-11-10T23:59:51+00:00",
-      "last_updated": "2026-11-11T01:36:02Z",
+      "data_timestamp": "2026-11-11T23:59:59+00:00",
+      "last_updated": "2026-11-12T02:36:12Z",
       "source": "CNN production.dataviz.cnn.io",
       "description": "CNN Fear & Greed Index \u2014 composite of 7 sub-indicators (market momentum, price strength, breadth, put/call options, VIX, safe-haven demand, junk bond demand). 0=Extreme Fear, 100=Extreme Greed."
     },
     "put_call": {
-      "cnn_score": 16.2,
+      "cnn_score": 19.4,
       "cnn_rating": "extreme fear",
       "zone": "Extreme Fear",
       "interpretation": "Extreme Fear \u2014 heavy put buying / panic hedging. Contrarian BUY zone.",
       "history_30d": [
-        {
-          "date": "2026-09-30",
-          "score": 34.4,
-          "rating": "Fear"
-        },
         {
           "date": "2026-10-01",
           "score": 37.4,
@@ -367,10 +362,15 @@
           "date": "2026-11-11",
           "score": 16.2,
           "rating": "Extreme Fear"
+        },
+        {
+          "date": "2026-11-12",
+          "score": 19.4,
+          "rating": "Extreme Fear"
         }
       ],
-      "data_timestamp": 1794345299000.0,
-      "last_updated": "2026-11-11T01:36:02Z",
+      "data_timestamp": 1794434909000.0,
+      "last_updated": "2026-11-12T02:36:12Z",
       "source": "CNN F&G sub-component (production.dataviz.cnn.io)",
       "note": "Higher score = more greedy/bullish positioning. CNN's normalized 0-100 version of the put/call ratio \u2014 INVERTED vs the raw CBOE ratio (where high = fear). For raw equity-only vs index breakdown, separate CBOE feed integration would be needed (not implemented).",
       "description": "Put/Call options positioning, CNN-normalized. <25 Extreme Fear / heavy put-buying (contrarian buy zone); >75 Extreme Greed / heavy call-buying (contrarian sell zone)."
@@ -384,8 +384,8 @@
       "description": "Net liquidity = Fed balance sheet \u2212 Treasury General Account \u2212 Reverse Repo. Risk assets follow the trend."
     },
     "dxy": {
-      "current": 102.27,
-      "sma_50d": 101.19,
+      "current": 102.94,
+      "sma_50d": 101.25,
       "regime": "Mildly tight",
       "description": "DXY = US Dollar Index. Rising DXY tightens global liquidity; rule of thumb: >105 things break, >110 historical crisis."
     },
@@ -440,14 +440,14 @@
           "source": "computed: FRED BCNSDODNS / GDP"
         }
       },
-      "last_updated": "2026-11-11T01:36:03Z",
+      "last_updated": "2026-11-12T02:36:13Z",
       "description": "Credit cycle composite \u2014 synthesized from HY OAS, IG OAS, HY-IG spread differential, SLOOS bank lending standards, C&I loan growth, and corporate-debt/GDP."
     },
     "spy_200dma": {
-      "price": 749.92,
-      "dma_200": 730.99,
+      "price": 759.81,
+      "dma_200": 731.31,
       "above_200dma": true,
-      "pct_from_200dma": 2.59,
+      "pct_from_200dma": 3.9,
       "description": "SPY 200-day moving average \u2014 the primary trend filter. Above = uptrend, below = downtrend."
     }
   }
