@@ -679,7 +679,7 @@
       "capital_efficiency": {
         "pass": true,
         "evidence": "Rule of 40 = 423.5 (rev growth +379.3% + FCF margin 44.3%); passes \u226525 hardware",
-        "metric_value": 423.536965511244,
+        "metric_value": 423.5369662116251,
         "metric_label": "Rule of 40",
         "metric_threshold": "\u226525 hardware"
       },
